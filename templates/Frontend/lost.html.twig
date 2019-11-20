@@ -1,0 +1,35 @@
+{% extends 'Frontend/layout.html.twig' %}
+{% block head %} <title>Mot de passe oublié</title> {% endblock %}
+{% block title %}<h2 class="mt3 text-uppercase">Mot de passe oublié </h2> {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-7 col-sm-7">
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email"
+                                    placeholder="Entrer votre e-mail (requis)" required="required" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Verification robot
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-left" id="btnContact">
+                            Envoyer</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

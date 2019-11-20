@@ -1,0 +1,16 @@
+{
+    "name": "Bertrand/BM finance",
+    "description": "Autoloader pour le site BM finance",
+    "authors": [{
+        "name": "Marc-Alban",
+        "email": "millet.marcalban@gmail.com"
+    }],
+    "require": {
+        "twig/twig": "2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "3B\\": "src"
+        }
+    }
+}

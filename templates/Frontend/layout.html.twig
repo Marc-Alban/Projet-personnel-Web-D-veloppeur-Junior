@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% block head %} {% endblock %}
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+  <link rel="stylesheet" href="css/layoutFrontend.css">
+  <link rel="stylesheet" href="css/modale.css">
+  <link rel="stylesheet" href="css/frontend.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+      <div class="rel">
+        <div class="row">
+          <div class="box">
+            <span class="title"><a href="#" class="navbar-brand"><span class="hStart">BM</span> Finance</a></span>
+            <div class="push">
+              <!-- Quantalys link -->
+              <a href="#" class="navbar-brand">
+                <div class="acces">ACCES PRIVE</div>
+              </a>
+              <!-- log in /-/ Modal -->
+              <a href="#" class="navbar-brand positionLog">
+                <div class="login" data-toggle="modal" data-target="#modalAdmin">
+                  <i class="far fa-user"></i>
+                </div>
+              </a>
+              <!-- ************************Modale**************************** -->
+
+              <!-- Modal -->
+              <div class="modal" id="modalAdmin" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h5 class="modal-title" id="titleModal">Acces Administration</h5>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="pseudo">Identifiant</label>
+                          <input type="text" class="form-control" id="pseudo" placeholder="Entrer Pseudo">
+                        </div>
+                        <div class="form-group">
+                          <label for="mdp">Mot de passe</label>
+                          <input type="password" class="form-control" id="mdp" placeholder="Mot de passe">
+                          <a href="?p=lostPassword"><small id="mdp" class="form-text text-muted">*Mot de passe
+                              oublié</small></a>
+                        </div>
+                        <div class="center-block">
+                          <input type="submit" class="text-uppercase" value="Je me connecte"></input>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ********************************************************** -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <button class="navbar-toggler btnNav" type="button" data-toggle="collapse"
+        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+      </button>
+    </div>
+  </nav>
+  <!-- Menu navigation -->
+  <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a href="#" class="nav-link blue">Accueil</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle blueStrong" href="#" id="navdrop" role="button" data-toggle="dropdown"
+          data-hover="dropdown">Blog</a>
+        <div class="dropdown-menu" aria-labelledby="navdrop">
+          <a class="dropdown-item" href="#">Article de la semaine</a><br class="saut">
+          <a class="dropdown-item" href="#">Liste des articles
+            hebdomadaire</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle orange" href="#" id="navdrop" role="button" data-toggle="dropdown"
+          data-hover="dropdown">Qui sommes-nous ?</a>
+        <div class="dropdown-menu" aria-labelledby="navdrop">
+          <a href="#" class="dropdown-item">Nos valeurs</a><br class="saut">
+          <a href="#" class="dropdown-item">Adresse</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle yellow" href="#" id="navdrop" role="button" data-toggle="dropdown"
+          data-hover="dropdown">Notre expertise</a>
+        <div class="dropdown-menu" aria-labelledby="navdrop">
+          <a class="dropdown-item" href="#">Conseil patrimonial</a><br class="saut">
+          <a class="dropdown-item" href="#">Conseil en investissement
+            financier </a><br class="saut">
+          <a class="dropdown-item" href="#">Conseil en investissement
+            immobilier </a><br class="saut">
+          <a class="dropdown-item" href="#">Autres solutions d’investissement
+          </a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link green">Contact</a>
+      </li>
+    </ul>
+  </div>
+  <!-- End NAV -->
+
+  <!-- Main -->
+  <div class="container">
+    <div class="bs-docs-section">
+
+      <div class="page-header">
+        <div class="row">
+          <div class="col-lg-12">
+            {% block title %} {% endblock %}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-9 col-lg-9">
+          <p class="bs-component">
+            {% block content %} {% endblock %}
+          </p>
+        </div>
+
+        <div class="col-12 col-sm-3 col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">
+              <h2 class="text-uppercase">Partenaires</h2>
+            </div>
+            <div class="card-body">
+              <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, facere.</p>
+              <a href="#">lien n°1</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- EndMain -->
+
+  <!-- Footer -->
+  <footer class="page-footer font-small pt-4">
+    <div class="container">
+
+      <!-- Footer Links -->
+      <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-xs-12 col-sm-6  mt-md-0 mt-3">
+
+            <!-- Content -->
+            <h5 class="text-uppercase titleFooter">BM Finance</h5>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+              aliquam voluptates illo possimus quae odit neque reprehenderit
+              similique ratione itaque..</p>
+
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-xs-12 col-sm-6  mb-md-0 mb-3">
+
+            <!-- Links -->
+            <ul>
+              <li><i class="fab fa-linkedin-in"></i></li>
+              <li>
+                <span class="fab fa-instagram"></span>
+              </li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Footer Links -->
+    </div>
+    <!-- Nav -->
+    <div class="nav-footer text-center py-3">
+      <ul id="nav">
+        <!--
+        -->
+        <li><a href="#">Plan du site</a></li>
+        <!--
+        -->
+        <li><a href="#">Mentions légales</a></li>
+        <!--
+        -->
+        <li><a href="#">Cookies</a></li>
+        <!--
+        -->
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <!-- Nav -->
+  </footer>
+  <!-- Endfooter -->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
