@@ -19,11 +19,59 @@
     border-bottom: none;
 }
 
-input[type=submit] {
+
+.captcha {
+    -webkit-appearance: button;
+    cursor: pointer;
+    background: #504f4f;
+    border: none;
+    color: #fff;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+button[type=submit] {
     -webkit-appearance: button;
     cursor: pointer;
     background: #cc0000;
     border: none;
     color: #fff;
     padding: 7px;
+}
+
+
+.modal .form-group {
+    text-align: center;
+}
+
+.modal .form-control {
+    display: block;
+    width: 100%;
+    margin: auto;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #fff;
+    background-color: #504f4f;
+    background-image: none;
+    border: 1px solid;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .modal .form-control {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .modal .form-control {
+        width: 50%;
+    }
 }
