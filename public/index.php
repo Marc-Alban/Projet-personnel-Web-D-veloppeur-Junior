@@ -42,22 +42,6 @@ switch ($page) {
         echo $twig->render('Backend/dashboard.html.twig');
         break;
 
-    case 'dashboard':
-        echo $twig->render('Backend/dashboard.html.twig');
-        break;
-
-    case 'dashboard':
-        echo $twig->render('Backend/dashboard.html.twig');
-        break;
-
-    case 'dashboard':
-        echo $twig->render('Backend/dashboard.html.twig');
-        break;
-
-    case 'dashboard':
-        echo $twig->render('Backend/dashboard.html.twig');
-        break;
-
     default:
         header('HTTP/1.0 404 NOT FOUND');
         echo $twig->render('404.html.twig');
