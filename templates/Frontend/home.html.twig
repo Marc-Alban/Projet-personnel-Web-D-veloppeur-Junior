@@ -5,131 +5,33 @@
 <div class="bs-docs-section">
     <div class="row">
         <!-- First row -->
-        <div class="col-12 col-md-6 col-lg-6">
-            <!-- Graph1 -->
-            <div class="card text-white  mb-3">
-                <div class="card-header">Prudent</div>
-                <div class="card-body bord">
-                    <!-- Modal btn graph1  -->
-                    <!-- log in /-/ Modal -->
-                    <div data-toggle="modal" data-target="#prudent">
-                        <img src="img/Prudent.png" alt="">
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal" id="prudent" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h5 class="modal-title" id="titleModal">Prudent</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <figure class="figure">
-                                        <img src="img/Prudent.png" class="figure-img img-fluid rounded" alt="">
-                                        <figcaption class=" figure-caption">Legende de l'image</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Modal -->
-                </div>
-            </div>
-            <!-- EndGraph -->
-            <!-- Graph2 -->
-            <div class="card text-white  mb-3">
-                <div class="card-header">Equilibré</div>
-                <div class="card-body bord">
-                    <!-- Modal btn graph2  -->
-                    <!-- log in /-/ Modal -->
-                    <div data-toggle="modal" data-target="#equilibré">
-                        <img src="img/Equilibré.png" alt="">
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal" id="equilibré" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h5 class="modal-title" id="titleModal">Equilibré</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <figure class="figure">
-                                        <img src="img/Equilibré.png" class="figure-img img-fluid rounded" alt="">
-                                        <figcaption class=" figure-caption">Legende de l'image</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Modal -->
-                </div>
-            </div>
-            <!-- EndGraph -->
-        </div>
-        <!-- EndRow -->
-        <!-- SecondRow -->
-        <div class="col-12  col-md-6 col-lg-6">
-            <!-- Graph3 -->
-            <div class="card text-white  mb-3">
-                <div class="card-header">Dynamique</div>
-                <div class="card-body bord">
-                    <!-- Modal btn graph3  -->
-                    <!-- log in /-/ Modal -->
-                    <div data-toggle="modal" data-target="#Dynamique">
-                        <img src="img/Dynamique.png" alt="">
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal" id="Dynamique" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h5 class="modal-title" id="titleModal">Dynamique</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <figure class="figure">
-                                        <img src="img/Dynamique.png" class="figure-img img-fluid rounded" alt="">
-                                        <figcaption class=" figure-caption">Legende de l'image</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Modal -->
-                </div>
-            </div>
-            <!-- EndGraph -->
-            <div class="col-12  col-md-6 col-lg-6">
-                <!-- Graph4 -->
+        {% for graph in graphs %}
+        <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+            <div class="height">
+                <!-- Graph1 -->
                 <div class="card text-white  mb-3">
-                    <div class="card-header">Autre</div>
+                    <div class="card-header">{{graph.title}}</div>
                     <div class="card-body bord">
-                        <!-- Modal btn graph4  -->
+                        <!-- Modal btn graph1  -->
                         <!-- log in /-/ Modal -->
-                        <div data-toggle="modal" data-target="#Autre">
-                            <img src="img/Performance.png" alt="">
+                        <div data-toggle="modal" data-target="#prudent">
+                            <img src="img/{{graph.image}}" alt="">
                         </div>
                         <!-- Modal -->
-                        <div class="modal" id="Autre" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class=" modal" id="prudent" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
-                                        <h5 class="modal-title" id="titleModal">Autre</h5>
+                                        <h5 class="modal-title" id="titleModal">
+                                            {{graph.title}}</h5>
                                     </div>
                                     <div class="modal-body">
                                         <figure class="figure">
-                                            <img src="img/Performance.png" class="figure-img img-fluid rounded" alt="">
-                                            <figcaption class=" figure-caption">Legende de l'image</figcaption>
+                                            <img src="img/{{graph.image}}" class="figure-img img-fluid rounded" alt="">
+                                            <figcaption class=" figure-caption">{{graph.description}}</figcaption>
                                         </figure>
                                     </div>
                                 </div>
@@ -138,10 +40,10 @@
                         <!-- End Modal -->
                     </div>
                 </div>
-                <!-- EndGraph -->
             </div>
-            <!-- EndSecondRow -->
+            <!-- EndGraph -->
         </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

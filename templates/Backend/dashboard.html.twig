@@ -1,0 +1,72 @@
+{% extends 'Backend/layout.html.twig' %}
+{% block head %} <title> Tableau de bord </title> {% endblock %}
+{% block content %}
+<!-- *************Bloc Article*********** -->
+<div class="bs-docs-section">
+    <div class="row">
+        <!-- First row -->
+        <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+            <!-- Article lien -->
+            <div class="card text-white  mb-3">
+                <div class="card-header"></div>
+                <div class="card-body bord">
+                </div>
+            </div>
+            <!-- End Lien Article -->
+        </div>
+    </div>
+</div>
+<!-- *************Bloc Lien*********** -->
+<div class="bs-docs-section">
+    <div class="row">
+        <!-- First row -->
+        <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+            <!-- Article lien -->
+            <div class="card text-white  mb-3">
+                <div class="card-header"></div>
+                <div class="card-body bord">
+                </div>
+            </div>
+            <!-- End Lien Article -->
+        </div>
+    </div>
+</div>
+<!-- **********************Instagram Api************************ -->
+<div class="container" style="margin-top:20px;margin-bottom:20px;padding:50px;background-color:#ddd;">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="" class="profile-pic" style="border-radius:50%;">
+        </div>
+        <div class="col-md-9">
+            <h2 class="username"></h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="number-of-posts"></span> posts
+                </div>
+                <div class="col-md-4">
+                    <span class="followers"></span> followers
+                </div>
+                <div class="col-md-4">
+                    <span class="following"></span> following
+                </div>
+            </div>
+            <div class="row" style="margin-top:60px;">
+                <h4 class="name"></h4>
+            </div>
+            <div class="row">
+                <h4 class="biography"></h4>
+            </div>
+            <br>
+            <hr><br>
+            <div class="row">
+                <p>POSTS</p>
+            </div>
+            <div class="row posts"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="js/instagram.js"></script>
+{% endblock %}
