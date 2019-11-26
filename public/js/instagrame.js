@@ -15,7 +15,7 @@ function nFormatter(num) {
 $.ajax({
   url: "https://www.instagram.com/<?php echo $_GET['user']; ?>?__a=1",
   type: 'get',
-  success: function(response) {
+  success: function (response) {
     $(".profile-pic").attr('src', response.graphql.user.profile_pic_url);
     $(".name").html(response.graphql.user.full_name);
     $(".biography").html(response.graphql.user.biography);
@@ -56,7 +56,7 @@ const options = {
   }
 };
 
-const profileRequest = https.request(options, function(res) {
+const profileRequest = https.request(options, function (res) {
   let data = '';
   res.on('data', (chunk) => {
     data += chunk;
@@ -64,7 +64,7 @@ const profileRequest = https.request(options, function(res) {
 
   res.on('end', () => {
     const profileData = JSON.parse(data);
-    console.log(JSON.stringify(profileData, 0, 2));
+    // console.log(JSON.stringify(profileData, 0, 2));
   });
 });
 profileRequest.end();

@@ -1,0 +1,55 @@
+{% extends 'Frontend/layout.html.twig' %}
+{% block head %} <title> Page article exemple </title> {% endblock %}
+{% block title %} Titre article exemple {% endblock %}
+{% block content %}
+
+<!--Grid column-->
+<div class="col-md-12">
+    <!--Card-->
+    <div class="card hoverable pb-5 mx-md-3">
+        <!-- img -->
+        <img class="jarallax-img" src="https://mdbootstrap.com/img/Photos/Others/city7.jpg" alt=""
+            style="height:100%; width: 100%">
+        <!-- /img -->
+        <div class="card-body">
+            <div class="container">
+                <!--Section heading-->
+                <h1 class="text-left h1 pt-4 mb-3">
+                    <strong>{{Title}}Title Article</strong>
+                </h1>
+                <div class="row">
+                    <div class="col-md-12 col-xl-12 d-flex justify-content-left">
+                        <p class="font-small grey-text mb-0">
+
+                            <i class="far fa-clock-o dark-grey-text"></i> 15/09/2017 at 4:03 pm</p>
+                    </div>
+                </div>
+                <!-- Grid column -->
+                <div class="row mt-3">
+
+                    <p class="dark-grey-text article">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                        accusantium
+                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
+                        sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
+                        nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+                        amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
+                        incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam
+                        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
+                        eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
+
+                </div>
+                <!--/Grid colomn -->
+            </div>
+            <!--/Grid column-->
+        </div>
+        <!--/Grid row-->
+    </div>
+    <!--/Card-->
+</div>
+<!--/Grid column-->
+
+{% endblock %}

@@ -1,84 +1,111 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title>Contactez-nous</title> {% endblock %}
-{% block title %}<h2 class="mt3 text-uppercase"> Contactez-nous</h2> {% endblock %}
+{% block title %}Contactez-nous{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-7 col-sm-7">
-            <form>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="name" placeholder="Nom et prénom (requis)"
-                                required="required" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="email" class="form-control" id="email" placeholder="E-mail (requis)"
-                                    required="required" /></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="tel" class="form-control" id="tel" placeholder="Téléphone (requis)"
-                                minlength="4" maxlength="8" required="required" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="code" placeholder="Code postal (requis)"
-                                    minlength="4" maxlength="8" required="required" /></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select id="option" name="option" class="form-control">
-                                <option value="" selected>Je suis déjà client(e)</option>
-                                <option value="">Je ne suis pas client(e) et souhaite un rendez-vous</option>
-                                <option value="">Je ne suis pas client(e) et souhaite des informations</option>
-                                <option value="">Je dépose ma candidature</option>
-                                <option value="">Je souhaite devenir partenaire</option>
-                                <option value="">Autre</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Sujet" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <textarea name="message" id="message" class="form-control" required="required" rows="5"
-                                cols="33" placeholder="Message (requis)"></textarea>
-                        </div>
-                    </div>
-                </div>
+<!-- Material form contact -->
+<div class="card">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        Verification robot
-                    </div>
-                </div>
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-left" id="btnContact">
-                            Envoyer ma demande</button>
+        <!-- Form -->
+        <form class="text-center" style="color: #757575;" action="#!">
+
+            <div class="form-row">
+                <div class="col">
+                    <!-- Name -->
+                    <div class="md-form">
+                        <input type="text" id="materialContactFormName" class="form-control">
+                        <label for="materialContactFormName">Nom et prénom (requis)</label>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="col">
+                    <!-- E-mail -->
+                    <div class="md-form">
+                        <input type="email" id="materialContactFormEmail" class="form-control">
+                        <label for="materialContactFormEmail">E-mail (requis)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <!-- Phone number -->
+                    <div class="md-form">
+                        <input type="password" id="materialRegisterFormPhone" class="form-control"
+                            aria-describedby="materialRegisterFormPhoneHelpBlock">
+                        <label for="materialRegisterFormPhone">Téléphone (requis)</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- CP -->
+                    <div class="md-form">
+                        <input type="text" id="materialContactCP" class="form-control">
+                        <label for="materialContactFormCP">Code postal (requis)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option  -->
+            <div class="md-form">
+                <select class="browser-default custom-select mb-4" id="select">
+                    <option value="" disabled="" selected="">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Je suis déjà client(e)</font>
+                        </font>
+                    </option>
+                    <option value="1">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Je ne suis pas client(e) et souhaite un rendez-vous
+                            </font>
+                        </font>
+                    </option>
+                    <option value="2">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Je ne suis pas client(e) et souhaite des informations
+                            </font>
+                        </font>
+                    </option>
+                    <option value="3">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Je dépose ma candidature</font>
+                        </font>
+                    </option>
+                    <option value="3">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Je souhaite devenir partenaire</font>
+                        </font>
+                    </option>
+                    <option value="3">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Autre</font>
+                        </font>
+                    </option>
+                </select>
+            </div>
+            <!-- Subject -->
+            <div class="md-form">
+                <input type="text" id="materialContactSubject" class="form-control">
+                <label for="materialContactFormSubject">Sujet (requis)</label>
+            </div>
+
+            <!--Message-->
+            <div class="md-form">
+                <textarea id="materialContactFormMessage" class="form-control md-textarea" rows="3"></textarea>
+                <label for="materialContactFormMessage">Message (requis)</label>
+            </div>
+
+
+            <!-- Send button -->
+            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Envoyer
+                ma demande</button>
+
+        </form>
+        <!-- Form -->
+
     </div>
+
 </div>
+<!-- Material form contact -->
 
 {% endblock %}

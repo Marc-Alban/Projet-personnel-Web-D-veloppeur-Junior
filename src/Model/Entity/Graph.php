@@ -1,5 +1,5 @@
 <?php
-namespace src\Model\Entity;
+namespace App\Model\Entity;
 
 use src\Model\Repository\Repository;
 

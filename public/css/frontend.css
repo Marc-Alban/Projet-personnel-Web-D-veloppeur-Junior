@@ -1,94 +1,176 @@
 /*Style générale des pages*/
 
-/* Image -- Accueil */
-
-.card-body {
-    border-bottom: 1px dashed #889094;
+a {
+    color: black;
 }
 
-.text-white .bord {
-    border-bottom: none;
+
+/* nav */
+
+.navbar-grey {
+    position: relative;
 }
 
-.card-header {
-    font-size: 1.5em;
-    font-weight: bold;
+.nav-flex-icons li {
+    margin-top: -10px;
 }
 
-.card-body img {
-    width: 100%;
-    height: 290px;
+.dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: #df1f1f;
+}
+
+.navbar .dropdown-menu a:hover {
+    color: #ffffff;
+}
+
+/* Log --> fas */
+
+#user {
+    background: #fcfcfc;
+    color: #6a7174;
+    border-radius: 0 0 10px 10px;
+    padding-top: 15px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px -1px 2px 0.8px rgba(0, 0, 0, 0.2) inset;
+}
+
+#user .fa-user {
+    justify-content: center;
+    display: flex;
+    font-size: 1.4em;
+}
+
+.fa-1x {
+    font-size: 1.5rem;
+}
+
+.navbar-toggler.toggler-example {
     cursor: pointer;
 }
 
-.figure img {
-    width: 100%;
-    height: 220px;
-    cursor: auto;
+
+
+/* color nav */
+.green {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 1px 0 0;
+    margin-right: 8px;
+    color: #1f1f1f;
+    border-top: 4px solid transparent;
+    border-color: #67c19d;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
 }
 
-/* End Accueil */
-
-/* Page -- Contact */
-
-form {
-    background: #fcfcfc;
-    padding: 20px;
-    margin-bottom: 70px;
+.green:hover {
+    color: #67c19d;
 }
 
-.form-control {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #000;
-    background-color: #fff;
-    background-image: none;
-    border-bottom: 1px solid;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+.blue {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 1px 0 0;
+    margin-right: 8px;
+    color: #1f1f1f;
+    border-top: 4px solid transparent;
+    border-color: #678396;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
 }
 
-/* End Contact */
+.blue:hover {
+    color: #678396;
+}
 
-/* Tablette -- Responsive */
 
-@media screen and (min-width: 768px) {
+.orange {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 1px 0 0;
+    margin-right: 8px;
+    color: #1f1f1f;
+    border-top: 4px solid transparent;
+    border-color: #f1703c;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
 
-    .card-body img {
-        width: 480px;
-        height: 340px;
-        cursor: pointer;
+.orange:hover {
+    color: #f1703c;
+}
+
+
+
+.yellow {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 1px 0 0;
+    margin-right: 8px;
+    color: #1f1f1f;
+    border-top: 4px solid transparent;
+    border-color: #cdc82e;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+}
+
+.yellow:hover {
+    color: #cdc82e;
+}
+
+
+.blueStrong {
+    font-weight: 400;
+    font-size: 12px;
+    padding: 1px 0 0;
+    margin-right: 8px;
+    color: #1f1f1f;
+    border-top: 4px solid transparent;
+    border-color: #3e71a8;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+
+}
+
+
+.blueStrong:hover {
+    color: #3e71a8;
+}
+
+
+.greyFooter {
+    background: #2a2d30;
+}
+
+.aside {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    color: #FFFFFF;
+    background-color: #6A7174;
+    border-left: 6px solid #CC0000;
+}
+
+@media screen and (min-width:768px) {
+    #user {
+        position: absolute;
+        top: 0;
+        right: 50px;
     }
-
-    .figure img {
-        width: 100%;
-        height: 370px;
-        cursor: auto;
-    }
-
 }
 
-@media screen and (min-width: 1024px) {
-
-    .card-body img {
-        width: 350px;
-        height: 340px;
-        cursor: pointer;
-    }
-
-
-    .figure img {
-        width: 100%;
+@media screen and (min-width:1440px) {
+    #user {
+        position: absolute;
+        top: 0;
+        right: 50px;
     }
 }

@@ -2,35 +2,37 @@
 {% block head %} <title> Tableau de bord </title> {% endblock %}
 {% block content %}
 <!-- *************Bloc Article*********** -->
-<div class="bs-docs-section">
+<div class="container">
     <div class="row">
-        <!-- First row -->
-        <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-            <!-- Article lien -->
-            <div class="card text-white  mb-3">
-                <div class="card-header"></div>
-                <div class="card-body bord">
+        <div class="container">
+
+            <h1 class="my-4 font-weight-bold">Tableau de bord</h1>
+
+            <div class="grid">
+                <div class="grid-item col-md-6 mb-4">
+                    <!-- Article nb -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre d'article</h5>
+                            <p class="card-text">{{nbArticle}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item col-md-6 mb-4">
+                    <!-- Lien nb -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Nombre de lien</h5>
+                            <p class="card-text">{{nbLien}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- End Lien Article -->
+
         </div>
     </div>
 </div>
-<!-- *************Bloc Lien*********** -->
-<div class="bs-docs-section">
-    <div class="row">
-        <!-- First row -->
-        <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-            <!-- Article lien -->
-            <div class="card text-white  mb-3">
-                <div class="card-header"></div>
-                <div class="card-body bord">
-                </div>
-            </div>
-            <!-- End Lien Article -->
-        </div>
-    </div>
-</div>
+
 <!-- **********************Instagram Api************************ -->
 <div class="container" style="margin-top:20px;margin-bottom:20px;padding:50px;background-color:#ddd;">
     <div class="row">
@@ -65,6 +67,8 @@
         </div>
     </div>
 </div>
+<!-- ******************************* -->
+
 {% endblock %}
 
 {% block javascript %}

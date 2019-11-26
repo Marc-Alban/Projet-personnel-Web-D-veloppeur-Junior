@@ -1,35 +1,32 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title>Mot de passe oublié</title> {% endblock %}
-{% block title %}<h2 class="mt3 text-uppercase">Mot de passe oublié </h2> {% endblock %}
+{% block title %}Mot de passe oublié{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-7 col-sm-7">
-            <form>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="email" class="form-control" id="email"
-                                    placeholder="Entrer votre e-mail (requis)" required="required" /></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        Verification robot
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-left" id="btnContact">
-                            Envoyer</button>
-                    </div>
-                </div>
+<!-- Card -->
+<div class="card">
 
+    <!-- Card body -->
+    <div class="card-body">
 
-            </form>
-        </div>
+        <!-- Material form register -->
+        <form>
+
+            <!-- Material input email -->
+            <div class="md-form">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input type="email" id="materialFormCardEmailEx" class="form-control">
+                <label for="materialFormCardEmailEx" class="font-weight-light">Entrer votre e-mail (requis)</label>
+            </div>
+
+            <div class="text-center py-4 mt-3">
+                <button class="btn btn-red" type="submit">Envoyer</button>
+            </div>
+        </form>
+        <!-- Material form register -->
+
     </div>
+    <!-- Card body -->
+
 </div>
+<!-- Card -->
 {% endblock %}

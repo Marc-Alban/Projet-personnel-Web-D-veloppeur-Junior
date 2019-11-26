@@ -1,16 +1,19 @@
 {
-    "name": "Bertrand/BM finance",
+    "name": "bertrand/bmfinance",
     "description": "Autoloader pour le site BM finance",
     "authors": [{
         "name": "Marc-Alban",
         "email": "millet.marcalban@gmail.com"
     }],
     "require": {
-        "twig/twig": "2.0"
+        "twig/twig": "^3.0"
     },
     "autoload": {
         "psr-4": {
-            "3B": "src"
+            "App\\": "src/"
         }
+    },
+    "require-dev": {
+        "symfony/debug": "^4.4"
     }
 }

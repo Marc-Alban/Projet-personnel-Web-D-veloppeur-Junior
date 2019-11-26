@@ -1,49 +1,34 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title> Accueil </title> {% endblock %}
-{% block title %}<h2 class="mt3">Performance selon les profils de risque:</h2> {% endblock %}
+{% block title %} Performance selon les profils de risque: {% endblock %}
+
 {% block content %}
-<div class="bs-docs-section">
-    <div class="row">
-        <!-- First row -->
-        {% for graph in graphs %}
-        <div class="col-12 col-sm-8 col-md-6 col-lg-6">
-            <div class="height">
-                <!-- Graph1 -->
-                <div class="card text-white  mb-3">
-                    <div class="card-header">{{graph.title}}</div>
-                    <div class="card-body bord">
-                        <!-- Modal btn graph1  -->
-                        <!-- log in /-/ Modal -->
-                        <div data-toggle="modal" data-target="#prudent">
-                            <img src="img/{{graph.image}}" alt="">
-                        </div>
-                        <!-- Modal -->
-                        <div class=" modal" id="prudent" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h5 class="modal-title" id="titleModal">
-                                            {{graph.title}}</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        <figure class="figure">
-                                            <img src="img/{{graph.image}}" class="figure-img img-fluid rounded" alt="">
-                                            <figcaption class=" figure-caption">{{graph.description}}</figcaption>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Modal -->
-                    </div>
-                </div>
-            </div>
-            <!-- EndGraph -->
-        </div>
-        {% endfor %}
+<!-- First row -->
+{% for graph in graphs %}
+<!-- Card -->
+<div class="card">
+
+    <!-- Card image -->
+    <div class="view overlay">
+        <img class="card-img-top" src="#" alt="Card image cap">
+        <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+        </a>
     </div>
+
+    <!-- Card content -->
+    <div class="card-body">
+
+        <!-- Title -->
+        <h4 class="card-title">{{graph.title}}</h4>
+        <!-- Text -->
+        <p class="card-text">{{graph.description}}</p>
+        <!-- Button -->
+        <a href="#" class="btn btn-primary">Agrandir</a>
+
+    </div>
+
 </div>
+<!-- Card -->
+{% endfor %}
 {% endblock %}
