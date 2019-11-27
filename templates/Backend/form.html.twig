@@ -1,0 +1,70 @@
+{% extends 'Backend/layout.html.twig' %}
+{% block head %} <title> Créer un article </title> {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <!-- Card -->
+            <div class="card mx-xl-5">
+                <!-- Card body -->
+                <div class="card-body">
+                    <!-- Default form subscription -->
+                    <form>
+                        <!-- Default input name -->
+                        <label for="defaultFormCardName">Titre de </label>
+                        <input type="text" id="defaultFormCardName" class="form-control">
+                        <br>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea">Corps de </label>
+                            <textarea class="form-control" id="exampleFormControlTextarea" rows="7"></textarea>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile"
+                                    aria-describedby="inputGroupFileAddon">
+                                <label class="custom-file-label" for="inputGroupFile">Choisir une image</label>
+                            </div>
+                        </div>
+                        <br>
+                        <label for="start" class="text-center mt-3 md-0 p-0">Date:</label>
+                        <div class="md-form m-0">
+                            <input type="date" id="start" name="trip-start" value="22-07-2018" min="01-01-2019"
+                                max="01-12-2099">
+                        </div>
+                        <br>
+                        <label class="text-center mt-3">Options:</label>
+                        <div class="form-row">
+                            <div class="col-6">
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                    <label class="custom-control-label" for="defaultUnchecked">Public</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <!-- Default unchecked -->
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked1">
+                                    <label class="custom-control-label" for="defaultUnchecked1">Article de la
+                                        semaine</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="text-center py-4 mt-3">
+                            <button class="btn btn-dark" type="submit">Envoyer<i
+                                    class="fa fa-paper-plane-o ml-2"></i></button>
+                        </div>
+
+                    </form>
+                    <!-- Default form subscription -->
+                </div>
+                <!-- Card body -->
+            </div>
+            <!-- Card -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

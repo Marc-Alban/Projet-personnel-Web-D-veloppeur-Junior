@@ -1,0 +1,49 @@
+{% extends 'Backend/layout.html.twig' %}
+{% block head %} <title> Page graphique </title> {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <!-- Card -->
+            <div class="card mx-xl-5">
+                <!-- Card body -->
+                <div class="card-body">
+                    <!-- Default form subscription -->
+                    <form>
+                        <div class="input-group">
+                            <select class="browser-default custom-select">
+                                <option selected>Prudent</option>
+                                <option value="">Equilibré</option>
+                                <option value="">Dynamique</option>
+                                <option value="">Autre</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile"
+                                    aria-describedby="inputGroupFileAddon">
+                                <label class="custom-file-label" for="inputGroupFile">Choisir une image</label>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- Default input email -->
+                        <label for="defaultFormCardDesc" class="grey-text font-weight-light">Legende</label>
+                        <input type="text" id="defaultFormCardDesc" class="form-control">
+                        <br>
+
+                        <div class="text-center py-4 mt-3">
+                            <button class="btn btn-dark" type="submit">Envoyer<i
+                                    class="fa fa-paper-plane-o ml-2"></i></button>
+                        </div>
+                    </form>
+                    <!-- Default form subscription -->
+                </div>
+                <!-- Card body -->
+            </div>
+            <!-- Card -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}

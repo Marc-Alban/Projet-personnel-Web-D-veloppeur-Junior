@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e5329d2ed8a885ca82eb80819c87d94",
+    "content-hash": "547932d976c308a8b46028c7f0779f96",
     "packages": [
         {
             "name": "symfony/polyfill-ctype",
@@ -235,6 +235,41 @@
                 "psr-3"
             ],
             "time": "2019-11-01T11:05:21+00:00"
+        },
+        {
+            "name": "rohnstock/pickadate",
+            "version": "v3.5.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rohnstock/pickadate.js.git",
+                "reference": "b5586a8373dd06db58fc9dbbf0ee87b4201865be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rohnstock/pickadate.js/zipball/b5586a8373dd06db58fc9dbbf0ee87b4201865be",
+                "reference": "b5586a8373dd06db58fc9dbbf0ee87b4201865be",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "files": [
+                        "css/*.css",
+                        "js/*.js",
+                        "translations/*.js"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The mobile-friendly, responsive, and lightweight jQuery date & time input picker.",
+            "homepage": "https://github.com/amsul/pickadate.js",
+            "keywords": [
+                "charts"
+            ],
+            "time": "2016-04-05T07:49:50+00:00"
         },
         {
             "name": "symfony/debug",

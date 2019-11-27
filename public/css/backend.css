@@ -1,0 +1,36 @@
+/* general */
+
+.footer-hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.footer-hover:hover {
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.text-black-40 {
+    color: rgba(0, 0, 0, 0.4)
+}
+
+/* form lien */
+.custom-file-input:lang(en)~.custom-file-label::after {
+    content: "Charger";
+}
+
+.topNavBack {
+    width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+
+    table,
+    tbody,
+    td,
+    tr {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+}

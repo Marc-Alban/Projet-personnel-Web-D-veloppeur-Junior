@@ -8,73 +8,94 @@
     {% block head %} {% endblock %}
     <!-- BM icon -->
     <link rel="icon" href="img/bm-favicon.ico" type="image/x-icon">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="css/back/MDB-FREE/bootstrap.min.css">
+    <link rel="stylesheet" href="css/MDB-FREE/bootstrap.min.css">
     <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="css/back/MDB-FREE/mdb.min.css">
+    <link rel="stylesheet" href="css/MDB-FREE/mdb.min.css">
+
+
+    {# style #}
+    <link rel="stylesheet" href="css/backend.css">
 </head>
 
 <body>
-    <!--Navbar -->
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark black ">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"> Tableau de bord
-                        <!-- <span class="sr-only">(current)</span> -->
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Espace
-                    </a>
-                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Créer un lien</a>
-                        <a class="dropdown-item" href="#">Liste des liens</a>
+    <header class="navbar navbar-dark black ">
+        <div class="container">
+            <div class="d-flex topNavBack">
+                <!--Navbar -->
+                <nav class="mb-1 navbar navbar-expand-md p-2 ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Tableau de bord
+                                    <!-- <span class="sr-only">(current)</span> -->
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Espace
+                                </a>
+                                <div class="dropdown-menu dropdown-default"
+                                    aria-labelledby="navbarDropdownMenuLink-333">
+                                    <a class="dropdown-item" href="#">Créer un lien</a>
+                                    <a class="dropdown-item" href="#">Liste des liens</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles
+                                </a>
+                                <div class="dropdown-menu dropdown-default"
+                                    aria-labelledby="navbarDropdownMenuLink-333">
+                                    <a class="dropdown-item" href="#">Créer un article</a>
+                                    <a class="dropdown-item" href="#">Liste des articles</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page
+                                </a>
+                                <div class="dropdown-menu dropdown-default"
+                                    aria-labelledby="navbarDropdownMenuLink-333">
+                                    <a class="dropdown-item" href="#">Liste des pages</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Graphique
+                                </a>
+                                <div class="dropdown-menu dropdown-default"
+                                    aria-labelledby="navbarDropdownMenuLink-333">
+                                    <a class="dropdown-item" href="#">Créer graphiques</a>
+                                    <a class="dropdown-item" href="#">Liste des graphiques</a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Articles
-                    </a>
-                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Créer un article</a>
-                        <a class="dropdown-item" href="#">Liste des articles</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Page
-                    </a>
-                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Liste des pages</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Graphique
-                    </a>
-                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Créer graphiques</a>
-                        <a class="dropdown-item" href="#">Liste des graphiques</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-                <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light">
-                        <button class="btn btn-light">Gestion du compte</button>
-                    </a>
-                </li>
-            </ul>
+                </nav>
+                <div class="ml-auto p-2">
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light">
+                                <button class="btn btn-light btn-Gestion ">Gestion du compte</button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </nav>
+    </header>
+
+
     <!--/.Navbar -->
     {% block content %}
     {% endblock %}
@@ -88,8 +109,10 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
 
+    <!--/.Navbar -->
+    {% block javascript %}
+    {% endblock %}
 
-    </script>
 </body>
 
 </html>

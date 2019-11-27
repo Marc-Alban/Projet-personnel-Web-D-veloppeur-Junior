@@ -11,7 +11,10 @@ if (isset($_GET['p'])) {
 }
 
 //Rend u  du template
-$loader = new FilesystemLoader('../templates');
+{
+    $loader = new FilesystemLoader('../templates');
+}
+
 $twig = new Environment($loader, [
     // 'cache' => false, //'__DIR__/tmp',
     // 'charset' => 'utf-8',
@@ -77,7 +80,44 @@ switch ($page) {
         echo $twig->render('Backend/dashboard.html.twig');
         break;
 
+    case 'createPartenaire':
+        echo $twig->render('Backend/partenaire.html.twig');
+        break;
+
+    case 'createGraph':
+        echo $twig->render('Backend/graph.html.twig');
+        break;
+
+    case 'createArticle':
+        echo $twig->render('Backend/form.html.twig');
+        break;
+
+    case 'updatePage':
+        echo $twig->render('Backend/form.html.twig');
+        break;
+
+    case 'listeLien':
+        echo $twig->render('Backend/table.html.twig');
+        break;
+
+    case 'listeArticle':
+        echo $twig->render('Backend/table.html.twig');
+        break;
+
+    case 'listePage':
+        echo $twig->render('Backend/table.html.twig');
+        break;
+
+    case 'listeGraphique':
+        echo $twig->render('Backend/table.html.twig');
+        break;
+
+    case 'loginUser':
+        echo $twig->render('Backend/loginUser.html.twig');
+        break;
+
     default:
         echo $twig->render('Frontend/404.html.twig');
         break;
+
 }
