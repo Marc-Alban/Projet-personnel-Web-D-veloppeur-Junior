@@ -31,6 +31,45 @@ a:hover {
     color: #e30614;
 }
 
+/* modal --formulaire */
+
+.md-form input:not([type]):focus:not([readonly]),
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="email"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="url"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="time"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="date"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="datetime"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="tel"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="number"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="search"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="search-md"]:focus:not([readonly]),
+.md-form textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #e30614;
+    -webkit-box-shadow: 0 1px 0 0 #e30614;
+    box-shadow: 0 1px 0 0 #e30614;
+}
+
+
+.md-form input:not([type]):focus:not([readonly])+label,
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="email"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="url"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="time"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="date"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="datetime"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="datetime-local"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="tel"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="number"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="search"]:not(.browser-default):focus:not([readonly])+label,
+.md-form input[type="search-md"]:focus:not([readonly])+label,
+.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color: #e30614;
+}
+
 /* nav */
 
 .navbar {
@@ -52,6 +91,10 @@ a:hover {
     padding: 0;
 }
 
+.nav-item {
+    margin: 0 5px;
+}
+
 /* Log --> fas */
 
 #user {
@@ -62,6 +105,7 @@ a:hover {
     width: 50px;
     height: 50px;
     box-shadow: 1px -1px 2px 0.8px rgba(0, 0, 0, 0.2) inset;
+    cursor: pointer;
 }
 
 #user .fa-user {
@@ -82,101 +126,75 @@ a:hover {
 
 /* color nav */
 .green {
-    font-weight: 400;
-    font-size: 12px;
-    padding: 1px 0 0;
-    margin-right: 8px;
-    color: #1f1f1f;
-    border-top: 4px solid transparent;
-    border-color: #67c19d;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
+    border-top: 4px solid #67c19d;
+    background-color: white !important;
 }
 
 .green:hover {
-    color: #67c19d;
+    color: #67c19d !important;
 }
 
 
 .blue {
-    font-weight: 400;
-    font-size: 12px;
-    padding: 1px 0 0;
-    margin-right: 8px;
-    color: #1f1f1f;
-    border-top: 4px solid transparent;
-    border-color: #678396;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
+    border-top: 4px solid #678396;
+    background-color: white !important;
 }
 
 .blue:hover {
-    color: #678396;
+    color: #678396 !important;
 }
 
 
 .orange {
-    font-weight: 400;
-    font-size: 12px;
-    padding: 1px 0 0;
-    margin-right: 8px;
-    color: #1f1f1f;
-    border-top: 4px solid transparent;
-    border-color: #f1703c;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
+    border-top: 4px solid #f1703c;
+    background-color: white !important;
 }
 
 .orange:hover {
-    color: #f1703c;
+    color: #f1703c !important;
 }
 
 
 
 .yellow {
-    font-weight: 400;
-    font-size: 12px;
-    padding: 1px 0 0;
-    margin-right: 8px;
-    color: #1f1f1f;
-    border-top: 4px solid transparent;
-    border-color: #cdc82e;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
+    border-top: 4px solid #cdc82e;
+    background-color: white !important;
 }
 
 .yellow:hover {
-    color: #cdc82e;
+    color: #cdc82e !important;
 }
 
 
 .blueStrong {
-    font-weight: 400;
-    font-size: 12px;
-    padding: 1px 0 0;
-    margin-right: 8px;
-    color: #1f1f1f;
-    border-top: 4px solid transparent;
-    border-color: #3e71a8;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
+    border-top: 4px solid #3e71a8;
+    background-color: white !important;
 
 }
 
 
 .blueStrong:hover {
-    color: #3e71a8;
+    color: #3e71a8 !important;
 }
 
 
-.greyFooter {
-    background: #2a2d30;
+/* blog--list post */
+
+.articleSemaine {
+    padding: 0;
 }
+
+.articleSemaine .card {
+    height: 410px;
+}
+
+.articleSemaine .card .view img {
+    background-size: cover;
+    height: 270px;
+}
+
+
+/* aside */
 
 .aside {
     font-size: 20px;
@@ -187,6 +205,20 @@ a:hover {
     background-color: #6A7174;
     border-left: 6px solid #CC0000;
 }
+
+
+/* footer */
+
+footer {
+    background: #2a2d30 !important;
+}
+
+footer .copyright-footer {
+    background: #000 !important;
+}
+
+
+
 
 @media screen and (max-width:767px) {
 
