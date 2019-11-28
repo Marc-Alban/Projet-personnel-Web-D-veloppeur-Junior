@@ -1,8 +1,11 @@
 <?php
 
-namespace App\view;
+namespace App\View;
 
-class View
+abstract class View
 {
-
+    public function renderer($view)
+    {
+        require VIEWS . '/' . $view . '.php';
+    }
 }

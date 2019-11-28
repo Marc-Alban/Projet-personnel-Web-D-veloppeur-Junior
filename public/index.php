@@ -4,21 +4,22 @@ require_once '../vendor/autoload.php';
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+//Rendu du template
+// define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates/');
+
+$loader = new FilesystemLoader('../templates');
+$twig = new Environment($loader);
+
+// $routeur = new Router($_SERVER["REQUEST_URI"]);
+
+// $routeur->get('/', 'IndexController@homeAction');
+// $routeur->match();
+
 //Routing
 $page = 'home';
 if (isset($_GET['p'])) {
     $page = $_GET['p'];
 }
-
-//Rend u  du template
-{
-    $loader = new FilesystemLoader('../templates');
-}
-
-$twig = new Environment($loader, [
-    // 'cache' => false, //'__DIR__/tmp',
-    // 'charset' => 'utf-8',
-]);
 
 switch ($page) {
     // Frontend
@@ -117,6 +118,7 @@ switch ($page) {
         break;
 
     default:
+        header('HTTP/1.0 404 Not Found');
         echo $twig->render('Frontend/404.html.twig');
         break;
 
