@@ -2,9 +2,7 @@
 
 namespace App\Model\Repository;
 
-use App\Model\Repository\Repository;
-
-class ArticleRepository extends Repository
+class ArticleRepository
 {
     public function findAllArticles()
     {
