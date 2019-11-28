@@ -1,8 +1,8 @@
 <?php
 
-namespace src\Model\Repository;
+namespace App\Model\Repository;
 
-use src\Model\Database;
+use App\Model\Database;
 
 class Repository extends Database
 {
