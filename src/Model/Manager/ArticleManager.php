@@ -4,6 +4,7 @@ namespace App\Model\Manager;
 
 use App\Model\Database;
 use App\Model\Entity\Article;
+use \PDO;
 
 class ArticleManager
 {
