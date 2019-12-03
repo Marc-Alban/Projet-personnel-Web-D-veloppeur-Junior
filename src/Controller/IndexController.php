@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use twig;
+use App\View\View;
 
-class IndexController extends twig
+class IndexController extends View
 {
     public function homeAction()
     {
-        var_dump(new twig);
-        //$this->renderer("home");
+        $this->renderer('Frontend', 'home');
     }
+
 }

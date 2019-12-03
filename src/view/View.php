@@ -2,10 +2,21 @@
 
 namespace App\View;
 
-abstract class View
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
+// $loader = new FilesystemLoader('../templates');
+// $twig = new Environment($loader);
+
+class View extends Environment
 {
-    public function renderer($view)
+
+    private $loader;
+
+    public function renderer($path, $view)
     {
-        require VIEWS . '/' . $view . '.php';
+        $this->loader = new FilesystemLoader(VIEWS . '/' . $path . '/' . $view . '.html.twig');
+
+        return $this->view->renderer($this->loader);
     }
 }
