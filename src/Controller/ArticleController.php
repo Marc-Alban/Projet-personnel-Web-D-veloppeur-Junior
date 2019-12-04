@@ -11,8 +11,8 @@ class ArticleController extends View
     {
         $articleManager = new ArticleManager;
         //$articleManager->readAll();
-        var_dump($articleManager->readAll());
-        die();
+        // var_dump($articleManager->readAll());
+        // die();
         echo $this->renderer('Frontend', 'blog', null);
     }
 

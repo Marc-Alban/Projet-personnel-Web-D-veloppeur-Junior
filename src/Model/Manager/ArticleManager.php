@@ -102,9 +102,9 @@ class ArticleManager
         $articles = [];
 
         while ($article = $this->pdoStatement->fetchObject('App\Model\Entity\Article')) {
-            var_dump($article);
-            die();
             $articles[] = $article;
+            // var_dump($articles);
+            // die();
         }
 
         return $articles;
