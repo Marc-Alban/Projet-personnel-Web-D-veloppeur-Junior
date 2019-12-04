@@ -50,6 +50,7 @@ class Router
             $this->page = $this->get('/?page=blog', 'ArticleController@listePostAction');
             $this->page = $this->get('/?page=article', 'ArticleController@PostAction');
             $this->page = $this->get('/?page=page', 'PageController@pageRenderAction');
+            $this->page = $this->get('/?page=contact', 'ContactController@contactRenderAction');
             $this->page = $this->get('/?page=newPassword', 'PasswordController@newPassAction');
             $this->page = $this->get('/?page=lostPassword', 'PasswordController@lostPassAction');
         } else if (in_array($this->page, $this->pageBack)) {
