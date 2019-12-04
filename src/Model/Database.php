@@ -6,12 +6,15 @@ use \PDO;
 
 class Database
 {
-    private static $instance;
+    const DSN = 'mysql:host=localhost;dbname=bmfinance';
+    const USER = 'root';
+    const PASSWORD = '';
+    private static $instance = null;
 
     public static function getPdo()
     {
         if (self::$instance === null) {
-            self::$instance = new PDO('mysql:host=localhost;dbname=bmfinance;charset=utf8', 'root', '', [
+            self::$instance = new PDO(self::DSN, self::USER, self::PASSWORD, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]);

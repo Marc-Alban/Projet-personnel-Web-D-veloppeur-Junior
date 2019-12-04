@@ -4,6 +4,7 @@ namespace App\Model\Manager;
 
 use App\Model\Database;
 use App\Model\Entity\Article;
+//use App\Model\Repository\ArticleRepository;
 use \PDO;
 
 class ArticleManager
@@ -93,11 +94,16 @@ class ArticleManager
      */
     public function readAll()
     {
-        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article ORDER BY date');
+        // $articleRepository = new ArticleRepository;
+
+        // $articleRepository->findAllArticle("SELECT * FROM article");
+        $this->pdoStatement = $this->pdo->prepare("SELECT * FROM article ORDER BY date DESC");
 
         $articles = [];
 
         while ($article = $this->pdoStatement->fetchObject('App\Model\Entity\Article')) {
+            var_dump($article);
+            die();
             $articles[] = $article;
         }
 

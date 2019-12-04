@@ -108,7 +108,17 @@
     <script type="text/javascript" src="js/MDB-Free/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
+    <!-- Script Tiny MCE -->
+    <script src='js/tinymce/tinymce.min.js' referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea',
+            encoding: "UTF-8",
+            mode: "textareas",
+            height: 1500
 
+        });
+    </script>
     <!--/.Navbar -->
     {% block javascript %}
     {% endblock %}

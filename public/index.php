@@ -12,25 +12,22 @@ class Router
     public function __construct(string $url)
     {
         $this->url = $url;
-        $this->page = $_GET['page'] ?? '/';
+        $this->page = $_GET['page'] ?? $this->url;
     }
 
     public function get(string $path, string $action)
     {
-        $this->routes['GET'][$path] = $action;
+        $this->routes[$path] = $action;
     }
 
     public function match()
     {
         foreach ($this->routes as $key => $val) {
-            foreach ($val as $path => $action) {
-                if ($path === $this->url) {
-                    $elements = explode('@', $action);
-                    $this->callController($elements);
-                }
+            if ($key === $this->url) {
+                $elements = explode('@', $val);
+                $this->callController($elements);
             }
         }
-        //header('HTTP/1.0 404 Not Found');
     }
 
     private function callController(array $elements)
@@ -61,6 +58,7 @@ class Router
             $this->page = $this->get('/?page=graph', 'GraphController@graphRenderAction');
             $this->page = $this->get('/?page=form', 'FormController@formAction');
         }
+        header('HTTP/1.0 404 Not Found');
 
     }
 
