@@ -6,9 +6,13 @@ use App\View\View;
 
 class IndexController extends View
 {
-    public function homeAction()
+    public function homeRenderAction()
     {
-        $this->renderer('Frontend', 'home');
+        echo $this->renderer('Frontend', 'home', null);
     }
 
+    public function errorAction()
+    {
+        echo $this->renderer('Frontend', '404', null);
+    }
 }

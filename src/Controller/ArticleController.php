@@ -2,15 +2,18 @@
 
 namespace App\Controller;
 
-class ArticleController
+use App\View\View;
+
+class ArticleController extends View
 {
-    public function articleAction()
+    public function listePostAction()
     {
-
+        echo $this->renderer('Frontend', 'blog', null);
     }
 
-    public function listeArticleAction()
+    public function PostAction()
     {
-
+        echo $this->renderer('Frontend', 'article', null);
     }
+
 }
