@@ -63,7 +63,7 @@ class ArticleManager
      */
     public function read($id)
     {
-        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE id=:id');
+        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE id=:id');
 
         //liason des paramètres
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
@@ -95,16 +95,14 @@ class ArticleManager
     public function readAll()
     {
         // $articleRepository = new ArticleRepository;
-
         // $articleRepository->findAllArticle("SELECT * FROM article");
-        $this->pdoStatement = $this->pdo->prepare("SELECT * FROM article ORDER BY date DESC");
+
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date DESC");
 
         $articles = [];
 
         while ($article = $this->pdoStatement->fetchObject('App\Model\Entity\Article')) {
             $articles[] = $article;
-            // var_dump($articles);
-            // die();
         }
 
         return $articles;

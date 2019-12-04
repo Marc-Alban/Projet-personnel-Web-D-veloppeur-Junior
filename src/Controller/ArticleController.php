@@ -10,15 +10,24 @@ class ArticleController extends View
     public function listePostAction()
     {
         $articleManager = new ArticleManager;
-        //$articleManager->readAll();
-        // var_dump($articleManager->readAll());
+        $articles[] = $articleManager->readAll();
+        // var_dump($articles);
         // die();
-        echo $this->renderer('Frontend', 'blog', null);
+        echo $this->renderer('Frontend', 'blog', $articles);
     }
 
     public function PostAction()
     {
         echo $this->renderer('Frontend', 'article', null);
     }
+
+    // public function createAction()
+    // {
+    //     $articleEntity = new Article;
+    //     $articleEntity->setLastArticle($_POST['lastArticle'])
+    //         ->setPosted($_POST['posted'])
+    //         ->setDate('Now()')
+    //         ->setImage($_FILES);
+    // }
 
 }

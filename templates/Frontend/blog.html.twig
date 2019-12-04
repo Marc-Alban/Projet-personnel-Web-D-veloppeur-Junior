@@ -2,6 +2,11 @@
 {% block head %} <title>Blog</title> {% endblock %}
 {% block title %}Liste des articles{% endblock %}
 {% block content %}
+
+{% for key, user in articles %}
+{{ key }}: {{ user.title|e }}
+{% endfor %}
+
 <!-- Section: Blog v.2 -->
 <section class="text-center my-5">
     <!-- Section  -->
