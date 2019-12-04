@@ -25,6 +25,6 @@ class View extends Environment
      */
     public function renderer(string $path, string $view, ?array $data)
     {
-        return $this->render($path . '/' . $view . '.html.twig', $data = []);
+        echo $this->render($path . '/' . $view . '.html.twig', ['data' => $data]);
     }
 }

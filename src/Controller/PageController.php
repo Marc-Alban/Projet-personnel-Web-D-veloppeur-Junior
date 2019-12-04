@@ -8,6 +8,6 @@ class PageController extends View
 {
     public function pageRenderAction()
     {
-        echo $this->renderer('Frontend', 'page', null);
+        $this->renderer('Frontend', 'page', null);
     }
 }

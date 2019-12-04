@@ -8,6 +8,6 @@ class FormController extends View
 {
     public function formAction()
     {
-        echo $this->renderer('Backend', 'form', null);
+        $this->renderer('Backend', 'form', null);
     }
 }

@@ -8,6 +8,6 @@ class PartenaireController extends View
 {
     public function createPartenaireAction()
     {
-        echo $this->renderer('Backend', 'partenaire', null);
+        $this->renderer('Backend', 'partenaire', null);
     }
 }

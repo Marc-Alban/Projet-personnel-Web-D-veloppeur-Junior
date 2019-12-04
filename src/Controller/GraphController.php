@@ -8,6 +8,6 @@ class GraphController extends View
 {
     public function graphRenderAction()
     {
-        echo $this->renderer('Backend', 'graph', null);
+        $this->renderer('Backend', 'graph', null);
     }
 }

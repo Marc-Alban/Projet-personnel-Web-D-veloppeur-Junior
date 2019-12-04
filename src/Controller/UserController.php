@@ -8,6 +8,6 @@ class UserController extends View
 {
     public function loginUserAction()
     {
-        echo $this->renderer('Backend', 'loginUser', null);
+        $this->renderer('Backend', 'loginUser', null);
     }
 }

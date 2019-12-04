@@ -8,11 +8,11 @@ class IndexController extends View
 {
     public function homeRenderAction()
     {
-        echo $this->renderer('Frontend', 'home', null);
+        $this->renderer('Frontend', 'home', null);
     }
 
     public function errorAction()
     {
-        echo $this->renderer('Frontend', '404', null);
+        $this->renderer('Frontend', '404', null);
     }
 }

@@ -8,7 +8,7 @@ class ContactController extends View
 {
     public function contactRenderAction()
     {
-        echo $this->renderer('Frontend', 'contact', null);
+        $this->renderer('Frontend', 'contact', null);
     }
 
 }

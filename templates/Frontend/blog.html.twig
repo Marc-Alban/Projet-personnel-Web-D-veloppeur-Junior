@@ -1,244 +1,69 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title>Blog</title> {% endblock %}
-{% block title %}Liste des articles{% endblock %}
+{% block title %}Blog{% endblock %}
 {% block content %}
 
-{% for key, user in articles %}
-{{ key }}: {{ user.title|e }}
-{% endfor %}
+
+
 
 <!-- Section: Blog v.2 -->
 <section class="text-center my-5">
     <!-- Section  -->
+    <!-- Article last -->
     <div class="mb-5 articleSemaine col-lg-12 col-md-8 col-sm-12">
+        {% for lasteArticle in data %}
         <!-- Card -->
         <div class="card">
             <!-- Card image -->
             <div class="view overlay">
-                <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                    alt="Card image cap">
-                <a href="#!">
+                <img class="card-img-top" src="img/{{ lasteArticle.image }}" alt="Card image cap">
+                <a href="">
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
             <!-- Card content -->
             <div class="card-body">
                 <!-- Text -->
-                <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                    on
-                    the card title
-                    and make up the
-                    bulk of the
-                    card's content.</p>
+                <p class="card-text font-weight-bold  text-justify">{{ lasteArticle.description }}</p>
                 <!-- Title -->
-                <h4 class="card-subtitle text-left">Sous-titre</h4>
+                <h4 class="card-subtitle text-left">{{ lasteArticle.title }}</h4>
                 <!-- Post data -->
-                <p class="text-left">15/07/2018</p>
+                <p class="text-left">{{ lasteArticle.date }}</p>
             </div>
         </div>
         <!-- Card -->
+        {% endfor %}
     </div>
-
+    <!-- lastArticle -->
     <!-- Grid row -->
     <div class="row">
         <!-- Grid column -->
+        {% for articles in data %}
         <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
             <!-- Card -->
             <div class="card">
                 <!-- Card image -->
                 <div class="view overlay">
-                    <img class="card-img-top"
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                        alt="Card image cap">
-                    <a href="#!">
+                    <img class="card-img-top" src="img/{{ articles.image }}" alt="Card image cap">
+                    <a href="">
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
                 <!-- Card content -->
                 <div class="card-body">
                     <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                        on
-                        the card title
-                        and make up the
-                        bulk of the
-                        card's content.</p>
+                    <p class="card-text font-weight-bold  text-justify">{{ articles.description }}</p>
                     <!-- Title -->
-                    <h4 class="card-subtitle text-left">Sous-titre</h4>
+                    <h4 class="card-subtitle text-left">{{ articles.title }}</h4>
                     <!-- Post data -->
-                    <p class="text-left">15/07/2018</p>
+                    <p class="text-left">{{ articles.date }}</p>
                 </div>
             </div>
             <!-- Card -->
 
         </div>
         <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
-            <!-- Card -->
-            <div class="card">
-                <!-- Card image -->
-                <div class="view overlay">
-                    <img class="card-img-top"
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                        alt="Card image cap">
-                    <a href="#!">
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <!-- Card content -->
-                <div class="card-body">
-                    <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                        on
-                        the card title
-                        and make up the
-                        bulk of the
-                        card's content.</p>
-                    <!-- Title -->
-                    <h4 class="card-subtitle text-left">Sous-titre</h4>
-                    <!-- Post data -->
-                    <p class="text-left">15/07/2018</p>
-                </div>
-            </div>
-            <!-- Card -->
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
-            <!-- Card -->
-            <div class="card">
-                <!-- Card image -->
-                <div class="view overlay">
-                    <img class="card-img-top"
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                        alt="Card image cap">
-                    <a href="#!">
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <!-- Card content -->
-                <div class="card-body">
-                    <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                        on
-                        the card title
-                        and make up the
-                        bulk of the
-                        card's content.</p>
-                    <!-- Title -->
-                    <h4 class="card-subtitle text-left">Sous-titre</h4>
-                    <!-- Post data -->
-                    <p class="text-left">15/07/2018</p>
-                </div>
-            </div>
-            <!-- Card -->
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
-            <!-- Card -->
-            <div class="card">
-                <!-- Card image -->
-                <div class="view overlay">
-                    <img class="card-img-top"
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                        alt="Card image cap">
-                    <a href="#!">
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <!-- Card content -->
-                <div class="card-body">
-                    <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                        on
-                        the card title
-                        and make up the
-                        bulk of the
-                        card's content.</p>
-                    <!-- Title -->
-                    <h4 class="card-subtitle text-left">Sous-titre</h4>
-                    <!-- Post data -->
-                    <p class="text-left">15/07/2018</p>
-                </div>
-            </div>
-            <!-- Card -->
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
-            <!-- Card -->
-            <div class="card">
-                <!-- Card image -->
-                <div class="view overlay">
-                    <img class="card-img-top"
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                        alt="Card image cap">
-                    <a href="#!">
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <!-- Card content -->
-                <div class="card-body">
-                    <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                        on
-                        the card title
-                        and make up the
-                        bulk of the
-                        card's content.</p>
-                    <!-- Title -->
-                    <h4 class="card-subtitle text-left">Sous-titre</h4>
-                    <!-- Post data -->
-                    <p class="text-left">15/07/2018</p>
-                </div>
-            </div>
-            <!-- Card -->
-
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
-            <!-- Card -->
-            <div class="card">
-                <!-- Card image -->
-                <div class="view overlay">
-                    <img class="card-img-top"
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                        alt="Card image cap">
-                    <a href="#!">
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
-                </div>
-                <!-- Card content -->
-                <div class="card-body">
-                    <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">Some quick example text to build
-                        on
-                        the card title
-                        and make up the
-                        bulk of the
-                        card's content.</p>
-                    <!-- Title -->
-                    <h4 class="card-subtitle text-left">Sous-titre</h4>
-                    <!-- Post data -->
-                    <p class="text-left">15/07/2018</p>
-                </div>
-            </div>
-            <!-- Card -->
-
-        </div>
-        <!-- Grid column -->
-
+        {% endfor %}
     </div>
     <!-- Grid row -->
 

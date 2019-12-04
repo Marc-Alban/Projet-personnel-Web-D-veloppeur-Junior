@@ -8,7 +8,7 @@ class DashboardController extends View
 {
     public function dashboardRenderAction()
     {
-        echo $this->renderer('Backend', 'dashboard', null);
+        $this->renderer('Backend', 'dashboard', null);
     }
 
 }

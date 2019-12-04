@@ -63,7 +63,7 @@ class ArticleManager
      */
     public function read($id)
     {
-        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE id=:id');
+        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE id=:id');
 
         //liason des paramètres
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
@@ -83,6 +83,18 @@ class ArticleManager
             return false;
         }
 
+    }
+
+    public function lastId()
+    {
+        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) AS id FROM article LIMIT 1');
+        $lastId = $this->pdoStatement;
+
+        var_dump($lastId);
+        die();
+        foreach ($lastId as $k => $v) {
+        }
+        return $lastId;
     }
 
     /**

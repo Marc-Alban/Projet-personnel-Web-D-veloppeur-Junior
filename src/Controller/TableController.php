@@ -8,6 +8,6 @@ class TableController extends View
 {
     public function listeTableAction()
     {
-        echo $this->renderer('Backend', 'table', null);
+        $this->renderer('Backend', 'table', null);
     }
 }
