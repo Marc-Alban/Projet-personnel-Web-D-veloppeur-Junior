@@ -11,12 +11,14 @@ class ArticleController extends View
     {
         $articleManager = new ArticleManager;
         $lastId = $articleManager->lastId();
-        $id = (int) $lastId;
-        $lasteArticle = $articleManager->read($id);
-        var_dump($lasteArticle, $lastId);
-        die();
-        $articles = $articleManager->readAll();
-        $this->renderer('Frontend', 'blog', $articles, $lasteArticle);
+        $lasteArticle = $articleManager->read($lastId);
+        $listeArticles = $articleManager->readAll();
+        //var_dump($listeArticles);
+        // echo '<br/>';
+        // var_dump($lasteArticle, 'toto');
+        // echo '<br/>';
+        // die();
+        $this->renderer('Frontend', 'blog', ['lasteArticle' => $lasteArticle, 'listeArticle' => $listeArticles]);
     }
 
     public function PostAction()

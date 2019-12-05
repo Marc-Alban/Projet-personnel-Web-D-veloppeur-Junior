@@ -11,12 +11,12 @@
     <!-- Section  -->
     <!-- Article last -->
     <div class="mb-5 articleSemaine col-lg-12 col-md-8 col-sm-12">
-        {% for articles in data %}
         <!-- Card -->
         <div class="card">
             <!-- Card image -->
             <div class="view overlay">
-                <img class="card-img-top" src="img/{{ articles.image }}"
+                <img class="card-img-top" src="img/{{ data.lasteArticle.image
+                    }}"
                     alt="Card image cap">
                 <a href="">
                     <div class="mask rgba-white-slight"></div>
@@ -26,27 +26,29 @@
             <div class="card-body">
                 <!-- Text -->
                 <p class="card-text font-weight-bold text-justify">{{
-                    articles.description }}</p>
+                    data.lasteArticle.description }}</p>
                 <!-- Title -->
-                <h4 class="card-subtitle text-left">{{ articles.title }}</h4>
+                <h4 class="card-subtitle text-left">{{
+                    data.lasteArticle.title }}</h4>
                 <!-- Post data -->
-                <p class="text-left">{{ articles.date }}</p>
+                <p class="text-left">{{ data.lasteArticle.date }}</p>
             </div>
         </div>
         <!-- Card -->
-        {% endfor %}
     </div>
     <!-- lastArticle -->
     <!-- Grid row -->
     <div class="row">
         <!-- Grid column -->
-        {% for lasteArticle in data %}
+        {% for listeArticle in data.listeArticle %}
         <div class="col-lg-6 col-md-8 col-sm-12 mb-4">
             <!-- Card -->
             <div class="card">
                 <!-- Card image -->
                 <div class="view overlay">
-                    <img class="card-img-top" src="img/{{ lasteArticle.image }}"
+                    <img class="card-img-top" src="img/{{
+                        listeArticle.image
+                        }}"
                         alt="Card image cap">
                     <a href="">
                         <div class="mask rgba-white-slight"></div>
@@ -56,11 +58,12 @@
                 <div class="card-body">
                     <!-- Text -->
                     <p class="card-text font-weight-bold text-justify">{{
-                        lasteArticle.description }}</p>
+                        listeArticle.description }}</p>
                     <!-- Title -->
-                    <h4 class="card-subtitle text-left">{{ lasteArticle.title }}</h4>
+                    <h4 class="card-subtitle text-left">{{
+                        listeArticle.title }}</h4>
                     <!-- Post data -->
-                    <p class="text-left">{{ lasteArticle.date }}</p>
+                    <p class="text-left">{{ listeArticle.date }}</p>
                 </div>
             </div>
             <!-- Card -->

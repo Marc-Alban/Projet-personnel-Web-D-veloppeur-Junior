@@ -73,10 +73,10 @@ class ArticleManager
 
         if ($executeIsOk) {
             $article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
+            return $article;
             if ($article === false) {
                 return null;
             }
-            return $article;
         }
 
         if (!$executeIsOk) {
@@ -87,9 +87,9 @@ class ArticleManager
 
     public function lastId()
     {
-        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) AS id FROM article LIMIT 1');
+        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) AS id FROM article WHERE lastArticle = 1 LIMIT 1');
         $lastId = $this->pdoStatement->fetch();
-        return $lastId;
+        return $lastId["id"];
     }
 
     /**
@@ -104,7 +104,7 @@ class ArticleManager
         // $articleRepository = new ArticleRepository;
         // $articleRepository->findAllArticle("SELECT * FROM article");
 
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date DESC");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) ORDER BY date DESC");
 
         $articles = [];
 
