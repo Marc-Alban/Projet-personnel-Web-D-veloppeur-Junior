@@ -11,7 +11,10 @@ class ArticleController extends View
     {
         $articleManager = new ArticleManager;
         $lastId = $articleManager->lastId();
-        $lasteArticle = $articleManager->read($lastId);
+        $id = (int) $lastId;
+        $lasteArticle = $articleManager->read($id);
+        var_dump($lasteArticle, $lastId);
+        die();
         $articles = $articleManager->readAll();
         $this->renderer('Frontend', 'blog', $articles, $lasteArticle);
     }

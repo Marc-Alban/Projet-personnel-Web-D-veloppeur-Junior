@@ -11,12 +11,13 @@
     <!-- Section  -->
     <!-- Article last -->
     <div class="mb-5 articleSemaine col-lg-12 col-md-8 col-sm-12">
-        {% for lasteArticle in data %}
+        {% for articles in data %}
         <!-- Card -->
         <div class="card">
             <!-- Card image -->
             <div class="view overlay">
-                <img class="card-img-top" src="img/{{ lasteArticle.image }}" alt="Card image cap">
+                <img class="card-img-top" src="img/{{ articles.image }}"
+                    alt="Card image cap">
                 <a href="">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -24,11 +25,12 @@
             <!-- Card content -->
             <div class="card-body">
                 <!-- Text -->
-                <p class="card-text font-weight-bold  text-justify">{{ lasteArticle.description }}</p>
+                <p class="card-text font-weight-bold text-justify">{{
+                    articles.description }}</p>
                 <!-- Title -->
-                <h4 class="card-subtitle text-left">{{ lasteArticle.title }}</h4>
+                <h4 class="card-subtitle text-left">{{ articles.title }}</h4>
                 <!-- Post data -->
-                <p class="text-left">{{ lasteArticle.date }}</p>
+                <p class="text-left">{{ articles.date }}</p>
             </div>
         </div>
         <!-- Card -->
@@ -38,13 +40,14 @@
     <!-- Grid row -->
     <div class="row">
         <!-- Grid column -->
-        {% for articles in data %}
-        <div class="col-lg-6 col-md-8 col-sm-12  mb-4">
+        {% for lasteArticle in data %}
+        <div class="col-lg-6 col-md-8 col-sm-12 mb-4">
             <!-- Card -->
             <div class="card">
                 <!-- Card image -->
                 <div class="view overlay">
-                    <img class="card-img-top" src="img/{{ articles.image }}" alt="Card image cap">
+                    <img class="card-img-top" src="img/{{ lasteArticle.image }}"
+                        alt="Card image cap">
                     <a href="">
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -52,11 +55,12 @@
                 <!-- Card content -->
                 <div class="card-body">
                     <!-- Text -->
-                    <p class="card-text font-weight-bold  text-justify">{{ articles.description }}</p>
+                    <p class="card-text font-weight-bold text-justify">{{
+                        lasteArticle.description }}</p>
                     <!-- Title -->
-                    <h4 class="card-subtitle text-left">{{ articles.title }}</h4>
+                    <h4 class="card-subtitle text-left">{{ lasteArticle.title }}</h4>
                     <!-- Post data -->
-                    <p class="text-left">{{ articles.date }}</p>
+                    <p class="text-left">{{ lasteArticle.date }}</p>
                 </div>
             </div>
             <!-- Card -->
@@ -75,14 +79,16 @@
 <section class="mb-5">
     <h4 class="font-weight-bold aside"><strong>Archive</strong></h4>
     <ul class="list-group z-depth-1">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item d-flex justify-content-between
+            align-items-center">
             <a>
                 <font style="vertical-align: inherit;">
                     <font style="vertical-align: inherit;">2019 </font>
                 </font>
             </a>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item d-flex justify-content-between
+            align-items-center">
             <a>
                 <font style="vertical-align: inherit;">
                     <font style="vertical-align: inherit;">2020 </font>

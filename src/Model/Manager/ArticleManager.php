@@ -88,12 +88,7 @@ class ArticleManager
     public function lastId()
     {
         $this->pdoStatement = $this->pdo->query('SELECT MAX(id) AS id FROM article LIMIT 1');
-        $lastId = $this->pdoStatement;
-
-        var_dump($lastId);
-        die();
-        foreach ($lastId as $k => $v) {
-        }
+        $lastId = $this->pdoStatement->fetch();
         return $lastId;
     }
 
