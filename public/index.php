@@ -44,8 +44,8 @@ class Router
             $this->page = $this->get('/', 'IndexController@homeRenderAction');
             $this->page = $this->get('/?page=', 'IndexController@errorAction');
             $this->page = $this->get('/?page=home', 'IndexController@homeRenderAction');
-            $this->page = $this->get('/?page=blog', 'ArticleController@listePostAction');
-            $this->page = $this->get('/?page=article', 'ArticleController@PostAction');
+            $this->page = $this->get('/?page=blog', 'ArticleController@listsArticlesAction');
+            $this->page = $this->get('/?page=article', 'ArticleController@postAction');
             $this->page = $this->get('/?page=page', 'PageController@pageRenderAction');
             $this->page = $this->get('/?page=contact', 'ContactController@contactRenderAction');
             $this->page = $this->get('/?page=newPassword', 'PasswordController@newPassAction');

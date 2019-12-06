@@ -16,17 +16,22 @@
 
                         <!-- Card -->
                         <div class="card primary-color white-text">
-                            <div class="card-body d-flex justify-content-around align-items-center">
+                            <div class="card-body d-flex justify-content-around
+                                align-items-center">
                                 <div>
-                                    <p class="h2-responsive font-weight-bold mt-n2 mb-0">20 Articles</p>
+                                    <p class="h2-responsive font-weight-bold
+                                        mt-n2 mb-0">20 Articles</p>
                                 </div>
                                 <div>
-                                    <i class="far fa-edit fa-3x fa-4x text-black-40"></i>
+                                    <i class="far fa-edit fa-3x fa-4x
+                                        text-black-40"></i>
                                 </div>
                             </div>
-                            <a class="card-footer footer-hover small text-center white-text border-0 p-2"
+                            <a class="card-footer footer-hover small text-center
+                                white-text border-0 p-2"
                                 href="?page=table">Liste
-                                articles<i class="fas fa-arrow-circle-right pl-2"></i></a>
+                                articles<i class="fas fa-arrow-circle-right
+                                    pl-2"></i></a>
                         </div>
                         <!-- Card -->
 
@@ -39,16 +44,21 @@
 
                         <!-- Card -->
                         <div class="card light-blue lighten-1 white-text">
-                            <div class="card-body d-flex justify-content-around align-items-center">
+                            <div class="card-body d-flex justify-content-around
+                                align-items-center">
                                 <div>
-                                    <p class="h2-responsive font-weight-bold mt-n2 mb-0">2 Liens partenaires</p>
+                                    <p class="h2-responsive font-weight-bold
+                                        mt-n2 mb-0">2 Liens partenaires</p>
                                 </div>
                                 <div>
-                                    <i class="far fa-edit fa-3x fa-4x text-black-40"></i>
+                                    <i class="far fa-edit fa-3x fa-4x
+                                        text-black-40"></i>
                                 </div>
                             </div>
-                            <a class="card-footer footer-hover small text-center white-text border-0 p-2"
-                                href="?page=table">Liste liens<i class="fas fa-arrow-circle-right pl-2"></i></a>
+                            <a class="card-footer footer-hover small text-center
+                                white-text border-0 p-2"
+                                href="?page=table">Liste liens<i class="fas
+                                    fa-arrow-circle-right pl-2"></i></a>
                         </div>
                         <!-- Card -->
 
@@ -75,23 +85,37 @@
 
                 <!-- Avatar -->
                 <div class="avatar mx-auto white">
-                    <img src="" class=" profile-pic rounded-circle" alt="woman avatar">
+                    <img src="" alt="" id="profile-pic">
                 </div>
 
                 <!-- Content -->
                 <div class="card-body">
-                    <!-- Name -->
-                    <h4 class="card-title name"></h4>
-                    <hr>
-                    <!-- Quotation -->
-                    <p class="username"></p>
-                    <p class="biography"></p>
-                    <p class="number-of-post"></p>
-                    <p class="followers"></p>
-                    <p class="following"></p>
-                    <p class="posts"></p>
+                    <div class="col-md-12">
+                        <h2 id="username"></h2>
+                        <div class="row">
+                            <div class="col-md-4"><span id="number-of-posts"></span>
+                                posts</div>
+                            <div class="col-md-4"><span id="followers"></span>
+                                followers</div>
+                            <div class="col-md-4"><span id="following"></span>
+                                following</div>
+                        </div>
+                        <div class="row" style="margin-top:60px"><h4 id="name"></h4></div>
+                        <div class="row"><h4 id="biography"></h4></div>
+                        <br>
+                        <hr>
+                        <br>
+                        <div class="row" id="posts">
+                            <div class="col-md-4 equal-height">
+                                <img src="" id="postImg">
+                                <div class="row" id="postLikeComment">
+                                    <div class="col-md-6" id="postLikes"></div>
+                                    <div class="col-md-6" id="postComments"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
             <!-- Card -->
         </div>

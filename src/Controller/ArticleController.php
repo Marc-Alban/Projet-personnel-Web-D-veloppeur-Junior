@@ -7,34 +7,26 @@ use App\View\View;
 
 class ArticleController extends View
 {
-    public function listePostAction()
+
+    private $articleManager;
+
+    public function __construct()
     {
-        $articleManager = new ArticleManager;
-        $lastId = $articleManager->lastId();
-        $lasteArticle = $articleManager->read($lastId);
-        $listeArticles = $articleManager->readAll();
-        //var_dump($listeArticles);
-        // echo '<br/>';
-        // var_dump($lasteArticle, 'toto');
-        // echo '<br/>';
+        $this->articleManager = new ArticleManager;
+    }
+
+    public function listsArticlesAction()
+    {
+        $articles = $this->articleManager->listePost();
+        // var_dump($articles);
         // die();
-        $this->renderer('Frontend', 'blog', ['lasteArticle' => $lasteArticle, 'listeArticle' => $listeArticles]);
+        $this->renderer('Frontend', 'blog', ['article' => $articles]);
     }
 
-    public function PostAction()
+    public function postAction()
     {
-        $articleManager = new ArticleManager;
-        $article[] = $articleManager->read(1);
-        $this->renderer('Frontend', 'article', $article);
+        $post = $this->articleManager->post();
+        //$this->renderer('Frontend', 'article', ['post' => $post]);
     }
-
-    // public function createAction()
-    // {
-    //     $articleEntity = new Article;
-    //     $articleEntity->setLastArticle($_POST['lastArticle'])
-    //         ->setPosted($_POST['posted'])
-    //         ->setDate('Now()')
-    //         ->setImage($_FILES);
-    // }
 
 }
