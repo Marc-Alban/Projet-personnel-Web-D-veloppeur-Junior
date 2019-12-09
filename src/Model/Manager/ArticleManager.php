@@ -27,7 +27,7 @@ class ArticleManager
 
     public function post()
     {
-        return $this->articleRepository->read(1);
+        return $this->articleRepository->read(5);
     }
 
     // public function createAction()

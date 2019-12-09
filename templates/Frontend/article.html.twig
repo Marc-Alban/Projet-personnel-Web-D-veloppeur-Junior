@@ -1,35 +1,35 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title> Page article exemple </title> {% endblock %}
-{% block title %}Article:{% for article in data %}{{ article.title }}{% endfor %} {% endblock %}
+{% block title %}Article:{% for post in data %}{{ post.title }}{% endfor %} {% endblock %}
 {% block content %}
-{% for article in data %}
+{% for post in data %}
 
 <!--Grid column-->
 <div class="col-md-12">
     <!--Card-->
     <div class="card hoverable pb-5 mx-md-3">
         <!-- img -->
-        <img class="jarallax-img" src="img/{{ article.image }}" alt="">
+        <img class="jarallax-img" src="img/{{ post.image }}" alt="">
         <!-- /img -->
         <div class="card-body">
             <div class="container">
                 <!--Section heading-->
                 <h1 class="text-left h1 pt-4 mb-3">
-                    <strong>{{ article.title }}</strong>
+                    <strong>{{ post.title }}</strong>
                 </h1>
                 <div class="row">
                     <div class="col-md-12 col-xl-12 d-flex justify-content-left">
                         <p class="font-small grey-text mb-0"><i class="far fa-clock-o dark-grey-text"></i>
-                            {{ article.legende }}</p>
+                            {{ post.legende }}</p>
                         <p class="font-small grey-text mb-0"><i class="far fa-clock-o dark-grey-text"></i>
-                            {{ article.date }}</p>
+                            {{ post.date }}</p>
                     </div>
                 </div>
 
                 <!-- Grid column -->
                 <div class="row mt-3">
 
-                    <p class="dark-grey-text article">{{ article.description }}</p>
+                    <p class="dark-grey-text article">{{ post.description }}</p>
 
                 </div>
                 <!--/Grid colomn -->

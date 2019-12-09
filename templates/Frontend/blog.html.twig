@@ -27,7 +27,7 @@
                 <h4 class="card-subtitle text-left">{{
                     data.lastArticle.title }}</h4>
                 <!-- Post data -->
-                <p class="text-left">{{ data.lastArticle.date }}</p>
+                <p class="text-left">{{ data.lastArticle.date|date('d/m/Y') }}</p>
             </div>
         </div>
         <!-- Card -->
@@ -58,7 +58,7 @@
                     <h4 class="card-subtitle text-left">{{
                         listeArticle.title }}</h4>
                     <!-- Post data -->
-                    <p class="text-left">{{ listeArticle.date | }}</p>
+                    <p class="text-left">{{ listeArticle.date|date('d/m/Y') }}</p>
                 </div>
             </div>
             <!-- Card -->
