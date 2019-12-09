@@ -1,5 +1,7 @@
 {% extends 'Frontend/layout.html.twig' %}
-{% block head %} <title>Contactez-nous</title> {% endblock %}
+{% block head %}
+<title>Contactez-nous</title>
+{% endblock %}
 {% block title %}Contactez-nous{% endblock %}
 {% block content %}
 <!-- Material form contact -->
@@ -95,6 +97,8 @@
                 <label for="materialContactFormMessage">Message (requis)</label>
             </div>
 
+            <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+            <div id="contact"></div>
 
             <!-- Send button -->
             <button class="btn btn-red btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Envoyer

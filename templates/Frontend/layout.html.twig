@@ -23,6 +23,20 @@
   <!--Style -->
   <link href="css/frontend.css" rel="stylesheet">
 
+  <script type="text/javascript">
+    var verifyCallback = function (response) {
+      alert(response);
+    };
+    var onloadCallback = function () {
+      // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
+      // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
+      grecaptcha.render('captcha', {
+        'sitekey': '6LdCHMIUAAAAAAWzKdTsmXFOtMohGlCSx7BXVM-9',
+        'callback': verifyCallback,
+        'theme': 'dark'
+      });
+    };
+  </script>
 </head>
 
 <body class="fixed-sn homepage-v3">
@@ -57,26 +71,32 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body mx-4">
-                  <!--Body-->
-                  <div class="md-form mb-5">
-                    <input type="text" id="Form-User" class="form-control
-                        validate">
-                    <label data-error="wrong" data-success="right" for="Form-User">Identifiant</label>
-                  </div>
+                  <form action="" method="POST">
+                    <!--Body-->
+                    <div class="md-form mb-5">
+                      <input type="text" id="Form-User" class="form-control
+                    validate" required>
+                      <label data-error="wrong" data-success="right" for="Form-User">Identifiant</label>
+                    </div>
 
-                  <div class="md-form pb-3">
-                    <input type="password" id="Form-pass" class="form-control
-                        validate">
-                    <label data-error="wrong" data-success="right" for="Form-pass">Mot de passe</label>
-                    <p class="font-small red-text d-flex
-                        justify-content-start"><a href="?page=lostPassword" class="red-text
-                          ml-1">*Mot de passe oublié</a></p>
-                  </div>
+                    <div class="md-form pb-3">
+                      <input type="password" id="Form-pass" class="form-control
+                    validate" required>
+                      <label data-error="wrong" data-success="right" for="Form-pass">Mot de passe</label>
+                      <p class="font-small red-text d-flex
+                    justify-content-start"><a href="?page=lostPassword" class="red-text
+                    ml-1">*Mot de passe oublié</a></p>
+                    </div>
 
-                  <div class="text-center mb-3">
-                    <button type="button" class="btn btn-block btn-red
-                        btn-rounded z-depth-1a">Je me connect</button>
-                  </div>
+                    <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+                    <div id="captcha"></div>
+
+                    <div class="text-center mb-3">
+                      <input type="submit" class="btn btn-block btn-red
+                        btn-rounded z-depth-1a" value="Je me connect">
+                    </div>
+                  </form>
+
 
                 </div>
               </div>
@@ -383,7 +403,9 @@
 
 
   <!-- SCRIPTS -->
-
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+  </script>
+  {% block js %} {% endblock %}
   <!-- JQuery -->
   <script type="text/javascript" src="js/MDB-Free/jquery.min.js"></script>
   <!-- Tooltips -->

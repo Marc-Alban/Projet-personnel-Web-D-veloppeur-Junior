@@ -17,16 +17,15 @@ class ArticleController extends View
 
     public function listsArticlesAction()
     {
-        $articles = $this->articleManager->listePost();
-        // var_dump($articles);
-        // die();
-        $this->renderer('Frontend', 'blog', ['article' => $articles]);
+        $listeArticle = $this->articleManager->listePost();
+        $lastArticle = $this->articleManager->lastArticle();
+        $this->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
     }
 
     public function postAction()
     {
         $post = $this->articleManager->post();
-        //$this->renderer('Frontend', 'article', ['post' => $post]);
+        $this->renderer('Frontend', 'article', ['post' => $post]);
     }
 
 }

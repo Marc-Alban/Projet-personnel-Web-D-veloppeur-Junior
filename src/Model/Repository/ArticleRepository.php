@@ -85,6 +85,11 @@ class ArticleRepository
 
     }
 
+    /**
+     * Retourn le dernier id insérer en bdd
+     *
+     * @return void
+     */
     public function lastId()
     {
         $this->pdoStatement = $this->pdo->query('SELECT MAX(id) AS id FROM article WHERE lastArticle = 1 LIMIT 1');

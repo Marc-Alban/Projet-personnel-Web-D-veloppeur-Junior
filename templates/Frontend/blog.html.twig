@@ -3,9 +3,6 @@
 {% block title %}Blog{% endblock %}
 {% block content %}
 
-
-
-
 <!-- Section: Blog v.2 -->
 <section class="text-center my-5">
     <!-- Section  -->
@@ -15,9 +12,8 @@
         <div class="card">
             <!-- Card image -->
             <div class="view overlay">
-                <img class="card-img-top" src="img/{{ data.lasteArticle.image
-                    }}"
-                    alt="Card image cap">
+                <img class="card-img-top" src="img/{{ data.lastArticle.image
+                    }}" alt="Card image cap">
                 <a href="">
                     <div class="mask rgba-white-slight"></div>
                 </a>
@@ -26,12 +22,12 @@
             <div class="card-body">
                 <!-- Text -->
                 <p class="card-text font-weight-bold text-justify">{{
-                    data.lasteArticle.description }}</p>
+                    data.lastArticle.description }}</p>
                 <!-- Title -->
                 <h4 class="card-subtitle text-left">{{
-                    data.lasteArticle.title }}</h4>
+                    data.lastArticle.title }}</h4>
                 <!-- Post data -->
-                <p class="text-left">{{ data.lasteArticle.date }}</p>
+                <p class="text-left">{{ data.lastArticle.date }}</p>
             </div>
         </div>
         <!-- Card -->
@@ -48,8 +44,7 @@
                 <div class="view overlay">
                     <img class="card-img-top" src="img/{{
                         listeArticle.image
-                        }}"
-                        alt="Card image cap">
+                        }}" alt="Card image cap">
                     <a href="">
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -63,7 +58,7 @@
                     <h4 class="card-subtitle text-left">{{
                         listeArticle.title }}</h4>
                     <!-- Post data -->
-                    <p class="text-left">{{ listeArticle.date }}</p>
+                    <p class="text-left">{{ listeArticle.date | }}</p>
                 </div>
             </div>
             <!-- Card -->
