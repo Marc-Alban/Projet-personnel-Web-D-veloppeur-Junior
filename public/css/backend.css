@@ -23,6 +23,11 @@
     width: 100%;
 }
 
+/* Dashboard */
+#postImg {
+    width: 100%;
+}
+
 @media screen and (max-width: 640px) {
 
     table,
