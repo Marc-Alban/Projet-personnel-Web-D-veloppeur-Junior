@@ -1,7 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
-class GraphEntity
+class Graph
 {
 
     private $id;

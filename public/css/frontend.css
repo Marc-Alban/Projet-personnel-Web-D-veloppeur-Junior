@@ -218,6 +218,11 @@ a:hover {
 }
 
 
+.card-img-top {
+    height: 207px;
+}
+
+
 /* footer */
 
 footer {

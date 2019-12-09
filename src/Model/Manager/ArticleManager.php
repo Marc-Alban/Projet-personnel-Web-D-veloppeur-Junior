@@ -30,13 +30,4 @@ class ArticleManager
         return $this->articleRepository->read(5);
     }
 
-    // public function createAction()
-    // {
-    //     $articleEntity = new Article;
-    //     $articleEntity->setLastArticle($_POST['lastArticle'])
-    //         ->setPosted($_POST['posted'])
-    //         ->setDate('Now()')
-    //         ->setImage($_FILES);
-    // }
-
 }

@@ -3,32 +3,36 @@
 {% block title %} Performance selon les profils de risque: {% endblock %}
 
 {% block content %}
-<!-- First row -->
-{% for graph in graphs %}
-<!-- Card -->
-<div class="card">
+<!-- Grid row -->
+<div class="row">
+    <!-- Grid column -->
+    {% for graph in data.graph %}
+    <div class="col-lg-6 col-md-8 col-sm-12 mb-4">
+        <!-- Card -->
+        <div class="card">
+            <!-- Card image -->
+            <div class="view overlay">
+                <img class="card-img-top" src="img/{{graph.image}}" alt="Card image cap">
+                <a href="">
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <!-- Card content -->
+            <div class="card-body">
+                <!-- Title -->
+                <h4 class="card-subtitle text-left">{{graph.title}}</h4>
+                <!-- Text -->
+                <p class="card-text font-weight-bold text-justify"> {{graph.description}}</p>
+            </div>
+        </div>
+        <!-- Card -->
 
-    <!-- Card image -->
-    <div class="view overlay">
-        <img class="card-img-top" src="#" alt="Card image cap">
-        <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-        </a>
     </div>
-
-    <!-- Card content -->
-    <div class="card-body">
-
-        <!-- Title -->
-        <h4 class="card-title">{{graph.title}}</h4>
-        <!-- Text -->
-        <p class="card-text">{{graph.description}}</p>
-        <!-- Button -->
-        <a href="#" class="btn btn-primary">Agrandir</a>
-
-    </div>
-
+    <!-- Grid column -->
+    {% endfor %}
 </div>
-<!-- Card -->
-{% endfor %}
+<!-- Grid row -->
+
+
+
 {% endblock %}
