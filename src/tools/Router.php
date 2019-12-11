@@ -19,7 +19,7 @@ class Router
         $this->routes[$path] = $action;
 
         if (isset($data)) {
-            if($_Get)
+
         }
     }
 
@@ -48,7 +48,7 @@ class Router
         if (isset($_GET)) {
             $controller->$method($this->get('', '', []));
         } else if ($_POST) {
-            $controller->$method($this->post('', '', [] ));
+            $controller->$method($this->post('', '', []));
         }
     }
 
