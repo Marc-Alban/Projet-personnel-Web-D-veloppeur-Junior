@@ -12,10 +12,8 @@ class Router
         $this->url = $url;
     }
 
-    //get(home,indexController);
     public function get(string $path = null, string $action = null, ?array $data = null)
     {
-        //$this->routes['home'] = indexController
         $this->routes[$path] = $action;
 
         if (isset($data)) {
@@ -31,8 +29,6 @@ class Router
     public function match()
     {
         foreach ($this->routes as $key => $val) {
-            var_dump($this->url, $this->routes);
-            die();
             if ($key === $this->url) {
                 $elements = explode('@', $val);
                 $this->callController($elements);
@@ -45,9 +41,9 @@ class Router
         $className = 'App\Controller\\' . $elements[0];
         $method = $elements[1];
         $controller = new $className;
-        if (isset($_GET)) {
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $controller->$method($this->get('', '', []));
-        } else if ($_POST) {
+        } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $controller->$method($this->post('', '', []));
         }
     }
