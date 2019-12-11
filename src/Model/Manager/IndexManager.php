@@ -19,4 +19,9 @@ class IndexManager
         return $this->indexRepository->readAll();
     }
 
+    public function modalGraph($id)
+    {
+        return $this->indexRepository->read($id);
+    }
+
 }

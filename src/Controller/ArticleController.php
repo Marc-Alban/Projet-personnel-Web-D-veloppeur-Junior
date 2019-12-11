@@ -12,8 +12,8 @@ class ArticleController extends View
 
     public function __construct()
     {
-        $this->articleManager = new ArticleManager;
         parent::__construct();
+        $this->articleManager = new ArticleManager;
     }
 
     public function listsArticlesAction()

@@ -2,8 +2,8 @@
 
 namespace App\Model\Repository;
 
-use App\Model\Database;
 use App\Model\Entity\Article;
+use App\Tools\Database;
 use \PDO;
 
 class ArticleRepository
@@ -63,6 +63,7 @@ class ArticleRepository
     public function read($id)
     {
         $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE id=:id');
+        //SELECT * FROM article WHERE lastArticle = 1 ORDER BY date  LIMIT 1
 
         //liason des paramètres
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
