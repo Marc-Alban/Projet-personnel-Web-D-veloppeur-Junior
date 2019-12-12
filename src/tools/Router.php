@@ -43,6 +43,21 @@ class Router
         if (in_array($this->page, $this->pageFront) || in_array($this->page, $this->pageBack)) {
             $datas = $this->dataGet;
             $this->routes[$path] = ['action' => $action, 'data' => $datas];
+            $this->params();
+        }
+    }
+
+    public function params()
+    {
+        var_dump($this->routes);
+        foreach ($this->routes as $k => $v) {
+            var_dump($k, $v);
+            foreach ($v as $key => $value) {
+                foreach ($value as $path => $act) {
+                    var_dump($path, $act);
+                    die();
+                }
+            }
         }
     }
 
@@ -79,7 +94,7 @@ class Router
         $className = 'App\Controller\\' . $elements[0];
         $method = $elements[1];
         $controller = new $className;
-        $controller->$method($this->get('', '', [$datas]));
+        $controller->$method($this->get('', '', $datas));
     }
 
 }
