@@ -6,6 +6,7 @@ use App\Tools\Router;
 
 //Front
 $routeur = new Router($_SERVER["REQUEST_URI"]);
+
 $routeur->get('/', "IndexController@homeRenderAction");
 $routeur->get('/?page=', 'IndexController@errorAction');
 $routeur->get('/?page=home', "IndexController@homeRenderAction", ['id', 'action']);

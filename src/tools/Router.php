@@ -1,7 +1,8 @@
 <?php
-session_start();
 
 namespace App\Tools;
+
+session_start();
 
 class Router
 {
@@ -13,6 +14,8 @@ class Router
     private $pageBack;
     private $routes = [];
 
+    //Url à passé dès l'instance de la classe
+    //$_SERVER["REQUEST_URI"]
     public function __construct(string $url)
     {
         $this->url = $url;
@@ -23,21 +26,34 @@ class Router
         $this->dataPost = ['post' => $_POST, $_SESSION];
     }
 
+    /**
+     * Définit la route dans l'index.php
+     * Contient comme paramètres:
+     * le chemin -> $path
+     * le controller séparé par un @ de la méthode
+     * puis les datas dans un tableau
+     *
+     * @param string $path
+     * @param string $action
+     * @param array|null $datas
+     * @return void
+     */
     public function get(string $path = null, string $action = null, ?array $datas = null)
     {
         if (in_array($this->page, $this->pageFront) || in_array($this->page, $this->pageBack)) {
-                $datas = $this->dataGet;
-                $this->routes[$path] = ['action' => $action, 'data' => $datas];
-            }
+            $datas = $this->dataGet;
+            $this->routes[$path] = ['action' => $action, 'data' => $datas];
         }
     }
 
-    //methode facultatif pour le moment !
-    // public function post(string $path, string $action)
-    // {
-    //     $this->routes[$path] = $action;
-    // }
-
+    /**
+     * Fonction qui récupérer l'url et l'explode
+     * en format de tableau. Elle vérifie si le chemin correspond
+     * bien à l'url passé dès l'instance. Si ok appel la méthode priver
+     * callController
+     *
+     * @return void
+     */
     public function match()
     {
         foreach ($this->routes as $key => $val) {
@@ -49,18 +65,21 @@ class Router
         }
     }
 
+    /**
+     * fonction ayant deux paramètres:
+     * $elements -> le controller et la méthode dans un tableau
+     * $datas -> paramètres supplémentaire (id, action etc ... )
+     *
+     * @param array $elements
+     * @param array|null $datas
+     * @return void
+     */
     private function callController(array $elements, ?array $datas = null)
     {
-        var_dump($elements, $datas);
-        die();
         $className = 'App\Controller\\' . $elements[0];
         $method = $elements[1];
         $controller = new $className;
         $controller->$method($this->get('', '', [$datas]));
-        // if ($_SERVER["REQUEST_METHOD"] === "GET") {
-        // } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        //     $controller->$method($this->post('', '', []));
-        // }
     }
 
 }
