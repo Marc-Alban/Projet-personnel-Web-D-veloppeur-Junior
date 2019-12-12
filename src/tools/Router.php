@@ -14,11 +14,8 @@ class Router
 
     public function get(string $path = null, string $action = null, ?array $data = null)
     {
-        $this->routes[$path] = $action;
-
-        if (isset($data)) {
-
-        }
+        $this->routes[$path][$action] = $action;
+        $this->routes[$path][$data] = $data;
     }
 
     public function post(string $path, string $action)

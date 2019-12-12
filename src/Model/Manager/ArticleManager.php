@@ -21,8 +21,7 @@ class ArticleManager
 
     public function lastArticle()
     {
-        $lastId = $this->articleRepository->lastId();
-        return $this->articleRepository->read($lastId);
+        return $this->articleRepository->read();
     }
 
     public function post()

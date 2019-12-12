@@ -60,13 +60,10 @@ class ArticleRepository
      * false si l'objet n'a pu être inséré, objet Article si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function read($id)
+    public function read()
     {
-        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE id=:id');
-        //SELECT * FROM article WHERE lastArticle = 1 ORDER BY date  LIMIT 1
-
-        //liason des paramètres
-        $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE id=(SELECT max(id) FROM article) ORDER BY date DESC');
+        //SELECT * FROM article WHERE lastArticle = 1 ORDER BY date LIMIT 1
 
         //execution de la requête
         $executeIsOk = $this->pdoStatement->execute();
@@ -87,18 +84,6 @@ class ArticleRepository
     }
 
     /**
-     * Retourn le dernier id insérer en bdd
-     *
-     * @return void
-     */
-    public function lastId()
-    {
-        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) AS id FROM article WHERE lastArticle = 1 LIMIT 1');
-        $lastId = $this->pdoStatement->fetch();
-        return $lastId["id"];
-    }
-
-    /**
      * Récupère tous les objet Article dans la bdd
      *
      * @return array|bool
@@ -107,8 +92,6 @@ class ArticleRepository
      */
     public function readAll()
     {
-        // $articleRepository = new ArticleRepository;
-        // $articleRepository->findAllArticle("SELECT * FROM article");
 
         $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) ORDER BY date DESC");
 
@@ -163,7 +146,7 @@ class ArticleRepository
     }
 
     /**
-     *Insere un objet et met à jour l'objetpassé en argument en
+     *Insere un objet et met à jour l'objet passé en argument en
      *lui spécifiant un identifiant ou le met à jour dans la bdd s'il en est issu
      *
      *@param Article $article objet Article passé par référence
