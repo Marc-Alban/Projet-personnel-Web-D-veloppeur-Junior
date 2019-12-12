@@ -62,7 +62,7 @@ class ArticleRepository
      */
     public function read()
     {
-        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE id=(SELECT max(id) FROM article) ORDER BY date DESC');
+        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 ORDER BY date DESC LIMIT 1');
         //SELECT * FROM article WHERE lastArticle = 1 ORDER BY date LIMIT 1
 
         //execution de la requête
