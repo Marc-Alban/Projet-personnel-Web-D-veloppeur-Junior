@@ -8,7 +8,7 @@ use App\Tools\Router;
 $routeur = new Router($_SERVER["REQUEST_URI"]);
 $routeur->get('/', "IndexController@homeRenderAction");
 $routeur->get('/?page=', 'IndexController@errorAction');
-$routeur->get('/?page=home', "IndexController@homeRenderAction", ['id']);
+$routeur->get('/?page=home', "IndexController@homeRenderAction", ['id', 'action']);
 $routeur->get('/?page=blog', 'ArticleController@listsArticlesAction');
 $routeur->get('/?page=article', 'ArticleController@postAction');
 //$routeur->post('/?page=page', 'PageController@pageRenderAction');

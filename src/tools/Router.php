@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 namespace App\Tools;
 
@@ -6,7 +7,8 @@ class Router
 {
     private $url;
     private $page;
-    private $id;
+    private $dataGet;
+    private $dataPost;
     private $pageFront;
     private $pageBack;
     private $routes = [];
@@ -14,20 +16,19 @@ class Router
     public function __construct(string $url)
     {
         $this->url = $url;
-        $this->id = $_GET['id'] ?? null;
         $this->page = $_GET['page'] ?? 'home';
         $this->pageFront = ['home', 'article', 'blog', 'page', 'contact', 'newPassword', 'lostPassword', '404'];
         $this->pageBack = ['dashboard', 'table', 'partenaire', 'login', 'graph', 'form'];
+        $this->dataGet = ['get' => $_GET, $_SESSION];
+        $this->dataPost = ['post' => $_POST, $_SESSION];
     }
 
     public function get(string $path = null, string $action = null, ?array $datas = null)
     {
-        if (in_array($this->page, $this->pageFront) || empty($_GET['page'])) {
-            $this->routes[$path] = ['action' => $action, 'data' => $datas];
-        }
-
-        if (isset($datas) && !empty($datas) && $datas !== null) {
-
+        if (in_array($this->page, $this->pageFront) || in_array($this->page, $this->pageBack)) {
+                $datas = $this->dataGet;
+                $this->routes[$path] = ['action' => $action, 'data' => $datas];
+            }
         }
     }
 
