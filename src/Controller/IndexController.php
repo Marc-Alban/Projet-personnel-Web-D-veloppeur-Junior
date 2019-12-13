@@ -16,11 +16,16 @@ class IndexController extends View
         parent::__construct();
     }
 
-    public function homeRenderAction($id)
+    public function homeAction()
     {
         $graph = $this->indexManager->listeGraph();
+        $this->renderer('Frontend', 'home', ['graph' => $graph]);
+    }
+
+    public function modalAction($id)
+    {
         $modal = $this->indexManager->modalGraph($id);
-        $this->renderer('Frontend', 'home', ['graph' => $graph, 'modal' => $modal]);
+        $this->renderer('Frontend', 'home', ['modal' => $modal]);
     }
 
     public function errorAction()
