@@ -1,4 +1,4 @@
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^home/([0-9]{1,4})$ index.php?page=home&id=$1 ^home/([0-9]{1,4})$ [QSA,L]
