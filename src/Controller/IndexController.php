@@ -24,8 +24,10 @@ class IndexController extends View
 
     public function modalAction($id)
     {
-        $modal = $this->indexManager->modalGraph($id);
-        $this->renderer('Frontend', 'home', ['modal' => $modal]);
+        echo $id;
+        // $graph = $this->indexManager->listeGraph();
+        // $modal = $this->indexManager->modalGraph($id);
+        // $this->renderer('Frontend', 'home', ['graph' => $graph, 'modal' => $modal]);
     }
 
     public function errorAction()

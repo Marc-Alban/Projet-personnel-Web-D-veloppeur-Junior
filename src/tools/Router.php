@@ -2,102 +2,96 @@
 
 namespace App\Tools;
 
+use App\Controller\IndexController;
+
 class Router
 {
-    private $_url;
-    private $_routes = [];
-    private $_matches;
+    //Les routes dans un tableau vide
+    private static $_routes = [];
+    private static $_params;
 
     /**
-     * Fonction constructeur qui récupère
-     * l'url passé en argument
-     *
-     * @param string $url
-     */
-    public function __construct(string $url)
-    {
-        $this->_url = $url;
-    }
-
-    /**
-     * Récupère le chemin dans le routeur
-     *
-     * @param [type] $route
-     * @param [type] $controller
+     * Récupère une route et l'insère dans le tableau des routes
+     * En index la route, et en valeur le controller
+     * @param string $route
+     * @param string $controller
      * @return void
      */
-    public function get(string $route, string $controller)
+    public static function get(string $route, string $controller): void
     {
-        $route = trim($this->_url, '/');
-        $this->_routes[$route] = $controller;
+        $route = trim($route, '/');
+        self::$_routes[$route] = $controller;
     }
 
     /**
-     * Lance la création de l'objet, c'est a dire le bon controller
-     * Sinon retourne une erreur
+     * Renvoie le resultat de la méthode match
+     *
+     *
+     * @return void
      */
-    public function run()
+    public static function run()
     {
-        foreach ($this->_routes as $route => $controller) {
-            $trimUrl = trim($this->_url, '/');
-            if ($this->match($trimUrl, $route)) {
-                return $this->call($controller);
+        foreach (self::$_routes as $route => $controller) {
+            //Si vrai on execute une action qui est une dernière méthode
+            if (self::match($_GET['url'], $route)) {
+                return self::callController($controller);
             }
         }
-        return $this->error();
+        return self::error();
     }
 
     /**
-     * Fonction qui permet de récupérer et de tester si il y a
-     * des paramètres apres le /.
+     * Permet de comparer l'url à la propriété $route
+     * Renvoie false si c'est pas bon sinon renvoi true
+     * et insere les paramètres dans un tableau
      *
-     * @param [type] $url
-     * @param [type] $route
+     * @param string $url
+     * @param string $route
      * @return void
      */
-    public function match($url, $route)
+    private static function match(string $url, string $route): bool
     {
-        //remplace ce qu'il y a apres le /home/ ... Dans l'url par
-        //soit un chiffre ou un text à l'infini.
-        $path = preg_replace('{[a-z0-9]+}', '([a-z0-9\-]+)\/?', $route);
-        //on verifie s'il y a une regex dans le sujet qui est l'url
-        //Et on insert la réponse dans $matches qui est un tableau
-        if (preg_match("#^$path$#", $url, $matches)) {
-            //Enleve les deux premier element du tableau
-            array_shift($matches);
-            array_shift($matches);
-            //Insertion des paramètres dans $this->_matches
-            $this->_matches = $matches;
-            return true;
-        }
-        // produit une erreur si ça n'a pas matché
-        return false;
-
+        //on doit récupérer si il y a un paramètre après la route {[a-z]+}
+        //puis le remplacer par une regex
+        $path = preg_replace("#({[a-z]+})#", "([a-z0-9\-]+)\/?", $route);
+        //On verifie si le chemin correspons à l'url
+        if (!preg_match("#^$path$#", $url, $matches)) {
+            return false;
+        };
+        //On enlève la première ligne du tableau
+        array_shift($matches);
+        //Si paramètres vide --> = tableau vide
+        self::$_params = $matches;
+        return true;
     }
 
-    /**
-     * Appelle le bon controlleur et la bonne méthode
-     *
-     * @param [type] $controller
-     * @return void
-     */
-    public function call($controller)
+/**
+ * Permet d'appeler un controller
+ *
+ * @param string $controller
+ * @return object
+ */
+    private static function callController(string $controller): ?object
     {
-        $params = explode('@', $controller);
+        $params = explode("@", $controller);
         $controllerName = $params[0] . 'Controller';
         $controllerString = 'App\Controller\\' . $controllerName;
-        $controller = new $controllerString;
-        return call_user_func_array([$controller, $params[1] . 'Action'], $this->_matches);
-
+        $controller = new $controllerString();
+        //Appel d'une méthode en fournissant les paramètres si il y en a
+        return call_user_func_array([$controller, $params[1]], self::$_params);
     }
 
     /**
-     * Genere une erreur 404
+     * La fonction redirectionErreur404() renvoit une véritable erreur 404
+     * passée en paramètre.
      *
-     * @return void
+     * @param : void
+     * @return : void
      */
-    public function error()
+    private static function error()
     {
-        return header("HTTP/1.0 404 Not Found");
+        $error = new IndexController;
+        return $error->errorAction();
     }
+
 }
