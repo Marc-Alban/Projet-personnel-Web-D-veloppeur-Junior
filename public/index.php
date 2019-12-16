@@ -1,9 +1,9 @@
 <?php
 require_once '../vendor/autoload.php';
 use App\Tools\Router;
-// var_dump($_SERVER["REQUEST_URI"]);
-// die();
 $Router = new Router($_SERVER["REQUEST_URI"]);
+// var_dump($_GET);
+// die();
 $Router->get('/', "Index@home");
 $Router->get('/home', "Index@home");
 $Router->get('/home/{id}', "Index@home");
