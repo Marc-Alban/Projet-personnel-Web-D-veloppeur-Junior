@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class Role
@@ -10,8 +10,9 @@ class Role
 
     /**
      * Get the value of idTypeRole
+     * @return string
      */
-    public function getIdTypeRole()
+    public function getIdTypeRole(): string
     {
         return $this->idTypeRole;
     }
@@ -21,7 +22,7 @@ class Role
      *
      * @return  self
      */
-    public function setIdTypeRole($idTypeRole)
+    public function setIdTypeRole(String $idTypeRole): self
     {
         $this->idTypeRole = $idTypeRole;
 
@@ -30,8 +31,9 @@ class Role
 
     /**
      * Get the value of idUser
+     * @return string
      */
-    public function getIdUser()
+    public function getIdUser(): string
     {
         return $this->idUser;
     }
@@ -41,7 +43,7 @@ class Role
      *
      * @return  self
      */
-    public function setIdUser($idUser)
+    public function setIdUser(String $idUser): self
     {
         $this->idUser = $idUser;
 
@@ -50,8 +52,9 @@ class Role
 
     /**
      * Get the value of id
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }

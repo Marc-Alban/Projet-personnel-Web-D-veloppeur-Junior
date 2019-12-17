@@ -2,13 +2,13 @@
 
 namespace App\Tools;
 
-use App\Controller\IndexController;
+use App\Controller\HomeController;
 
 class Router
 {
     //Les routes dans un tableau vide
-    private static $_routes = [];
-    private static $_params;
+    private $routes = [];
+    private $params;
 
     /**
      * Récupère une route et l'insère dans le tableau des routes
@@ -17,11 +17,17 @@ class Router
      * @param string $controller
      * @return void
      */
-    public static function get(string $route, string $controller): void
+    public function get(String $route, String $controller): void
     {
         $route = trim($route, '/');
-        self::$_routes[$route] = $controller;
+        $this->routes[$route] = $controller;
     }
+
+    // public function post(string $route, string $controller): void
+    // {
+    //     // $route = trim($route, '/');
+    //     // $this->routes[$route] = $controller;
+    // }
 
     /**
      * Renvoie le resultat de la méthode match
@@ -29,15 +35,15 @@ class Router
      *
      * @return void
      */
-    public static function run()
+    public function run()
     {
-        foreach (self::$_routes as $route => $controller) {
+        foreach ($this->routes as $route => $controller) {
             //Si vrai on execute une action qui est une dernière méthode
-            if (self::match($_GET['url'], $route)) {
-                return self::callController($controller);
+            if ($this->match($_GET['url'], $route)) {
+                return $this->callController($controller);
             }
         }
-        return self::error();
+        return $this->error();
     }
 
     /**
@@ -49,7 +55,7 @@ class Router
      * @param string $route
      * @return void
      */
-    private static function match(string $url, string $route): bool
+    private function match(String $url, String $route): bool
     {
         //on doit récupérer si il y a un paramètre après la route {[a-z]+}
         //puis le remplacer par une regex
@@ -61,7 +67,7 @@ class Router
         //On enlève la première ligne du tableau
         array_shift($matches);
         //Si paramètres vide --> = tableau vide
-        self::$_params = $matches;
+        $this->params = $matches;
         return true;
     }
 
@@ -71,14 +77,14 @@ class Router
  * @param string $controller
  * @return object
  */
-    private static function callController(string $controller): ?object
+    private function callController(String $controller): ?object
     {
         $params = explode("@", $controller);
         $controllerName = $params[0] . 'Controller';
         $controllerString = 'App\Controller\\' . $controllerName;
         $controller = new $controllerString();
         //Appel d'une méthode en fournissant les paramètres si il y en a
-        return call_user_func_array([$controller, $params[1]], self::$_params);
+        return call_user_func_array([$controller, $params[1]], $this->params);
     }
 
     /**
@@ -88,9 +94,9 @@ class Router
      * @param : void
      * @return : void
      */
-    private static function error()
+    private function error()
     {
-        $error = new IndexController;
+        $error = new HomeController();
         return $error->errorAction();
     }
 

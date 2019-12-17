@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Controller;
 
 use App\Model\Manager\ArticleManager;
@@ -10,22 +10,39 @@ class ArticleController extends View
 
     private $articleManager;
 
+    /**
+     * Fonction constructeur:
+     * Récupère  la fonction parent construct "Twig/Environement"
+     * de sa fille qui est la classe view, et instancie l'objet
+     * Articlemanager dans une propriété
+     *
+     */
     public function __construct()
     {
         parent::__construct();
-        $this->articleManager = new ArticleManager;
+        $this->articleManager = new ArticleManager();
     }
 
-    public function listsArticlesAction()
+    /**
+     * Retourne la liste des articles sur la page blog
+     *
+     * @return void
+     */
+    public function listesArticlesAction(): void
     {
         $listeArticle = $this->articleManager->listePost();
         $lastArticle = $this->articleManager->lastArticle();
         $this->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
     }
 
-    public function postAction()
+    /**
+     * Retourne un article sur la page article cibler par l'id passé en paramètre
+     *
+     * @return void
+     */
+    public function articleAction(): void
     {
-        $post = $this->articleManager->post();
+        $post = $this->articleManager->article();
         $this->renderer('Frontend', 'article', ['post' => $post]);
     }
 

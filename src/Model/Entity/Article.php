@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class Article
@@ -15,8 +15,10 @@ class Article
 
     /**
      * Get the value of lastArticle
+     *
+     * @return string
      */
-    public function getLastArticle()
+    public function getLastArticle(): string
     {
         return $this->lastArticle;
     }
@@ -26,7 +28,7 @@ class Article
      *
      * @return  self
      */
-    public function setLastArticle($lastArticle)
+    public function setLastArticle(String $lastArticle): self
     {
         $this->lastArticle = $lastArticle;
 
@@ -35,8 +37,10 @@ class Article
 
     /**
      * Get the value of posted
+     *
+     * @return string
      */
-    public function getPosted()
+    public function getPosted(): string
     {
         return $this->posted;
     }
@@ -46,7 +50,7 @@ class Article
      *
      * @return  self
      */
-    public function setPosted($posted)
+    public function setPosted(String $posted): self
     {
         $this->posted = $posted;
 
@@ -55,8 +59,10 @@ class Article
 
     /**
      * Get the value of date
+     *
+     * @return string
      */
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
     }
@@ -66,7 +72,7 @@ class Article
      *
      * @return  self
      */
-    public function setDate($date)
+    public function setDate(String $date): self
     {
         $this->date = $date;
 
@@ -75,8 +81,10 @@ class Article
 
     /**
      * Get the value of image
+     *
+     * @return string
      */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -86,7 +94,7 @@ class Article
      *
      * @return  self
      */
-    public function setImage($image)
+    public function setImage(String $image): self
     {
         $this->image = $image;
 
@@ -95,8 +103,10 @@ class Article
 
     /**
      * Get the value of description
+     *
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -106,7 +116,7 @@ class Article
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(String $description): self
     {
         $this->description = $description;
 
@@ -115,8 +125,10 @@ class Article
 
     /**
      * Get the value of legende
+     *
+     * @return string
      */
-    public function getLegende()
+    public function getLegende(): string
     {
         return $this->legende;
     }
@@ -126,7 +138,7 @@ class Article
      *
      * @return  self
      */
-    public function setLegende($legende)
+    public function setLegende(String $legende): self
     {
         $this->legende = $legende;
 
@@ -135,8 +147,10 @@ class Article
 
     /**
      * Get the value of title
+     *
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -146,7 +160,7 @@ class Article
      *
      * @return  self
      */
-    public function setTitle($title)
+    public function setTitle(String $title): self
     {
         $this->title = $title;
 
@@ -155,8 +169,10 @@ class Article
 
     /**
      * Get the value of id
+     *
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }

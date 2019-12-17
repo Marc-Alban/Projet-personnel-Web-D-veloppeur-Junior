@@ -11,7 +11,13 @@ class Database
     const PASSWORD = '';
     private static $instance = null;
 
-    public static function getPdo()
+    /**
+     * Retourne la base de donnée si elle n'existe pas
+     * Sinon reprend la bdd existante
+     *
+     * @return PDO
+     */
+    public static function getPdo(): PDO
     {
         if (self::$instance === null) {
             self::$instance = new PDO(self::DSN, self::USER, self::PASSWORD, [

@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class Page
@@ -12,8 +12,9 @@ class Page
 
     /**
      * Get the value of posted
+     * @return string
      */
-    public function getPosted()
+    public function getPosted(): string
     {
         return $this->posted;
     }
@@ -23,7 +24,7 @@ class Page
      *
      * @return  self
      */
-    public function setPosted($posted)
+    public function setPosted(String $posted): self
     {
         $this->posted = $posted;
 
@@ -32,8 +33,9 @@ class Page
 
     /**
      * Get the value of image
+     * @return string
      */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -43,7 +45,7 @@ class Page
      *
      * @return  self
      */
-    public function setImage($image)
+    public function setImage(String $image): self
     {
         $this->image = $image;
 
@@ -52,8 +54,9 @@ class Page
 
     /**
      * Get the value of description
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -63,7 +66,7 @@ class Page
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(String $description): self
     {
         $this->description = $description;
 
@@ -72,8 +75,9 @@ class Page
 
     /**
      * Get the value of title
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -83,7 +87,7 @@ class Page
      *
      * @return  self
      */
-    public function setTitle($title)
+    public function setTitle(String $title): self
     {
         $this->title = $title;
 
@@ -92,8 +96,9 @@ class Page
 
     /**
      * Get the value of id
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }

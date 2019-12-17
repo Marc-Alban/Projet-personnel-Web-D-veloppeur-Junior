@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Repository;
 
 use App\Model\Entity\Article;
@@ -12,44 +12,13 @@ class ArticleRepository
     private $pdo;
     private $pdoStatement;
 
+    /**
+     * Fonction constructeur, instanciation de la bdd
+     * dans la propriété pdo
+     */
     public function __construct()
     {
         $this->pdo = Database::getPdo();
-    }
-
-    /**
-     * Insert un objet Article en bdd des articles
-     * et met à jour l'objet passé en paramètre en lui
-     * spécifiant un identifiant
-     *
-     * @param Article $article objet de type Article passé par référence
-     * @return bool true si l'objet est inséré en bdd, false si il y a une erreur
-     */
-    private function create(Article &$article)
-    {
-        $this->pdoStatement = $this->pdo->prepare('INSERT INTO article VALUES (null, :title, :legende,  :description, :image, :date, :posted, :lastArticle)');
-
-        //liaison paramètres
-        $this->pdoStatement->bindValue(':title', $article->getTitle(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':legende', $article->getLegende(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':description', $article->getDescription());
-        $this->pdoStatement->bindValue(':image', $article->getImage(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':date', $article->getDate());
-        $this->pdoStatement->bindValue(':posted', $article->getPosted(), PDO::PARAM_INT);
-        $this->pdoStatement->bindValue(':lastArticle', $article->getLastArticle(), PDO::PARAM_INT);
-
-        //execution de la requète
-        $executeIsOk = $this->pdoStatement->execute();
-
-        if ($executeIsOk) {
-            $id = $this->pdo->lastInsertId();
-            $article = $this->read($id);
-            return true;
-        }
-
-        if (!$executeIsOk) {
-            return false;
-        }
     }
 
     /**
@@ -60,10 +29,9 @@ class ArticleRepository
      * false si l'objet n'a pu être inséré, objet Article si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function read()
+    public function read(): Object
     {
         $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 ORDER BY date DESC LIMIT 1');
-        //SELECT * FROM article WHERE lastArticle = 1 ORDER BY date LIMIT 1
 
         //execution de la requête
         $executeIsOk = $this->pdoStatement->execute();
@@ -90,7 +58,7 @@ class ArticleRepository
      * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
      * false si une erreur survient
      */
-    public function readAll()
+    public function readAll(): array
     {
 
         $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) ORDER BY date DESC");
@@ -105,16 +73,59 @@ class ArticleRepository
     }
 
     /**
+     * Insert un objet Article en bdd des articles
+     * et met à jour l'objet passé en paramètre en lui
+     * spécifiant un identifiant
+     *
+     * @param Article $article objet de type Article passé par référence
+     * @return bool true si l'objet est inséré en bdd, false si il y a une erreur
+     */
+    private function create(Article $article): bool
+    {
+        $this->pdoStatement = $this->pdo->prepare('INSERT INTO article VALUES (null, :title, :legende,  :description, :image, :date, :posted, :lastArticle)');
+
+        //liaison paramètres
+        $this->bind($article);
+
+        //execution de la requète
+        $executeIsOk = $this->pdoStatement->execute();
+
+        if ($executeIsOk) {
+            $article = $this->read();
+            return true;
+        }
+
+        if (!$executeIsOk) {
+            return false;
+        }
+    }
+
+    /**
      * Met à jour un objet Article stocké en bdd
      *
      * @param Article $article objet de type Article
      * @return bool true en cas de succès, false en cas d'erreur
      */
-    private function update(Article $article)
+    private function update(Article $article): bool
     {
         $this->pdoStatement = $this->pdo->prepare('UPDATE article SET null, title=:title, legende=:legende, description=:description, image=:image, date=:date, posted=:posted, lastArticle=:lastArticle WHERE id=:id LIMIT 1');
 
         //liaison paramètres
+        $this->bind($article);
+        $this->pdoStatement->bindValue(':id', $article->getId(), PDO::PARAM_INT);
+
+        //execution de la requete
+        return $this->pdoStatement->execute();
+    }
+
+    /**
+     * Factorisation du bindvalue
+     *
+     * @param [type] $article
+     * @return void
+     */
+    private function bind(Article $article): void
+    {
         $this->pdoStatement->bindValue(':title', $article->getTitle(), PDO::PARAM_STR);
         $this->pdoStatement->bindValue(':legende', $article->getLegende(), PDO::PARAM_STR);
         $this->pdoStatement->bindValue(':description', $article->getDescription());
@@ -122,10 +133,6 @@ class ArticleRepository
         $this->pdoStatement->bindValue(':date', $article->getDate());
         $this->pdoStatement->bindValue(':posted', $article->getPosted(), PDO::PARAM_INT);
         $this->pdoStatement->bindValue(':lastArticle', $article->getLastArticle(), PDO::PARAM_INT);
-        $this->pdoStatement->bindValue(':id', $article->getId(), PDO::PARAM_INT);
-
-        //execution de la requete
-        return $this->pdoStatement->execute();
     }
 
     /**
@@ -134,7 +141,7 @@ class ArticleRepository
      * @param Article $article objet de type Article
      * @return bool true en cas de succès, false en cas d'erreur
      */
-    public function delete(Article $article)
+    public function delete(Article $article): bool
     {
         $this->pdoStatement = $this->pdo->prepare('DELETE FROM article WHERE id=:id LIMIT 1');
 
@@ -153,7 +160,7 @@ class ArticleRepository
      *
      * @return bool true en cas de succès ou false en cas d'erreur
      */
-    public function save(Article $article)
+    public function save(Article $article): bool
     {
         //il faut utiliser la méthode create lorsqu'il s'agit d'un nouvel objet
         //et la méthode Update lorsque l'objet n'est pas nouveau

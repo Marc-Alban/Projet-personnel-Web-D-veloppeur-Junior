@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class TypeRole
@@ -12,8 +12,9 @@ class TypeRole
 
     /**
      * Get the value of graph
+     * @return string
      */
-    public function getGraph()
+    public function getGraph(): string
     {
         return $this->graph;
     }
@@ -23,7 +24,7 @@ class TypeRole
      *
      * @return  self
      */
-    public function setGraph($graph)
+    public function setGraph(String $graph): self
     {
         $this->graph = $graph;
 
@@ -32,8 +33,9 @@ class TypeRole
 
     /**
      * Get the value of article
+     * @return string
      */
-    public function getArticle()
+    public function getArticle(): string
     {
         return $this->article;
     }
@@ -43,7 +45,7 @@ class TypeRole
      *
      * @return  self
      */
-    public function setArticle($article)
+    public function setArticle(String $article): self
     {
         $this->article = $article;
 
@@ -52,8 +54,9 @@ class TypeRole
 
     /**
      * Get the value of partenaire
+     * @return string
      */
-    public function getPartenaire()
+    public function getPartenaire(): string
     {
         return $this->partenaire;
     }
@@ -63,7 +66,7 @@ class TypeRole
      *
      * @return  self
      */
-    public function setPartenaire($partenaire)
+    public function setPartenaire(String $partenaire): self
     {
         $this->partenaire = $partenaire;
 
@@ -72,8 +75,9 @@ class TypeRole
 
     /**
      * Get the value of admin
+     * @return string
      */
-    public function getAdmin()
+    public function getAdmin(): string
     {
         return $this->admin;
     }
@@ -83,7 +87,7 @@ class TypeRole
      *
      * @return  self
      */
-    public function setAdmin($admin)
+    public function setAdmin(String $admin): self
     {
         $this->admin = $admin;
 
@@ -92,8 +96,9 @@ class TypeRole
 
     /**
      * Get the value of id
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }

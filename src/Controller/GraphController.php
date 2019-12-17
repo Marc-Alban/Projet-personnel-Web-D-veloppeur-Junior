@@ -1,12 +1,17 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Controller;
 
 use App\View\View;
 
 class GraphController extends View
 {
-    public function graphRenderAction()
+    /**
+     * Rendu des graphs
+     *
+     * @return void
+     */
+    public function graphRenderAction(): void
     {
         $this->renderer('Backend', 'graph', null);
     }

@@ -1,12 +1,17 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Controller;
 
 use App\View\View;
 
 class DashboardController extends View
 {
-    public function dashboardRenderAction()
+    /**
+     * Rendu de la page dashboard
+     *
+     * @return void
+     */
+    public function dashboardRenderAction(): void
     {
         $this->renderer('Backend', 'dashboard', null);
     }

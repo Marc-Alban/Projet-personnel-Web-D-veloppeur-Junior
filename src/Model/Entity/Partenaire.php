@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class Partenaire
@@ -11,8 +11,9 @@ class Partenaire
 
     /**
      * Get the value of posted
+     * @return string
      */
-    public function getPosted()
+    public function getPosted(): string
     {
         return $this->posted;
     }
@@ -22,7 +23,7 @@ class Partenaire
      *
      * @return  self
      */
-    public function setPosted($posted)
+    public function setPosted(String $posted): self
     {
         $this->posted = $posted;
 
@@ -31,8 +32,9 @@ class Partenaire
 
     /**
      * Get the value of lien
+     * @return string
      */
-    public function getLien()
+    public function getLien(): string
     {
         return $this->lien;
     }
@@ -42,7 +44,7 @@ class Partenaire
      *
      * @return  self
      */
-    public function setLien($lien)
+    public function setLien(String $lien): self
     {
         $this->lien = $lien;
 
@@ -51,8 +53,9 @@ class Partenaire
 
     /**
      * Get the value of legende
+     * @return string
      */
-    public function getLegende()
+    public function getLegende(): string
     {
         return $this->legende;
     }
@@ -62,7 +65,7 @@ class Partenaire
      *
      * @return  self
      */
-    public function setLegende($legende)
+    public function setLegende(String $legende): self
     {
         $this->legende = $legende;
 
@@ -71,8 +74,9 @@ class Partenaire
 
     /**
      * Get the value of id
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }

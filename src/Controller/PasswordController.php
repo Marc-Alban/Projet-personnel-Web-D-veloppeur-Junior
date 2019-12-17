@@ -1,17 +1,27 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Controller;
 
 use App\View\View;
 
 class PasswordController extends View
 {
-    public function newPassAction()
+    /**
+     * Rendu de la page nouveau password
+     *
+     * @return void
+     */
+    public function newPassAction(): void
     {
         $this->renderer('Frontend', 'new', null);
     }
 
-    public function lostPassAction()
+    /**
+     * Rendu de la page password perdu
+     *
+     * @return void
+     */
+    public function lostPassAction(): void
     {
         $this->renderer('Frontend', 'lost', null);
     }

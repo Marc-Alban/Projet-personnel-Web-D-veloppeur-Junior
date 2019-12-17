@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class Graph
@@ -12,8 +13,10 @@ class Graph
 
     /**
      * Get the value of posted
+     *
+     * @return string
      */
-    public function getPosted()
+    public function getPosted(): string
     {
         return $this->posted;
     }
@@ -23,7 +26,7 @@ class Graph
      *
      * @return  self
      */
-    public function setPosted($posted)
+    public function setPosted(String $posted): self
     {
         $this->posted = $posted;
 
@@ -32,8 +35,10 @@ class Graph
 
     /**
      * Get the value of image
+     *
+     * @return string
      */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->image;
     }
@@ -43,7 +48,7 @@ class Graph
      *
      * @return  self
      */
-    public function setImage($image)
+    public function setImage(String $image): self
     {
         $this->image = $image;
 
@@ -52,8 +57,10 @@ class Graph
 
     /**
      * Get the value of description
+     *
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -63,7 +70,7 @@ class Graph
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(String $description): self
     {
         $this->description = $description;
 
@@ -72,8 +79,10 @@ class Graph
 
     /**
      * Get the value of title
+     *
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -83,7 +92,7 @@ class Graph
      *
      * @return  self
      */
-    public function setTitle($title)
+    public function setTitle(String $title): self
     {
         $this->title = $title;
 
@@ -92,8 +101,10 @@ class Graph
 
     /**
      * Get the value of id
+     *
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }

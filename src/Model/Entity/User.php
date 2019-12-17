@@ -1,5 +1,5 @@
 <?php
-
+declare (strict_types = 1);
 namespace App\Model\Entity;
 
 class User
@@ -12,8 +12,9 @@ class User
 
     /**
      * Get the value of password
+     * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -23,7 +24,7 @@ class User
      *
      * @return  self
      */
-    public function setPassword($password)
+    public function setPassword(String $password): self
     {
         $this->password = $password;
 
@@ -32,8 +33,9 @@ class User
 
     /**
      * Get the value of mail
+     * @return string
      */
-    public function getMail()
+    public function getMail(): string
     {
         return $this->mail;
     }
@@ -43,7 +45,7 @@ class User
      *
      * @return  self
      */
-    public function setMail($mail)
+    public function setMail(String $mail): self
     {
         $this->mail = $mail;
 
@@ -52,8 +54,9 @@ class User
 
     /**
      * Get the value of lastName
+     * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -63,7 +66,7 @@ class User
      *
      * @return  self
      */
-    public function setLastName($lastName)
+    public function setLastName(String $lastName): self
     {
         $this->lastName = $lastName;
 
@@ -72,8 +75,9 @@ class User
 
     /**
      * Get the value of name
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -83,7 +87,7 @@ class User
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName(String $name): self
     {
         $this->name = $name;
 
@@ -92,8 +96,9 @@ class User
 
     /**
      * Get the value of id
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
