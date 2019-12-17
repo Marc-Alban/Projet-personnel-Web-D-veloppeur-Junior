@@ -21,9 +21,9 @@ class HomeManager
     /**
      * Retourne la liste des graphs sur le controller home
      *
-     * @return Object
+     * @return array
      */
-    public function listeGraph(): Object
+    public function listeGraph(): array
     {
         return $this->homeRepository->readAll();
     }
