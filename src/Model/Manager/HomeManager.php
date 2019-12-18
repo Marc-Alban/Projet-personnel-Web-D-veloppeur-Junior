@@ -29,17 +29,4 @@ class HomeManager extends PDOException
         return $this->homeRepository->readAll();
     }
 
-    public function modalGraph()
-    {
-        $donne = $this->homeRepository->readAll();
-        $modalGraphs = [];
-        foreach ($donne as $key) {
-            $array = $key->getGraph();
-            foreach ($array as $k => $value) {
-                $modalGraphs[] = $value;
-            }
-        }
-        return $modalGraphs;
-    }
-
 }
