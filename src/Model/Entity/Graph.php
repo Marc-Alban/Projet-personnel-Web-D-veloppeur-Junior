@@ -121,6 +121,7 @@ class Graph
             $this->getId(),
             $this->getTitle(),
             $this->getDescription(),
+            $this->getImage(),
             $this->getPosted(),
         ];
     }

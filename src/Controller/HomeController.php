@@ -31,8 +31,11 @@ class HomeController extends View
     public function homeAction(): void
     {
         $graph = $this->HomeManager->listeGraph();
-        //Format JSON --> $modal
         $modal = $this->HomeManager->modalGraph();
+        //Format JSON --> $modal
+        // var_dump($modal);
+        // die();
+        //, 'modal' => $modal]
         $this->renderer('Frontend', 'home', ['graph' => $graph, 'modal' => $modal]);
     }
 
