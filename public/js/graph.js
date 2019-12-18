@@ -1,5 +1,3 @@
-$(document).ready(function () {
-    $("#idGraph").click(function () {
-
-    })
-})
+// $(document).ready(function () {
+//     let modal
+// })

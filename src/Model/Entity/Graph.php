@@ -109,4 +109,13 @@ class Graph
         return $this->id;
     }
 
+    public function getGraph()
+    {
+        return [
+            $this->getId(),
+            $this->getTitle(),
+            $this->getDescription(),
+            $this->getPosted(),
+        ];
+    }
 }

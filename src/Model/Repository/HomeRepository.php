@@ -4,7 +4,6 @@ namespace App\Model\Repository;
 
 use App\Model\Entity\Graph;
 use App\Tools\Database;
-use \PDO;
 
 class HomeRepository
 {
