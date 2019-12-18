@@ -4,12 +4,12 @@
 
 {% block content %}
 <!-- Grid row -->
-<div class="row">
+<div class="row" onclick="idGraph">
     <!-- Grid column -->
     {% for graph in data.graph %}
     <div class="col-lg-6 col-md-8 col-sm-12 mb-4" data-toggle="modal" data-target="#graph">
-        <!-- Card -->
         <div class="card">
+            <!-- Card -->
             <!-- Card image -->
             <div class="view overlay">
                 <img class="card-img-top" src="img/{{graph.image}}" alt="Card
@@ -34,11 +34,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="graph" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="graph" tabindex="-1" role="dialog" aria-labelledby="modaleLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="modaleLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -54,4 +54,8 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="js/graph.js"></script>
 {% endblock %}

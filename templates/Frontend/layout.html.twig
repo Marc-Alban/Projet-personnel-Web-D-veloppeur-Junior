@@ -411,7 +411,6 @@
   <!-- SCRIPTS -->
   <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
   </script>
-  {% block js %} {% endblock %}
   <!-- JQuery -->
   <script type="text/javascript" src="js/MDB-Free/jquery.min.js"></script>
   <!-- Tooltips -->
@@ -420,6 +419,8 @@
   <script type="text/javascript" src="js/MDB-Free/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
+  <!-- Import script -->
+  {% block js %} {% endblock %}
 </body>
 
 </html>
