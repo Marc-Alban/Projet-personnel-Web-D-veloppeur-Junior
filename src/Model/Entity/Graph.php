@@ -109,6 +109,12 @@ class Graph
         return $this->id;
     }
 
+    /**
+     * Renvoie tous les propriété sous une seul fonction
+     * mais dans un array
+     *
+     * @return void
+     */
     public function getGraph()
     {
         return [
