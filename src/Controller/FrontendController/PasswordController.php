@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace App\Controller;
+namespace App\Controller\FrontendController;
 
 use App\View\View;
 
@@ -11,7 +11,7 @@ class PasswordController extends View
      *
      * @return void
      */
-    public function newPassAction(): void
+    public function NewPasswordAction(): void
     {
         $this->renderer('Frontend', 'new', null);
     }
@@ -21,7 +21,7 @@ class PasswordController extends View
      *
      * @return void
      */
-    public function lostPassAction(): void
+    public function LostPasswordAction(): void
     {
         $this->renderer('Frontend', 'lost', null);
     }

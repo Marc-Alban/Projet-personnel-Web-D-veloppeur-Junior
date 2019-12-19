@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace App\Controller;
+namespace App\Controller\FrontendController;
 
 use App\Model\Manager\ArticleManager;
 use App\View\View;
@@ -28,7 +28,7 @@ class ArticleController extends View
      *
      * @return void
      */
-    public function listesArticlesAction(): void
+    public function ListesArticlesAction(): void
     {
         $listeArticle = $this->articleManager->listePost();
         $lastArticle = $this->articleManager->lastArticle();
@@ -40,7 +40,7 @@ class ArticleController extends View
      *
      * @return void
      */
-    public function articleAction(): void
+    public function ArticleAction(): void
     {
         $post = $this->articleManager->article();
         $this->renderer('Frontend', 'article', ['post' => $post]);

@@ -2,62 +2,82 @@
 declare (strict_types = 1);
 namespace App\Tools;
 
-session_start();
-
 class Router
 {
+
     private $id;
     private $action;
     private $page;
     private $pageFront;
     private $pageBack;
-    private $controllerName;
     private $controller;
     private $methode;
 
-    public function __contruct()
+    public function __construct()
     {
         $this->id = $_GET['id'] ?? null;
         $this->action = $_GET['action'] ?? null;
-        $this->page = $_GET['page'] ?? 'home';
-        $this->pageFront = ['home', 'blog', 'error'];
+        $this->page = $_GET['page'] ?? "Home";
+        $this->pageFront = ['Home', 'Blog', 'Error'];
         $this->pageBack = ['adminComments', 'adminChapters', 'adminChapter', 'adminWrite', 'login', 'adminProfil'];
-        //var_dump($this->page, $this->pageFront);
 
     }
 
+    /**
+     * Renvoie le bon controller en fonction de la page qui est passé
+     *
+     * @return string
+     */
     public function controller(): string
     {
-        var_dump($this->page, $this->pageFront);
         if (in_array($this->page, $this->pageFront) || empty($this->page) || !in_array($this->page, $this->pageBack)) {
-            //var_dump('test');
-            //return $this->controllerName = 'App\Controller\FrontendController' . $this->page . "Controller"
+            return 'App\Controller\FrontendController\\' . $this->page . "Controller";
         } else if (in_array($this->page, $this->pageBack)) {
-            return $this->controllerName = 'App\Controller\BackendController';
+            return 'App\Controller\BackendController';
         }
-        //die();
+
     }
 
+    /**
+     * Appel le controller et appelle la bonne
+     *  méthode sur le controller appelé
+     *
+     * @return void
+     */
     public function call()
     {
-        $this->controller = new $this->controllerName;
+        $controllerString = $this->controller();
+        $this->controller = new $controllerString();
         $this->methode = $this->page . 'Action';
+
+        var_dump($this->controller->$this->methode());
+        die();
+        $controllerMethode = $this->controller->$this->methode();
     }
 
+    /**
+     * Si il y a des paramètres dans l'url alors
+     * on fait un algo pour savoir quoi mettre dans les méthodes
+     * comme paramètres
+     *
+     */
     public function Action()
     {
+
         if (in_array($this->page, $this->pageFront) || in_array($this->page, $this->pageBack)) {
             if (($this->action === null && $this->id === null) || ($this->action !== null && $this->id !== null || $this->action !== null && $this->id === null)) {
                 $this->controller->$this->methode($_SESSION, ['get' => $_GET, 'post' => $_POST, 'files' => $_FILES]);
             } else if ($this->action === null && $this->id !== null) {
                 $this->controller->$this->methode($_SESSION, ['post' => $_POST, 'get' => $_GET]);
             }
+        } else if (!in_array($this->page, $this->pageFront) || !in_array($this->page, $this->pageBack)) {
+            $this->error();
         }
     }
 
     public function error()
     {
-        $this->controller->errorAction();
+        $this->controller->ErrorAction();
     }
 
 }

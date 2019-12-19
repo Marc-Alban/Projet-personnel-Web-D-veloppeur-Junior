@@ -4,9 +4,7 @@ require_once '../vendor/autoload.php';
 use App\Tools\Router;
 
 $Router = new Router();
-var_dump($Router, $_GET);
-die();
-$Router->controller();
+$Router->call();
 
 //GET
 //On met un slash pour eviter de se tromper si l'url est vide ..

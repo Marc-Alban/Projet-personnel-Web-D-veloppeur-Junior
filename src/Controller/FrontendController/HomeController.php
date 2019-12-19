@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace App\Controller;
+namespace App\Controller\FrontendController;
 
 use App\Model\Manager\HomeManager;
 use App\View\View;
@@ -28,7 +28,7 @@ class HomeController extends View
      *
      * @return void
      */
-    public function homeAction(): void
+    public function HomeAction(): void
     {
         $graph = $this->HomeManager->listeGraph();
         $this->renderer('Frontend', 'home', ['graph' => $graph]);
@@ -39,7 +39,7 @@ class HomeController extends View
      *
      * @return void
      */
-    public function errorAction(): void
+    public function ErrorAction(): void
     {
         $this->renderer('Frontend', '404', null);
     }

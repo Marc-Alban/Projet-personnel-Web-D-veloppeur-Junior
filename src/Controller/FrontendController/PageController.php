@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace App\Controller;
+namespace App\Controller\FrontendController;
 
 use App\View\View;
 
@@ -11,7 +11,7 @@ class PageController extends View
      *
      * @return void
      */
-    public function pageRenderAction(): void
+    public function PageAction(): void
     {
         $this->renderer('Frontend', 'page', null);
     }

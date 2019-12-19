@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-namespace App\Controller;
+namespace App\Controller\FrontendController;
 
 use App\View\View;
 
@@ -11,7 +11,7 @@ class ContactController extends View
      *
      * @return void
      */
-    public function contactRenderAction(): void
+    public function ContactAction(): void
     {
         $this->renderer('Frontend', 'contact', null);
     }
