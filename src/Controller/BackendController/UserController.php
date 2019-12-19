@@ -11,7 +11,7 @@ class UserController extends View
      *
      * @return void
      */
-    public function loginUserAction(): void
+    public function UserAction(): void
     {
         $this->renderer('Backend', 'loginUser', null);
     }

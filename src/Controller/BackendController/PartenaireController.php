@@ -11,7 +11,7 @@ class PartenaireController extends View
      *
      * @return void
      */
-    public function createPartenaireAction(): void
+    public function PartenaireAction(): void
     {
         $this->renderer('Backend', 'partenaire', null);
     }

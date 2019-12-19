@@ -2,24 +2,31 @@
 declare (strict_types = 1);
 namespace App\Tools;
 
+use App\Controller\FrontendController\HomeController;
+
+session_start();
+
 class Router
 {
 
     private $id;
     private $action;
     private $page;
+    private $pageMaj;
     private $pageFront;
     private $pageBack;
-    private $controller;
-    private $methode;
+    private $home;
 
     public function __construct()
     {
+
         $this->id = $_GET['id'] ?? null;
         $this->action = $_GET['action'] ?? null;
-        $this->page = $_GET['page'] ?? "Home";
-        $this->pageFront = ['Home', 'Blog', 'Error'];
-        $this->pageBack = ['adminComments', 'adminChapters', 'adminChapter', 'adminWrite', 'login', 'adminProfil'];
+        $this->page = $_GET['page'] ?? "home";
+        $this->pageMaj = ucfirst($this->page);
+        $this->pageFront = ['Home', 'Article', 'ListesArticles', 'Contact', 'Page', 'NewPassword', 'LostPassword'];
+        $this->pageBack = ['Dashboard', 'Form', 'Graph', 'Partenaire', 'Table', 'User'];
+        $this->home = new HomeController;
 
     }
 
@@ -30,10 +37,10 @@ class Router
      */
     public function controller(): string
     {
-        if (in_array($this->page, $this->pageFront) || empty($this->page) || !in_array($this->page, $this->pageBack)) {
-            return 'App\Controller\FrontendController\\' . $this->page . "Controller";
-        } else if (in_array($this->page, $this->pageBack)) {
-            return 'App\Controller\BackendController';
+        if (in_array($this->pageMaj, $this->pageFront) || empty($this->pageMaj) || !in_array($this->pageMaj, $this->pageBack)) {
+            return 'App\Controller\FrontendController\\' . $this->pageMaj . "Controller";
+        } else if (in_array($this->pageMaj, $this->pageBack)) {
+            return 'App\Controller\BackendController\\' . $this->pageMaj . "Controller";
         }
 
     }
@@ -42,17 +49,14 @@ class Router
      * Appel le controller et appelle la bonne
      *  méthode sur le controller appelé
      *
-     * @return void
+     * @return array
      */
-    public function call()
+    public function call(array $session, array $datas): ?array
     {
         $controllerString = $this->controller();
-        $this->controller = new $controllerString();
-        $this->methode = $this->page . 'Action';
-
-        var_dump($this->controller->$this->methode());
-        die();
-        $controllerMethode = $this->controller->$this->methode();
+        $controller = new $controllerString();
+        $methode = $this->pageMaj . 'Action';
+        return $controller->$methode($session, $datas);
     }
 
     /**
@@ -61,23 +65,28 @@ class Router
      * comme paramètres
      *
      */
-    public function Action()
+    public function action(): void
     {
-
-        if (in_array($this->page, $this->pageFront) || in_array($this->page, $this->pageBack)) {
+        if (in_array($this->pageMaj, $this->pageFront) || in_array($this->pageMaj, $this->pageBack)) {
             if (($this->action === null && $this->id === null) || ($this->action !== null && $this->id !== null || $this->action !== null && $this->id === null)) {
-                $this->controller->$this->methode($_SESSION, ['get' => $_GET, 'post' => $_POST, 'files' => $_FILES]);
+                $this->call($_SESSION, ['get' => $_GET, 'post' => $_POST, 'files' => $_FILES]);
             } else if ($this->action === null && $this->id !== null) {
-                $this->controller->$this->methode($_SESSION, ['post' => $_POST, 'get' => $_GET]);
+                $this->call($_SESSION, ['post' => $_POST, 'get' => $_GET]);
             }
-        } else if (!in_array($this->page, $this->pageFront) || !in_array($this->page, $this->pageBack)) {
+        } else if (!in_array($this->pageMaj, $this->pageFront) || !in_array($this->pageMaj, $this->pageBack)) {
             $this->error();
         }
     }
 
-    public function error()
+    /**
+     * Renvoie la page 404 si rien n'est trouvée !
+     *
+     * @return void
+     */
+    public function error(): void
     {
-        $this->controller->ErrorAction();
+        $this->home->errorAction();
+        exit();
     }
 
 }

@@ -5,7 +5,7 @@ namespace App\Controller\FrontendController;
 use App\Model\Manager\ArticleManager;
 use App\View\View;
 
-class ArticleController extends View
+class ListesArticlesController extends View
 {
 
     private $articleManager;
@@ -24,14 +24,15 @@ class ArticleController extends View
     }
 
     /**
-     * Retourne un article sur la page article cibler par l'id passé en paramètre
+     * Retourne la liste des articles sur la page blog
      *
      * @return void
      */
-    public function ArticleAction(): void
+    public function ListesArticlesAction(): void
     {
-        $post = $this->articleManager->article();
-        $this->renderer('Frontend', 'article', ['post' => $post]);
+        $listeArticle = $this->articleManager->listePost();
+        $lastArticle = $this->articleManager->lastArticle();
+        $this->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
     }
 
 }

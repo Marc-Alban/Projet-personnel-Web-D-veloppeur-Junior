@@ -4,18 +4,8 @@ namespace App\Controller\FrontendController;
 
 use App\View\View;
 
-class PasswordController extends View
+class LostPasswordController extends View
 {
-    /**
-     * Rendu de la page nouveau password
-     *
-     * @return void
-     */
-    public function NewPasswordAction(): void
-    {
-        $this->renderer('Frontend', 'new', null);
-    }
-
     /**
      * Rendu de la page password perdu
      *

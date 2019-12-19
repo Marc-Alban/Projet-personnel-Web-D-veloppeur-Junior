@@ -11,7 +11,7 @@ class TableController extends View
      *
      * @return void
      */
-    public function listeTableAction(): void
+    public function TableAction(): void
     {
         $this->renderer('Backend', 'table', null);
     }

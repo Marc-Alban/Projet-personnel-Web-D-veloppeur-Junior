@@ -11,7 +11,7 @@ class DashboardController extends View
      *
      * @return void
      */
-    public function dashboardRenderAction(): void
+    public function DashboardAction(): void
     {
         $this->renderer('Backend', 'dashboard', null);
     }

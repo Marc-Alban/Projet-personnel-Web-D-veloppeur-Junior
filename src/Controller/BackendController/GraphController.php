@@ -11,7 +11,7 @@ class GraphController extends View
      *
      * @return void
      */
-    public function graphRenderAction(): void
+    public function graphAction(): void
     {
         $this->renderer('Backend', 'graph', null);
     }

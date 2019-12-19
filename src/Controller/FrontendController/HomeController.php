@@ -39,7 +39,7 @@ class HomeController extends View
      *
      * @return void
      */
-    public function ErrorAction(): void
+    public function errorAction(): void
     {
         $this->renderer('Frontend', '404', null);
     }
