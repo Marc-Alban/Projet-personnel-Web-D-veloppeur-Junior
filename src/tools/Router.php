@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 
 namespace App\Tools;
 
@@ -17,17 +18,11 @@ class Router
      * @param string $controller
      * @return void
      */
-    public function get(String $route, String $controller): void
+    public function url(String $route, String $controller): void
     {
         $route = trim($route, '/');
         $this->routes[$route] = $controller;
     }
-
-    // public function post(string $route, string $controller): void
-    // {
-    //     // $route = trim($route, '/');
-    //     // $this->routes[$route] = $controller;
-    // }
 
     /**
      * Renvoie le resultat de la méthode match
