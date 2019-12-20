@@ -1,6 +1,6 @@
 {% extends 'Frontend/layout.html.twig' %}
-{% block head %} <title> Page exemple </title> {% endblock %}
-{% block title %} Titre page exemple {% endblock %}
+{% block head %} {% for pages in data.page %} <title> {{pages.title}} </title> {% endfor %} {% endblock %}
+{% block title %} {% for pages in data.page %} {{pages.title}} {% endfor %}{% endblock %}
 {% block content %}
 
 <!--Grid column-->
@@ -12,29 +12,19 @@
         <!-- /img -->
         <div class="card-body">
             <div class="container">
+                {% for pages in data.page %}
                 <!--Section heading-->
                 <h1 class="text-left h1 pt-4 mb-3">
-                    <strong>{{Title}}Title</strong>
+                    <strong>{{pages.title}}</strong>
                 </h1>
                 <!-- Grid column -->
                 <div class="row mt-3">
 
-                    <p class="dark-grey-text article">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium
-                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
-                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                        sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
-                        nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                        amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                        incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                        Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
-                        eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                        consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
+                    <p class="dark-grey-text article">{{pages.description}}</p>
 
                 </div>
                 <!--/Grid colomn -->
+                {% endfor %}
             </div>
             <!--/Grid column-->
         </div>

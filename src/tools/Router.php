@@ -11,6 +11,7 @@ class Router
 
     private $id;
     private $action;
+    private $title;
     private $page;
     private $pageMaj;
     private $pageFront;
@@ -22,6 +23,7 @@ class Router
 
         $this->id = $_GET['id'] ?? null;
         $this->action = $_GET['action'] ?? null;
+        $this->title = $_GET['title'] ?? null;
         $this->page = $_GET['page'] ?? "home";
         $this->pageMaj = ucfirst($this->page);
         $this->pageFront = ['Home', 'Article', 'ListesArticles', 'Contact', 'Page', 'NewPassword', 'LostPassword'];

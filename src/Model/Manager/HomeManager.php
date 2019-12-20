@@ -3,9 +3,8 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Repository\HomeRepository;
-use PDOException;
 
-class HomeManager extends PDOException
+class HomeManager
 {
 
     private $homeRepository;
