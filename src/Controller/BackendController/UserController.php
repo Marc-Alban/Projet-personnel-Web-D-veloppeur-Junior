@@ -4,8 +4,16 @@ namespace App\Controller\BackendController;
 
 use App\View\View;
 
-class UserController extends View
+class UserController
 {
+
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu de la page info utilisateur
      *
@@ -13,6 +21,6 @@ class UserController extends View
      */
     public function UserAction(): void
     {
-        $this->renderer('Backend', 'loginUser', null);
+        $this->view->renderer('Backend', 'loginUser', null);
     }
 }

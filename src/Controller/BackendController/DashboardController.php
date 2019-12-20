@@ -4,8 +4,16 @@ namespace App\Controller\BackendController;
 
 use App\View\View;
 
-class DashboardController extends View
+class DashboardController
 {
+
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu de la page dashboard
      *
@@ -13,7 +21,7 @@ class DashboardController extends View
      */
     public function DashboardAction(): void
     {
-        $this->renderer('Backend', 'dashboard', null);
+        $this->view->renderer('Backend', 'dashboard', null);
     }
 
 }

@@ -4,8 +4,15 @@ namespace App\Controller\BackendController;
 
 use App\View\View;
 
-class FormController extends View
+class FormController
 {
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu des formulaires
      *
@@ -13,6 +20,6 @@ class FormController extends View
      */
     public function formAction(): void
     {
-        $this->renderer('Backend', 'form', null);
+        $this->view->renderer('Backend', 'form', null);
     }
 }

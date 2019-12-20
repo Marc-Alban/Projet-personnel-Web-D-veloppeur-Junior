@@ -4,8 +4,15 @@ namespace App\Controller\BackendController;
 
 use App\View\View;
 
-class PartenaireController extends View
+class PartenaireController
 {
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu des partenaires
      *
@@ -13,6 +20,6 @@ class PartenaireController extends View
      */
     public function PartenaireAction(): void
     {
-        $this->renderer('Backend', 'partenaire', null);
+        $this->view->renderer('Backend', 'partenaire', null);
     }
 }

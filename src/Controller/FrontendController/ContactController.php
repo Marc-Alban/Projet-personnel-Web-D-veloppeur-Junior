@@ -4,8 +4,16 @@ namespace App\Controller\FrontendController;
 
 use App\View\View;
 
-class ContactController extends View
+class ContactController
 {
+
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu de la page contact
      *
@@ -13,7 +21,7 @@ class ContactController extends View
      */
     public function ContactAction(): void
     {
-        $this->renderer('Frontend', 'contact', null);
+        $this->view->renderer('Frontend', 'contact', null);
     }
 
 }

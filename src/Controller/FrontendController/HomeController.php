@@ -5,11 +5,11 @@ namespace App\Controller\FrontendController;
 use App\Model\Manager\HomeManager;
 use App\View\View;
 
-class HomeController extends View
+class HomeController
 {
 
     private $HomeManager;
-
+    private $view;
     /**
      * Fonction constructeur:
      * Récupère  la fonction parent construct "Twig/Environement"
@@ -20,7 +20,7 @@ class HomeController extends View
     public function __construct()
     {
         $this->HomeManager = new HomeManager();
-        parent::__construct();
+        $this->view = new View();
     }
 
     /**
@@ -31,7 +31,7 @@ class HomeController extends View
     public function HomeAction(): void
     {
         $graph = $this->HomeManager->listeGraph();
-        $this->renderer('Frontend', 'home', ['graph' => $graph]);
+        $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
     }
 
     /**
@@ -41,6 +41,6 @@ class HomeController extends View
      */
     public function errorAction(): void
     {
-        $this->renderer('Frontend', '404', null);
+        $this->view->renderer('Frontend', '404', null);
     }
 }

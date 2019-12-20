@@ -5,9 +5,9 @@ namespace App\Controller\FrontendController;
 use App\Model\Manager\ArticleManager;
 use App\View\View;
 
-class ListesArticlesController extends View
+class ListesArticlesController
 {
-
+    private $view;
     private $articleManager;
 
     /**
@@ -19,8 +19,8 @@ class ListesArticlesController extends View
      */
     public function __construct()
     {
-        parent::__construct();
         $this->articleManager = new ArticleManager();
+        $this->view = new View();
     }
 
     /**
@@ -32,7 +32,7 @@ class ListesArticlesController extends View
     {
         $listeArticle = $this->articleManager->listePost();
         $lastArticle = $this->articleManager->lastArticle();
-        $this->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
+        $this->view->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
     }
 
 }

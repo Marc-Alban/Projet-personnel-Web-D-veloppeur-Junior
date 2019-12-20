@@ -5,10 +5,11 @@ namespace App\Controller\FrontendController;
 use App\Model\Manager\ArticleManager;
 use App\View\View;
 
-class ArticleController extends View
+class ArticleController
 {
 
     private $articleManager;
+    private $view;
 
     /**
      * Fonction constructeur:
@@ -19,8 +20,8 @@ class ArticleController extends View
      */
     public function __construct()
     {
-        parent::__construct();
         $this->articleManager = new ArticleManager();
+        $this->view = new View();
     }
 
     /**
@@ -28,10 +29,10 @@ class ArticleController extends View
      *
      * @return void
      */
-    public function ArticleAction(array &$session, array $data): void
+    public function ArticleAction(array $data): void
     {
         $post = $this->articleManager->article((int) $data['get']['id']);
-        $this->renderer('Frontend', 'article', ['post' => $post]);
+        $this->view->renderer('Frontend', 'article', ['post' => $post]);
     }
 
 }

@@ -4,8 +4,15 @@ namespace App\Controller\BackendController;
 
 use App\View\View;
 
-class TableController extends View
+class TableController
 {
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu des listes sous form de tableau
      *
@@ -13,6 +20,6 @@ class TableController extends View
      */
     public function TableAction(): void
     {
-        $this->renderer('Backend', 'table', null);
+        $this->view->renderer('Backend', 'table', null);
     }
 }

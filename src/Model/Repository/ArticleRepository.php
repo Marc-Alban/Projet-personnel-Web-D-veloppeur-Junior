@@ -57,7 +57,7 @@ class ArticleRepository
      * Récupère un objet Article à partir de son identifiant
      *
      * @param int $id identifiant d'un article
-     * @return bool|Article|null
+     * @return bool|Article
      * false si l'objet n'a pu être inséré, objet Article si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
@@ -76,7 +76,8 @@ class ArticleRepository
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
             $article = $this->pdoStatement->fetchObject(Article::class);
             if ($article === false) {
-                return null;
+                header("Location: index.php?page=listesArticles");
+                exit;
             }
             return $article;
         }

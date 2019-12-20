@@ -4,8 +4,15 @@ namespace App\Controller\BackendController;
 
 use App\View\View;
 
-class GraphController extends View
+class GraphController
 {
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu des graphs
      *
@@ -13,6 +20,6 @@ class GraphController extends View
      */
     public function graphAction(): void
     {
-        $this->renderer('Backend', 'graph', null);
+        $this->view->renderer('Backend', 'graph', null);
     }
 }

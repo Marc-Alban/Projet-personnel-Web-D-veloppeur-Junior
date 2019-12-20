@@ -53,12 +53,12 @@ class Router
      *
      * @return array
      */
-    public function call(array $session, array $datas): ?array
+    public function call(array $datas): ?array
     {
         $controllerString = $this->controller();
         $controller = new $controllerString();
         $methode = $this->pageMaj . 'Action';
-        return $controller->$methode($session, $datas);
+        return $controller->$methode($datas);
     }
 
     /**
@@ -71,10 +71,10 @@ class Router
     {
         if (in_array($this->pageMaj, $this->pageFront) || in_array($this->pageMaj, $this->pageBack)) {
             if (($this->action === null && $this->id === null) || ($this->action !== null && $this->id !== null || $this->action !== null && $this->id === null)) {
-                $this->call($_SESSION, ['get' => $_GET, 'post' => $_POST, 'files' => $_FILES]);
+                $this->call(['get' => $_GET, 'post' => $_POST, 'files' => $_FILES, 'session' => $_SESSION]);
 
             } else if ($this->action === null && $this->id !== null) {
-                $this->call($_SESSION, ['post' => $_POST, 'get' => $_GET]);
+                $this->call(['post' => $_POST, 'get' => $_GET, 'session' => $_SESSION]);
             }
         } else if (!in_array($this->pageMaj, $this->pageFront) || !in_array($this->pageMaj, $this->pageBack)) {
             $this->error();

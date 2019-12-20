@@ -5,10 +5,11 @@ namespace App\Controller\FrontendController;
 use App\Model\Manager\PageManager;
 use App\View\View;
 
-class PageController extends View
+class PageController
 {
 
     private $pageManager;
+    private $view;
 
     /**
      * Fonction constructeur:
@@ -19,8 +20,8 @@ class PageController extends View
      */
     public function __construct()
     {
-        parent::__construct();
         $this->pageManager = new PageManager();
+        $this->view = new View();
     }
 
     /**
@@ -28,9 +29,9 @@ class PageController extends View
      *
      * @return void
      */
-    public function PageAction(array $session, array $data): void
+    public function PageAction(array $data): void
     {
         $page = $this->pageManager->readPage($data['get']['title']);
-        $this->renderer('Frontend', 'page', ['page' => $page]);
+        $this->view->renderer('Frontend', 'page', ['page' => $page]);
     }
 }

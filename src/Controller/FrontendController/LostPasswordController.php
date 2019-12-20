@@ -4,8 +4,16 @@ namespace App\Controller\FrontendController;
 
 use App\View\View;
 
-class LostPasswordController extends View
+class LostPasswordController
 {
+
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
+
     /**
      * Rendu de la page password perdu
      *
@@ -13,6 +21,6 @@ class LostPasswordController extends View
      */
     public function LostPasswordAction(): void
     {
-        $this->renderer('Frontend', 'lost', null);
+        $this->view->renderer('Frontend', 'lost', null);
     }
 }

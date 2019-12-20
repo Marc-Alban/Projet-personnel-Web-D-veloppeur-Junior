@@ -4,8 +4,14 @@ namespace App\Controller\FrontendController;
 
 use App\View\View;
 
-class NewPasswordController extends View
+class NewPasswordController
 {
+    private $view;
+
+    public function __construct()
+    {
+        $this->view = new View();
+    }
     /**
      * Rendu de la page nouveau password
      *
@@ -13,7 +19,7 @@ class NewPasswordController extends View
      */
     public function NewPasswordAction(): void
     {
-        $this->renderer('Frontend', 'new', null);
+        $this->view->renderer('Frontend', 'new', null);
     }
 
 }
