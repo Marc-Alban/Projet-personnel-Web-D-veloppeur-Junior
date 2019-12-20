@@ -70,6 +70,7 @@ class Router
         if (in_array($this->pageMaj, $this->pageFront) || in_array($this->pageMaj, $this->pageBack)) {
             if (($this->action === null && $this->id === null) || ($this->action !== null && $this->id !== null || $this->action !== null && $this->id === null)) {
                 $this->call($_SESSION, ['get' => $_GET, 'post' => $_POST, 'files' => $_FILES]);
+
             } else if ($this->action === null && $this->id !== null) {
                 $this->call($_SESSION, ['post' => $_POST, 'get' => $_GET]);
             }

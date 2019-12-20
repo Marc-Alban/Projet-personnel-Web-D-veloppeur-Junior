@@ -11,6 +11,7 @@ class ArticleRepository
 
     private $pdo;
     private $pdoStatement;
+    private $article;
 
     /**
      * Fonction constructeur, instanciation de la bdd
@@ -19,6 +20,37 @@ class ArticleRepository
     public function __construct()
     {
         $this->pdo = Database::getPdo();
+        $this->article = new Article;
+    }
+
+    /**
+     * Récupère le dernier article
+     *
+     * @return bool|Article|null
+     * false si l'objet n'a pu être inséré, objet Article si une
+     * correspondance est trouvé, NULL s'il n'y a aucune correspondance
+     */
+    public function last(): Object
+    {
+
+        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 ORDER BY date DESC LIMIT 1');
+
+        //execution de la requête
+        $executeIsOk = $this->pdoStatement->execute();
+
+        if ($executeIsOk) {
+            //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
+            $article = $this->pdoStatement->fetchObject(Article::class);
+            if ($article === false) {
+                return null;
+            }
+            return $article;
+        }
+
+        if (!$executeIsOk) {
+            return false;
+        }
+
     }
 
     /**
@@ -29,9 +61,13 @@ class ArticleRepository
      * false si l'objet n'a pu être inséré, objet Article si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function read(): Object
+    public function read(int $id): Object
     {
-        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 ORDER BY date DESC LIMIT 1');
+
+        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE lastArticle = 1 AND id=:id ORDER BY date DESC LIMIT 1');
+
+        //Liaison paramètres
+        $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
 
         //execution de la requête
         $executeIsOk = $this->pdoStatement->execute();
@@ -39,10 +75,10 @@ class ArticleRepository
         if ($executeIsOk) {
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
             $article = $this->pdoStatement->fetchObject(Article::class);
-            return $article;
             if ($article === false) {
                 return null;
             }
+            return $article;
         }
 
         if (!$executeIsOk) {
@@ -91,7 +127,7 @@ class ArticleRepository
         $executeIsOk = $this->pdoStatement->execute();
 
         if ($executeIsOk) {
-            $article = $this->read();
+            $article = $this->last();
             return true;
         }
 

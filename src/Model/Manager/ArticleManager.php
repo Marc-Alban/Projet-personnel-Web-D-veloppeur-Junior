@@ -38,7 +38,7 @@ class ArticleManager
      */
     public function lastArticle(): Object
     {
-        return $this->articleRepository->read();
+        return $this->articleRepository->last();
     }
 
     /**
@@ -46,9 +46,9 @@ class ArticleManager
      *
      * @return Object
      */
-    public function article(): Object
+    public function article(int $id): Object
     {
-        return $this->articleRepository->read(5);
+        return $this->articleRepository->read((int) $id);
     }
 
 }

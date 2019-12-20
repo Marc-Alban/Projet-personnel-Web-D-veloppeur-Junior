@@ -28,9 +28,9 @@ class ArticleController extends View
      *
      * @return void
      */
-    public function ArticleAction(): void
+    public function ArticleAction(array &$session, array $data): void
     {
-        $post = $this->articleManager->article();
+        $post = $this->articleManager->article((int) $data['get']['id']);
         $this->renderer('Frontend', 'article', ['post' => $post]);
     }
 
