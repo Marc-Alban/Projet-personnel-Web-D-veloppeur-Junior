@@ -32,6 +32,7 @@ class PageController
     public function PageAction(array $data): void
     {
         $page = $this->pageManager->readPage($data['get']['title']);
+
         $this->view->renderer('Frontend', 'page', ['page' => $page]);
     }
 }
