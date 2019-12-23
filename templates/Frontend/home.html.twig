@@ -3,6 +3,13 @@
 {% block title %} Performance selon les profils de risque: {% endblock %}
 
 {% block content %}
+<!-- Erreur strat -->
+{% for error in data.errors %}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{% endfor %}
+<!-- Erreur end -->
 <!-- Grid row -->
 <div class="row">
     <!-- Grid column -->

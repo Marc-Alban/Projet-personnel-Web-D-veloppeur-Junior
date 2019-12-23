@@ -71,7 +71,7 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body mx-4">
-                  <form action="/?p=dashboard&action=connexion" method="POST">
+                  <form action="/?p=home&action=connexion" method="POST">
                     <!--Body-->
                     <div class="md-form mb-5">
                       <input type="text" id="Form-User" name="pseudo" class="form-control
@@ -218,9 +218,6 @@
                   </strong></h4>
                 <hr class="red title-hr">
                 {% block content %}
-                {% for error in data.errors %}
-                {{error}}
-                {% endfor %}
                 {% endblock %}
               </section>
               <!--/Section: Magazine posts-->

@@ -28,9 +28,8 @@ class DashboardController
     public function DashboardAction(array &$data): void
     {
         $action = $data['get']['action'] ?? null;
-        $session = $data['session'];
-        $errors = $session['errors'] ?? null;
-        unset($session['errors']);
+
+        $errors = $data['session']['errors'] ?? null;
 
         if (isset($data['post']['connexion']) && $action === "connexion") {
 
@@ -47,24 +46,22 @@ class DashboardController
                 $errors['identifiants'] = 'Identifiants Incorrect';
             }
 
-            $this->user->createSessionToken($session);
+            $this->user->createSessionToken($data['session']);
             $errors['token'] = $this->user->compareTokens($data);
 
-            if ($errors['token'] === null || is_null($errors['token'])) {
-                unset($errors['token']);
+            if ($data['session']['token'] === null || is_null($data['session']['token'])) {
+                unset($data['session']['token']);
             }
 
             if (empty($errors)) {
-                $session['user'] = $pseudo;
-                $session['mdp'] = $password;
+                $data['session']['user'] = $pseudo;
+                $data['session']['mdp'] = $password;
+                $nbArticle = count($this->article->listePost());
+                $this->view->renderer('Backend', 'dashboard', ['nbArticle' => $nbArticle]);
             } else if (isset($errors) && !empty($errors)) {
-                var_dump($errors);
-                die();
                 $this->view->renderer('Frontend', 'home', ['errors' => $errors]);
             }
         }
 
-        $nbArticle = count($this->article->listePost());
-        $this->view->renderer('Backend', 'dashboard', ['nbArticle' => $nbArticle, 'errors' => $errors]);
     }
 }

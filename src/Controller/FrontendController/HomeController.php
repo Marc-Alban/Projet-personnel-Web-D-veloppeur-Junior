@@ -2,6 +2,7 @@
 declare (strict_types = 1);
 namespace App\Controller\FrontendController;
 
+use App\Controller\BackendController\DashboardController;
 use App\Model\Manager\HomeManager;
 use App\View\View;
 
@@ -20,6 +21,7 @@ class HomeController
     public function __construct()
     {
         $this->HomeManager = new HomeManager();
+        $this->dashbordController = new DashboardController;
         $this->view = new View();
     }
 
@@ -28,10 +30,15 @@ class HomeController
      *
      * @return void
      */
-    public function HomeAction(): void
+    public function HomeAction(?array $data = null): void
     {
-        $graph = $this->HomeManager->listeGraph();
-        $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
+
+        if (isset($data["get"]["action"]) && !empty($data["get"]["action"])) {
+            $this->dashbordController->DashboardAction($data);
+        } else if (!isset($data["get"]["action"]) && empty($data["get"]["action"])) {
+            $graph = $this->HomeManager->listeGraph();
+            $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
+        }
     }
 
     /**
