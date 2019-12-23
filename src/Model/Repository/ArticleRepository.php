@@ -76,7 +76,7 @@ class ArticleRepository
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
             $article = $this->pdoStatement->fetchObject(Article::class);
             if ($article === false) {
-                header("Location: index.php?p=listesArticles");
+                header("Location: ?p=listesArticles");
                 exit;
             }
             return $article;

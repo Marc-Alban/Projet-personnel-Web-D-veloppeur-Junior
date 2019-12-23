@@ -12,27 +12,28 @@ class DashboardController
     private $view;
     private $article;
     private $user;
+    //private $home;
 
     public function __construct()
     {
         $this->view = new View();
         $this->article = new ArticleManager();
         $this->user = new UserManager();
+        //$this->home = new HomeController();
     }
 
     /**
-     * Renvoie la page dashboard
+     * méthode qui permet de vérifier si l'utilisateur sera renvoyé sur la page home avec
+     * une erreur lors de la connection ou alors sur la page dashboard et qu'il soit bien connecté.
      *
      * @return void
      */
     public function DashboardAction(array &$data): void
     {
         $action = $data['get']['action'] ?? null;
-
         $errors = $data['session']['errors'] ?? null;
 
         if (isset($data['post']['connexion']) && $action === "connexion") {
-
             $passwordBdd = $this->user->getPass();
             $pseudo = $data["post"]['pseudo'] ?? null;
             $userBdd = $this->user->getUsers();
@@ -62,6 +63,6 @@ class DashboardController
                 $this->view->renderer('Frontend', 'home', ['errors' => $errors]);
             }
         }
-
+        //$this->home->errorAction();
     }
 }

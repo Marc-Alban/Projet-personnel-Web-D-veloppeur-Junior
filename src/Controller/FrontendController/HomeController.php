@@ -30,9 +30,8 @@ class HomeController
      *
      * @return void
      */
-    public function HomeAction(?array $data = null): void
+    public function HomeAction(array $data): void
     {
-
         if (isset($data["get"]["action"]) && !empty($data["get"]["action"])) {
             $this->dashbordController->DashboardAction($data);
         } else if (!isset($data["get"]["action"]) && empty($data["get"]["action"])) {
