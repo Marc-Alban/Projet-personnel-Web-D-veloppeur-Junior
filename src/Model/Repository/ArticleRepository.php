@@ -98,7 +98,7 @@ class ArticleRepository
     public function readAll(): array
     {
 
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) ORDER BY date DESC");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY date DESC");
 
         $articles = [];
 

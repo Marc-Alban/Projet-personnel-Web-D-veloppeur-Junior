@@ -71,28 +71,32 @@
                 </div>
                 <!--Body-->
                 <div class="modal-body mx-4">
-                  <form action="" method="POST">
+                  <form action="/?p=dashboard&action=connexion" method="POST">
                     <!--Body-->
                     <div class="md-form mb-5">
-                      <input type="text" id="Form-User" class="form-control
-                          validate" required>
+                      <input type="text" id="Form-User" name="pseudo" class="form-control
+                          validate">
                       <label data-error="wrong" data-success="right" for="Form-User">Identifiant</label>
                     </div>
 
                     <div class="md-form pb-3">
-                      <input type="password" id="Form-pass" class="form-control
-                          validate" required>
+                      <input type="password" id="Form-pass" name="password" class="form-control
+                          validate">
                       <label data-error="wrong" data-success="right" for="Form-pass">Mot de passe</label>
                       <p class="font-small red-text d-flex
                           justify-content-start"><a href="?p=lostPassword" class="red-text
                             ml-1">*Mot de passe oublié</a></p>
                     </div>
 
+                    <div class="md-form">
+                      <input type="hidden" id="Form-User" name="name" class="form-control validate">
+                    </div>
+
                     <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
                     <div id="captcha"></div>
 
                     <div class="text-center mb-3">
-                      <input type="submit" class="btn btn-block btn-red
+                      <input type="submit" name="connexion" class="btn btn-block btn-red
                           btn-rounded z-depth-1a" value="Je me connect">
                     </div>
                   </form>
@@ -213,7 +217,11 @@
                     {% block title %} {% endblock %}
                   </strong></h4>
                 <hr class="red title-hr">
-                {% block content %} {% endblock %}
+                {% block content %}
+                {% for error in data.errors %}
+                {{error}}
+                {% endfor %}
+                {% endblock %}
               </section>
               <!--/Section: Magazine posts-->
             </div>

@@ -20,7 +20,9 @@
                                 align-items-center">
                                 <div>
                                     <p class="h2-responsive font-weight-bold
-                                        mt-n2 mb-0">20 Articles</p>
+                                        mt-n2 mb-0">{{data.nbArticle}}
+                                        article{% if data.nbArticle > 1 %}s{% elseif data.nbArticle <= 1  %}{% endif %}
+                                    </p>
                                 </div>
                                 <div>
                                     <i class="far fa-edit fa-3x fa-4x
