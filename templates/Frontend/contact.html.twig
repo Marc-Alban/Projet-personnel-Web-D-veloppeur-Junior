@@ -4,9 +4,25 @@
 {% endblock %}
 {% block title %}Contactez-nous{% endblock %}
 {% block content %}
+
+{% if data.donnees.succes.message %}
+<!-- Success strat -->
+<div class="alert alert-primary" role="alert">
+    {{data.donnees}}
+</div>
+<!-- Success end -->
+{% endif %}
+
+{% if data.donnees %}
+<!-- Erreur strat -->
+<div class="alert alert-danger" role="alert">
+    {{data.donnees}}
+</div>
+<!-- Erreur end -->
+{% endif %}
+
 <!-- Material form contact -->
 <div class="card">
-
     <!--Card content-->
     <div class="card-body px-lg-5 pt-0">
 
@@ -17,14 +33,15 @@
                 <div class="col">
                     <!-- Name -->
                     <div class="md-form">
-                        <input type="text" id="materialContactFormName" class="form-control">
-                        <label for="materialContactFormName">Nom et prénom (requis)</label>
+                        <input type="text" name="name_lastname" id="materialContactFormName" class="form-control">
+                        <label for="materialContactFormName">Nom et prénom
+                            (requis)</label>
                     </div>
                 </div>
                 <div class="col">
                     <!-- E-mail -->
                     <div class="md-form">
-                        <input type="email" id="materialContactFormEmail" class="form-control">
+                        <input type="email" name="mail" id="materialContactFormEmail" class="form-control">
                         <label for="materialContactFormEmail">E-mail (requis)</label>
                     </div>
                 </div>
@@ -34,15 +51,16 @@
                 <div class="col">
                     <!-- Phone number -->
                     <div class="md-form">
-                        <input type="password" id="materialRegisterFormPhone" class="form-control"
+                        <input type="tel" name="telephone" id="materialRegisterFormPhone" class="form-control"
                             aria-describedby="materialRegisterFormPhoneHelpBlock">
-                        <label for="materialRegisterFormPhone">Téléphone (requis)</label>
+                        <label for="materialRegisterFormPhone">Téléphone
+                            (requis)</label>
                     </div>
                 </div>
                 <div class="col">
                     <!-- CP -->
                     <div class="md-form">
-                        <input type="text" id="materialContactCP" class="form-control">
+                        <input type="text" name="codepostal" id="materialContactCP" class="form-control">
                         <label for="materialContactFormCP">Code postal (requis)</label>
                     </div>
                 </div>
@@ -50,35 +68,42 @@
 
             <!-- Option  -->
             <div class="md-form">
-                <select class="browser-default custom-select mb-4" id="select">
-                    <option value="" disabled="" selected="">
+                <select class="browser-default custom-select mb-4" name="liste" id="select">
+                    <option value="Je suis déjà client(e)" selected>
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Je suis déjà client(e)</font>
+                            <font style="vertical-align: inherit;">Je suis déjà
+                                client(e)</font>
                         </font>
                     </option>
-                    <option value="1">
+                    <option value="Je ne suis pas client(e) et souhaite un
+                        rendez-vous">
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Je ne suis pas client(e) et souhaite un rendez-vous
+                            <font style="vertical-align: inherit;">Je ne suis
+                                pas client(e) et souhaite un rendez-vous
                             </font>
                         </font>
                     </option>
-                    <option value="2">
+                    <option value="Je ne suis pas client(e) et souhaite des
+                        informations">
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Je ne suis pas client(e) et souhaite des informations
+                            <font style="vertical-align: inherit;">Je ne suis
+                                pas client(e) et souhaite des informations
                             </font>
                         </font>
                     </option>
-                    <option value="3">
+                    <option value="Je dépose ma candidature">
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Je dépose ma candidature</font>
+                            <font style="vertical-align: inherit;">Je dépose ma
+                                candidature</font>
                         </font>
                     </option>
-                    <option value="3">
+                    <option value="Je souhaite devenir partenaire">
                         <font style="vertical-align: inherit;">
-                            <font style="vertical-align: inherit;">Je souhaite devenir partenaire</font>
+                            <font style="vertical-align: inherit;">Je souhaite
+                                devenir partenaire</font>
                         </font>
                     </option>
-                    <option value="3">
+                    <option value="Autre">
                         <font style="vertical-align: inherit;">
                             <font style="vertical-align: inherit;">Autre</font>
                         </font>
@@ -87,13 +112,14 @@
             </div>
             <!-- Subject -->
             <div class="md-form">
-                <input type="text" id="materialContactSubject" class="form-control">
+                <input type="text" name="sujet" id="materialContactSubject" class="form-control">
                 <label for="materialContactFormSubject">Sujet (requis)</label>
             </div>
 
             <!--Message-->
             <div class="md-form">
-                <textarea id="materialContactFormMessage" class="form-control md-textarea" rows="3"></textarea>
+                <textarea id="materialContactFormMessage" name="message" class="form-control
+                    md-textarea" rows="3"></textarea>
                 <label for="materialContactFormMessage">Message (requis)</label>
             </div>
 
@@ -101,7 +127,8 @@
             <div id="contact"></div>
 
             <!-- Send button -->
-            <button class="btn btn-red btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Envoyer
+            <button class="btn btn-red btn-rounded btn-block z-depth-0 my-4
+                waves-effect" name="submit" type="submit">Envoyer
                 ma demande</button>
 
         </form>

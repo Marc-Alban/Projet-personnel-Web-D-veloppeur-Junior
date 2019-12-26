@@ -48,11 +48,12 @@ class DashboardController
             }
 
             $this->user->createSessionToken($data['session']);
-            $errors['token'] = $this->user->compareTokens($data);
+            $errors["token"] = $this->user->compareTokens($data);
 
             if ($data['session']['token'] === null || is_null($data['session']['token'])) {
                 unset($data['session']['token']);
             }
+            var_dump($data);
 
             if (empty($errors)) {
                 $data['session']['user'] = $pseudo;

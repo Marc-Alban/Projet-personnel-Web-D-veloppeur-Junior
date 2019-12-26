@@ -30,6 +30,7 @@ class View extends Environment
      */
     public function renderer(string $path, string $view, ?array $data): void
     {
+        $this->addGlobal('session', $_SESSION);
         echo $this->render($path . '/' . $view . '.html.twig', ['data' => $data]);
     }
 }
