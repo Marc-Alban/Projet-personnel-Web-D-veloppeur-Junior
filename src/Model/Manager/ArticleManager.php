@@ -46,8 +46,13 @@ class ArticleManager
      *
      * @return Object
      */
-    public function article(int $id): Object
+    public function article(?int $id, ?array $data): Object
     {
+        $id = $data['get']['id'] ?? null;
+        if ($id === null || empty($id)) {
+
+            return $this->articleRepository->last();
+        }
         return $this->articleRepository->read((int) $id);
     }
 

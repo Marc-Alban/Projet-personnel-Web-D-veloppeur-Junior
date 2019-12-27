@@ -64,7 +64,7 @@ class ArticleRepository
     public function read(int $id): Object
     {
 
-        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE lastArticle = 1 AND id=:id ORDER BY date DESC LIMIT 1');
+        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE  posted = 1 AND id=:id');
 
         //Liaison paramètres
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
@@ -75,11 +75,14 @@ class ArticleRepository
         if ($executeIsOk) {
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
             $article = $this->pdoStatement->fetchObject(Article::class);
+            // var_dump($article);
+            // die();
+
             if ($article === false) {
-                header("Location: ?p=listesArticles");
-                exit;
+                return null;
             }
             return $article;
+
         }
 
         if (!$executeIsOk) {
