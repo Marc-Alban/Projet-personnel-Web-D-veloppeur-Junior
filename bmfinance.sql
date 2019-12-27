@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 04 déc. 2019 à 16:37
+-- Généré le :  ven. 27 déc. 2019 à 15:34
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.3.5
 
@@ -39,15 +39,18 @@ CREATE TABLE IF NOT EXISTS `article` (
   `posted` tinyint(1) NOT NULL,
   `lastArticle` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `article`
 --
 
 INSERT INTO `article` (`id`, `title`, `legende`, `description`, `image`, `date`, `posted`, `lastArticle`) VALUES
-(1, 'Article 1 ', 'Beau graphique', 'Five hours? Aw, man! Couldn\'t you just get me the death penalty?\r\nBite my shiny metal ass. Oh, I don\'t have time for this. I have to go and buy a single piece of fruit with a coupon and then return it, making people wait behind me while I complain. Hi, I\'m a naughty nurse, and I really need someone to talk to. $9.95 a minute.\r\n\r\nWhen the lights go out, it\'s nobody\'s business what goes on between two consenting adults.\r\nAh, yes! John Quincy Adding Machine. He struck a chord with the voters when he pledged not to go on a killing spree.\r\nThey\'re like sex, except I\'m having them!', '1.png', '2019-11-21 06:03:21', 1, 1),
-(2, 'Article 2', 'Beau graphique', 'Five hours? Aw, man! Couldn\'t you just get me the death penalty?\r\nBite my shiny metal ass. Oh, I don\'t have time for this. I have to go and buy a single piece of fruit with a coupon and then return it, making people wait behind me while I complain. Hi, I\'m a naughty nurse, and I really need someone to talk to. $9.95 a minute.\r\n\r\nWhen the lights go out, it\'s nobody\'s business what goes on between two consenting adults.\r\nAh, yes! John Quincy Adding Machine. He struck a chord with the voters when he pledged not to go on a killing spree.\r\nThey\'re like sex, except I\'m having them!', '2.png', '2019-11-21 06:03:21', 1, 0);
+(5, 'Titre Premier', 'klshfckjdsqh', 'vdsfvdsvdsvdsvdsvdsv\r\ndsv\r\nds\r\nvdsvs', 'default.png', '2019-12-08 00:18:00', 1, 0),
+(6, 'Titre deuxieme', 'klshfckjdsqh', 'vdsfvdsvdsvdsvdsvdsv\r\ndsv\r\nds\r\nvdsvs', 'default.png', '2019-12-09 00:18:00', 1, 1),
+(7, 'Titre troisieme', 'klshfckjdsqh', 'vdsfvdsvdsvdsvdsvdsv\r\ndsv\r\nds\r\nvdsvs', 'default.png', '2019-12-09 15:18:00', 0, 0),
+(8, 'Quatrieme titre', 'klshfckjdsqh', 'sdvsdsdvsdvdsvs', 'default.png', '2019-12-12 08:13:20', 0, 0),
+(9, 'Cinquième titre', 'klshfckjdsqh', 'sdvsdsdvsdvdsvs', 'default.png', '2019-12-12 13:27:20', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -58,19 +61,19 @@ INSERT INTO `article` (`id`, `title`, `legende`, `description`, `image`, `date`,
 DROP TABLE IF EXISTS `graph`;
 CREATE TABLE IF NOT EXISTS `graph` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'graph.png',
+  `title` varchar(255) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `image` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'graph.png',
   `posted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `graph`
 --
 
 INSERT INTO `graph` (`id`, `title`, `description`, `image`, `posted`) VALUES
-(1, 'Prudent', '<p>jkdsqhcisqdhcjdshbcpsdhcpjkdshc^dsh</p>\r\n<p>dsvdsv</p>\r\n<p>dsvdsvdsvsdv</p>\r\nco^dshc^dsojhc^dsjco^dsjcssdcdscdscds', 'Prudent.png', 1),
+(1, 'Prudent', 'Légende de l\'image', 'Prudent.png', 1),
 (2, 'Equilibré', 'Légende de l\'image', 'Equilibre.png', 1),
 (3, 'Dynamique', 'Légende de l\'image', 'Dynamique.png', 1),
 (4, 'Autre', 'Légende de l\'image', 'Performance.png', 1);
@@ -89,7 +92,20 @@ CREATE TABLE IF NOT EXISTS `page` (
   `image` varchar(255) COLLATE utf8_bin NOT NULL,
   `posted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `page`
+--
+
+INSERT INTO `page` (`id`, `title`, `description`, `image`, `posted`) VALUES
+(1, 'Nos Valeurs', 'Je suis la descrtiption de la page nos valeurs bla bla bla', 'default.png', 1),
+(2, 'Adresse', 'Je suis la descrtiption de la page adresse bla bla bla', 'default.png', 1),
+(3, 'Conseil patrimonial', 'Je suis la descrtiption de la page conseil patrimonial  bla bla bla', 'default.png', 1),
+(4, 'Conseil en investissement financier', 'Je suis la descrtiption de la page Conseil en investissement financier  bla bla bla', 'default.png', 1),
+(5, 'Conseil en investissement immobilier', 'Je suis la descrtiption de la page Conseil en investissement immobilier  bla bla bla', 'default.png', 1),
+(6, 'Autres solutions d\'investissement', 'Je suis la descrtiption de la page Autres solutions d’investissement  bla bla bla', 'default.png', 1),
+(7, 'Contact', 'Je suis la descrtiption de la page Contact  bla bla bla', 'default.png', 1);
 
 -- --------------------------------------------------------
 
@@ -150,7 +166,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mail` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`) VALUES
+(1, 'Bertrand', 'Millet', 'bertrand.millet69@orange.fr', 'ade2bec3ea5fc482c9ece1ec73ef93c8');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
