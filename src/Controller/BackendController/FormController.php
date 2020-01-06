@@ -23,7 +23,7 @@ class FormController
      */
     public function formAction(array $data): void
     {
-        if (!empty($data['session']['mdp'])) {
+        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
             $this->view->renderer('Backend', 'form', null);
         }
         $this->error->errorAction();

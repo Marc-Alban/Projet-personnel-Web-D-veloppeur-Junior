@@ -1,12 +1,23 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title>Page not found</title> {% endblock %}
-{% block title %} 404 : ERROR {% endblock %}
+{% block title %}{% if data.errors %} Erreur connexion: {% else %} 404 : ERROR{%
+endif %}{% endblock %}
 
 {% block content %}
+{% if data.errors %}
+<!-- Erreur strat -->
+{% for error in data.errors %}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{% endfor %}
+<!-- Erreur end -->
+{% else %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h2 class="display-4">Oops : 404 Not Found </h2>
         <p class="lead"> Sorry, an error has occured, Requested page not found!</p>
     </div>
 </div>
+{% endif %}
 {% endblock %}

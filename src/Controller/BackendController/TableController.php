@@ -23,7 +23,7 @@ class TableController
      */
     public function TableAction(array $data): void
     {
-        if (!empty($data['session']['mdp'])) {
+        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
             $this->view->renderer('Backend', 'table', null);
         }
         $this->error->errorAction();

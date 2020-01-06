@@ -23,7 +23,7 @@ class PartenaireController
      */
     public function PartenaireAction(array $data): void
     {
-        if (!empty($data['session']['mdp'])) {
+        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
             $this->view->renderer('Backend', 'partenaire', null);
         }
         $this->error->errorAction();

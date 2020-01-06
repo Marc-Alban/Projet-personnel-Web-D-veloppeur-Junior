@@ -23,7 +23,7 @@ class GraphController
      */
     public function graphAction(array $data): void
     {
-        if (!empty($data['session']['mdp'])) {
+        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
             $this->view->renderer('Backend', 'graph', null);
         }
         $this->error->errorAction();

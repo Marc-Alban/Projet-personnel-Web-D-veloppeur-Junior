@@ -16,7 +16,7 @@ class NewPasswordController
     {
         $this->view = new View();
         $this->error = new HomeController();
-        $this->$userManager = new UserManager();
+        $this->userManager = new UserManager();
     }
 
     /**
@@ -26,7 +26,7 @@ class NewPasswordController
      */
     public function NewPasswordAction(array $data): void
     {
-        if (!empty($data['session']['mdp'])) {
+        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
             $this->userManager->verifMail();
             $this->view->renderer('Frontend', 'new', null);
         }

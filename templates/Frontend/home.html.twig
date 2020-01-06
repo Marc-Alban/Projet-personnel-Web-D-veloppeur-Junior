@@ -1,28 +1,17 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title> Accueil </title> {% endblock %}
 {% block title %}
-{% if data.errors %} Erreur : Connexion
-{% else  %}
 Performance selon les profils de risque:
-{% endif %}
 {% endblock %}
 
 {% block content %}
-{% if data.errors %}
-<!-- Erreur strat -->
-{% for error in data.errors %}
-<div class="alert alert-danger" role="alert">
-    {{error}}
-</div>
-{% endfor %}
-<!-- Erreur end -->
-{% endif %}
 
 <!-- Grid row -->
 <div class="row">
     <!-- Grid column -->
     {% for graph in data.graph %}
-    <div class="col-lg-6 col-md-8 col-sm-12 mb-4" data-toggle="modal" data-target="#graph{{graph.id}}">
+    <div class="col-lg-6 col-md-8 col-sm-12 mb-4" data-toggle="modal"
+        data-target="#graph{{graph.id}}">
         <div class="card">
             <!-- Card -->
             <!-- Card image -->
@@ -50,13 +39,15 @@ Performance selon les profils de risque:
 {% for graph in data.graph %}
 
 <!-- Modal -->
-<div class="modal fade" id="graph{{graph.id}}" tabindex="-1" role="dialog" aria-labelledby="modaleLabel"
+<div class="modal fade" id="graph{{graph.id}}" tabindex="-1" role="dialog"
+    aria-labelledby="modaleLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modaleLabel">{{graph.title}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -67,7 +58,8 @@ Performance selon les profils de risque:
                     {{graph.description}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>

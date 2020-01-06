@@ -30,7 +30,7 @@ class HomeController
      *
      * @return void
      */
-    public function HomeAction(array $data): void
+    public function HomeAction(): void
     {
         $graph = $this->HomeManager->listeGraph();
         $this->view->renderer('Frontend', 'home', ['graph' => $graph]);

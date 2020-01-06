@@ -24,7 +24,7 @@ class UserController
      */
     public function UserAction(array $data): void
     {
-        if (!empty($data['session']['mdp'])) {
+        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
             $this->view->renderer('Backend', 'loginUser', null);
         }
         $this->error->errorAction();

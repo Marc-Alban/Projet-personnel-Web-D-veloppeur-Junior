@@ -4,6 +4,8 @@ namespace App\Tools;
 
 class Token
 {
+
+    private $token;
 /**
  * Créer les tokens
  *
@@ -24,8 +26,11 @@ class Token
      */
     public function compareTokens(array $data): ?string
     {
-        if (!isset($this->token) || !isset($data['post']['token']) || empty($this->token['token']) || empty($data['post']['token']) || $this->token['token'] !== $data['post']['token']) {
-            return "Formulaire incorrect";
+        if (empty($data['session']['token']) || empty($data['post']['token'])) {
+            return "Formulaire incorrect *";
+        }
+        if ($data['session']['token'] !== $data['post']['token']) {
+            return "Formulaire incorrect **";
         }
         return null;
     }

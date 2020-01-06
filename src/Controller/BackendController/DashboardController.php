@@ -29,22 +29,21 @@ class DashboardController
      *
      * @return void
      */
-    public function DashboardAction(array &$data): void
+    public function DashboardAction(array $data): void
     {
         $action = $data['get']['action'] ?? null;
         $errors = $data['session']['errors'] ?? null;
 
         if (isset($data['post']['connexion']) && $action === "connexion") {
-            $passwordBdd = $this->user->getPass();
-            $pseudo = $data["post"]['pseudo'] ?? null;
             $userBdd = $this->user->getUsers();
+            $pseudo = $data["post"]['pseudo'] ?? null;
+            $passwordBdd = $this->user->getPass();
             $password = $data["post"]['password'] ?? null;
-
             if (empty($pseudo)) {
                 $errors["pseudoEmpty"] = 'Veuillez mettre un pseudo ';
-            } elseif (empty($password)) {
+            } else if (empty($password)) {
                 $errors["passwordEmpty"] = 'Veuillez mettre un mot de passe';
-            } elseif (!password_verify($password, $passwordBdd) || $userBdd === null) {
+            } else if (!password_verify($password, $passwordBdd) || $userBdd === null) {
                 $errors['identifiants'] = 'Identifiants Incorrect';
             }
 
@@ -53,16 +52,14 @@ class DashboardController
             if ($data['session']['token'] === null || is_null($data['session']['token'])) {
                 unset($data['session']['token']);
             }
-            var_dump($data);
 
             if (empty($errors)) {
                 $data['session']['user'] = $pseudo;
                 $data['session']['mdp'] = $password;
                 $nbArticle = count($this->article->listePost());
                 $this->view->renderer('Backend', 'dashboard', ['nbArticle' => $nbArticle]);
-            } else if (isset($errors) && !empty($errors)) {
-                $this->view->renderer('Frontend', 'home', ['errors' => $errors]);
             }
         }
+        $this->view->renderer('Frontend', '404', ['errors' => $errors]);
     }
 }
