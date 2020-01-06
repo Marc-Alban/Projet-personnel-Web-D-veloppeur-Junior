@@ -2,16 +2,19 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
+use App\Controller\FrontendController\HomeController;
 use App\View\View;
 
 class UserController
 {
 
     private $view;
+    private $error;
 
     public function __construct()
     {
         $this->view = new View();
+        $this->error = new HomeController();
     }
 
     /**
@@ -19,8 +22,11 @@ class UserController
      *
      * @return void
      */
-    public function UserAction(): void
+    public function UserAction(array $data): void
     {
-        $this->view->renderer('Backend', 'loginUser', null);
+        if (!empty($data['session']['mdp'])) {
+            $this->view->renderer('Backend', 'loginUser', null);
+        }
+        $this->error->errorAction();
     }
 }

@@ -32,7 +32,6 @@ class ArticleController
     public function ArticleAction(array $data): void
     {
         $id = $data['get']['id'] ?? null;
-
         $post = $this->articleManager->article((int) $id, $data);
         $this->view->renderer('Frontend', 'article', ['post' => $post]);
     }

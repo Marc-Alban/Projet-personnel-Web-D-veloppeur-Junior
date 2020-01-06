@@ -2,15 +2,18 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
+use App\Controller\FrontendController\HomeController;
 use App\View\View;
 
 class GraphController
 {
     private $view;
+    private $error;
 
     public function __construct()
     {
         $this->view = new View();
+        $this->error = new HomeController();
     }
 
     /**
@@ -18,8 +21,11 @@ class GraphController
      *
      * @return void
      */
-    public function graphAction(): void
+    public function graphAction(array $data): void
     {
-        $this->view->renderer('Backend', 'graph', null);
+        if (!empty($data['session']['mdp'])) {
+            $this->view->renderer('Backend', 'graph', null);
+        }
+        $this->error->errorAction();
     }
 }
