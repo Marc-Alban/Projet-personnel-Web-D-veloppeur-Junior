@@ -88,35 +88,47 @@ class ContactManager
             unset($data["session"]["succes"]);
 
             if (empty($sujet) && empty($tel) && empty($mail) && empty($message) && empty($nomPrenom) && empty($cp)) {
-                return $errors['allEmpty'] = "Veuillez remplir le formulaire";
-            } else if (empty($mail)) {
-                return $errors['mailEmpty'] = "Veuillez mettre un mail";
-            } else if (empty($sujet)) {
-                return $errors['subject'] = "Veuillez mettre un sujet";
-            } else if (empty($tel)) {
-                return $errors['telEmpty'] = "Veuillez mettre un téléphone";
-            } else if (empty($message)) {
-                return $errors['message'] = "Veuillez mettre un message";
+                $errors['allEmpty'] = "Veuillez remplir le formulaire";
             } else if (empty($nomPrenom)) {
-                return $errors['name'] = "Veuillez mettre un nom ou un prénom";
-            } else if (empty($liste)) {
-                return $errors['name'] = "Veuillez choisir une option";
+                $errors['name'] = "Veuillez mettre un nom ou un prénom";
+            } else if (empty($mail)) {
+                $errors['mailEmpty'] = "Veuillez mettre un mail";
+            } else if (empty($tel)) {
+                $errors['telEmpty'] = "Veuillez mettre un téléphone";
             } else if (empty($cp)) {
-                return $errors['name'] = "Veuillez mettre un code postal";
+                $errors['cp'] = "Veuillez mettre un code postal";
+            } else if (empty($sujet)) {
+                $errors['subject'] = "Veuillez mettre un sujet";
+            } else if (empty($message)) {
+                $errors['message'] = "Veuillez mettre un message";
+            } else if (empty($liste)) {
+                $errors['liste'] = "Veuillez choisir une option";
             }
 
-            if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mail)) {
-                return $errors['mailWrong'] = "L'adresse eMail est invalide";
+            if (!empty($mail)) {
+                if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mail)) {
+                    $errors['mailWrong'] = "L'adresse e-mail est invalide";
+                }
             }
 
-            if (!preg_match(" #^[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}?$# ", $tel)) {
-                return $errors['telWrong'] = "Le téléphone est invalide";
+            if (!empty($tel)) {
+                if (!preg_match(" #^[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}[-/ ]?[0-9]{2}?$# ", $tel)) {
+                    $errors['telWrong'] = "Le téléphone est invalide";
+                }
+            }
+
+            if (!empty($cp)) {
+                if (!preg_match('#^[0-9]{5}$#', $cp)) {
+                    $errors['cpWrong'] = "Le Code postale est invalide";
+                }
             }
 
             if (empty($errors)) {
                 $this->sendMail($data);
                 return $succes['message'] = 'Message envoyé';
             }
+
+            return $errors;
 
         }
     }

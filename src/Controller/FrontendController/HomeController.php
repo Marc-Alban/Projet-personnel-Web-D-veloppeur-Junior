@@ -32,12 +32,8 @@ class HomeController
      */
     public function HomeAction(array $data): void
     {
-        if (isset($data["get"]["action"]) && !empty($data["get"]["action"])) {
-            $this->dashbordController->DashboardAction($data);
-        } else if (!isset($data["get"]["action"]) && empty($data["get"]["action"])) {
-            $graph = $this->HomeManager->listeGraph();
-            $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
-        }
+        $graph = $this->HomeManager->listeGraph();
+        $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
     }
 
     /**

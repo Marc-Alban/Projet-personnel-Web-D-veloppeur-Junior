@@ -4,6 +4,7 @@ namespace App\Controller\BackendController;
 
 use App\Model\Manager\ArticleManager;
 use App\Model\Manager\UserManager;
+use App\Tools\Token;
 use App\View\View;
 
 class DashboardController
@@ -12,14 +13,14 @@ class DashboardController
     private $view;
     private $article;
     private $user;
-    //private $home;
+    private $token;
 
     public function __construct()
     {
         $this->view = new View();
         $this->article = new ArticleManager();
         $this->user = new UserManager();
-        //$this->home = new HomeController();
+        $this->token = new Token();
     }
 
     /**
@@ -47,8 +48,7 @@ class DashboardController
                 $errors['identifiants'] = 'Identifiants Incorrect';
             }
 
-            $this->user->createSessionToken($data['session']);
-            $errors["token"] = $this->user->compareTokens($data);
+            $errors["token"] = $this->token->compareTokens($data);
 
             if ($data['session']['token'] === null || is_null($data['session']['token'])) {
                 unset($data['session']['token']);
@@ -64,6 +64,5 @@ class DashboardController
                 $this->view->renderer('Frontend', 'home', ['errors' => $errors]);
             }
         }
-        //$this->home->errorAction();
     }
 }

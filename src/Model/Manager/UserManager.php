@@ -8,7 +8,7 @@ class UserManager
 {
 
     private $userRepository;
-    private $password;
+    private $user;
     private $token = null;
 
     /**
@@ -18,33 +18,7 @@ class UserManager
     public function __construct()
     {
         $this->userRepository = new UserRepository();
-    }
-
-    /**
-     * Créer les tokens
-     *
-     * @param [type] $session
-     * @return void
-     */
-    public function createSessionToken(array &$data): void
-    {
-        $this->token = bin2hex(random_bytes(32));
-        $data['token'] = $this->token;
-    }
-
-    /**
-     * Compare les tokens
-     *
-     * @param [type] $session
-     * @param array $data
-     * @return string|null
-     */
-    public function compareTokens(array $data): ?string
-    {
-        if (!isset($this->token) || !isset($data['post']['token']) || empty($this->token['token']) || empty($data['post']['token']) || $this->token['token'] !== $data['post']['token']) {
-            return "Formulaire incorrect";
-        }
-        return null;
+        $this->user = $this->userRepository->readUser();
     }
 
     /**
@@ -52,10 +26,9 @@ class UserManager
      *
      * @return string
      */
-    public function getUsers()
+    public function getUsers(): string
     {
-        $user = $this->userRepository->readUser();
-        return $user->getName();
+        return $this->user->getName();
     }
 
     /**
@@ -63,10 +36,19 @@ class UserManager
      *
      * @return string
      */
-    public function getPass()
+    public function getPass(): string
     {
-        $pass = $this->userRepository->readUser();
-        return $pass->getPassword();
+        return $this->user->getPassword();
+    }
+
+    /**
+     * Verifie si le mail existe bien en bdd
+     *
+     * @return void
+     */
+    private function verifMail()
+    {
+        $mail = $this->user->getMail();
     }
 
 }

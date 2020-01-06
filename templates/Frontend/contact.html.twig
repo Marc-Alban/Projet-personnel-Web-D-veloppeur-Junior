@@ -14,11 +14,13 @@
 {% endif %}
 
 {% if data.donnees %}
+{% for errors in data.donnees %}
 <!-- Erreur strat -->
 <div class="alert alert-danger" role="alert">
-    {{data.donnees}}
+    {{errors}}
 </div>
 <!-- Erreur end -->
+{% endfor %}
 {% endif %}
 
 <!-- Material form contact -->
