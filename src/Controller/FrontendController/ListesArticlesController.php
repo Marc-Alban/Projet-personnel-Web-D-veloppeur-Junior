@@ -28,10 +28,11 @@ class ListesArticlesController
      *
      * @return void
      */
-    public function ListesArticlesAction(): void
+    public function ListesArticlesAction(array $data): void
     {
-        $listeArticle = $this->articleManager->listePost();
         $lastArticle = $this->articleManager->lastArticle();
+        $listeArticle = $this->articleManager->pagination($data);
+
         $this->view->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
     }
 

@@ -2,7 +2,6 @@
 declare (strict_types = 1);
 namespace App\Controller\FrontendController;
 
-use App\Controller\BackendController\DashboardController;
 use App\Model\Manager\HomeManager;
 use App\View\View;
 
@@ -21,7 +20,6 @@ class HomeController
     public function __construct()
     {
         $this->HomeManager = new HomeManager();
-        $this->dashbordController = new DashboardController;
         $this->view = new View();
     }
 

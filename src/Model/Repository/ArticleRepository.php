@@ -98,10 +98,10 @@ class ArticleRepository
      * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
      * false si une erreur survient
      */
-    public function readAll(): array
+    public function readAll($firstOfPage, $perPage): array
     {
 
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY date DESC");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY id LIMIT $firstOfPage,$perPage");
 
         $articles = [];
 
@@ -214,4 +214,22 @@ class ArticleRepository
             return $this->update($article);
         }
     }
+
+/**
+ * Renvoie le nombre d'article stocké dans la table article et s'il
+ * n'y a rien alors renvoie null
+ *
+ * @return string|null
+ */
+    public function countArticle(): ?string
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article");
+        $req = $this->pdoStatement->fetch();
+        if ($req) {
+            $total = $req['total'];
+            return $total;
+        }
+        return null;
+    }
+
 }

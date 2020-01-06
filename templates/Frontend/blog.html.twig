@@ -68,7 +68,28 @@
         {% endfor %}
     </div>
     <!-- Grid row -->
+    <!-- Pagination -->
+    <nav aria-label="Page navigation mr-auto">
+        <ul class="pagination pg-blue">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            {% for i in 0..session.nbPage %}
+            <li class="page-item"><a class="page-link">{{ loop.index }}</a></li>
+            {% endfor %}
 
+            <li class="page-item">
+                <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- EndPagination -->
 </section>
 <!-- Section: Blog v.2 -->
 {% endblock %}

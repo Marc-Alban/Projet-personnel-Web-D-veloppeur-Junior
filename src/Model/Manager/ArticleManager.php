@@ -2,12 +2,14 @@
 declare (strict_types = 1);
 namespace App\Model\Manager;
 
+use App\Controller\FrontendController\HomeController;
 use App\Model\Repository\ArticleRepository;
 
 class ArticleManager
 {
 
     private $articleRepository;
+    private $error;
 
     /**
      * Fonction constructeur, instanciation de l'articlerepository
@@ -16,17 +18,7 @@ class ArticleManager
     public function __construct()
     {
         $this->articleRepository = new ArticleRepository();
-    }
-
-    /**
-     * Retourne la liste des articles dans un tableau
-     * ou false si il n'y a rien
-     *
-     * @return array
-     */
-    public function listePost(): array
-    {
-        return $this->articleRepository->readAll();
+        $this->error = new HomeController();
     }
 
     /**
@@ -54,6 +46,27 @@ class ArticleManager
             return $this->articleRepository->last();
         }
         return $this->articleRepository->read((int) $id);
+    }
+
+    public function pagination(array $data)
+    {
+        $perPage = 5;
+        $total = $this->articleRepository->countArticle();
+        $nbPage = ceil($total / $perPage);
+        $current = $data['get']['pp'] ?? null;
+
+        if (!isset($data['get']['pp']) || empty($data['get']['pp']) || ctype_digit($data['get']['pp']) === false) {
+            $current = 1;
+        } else if ($data['get']['pp'] > $nbPage) {
+            $current = $nbPage;
+        }
+
+        $firstOfPage = ($current - 1) * $perPage;
+
+        $data['session']['current'] = $current;
+        $data['session']['nbPage'] = $nbPage;
+
+        return $this->articleRepository->readAll($firstOfPage, $perPage);
     }
 
 }
