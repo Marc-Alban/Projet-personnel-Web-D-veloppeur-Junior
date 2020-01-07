@@ -48,7 +48,14 @@ class ArticleManager
         return $this->articleRepository->read((int) $id);
     }
 
-    public function pagination(array $data)
+    /**
+     * Méthode pour la pagination des articles
+     * sur la page blog
+     *
+     * @param array $data
+     * @return array
+     */
+    public function pagination(array $data): array
     {
         $perPage = 5;
         $total = $this->articleRepository->countArticle();
@@ -69,6 +76,23 @@ class ArticleManager
             'articles' => $this->articleRepository->readAll($firstOfPage, $perPage),
         ];
 
+    }
+
+    /**
+     * Retourne les articles en fonctions
+     *
+     * @param array $data
+     * @return array
+     */
+    public function classification(array $data): array
+    {
+        $years = $data['get']['years'] ?? null;
+
+        if (!isset($data['get']['years']) || empty($data['get']['years']) || ctype_digit($data['get']['years']) === false) {
+            $years = 2019;
+        }
+
+        return $this->articleRepository->articleDate($years);
     }
 
 }

@@ -232,4 +232,17 @@ class ArticleRepository
         return null;
     }
 
+    /**
+     * Retourne les articles en fonctions de la date données dans l'url
+     * sinon  si c'est false ou null alors par défaults ce sera 2019
+     *
+     * @param [type] $years
+     * @return array
+     */
+    public function articleDate($years): array
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE YEAR( date ) = $years");
+        return $this->pdoStatement->fetchAll();
+    }
+
 }

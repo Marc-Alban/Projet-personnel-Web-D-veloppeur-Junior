@@ -31,10 +31,19 @@ class ListesArticlesController
     public function ListesArticlesAction(array $data): void
     {
         $lastArticle = $this->articleManager->lastArticle();
-        $listeArticle = $this->articleManager->pagination($data);
-        // var_dump($listeArticle);
-        // die();
-        $this->view->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
+        if (isset($data['get']['years']) && !empty($data['get']['years'])) {
+            $classement = $this->articleManager->classification($data);
+        } else if (isset($data['get']['pp']) || !empty($data['get']['pp']) || empty($data['get']['pp'])) {
+            $listeArticle = $this->articleManager->pagination($data);
+        }
+
+        $tabData = [
+            'listeArticle' => $listeArticle ?? null,
+            'lastArticle' => $lastArticle,
+            'classement' => $classement ?? null,
+        ];
+
+        $this->view->renderer('Frontend', 'blog', $tabData);
     }
 
 }
