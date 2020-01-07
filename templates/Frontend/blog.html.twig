@@ -36,7 +36,7 @@
     <!-- Grid row -->
     <div class="row">
         <!-- Grid column -->
-        {% for listeArticle in data.listeArticle %}
+        {% for listeArticle in data.listeArticle.articles %}
         <div class="col-lg-6 col-md-8 col-sm-12 mb-4">
             <!-- Card -->
             <div class="card">
@@ -71,18 +71,40 @@
     <!-- Pagination -->
     <nav aria-label="Page navigation mr-auto">
         <ul class="pagination pg-blue">
-            <li class="page-item">
-                <a class="page-link" aria-label="Previous">
+            <li class="page-item
+                {% if data.listeArticle.current == 1 %}
+                disabled
+                {% endif %}">
+                <a class="page-link" aria-label="Previous" href="{% if
+                    data.listeArticle.current != 1 %}
+                    ?p=listesArticles&pp={{data.listeArticle.current - 1 }}
+                    {% else %}
+                    ?p=listesArticles&pp={{data.listeArticle.current }}
+                    {% endif %}">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
-            {% for i in 0..session.nbPage %}
-            <li class="page-item"><a class="page-link">{{ loop.index }}</a></li>
+            {% for i in 1..data.listeArticle.nbPage %}
+            {% if i == data.listeArticle.current %}
+            <li class="page-item active"><a class="page-link"
+                    href="?p=listesArticles&pp={{ i }}">{{ i }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link"
+                    href="?p=listesArticles&pp={{ i }}">{{ i }}</a></li>
+            {% endif %}
             {% endfor %}
 
-            <li class="page-item">
-                <a class="page-link" aria-label="Next">
+            <li class="page-item
+                {% if data.listeArticle.current == data.listeArticle.nbPage %}
+                disabled
+                {% endif %}">
+                <a class="page-link" aria-label="Next" href="{% if
+                    data.listeArticle.current != data.listeArticle.nbPage %}
+                    ?p=listesArticles&pp={{data.listeArticle.current + 1 }}
+                    {% else %}
+                    ?p=listesArticles&pp={{data.listeArticle.current }}
+                    {% endif %}">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>

@@ -63,10 +63,12 @@ class ArticleManager
 
         $firstOfPage = ($current - 1) * $perPage;
 
-        $data['session']['current'] = $current;
-        $data['session']['nbPage'] = $nbPage;
+        return $tabArticle = [
+            'current' => (int) $current,
+            'nbPage' => (int) $nbPage,
+            'articles' => $this->articleRepository->readAll($firstOfPage, $perPage),
+        ];
 
-        return $this->articleRepository->readAll($firstOfPage, $perPage);
     }
 
 }

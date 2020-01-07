@@ -32,7 +32,8 @@ class ListesArticlesController
     {
         $lastArticle = $this->articleManager->lastArticle();
         $listeArticle = $this->articleManager->pagination($data);
-
+        // var_dump($listeArticle);
+        // die();
         $this->view->renderer('Frontend', 'blog', ['listeArticle' => $listeArticle, 'lastArticle' => $lastArticle]);
     }
 
