@@ -26,11 +26,12 @@ class NewPasswordController
      */
     public function NewPasswordAction(array $data): void
     {
-        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
-            $this->userManager->verifMail();
-            $this->view->renderer('Frontend', 'new', null);
+        if ($this->userManager->verifUser($data) === null || !isset($data['get']['token'])) {
+            header('Location: http://3bigbangbourse.fr/?p=lostPassword');
         }
-        $this->error->errorAction();
+        $newPass = $this->userManager->changeMdp($data);
+        $this->view->renderer('Frontend', 'new', ['newPass' => $newPass]);
+        // $this->error->errorAction();
     }
 
 }

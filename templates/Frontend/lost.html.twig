@@ -2,6 +2,23 @@
 {% block head %} <title>Mot de passe oublié</title> {% endblock %}
 {% block title %}Mot de passe oublié{% endblock %}
 {% block content %}
+{% if data.mailExist.message %}
+{% for succes in data.mailExist %}
+<!-- Success strat -->
+<div class="alert alert-primary" role="alert">
+    {{succes}}
+</div>
+<!-- Success end -->
+{% endfor %}
+{% else %}
+{% for errors in data.mailExist %}
+<!-- Erreur strat -->
+<div class="alert alert-danger" role="alert">
+    {{errors}}
+</div>
+<!-- Erreur end -->
+{% endfor %}
+{% endif %}
 <!-- Card -->
 <div class="card">
 
@@ -9,17 +26,19 @@
     <div class="card-body">
 
         <!-- Material form register -->
-        <form>
+        <form action="/?p=lostPassword" method="POST">
 
             <!-- Material input email -->
             <div class="md-form">
                 <i class="fa fa-envelope prefix grey-text"></i>
-                <input type="email" id="materialFormCardEmailEx" class="form-control">
-                <label for="materialFormCardEmailEx" class="font-weight-light">Entrer votre e-mail (requis)</label>
+                <input type="email" id="materialFormCardEmailEx"
+                    name="mail" class="form-control">
+                <label for="materialFormCardEmailEx" class="font-weight-light">Entrer
+                    votre e-mail (requis)</label>
             </div>
 
             <div class="text-center py-4 mt-3">
-                <button class="btn btn-red" type="submit">Envoyer</button>
+                <input name="submit" class="btn btn-red" type="submit" value="Envoyer"></input>
             </div>
         </form>
         <!-- Material form register -->

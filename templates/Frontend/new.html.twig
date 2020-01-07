@@ -2,7 +2,23 @@
 {% block head %} <title>Nouveau mot de passe</title> {% endblock %}
 {% block title %}Nouveau mot de passe{% endblock %}
 {% block content %}
-<form>
+{% if data.newPass.message %}
+{% for succes in data.newPass %}
+<!-- Success strat -->
+<div class="alert alert-primary" role="alert">
+    {{succes}}
+</div>
+<!-- Success end -->
+{% endfor %}
+{% else %}
+{% for errors in data.newPass %}
+<!-- Erreur strat -->
+<div class="alert alert-danger" role="alert">
+    {{errors}}
+</div>
+<!-- Erreur end -->
+{% endfor %}
+{% endif %}
     <!-- Card -->
     <div class="card">
 
@@ -10,35 +26,43 @@
         <div class="card-body">
 
             <!-- Material form register -->
-            <form>
+            <form action="/?p=newPassword&token=$2y$10$ajIKTxXSMEp38un2Dp611OPm7Q.Y.gs3umrW8pT/y.KIpMtrE2yaS"
+                method="POST">
 
                 <!-- Material input password -->
                 <div class="md-form">
                     <i class="fa fa-lock prefix grey-text"></i>
-                    <input type="password" id="materialFormCardPasswordEx" class="form-control">
-                    <label for="materialFormCardPasswordEx" class="font-weight-light">Entrer votre mot de passe
+                    <input type="password" id="materialFormCardPasswordEx"
+                        name="newMdp"
+                        class="form-control">
+                    <label for="materialFormCardPasswordEx"
+                        class="font-weight-light">Entrer votre mot de passe
                         (requis)</label>
                 </div>
 
                 <!-- Material input email -->
                 <div class="md-form">
                     <i class="fa fa-exclamation-triangle prefix grey-text"></i>
-                    <input type="password" id="materialFormCardConfirmEx" class="form-control">
-                    <label for="materialFormCardConfirmEx" class="font-weight-light">Confirmation mot de passe
+                    <input type="password" id="materialFormCardConfirmEx"
+                        name="newMdpConf"
+                        class="form-control">
+                    <label for="materialFormCardConfirmEx"
+                        class="font-weight-light">Confirmation mot de passe
                         (requis)</label>
                 </div>
 
                 <div class="text-center py-4 mt-3">
-                    <button class="btn btn-red" type="submit">Envoyer</button>
-                </div>
-            </form>
-            <!-- Material form register -->
-
-        </div>
-        <!-- Card body -->
+                    <input class="btn btn-red" name="submit" type="submit"
+                        value="Envoyer"></input>
+            </div>
+        </form>
+        <!-- Material form register -->
 
     </div>
-    <!-- Card -->
+    <!-- Card body -->
+
+</div>
+<!-- Card -->
 
 
-    {% endblock %}
+{% endblock %}
