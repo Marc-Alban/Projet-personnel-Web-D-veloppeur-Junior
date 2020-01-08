@@ -62,31 +62,27 @@ class UserManager
      *
      * @return void
      */
-    private function message(): void
+    private function message($mdp): void
     {
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= 'From: BmFinance "\n"';
-        $headers .= 'Content-Type:text/html; charset="UTF-8"' . "\n";
+        $headers = "MIME-Version: 1.0\r\n..";
+        $headers .= 'From: BmFinance';
+        $headers .= "Content-type: text/html; charset= utf8\n..";
         $headers .= 'Content-Transfer-Encoding: 8bit';
 
-        $message = '
-<html>
+        $message = "
+        <html>
+            <head>
+                <title> Renouvellement du mot de passe </title>
+            </head>
+            <body>
+                Bonjour,
 
-<head>
-    <title> Renouvellement du mot de passe </title>
-</head>
-
-<body>
-Bonjour,
-
-Vous avez cliqué sur le lien pour renouveler son mot de passe:
-Cliquer sur le lien dessous pour modifier votre mot de passe.
-http://3bigbangbourse.fr/?p=newPassword&token=$2y$10$ajIKTxXSMEp38un2Dp611OPm7Q.Y.gs3umrW8pT/y.KIpMtrE2yaS
-
-</body>
-
-</html>
-';
+                Vous avez cliqué sur le lien pour renouveler son mot de passe:
+                Cliquer sur le lien dessous pour modifier votre mot de passe.
+                <a href='http://3bigbangbourse.fr/?p=newPassword&token=' . $mdp . '>
+            </body>
+        </html>
+        ";
 
         mail("millet.marcalban@gmail.com", "Page LostPassword - BmFinance.com", $message, $headers);
 
@@ -102,7 +98,7 @@ http://3bigbangbourse.fr/?p=newPassword&token=$2y$10$ajIKTxXSMEp38un2Dp611OPm7Q.
     {
 
         $mail = $data['post']['mail'] ?? null;
-
+        $mdp = $this->user->getPassword();
         $succes = $data["session"]["succes"] ?? null;
         unset($data["session"]["succes"]);
         $error = $data['session']['error'] ?? null;
@@ -120,7 +116,7 @@ http://3bigbangbourse.fr/?p=newPassword&token=$2y$10$ajIKTxXSMEp38un2Dp611OPm7Q.
 
             if (empty($error)) {
                 if ($this->checkBddMail($mail) === true) {
-                    $this->message();
+                    $this->message($mdp);
                     $succes['message'] = 'Vous allez recevoir un mail de réinitialisation de mot de passe';
 
                 }
@@ -172,6 +168,7 @@ http://3bigbangbourse.fr/?p=newPassword&token=$2y$10$ajIKTxXSMEp38un2Dp611OPm7Q.
                 $error['mdpWrong'] = 'Mot de passe non conforme, doit avoir minuscule-majuscule-chiffres-caractères';
             }
             if (empty($error)) {
+                $this->userRepository->changeMdp($data);
                 $succes['message'] = 'Mot de passe changé';
                 return $succes;
             }

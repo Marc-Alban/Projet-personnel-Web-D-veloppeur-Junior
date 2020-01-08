@@ -9,14 +9,14 @@ use App\View\View;
 class NewPasswordController
 {
     private $view;
-    private $error;
     private $userManager;
+    private $home;
 
     public function __construct()
     {
         $this->view = new View();
-        $this->error = new HomeController();
         $this->userManager = new UserManager();
+        $this->home = new HomeController();
     }
 
     /**
@@ -26,12 +26,20 @@ class NewPasswordController
      */
     public function NewPasswordAction(array $data): void
     {
-        if ($this->userManager->verifUser($data) === null || !isset($data['get']['token'])) {
-            header('Location: http://3bigbangbourse.fr/?p=lostPassword');
+        if (!isset($data['get']['token']) || empty($data['get']['token'])) {
+            $this->home->errorAction();
         }
-        $newPass = $this->userManager->changeMdp($data);
-        $this->view->renderer('Frontend', 'new', ['newPass' => $newPass]);
-        // $this->error->errorAction();
+
+        if (isset($data['get']['token']) || !empty($data['get']['token'])) {
+            if ($this->userManager->verifUser($data) === null) {
+                header('Location: http://3bigbangbourse.fr/?p=lostPassword');
+            }
+
+            $newPass = $this->userManager->changeMdp($data);
+            $this->view->renderer('Frontend', 'new', ['newPass' => $newPass]);
+
+        }
+
     }
 
 }

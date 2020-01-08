@@ -35,4 +35,20 @@ class UserRepository
         return $user;
     }
 
+    /**
+     * Methode qui change de mot de passe
+     *
+     */
+    public function changeMdp($data)
+    {
+        $password = password_hash($data['post']['newMdp'], PASSWORD_DEFAULT);
+        $data['session']['mdp'] = $password;
+        $e = [
+            ':pass' => $password,
+        ];
+
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET password = :pass");
+        $this->pdoStatement->execute($e);
+    }
+
 }
