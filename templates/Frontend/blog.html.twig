@@ -24,10 +24,12 @@
             <div class="card-body">
                 <!-- Text -->
                 <p class="card-text font-weight-bold text-justify">{{
-                    data.lastArticle.description }}</p>
+                    data.lastArticle.description|raw|convert_encoding("utf-8",
+                    "ISO-8859-1") }}</p>
                 <!-- Title -->
                 <h4 class="card-subtitle text-left">{{
-                    data.lastArticle.title }}</h4>
+                    data.lastArticle.title|raw|convert_encoding("utf-8",
+                    "ISO-8859-1") }}</h4>
                 <!-- Post data -->
                 <p class="text-left">{{ data.lastArticle.date|date('d/m/Y') }}</p>
             </div>
@@ -55,10 +57,12 @@
                 <div class="card-body">
                     <!-- Text -->
                     <p class="card-text font-weight-bold text-justify">{{
-                        listeArticle.description }}</p>
+                        listeArticle.description|raw|convert_encoding("utf-8",
+                        "ISO-8859-1") }}</p>
                     <!-- Title -->
                     <h4 class="card-subtitle text-left">{{
-                        listeArticle.title }}</h4>
+                        listeArticle.title|raw|convert_encoding("utf-8",
+                        "ISO-8859-1") }}</h4>
                     <!-- Post data -->
                     <p class="text-left">{{ listeArticle.date|date('d/m/Y') }}</p>
                 </div>
@@ -136,10 +140,12 @@
                 <div class="card-body">
                     <!-- Text -->
                     <p class="card-text font-weight-bold text-justify">{{
-                        classementYear.description }}</p>
+                        classementYear.description|raw|convert_encoding("utf-8",
+                        "ISO-8859-1") }}</p>
                     <!-- Title -->
                     <h4 class="card-subtitle text-left">{{
-                        classementYear.title }}</h4>
+                        classementYear.title|raw|convert_encoding("utf-8",
+                        "ISO-8859-1") }}</h4>
                     <!-- Post data -->
                     <p class="text-left">{{ classementYear.date|date('d/m/Y') }}</p>
                 </div>

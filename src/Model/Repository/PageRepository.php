@@ -32,7 +32,7 @@ class PageRepository
         $this->pdoStatement = $this->pdo->query("SELECT * FROM page WHERE posted = 1");
         $pages = [];
         while ($page = $this->pdoStatement->fetchObject(Page::class)) {
-            $title = strtolower(str_replace(' ', '', $page->getTitle()));
+            $title = strtolower(str_replace(' ', '', $page->getTitlePage()));
             if ($data === $title) {
                 $pages[] = $page;
             }

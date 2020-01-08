@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 class Article
 {
     private $id;
+    private $titleArticle;
     private $title;
     private $legende;
     private $description;
@@ -177,4 +178,23 @@ class Article
         return $this->id;
     }
 
+    /**
+     * Get the value of titleArticle
+     */
+    public function getTitleArticle()
+    {
+        return $this->titleArticle;
+    }
+
+    /**
+     * Set the value of titleArticle
+     *
+     * @return  self
+     */
+    public function setTitleArticle($titleArticle)
+    {
+        $this->titleArticle = $titleArticle;
+
+        return $this;
+    }
 }

@@ -122,7 +122,7 @@ class ArticleRepository
      */
     private function create(Article $article): bool
     {
-        $this->pdoStatement = $this->pdo->prepare('INSERT INTO article VALUES (null, :title, :legende,  :description, :image, :date, :posted, :lastArticle)');
+        $this->pdoStatement = $this->pdo->prepare('INSERT INTO article VALUES (null, :titleArticle, :title, :legende,  :description, :image, :date, :posted, :lastArticle)');
 
         //liaison paramètres
         $this->bind($article);
@@ -148,7 +148,7 @@ class ArticleRepository
      */
     private function update(Article $article): bool
     {
-        $this->pdoStatement = $this->pdo->prepare('UPDATE article SET null, title=:title, legende=:legende, description=:description, image=:image, date=:date, posted=:posted, lastArticle=:lastArticle WHERE id=:id LIMIT 1');
+        $this->pdoStatement = $this->pdo->prepare('UPDATE article SET null, titleArticle=:titleArticle, title=:title, legende=:legende, description=:description, image=:image, date=:date, posted=:posted, lastArticle=:lastArticle WHERE id=:id LIMIT 1');
 
         //liaison paramètres
         $this->bind($article);
@@ -166,6 +166,7 @@ class ArticleRepository
      */
     private function bind(Article $article): void
     {
+        $this->pdoStatement->bindValue(':titleArticle', $article->getTitleArticle(), PDO::PARAM_STR);
         $this->pdoStatement->bindValue(':title', $article->getTitle(), PDO::PARAM_STR);
         $this->pdoStatement->bindValue(':legende', $article->getLegende(), PDO::PARAM_STR);
         $this->pdoStatement->bindValue(':description', $article->getDescription());

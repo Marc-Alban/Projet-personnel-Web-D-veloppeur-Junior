@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 class Page
 {
     private $id;
+    private $titlePage;
     private $title;
     private $description;
     private $image;
@@ -103,4 +104,23 @@ class Page
         return $this->id;
     }
 
+    /**
+     * Get the value of titlePage
+     */
+    public function getTitlePage(): string
+    {
+        return $this->titlePage;
+    }
+
+    /**
+     * Set the value of titlePage
+     *
+     * @return  self
+     */
+    public function setTitlePage($titlePage): self
+    {
+        $this->titlePage = $titlePage;
+
+        return $this;
+    }
 }

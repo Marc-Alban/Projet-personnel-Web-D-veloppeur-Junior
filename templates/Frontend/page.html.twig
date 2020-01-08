@@ -1,6 +1,14 @@
 {% extends 'Frontend/layout.html.twig' %}
-{% block head %} {% for pages in data.page %} <title> {{pages.title}} </title> {% endfor %} {% endblock %}
-{% block title %} {% for pages in data.page %} {{pages.title}} {% endfor %}{% endblock %}
+{% block head %} {% for pages in data.page %} <title>
+    {{pages.titlePage|raw|convert_encoding("utf-8",
+    "ISO-8859-1")}}
+</title>
+{% endfor %} {% endblock %}
+{% block title %} {% for pages in data.page %} Page:
+{{pages.titlePage|raw|convert_encoding("utf-8",
+"ISO-8859-1")}} {% endfor
+%}{%
+endblock %}
 {% block content %}
 
 <!--Grid column-->
@@ -8,19 +16,22 @@
     <!--Card-->
     <div class="card hoverable pb-5 mx-md-3">
         <!-- img -->
-        <img class="jarallax-img" src="https://mdbootstrap.com/img/Photos/Others/city7.jpg" alt="">
+        <img class="jarallax-img"
+            src="https://mdbootstrap.com/img/Photos/Others/city7.jpg" alt="">
         <!-- /img -->
         <div class="card-body">
             <div class="container">
                 {% for pages in data.page %}
                 <!--Section heading-->
                 <h1 class="text-left h1 pt-4 mb-3">
-                    <strong>{{pages.title}}</strong>
+                    <strong>{{pages.title|raw|convert_encoding("utf-8",
+                        "ISO-8859-1")}}</strong>
                 </h1>
                 <!-- Grid column -->
                 <div class="row mt-3">
 
-                    <p class="dark-grey-text article">{{pages.description}}</p>
+                    <p class="dark-grey-text article">{{pages.description|raw|convert_encoding("utf-8",
+                        "ISO-8859-1")}}</p>
 
                 </div>
                 <!--/Grid colomn -->

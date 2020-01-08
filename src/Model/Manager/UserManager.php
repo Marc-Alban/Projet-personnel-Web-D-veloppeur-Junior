@@ -65,8 +65,8 @@ class UserManager
     private function message($mdp): void
     {
         $headers = "MIME-Version: 1.0\r\n..";
-        $headers .= 'From: BmFinance';
-        $headers .= "Content-type: text/html; charset= utf8\n..";
+        $headers = 'From: From: BmFinance' . "\n";
+        $headers .= 'Content-Type: text/html; charset="UTF-8"' . "\n";
         $headers .= 'Content-Transfer-Encoding: 8bit';
 
         $message = "
@@ -75,11 +75,11 @@ class UserManager
                 <title> Renouvellement du mot de passe </title>
             </head>
             <body>
-                Bonjour,
+                <p>Bonjour,</p>
 
-                Vous avez cliqué sur le lien pour renouveler son mot de passe:
-                Cliquer sur le lien dessous pour modifier votre mot de passe.
-                <a href='http://3bigbangbourse.fr/?p=newPassword&token=' . $mdp . '>
+                <p>Vous avez cliqué sur le lien pour renouveler son mot de passe:</p>
+                <p>Cliquer sur le lien dessous pour modifier votre mot de passe.</p>
+                <p><a href='http://3bigbangbourse.fr/?p=newPassword&token=" . $mdp . "'>http://3bigbangbourse.fr/?p=newPassword&token=' . $mdp . '</a></p>
             </body>
         </html>
         ";
