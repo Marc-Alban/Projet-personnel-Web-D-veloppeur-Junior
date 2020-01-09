@@ -96,15 +96,14 @@ class UserManager
      */
     public function verifMail(array $data): ?array
     {
+        $mail = $this->getMail($data);
         $token = password_hash(random_bytes(5), PASSWORD_DEFAULT);
         $succes = $data["session"]["succes"] ?? null;
         unset($data["session"]["succes"]);
         $error = $data['session']['error'] ?? null;
         unset($data["session"]["error"]);
 
-        if (isset($data['post']['submit']) && !empty($data['post']['submit'])) {
-
-            $mail = $this->getMail($data);
+        if (isset($data['post']['submit'])) {
 
             if (empty($mail) || !isset($mail)) {
                 $error['empty'] = "Veuillez mettre un mail";
@@ -129,10 +128,31 @@ class UserManager
         return null;
     }
 
+    /**
+     * Récupère le mail dans le formulaire sinon renvoie null si rien
+     *
+     * @param array $data
+     * @return string|null
+     */
     public function getMail(array $data): ?string
     {
-        $mail = htmlentities(strip_tags(trim($data['post']['mail']))) ?? null;
-        return $mail;
+        if (isset($data['post']['submit'])) {
+            $mail = htmlentities(strip_tags(trim($data['post']['mail']))) ?? null;
+            return $mail;
+        }
+        return null;
+    }
+
+    /**
+     * Récupère le token dans la bdd
+     *
+     * @param array $data
+     * @return string
+     */
+    public function token(): string
+    {
+        $token = $this->user->readUser()->getToken();
+        return $token;
     }
 
     /**
@@ -154,7 +174,13 @@ class UserManager
         return true;
     }
 
-    public function changeMdp(array $data)
+    /**
+     * Methode pour changer le mot de passe
+     *
+     * @param array $data
+     * @return array|null
+     */
+    public function changeMdp(array $data): ?array
     {
         $submit = $data['post']['submit'] ?? null;
         if ($submit) {
@@ -182,6 +208,7 @@ class UserManager
             }
             return $error;
         }
+        return null;
     }
 
 }

@@ -44,7 +44,7 @@ class UserRepository
     public function insertToken($token): void
     {
         $e = [
-            ':pass' => $token,
+            ':token' => $token,
         ];
         $this->pdoStatement = $this->pdo->prepare("UPDATE user SET token = :token");
         $this->pdoStatement->execute($e);
@@ -60,12 +60,12 @@ class UserRepository
      */
     public function changeActive(string $bool): void
     {
-        $active = '';
+        $active = null;
 
         if ($bool === 'false') {
-            $active = false;
+            $active = 0;
         } else if ($bool === 'true') {
-            $active === true;
+            $active = 1;
         }
 
         $e = [

@@ -36,7 +36,8 @@ class NewPasswordController
             }
 
             $newPass = $this->userManager->changeMdp($data);
-            $this->view->renderer('Frontend', 'new', ['newPass' => $newPass]);
+            $token = $this->userManager->token();
+            $this->view->renderer('Frontend', 'new', ['newPass' => $newPass, 'token' => $token]);
 
         }
 

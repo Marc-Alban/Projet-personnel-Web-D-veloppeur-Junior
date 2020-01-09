@@ -2,7 +2,6 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
-use App\Model\Manager\ArticleManager;
 use App\Model\Manager\UserManager;
 use App\Tools\Token;
 use App\View\View;
@@ -11,14 +10,14 @@ class DashboardController
 {
 
     private $view;
-    private $article;
+    //private $article;
     private $user;
     private $token;
 
     public function __construct()
     {
         $this->view = new View();
-        $this->article = new ArticleManager();
+        //$this->article = new ArticleManager();
         $this->user = new UserManager();
         $this->token = new Token();
     }
