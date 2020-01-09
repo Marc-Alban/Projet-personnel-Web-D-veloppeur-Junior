@@ -5,16 +5,18 @@
 {% block title %}Contactez-nous{% endblock %}
 {% block content %}
 
-{% if data.donnees.succes.message %}
+{% if data.listeMessage.send %}
+{% for success in data.listeMessage %}
 <!-- Success strat -->
 <div class="alert alert-primary" role="alert">
-    {{data.donnees}}
+    {{success}}
 </div>
+{% endfor %}
 <!-- Success end -->
 {% endif %}
 
-{% if data.donnees %}
-{% for errors in data.donnees %}
+{% if data.listeMessage.tab %}
+{% for errors in data.listeMessage.tab %}
 <!-- Erreur strat -->
 <div class="alert alert-danger" role="alert">
     {{errors}}
@@ -22,7 +24,6 @@
 <!-- Erreur end -->
 {% endfor %}
 {% endif %}
-
 <!-- Material form contact -->
 <div class="card">
     <!--Card content-->
@@ -36,8 +37,9 @@
                 <div class="col">
                     <!-- Name -->
                     <div class="md-form">
-                        <input type="text" name="name_lastname"
-                            id="materialContactFormName" class="form-control">
+                        <input type="text" name="nameLastname"
+                            id="materialContactFormName" class="form-control"
+                            value="{{data.donnee.namelastname}}">
                         <label for="materialContactFormName">Nom et prénom
                             (requis)</label>
                     </div>
@@ -47,7 +49,7 @@
                     <div class="md-form">
                         <input type="email" name="mail"
                             id="materialContactFormEmail" class="form-control"
-                            value="">
+                            value="{{data.donnee.mail}}">
                         <label for="materialContactFormEmail">E-mail (requis)</label>
                     </div>
                 </div>
@@ -59,7 +61,8 @@
                     <div class="md-form">
                         <input type="tel" name="telephone"
                             id="materialRegisterFormPhone" class="form-control"
-                            aria-describedby="materialRegisterFormPhoneHelpBlock">
+                            aria-describedby="materialRegisterFormPhoneHelpBlock"
+                            value="{{data.donnee.tel}}">
                         <label for="materialRegisterFormPhone">Téléphone
                             (requis)</label>
                     </div>
@@ -68,7 +71,8 @@
                     <!-- CP -->
                     <div class="md-form">
                         <input type="text" name="codepostal"
-                            id="materialContactCP" class="form-control">
+                            id="materialContactCP" class="form-control"
+                            value="{{data.donnee.cp}}">
                         <label for="materialContactFormCP">Code postal (requis)</label>
                     </div>
                 </div>
@@ -122,8 +126,9 @@
             <!-- Subject -->
             <div class="md-form">
                 <input type="text" name="sujet" id="materialContactSubject"
-                    class="form-control">
-                <label for="materialContactFormSubject">Sujet (requis)</label>
+                    class="form-control" value="{{data.donnee.sujet}}">
+                <label for="materialContactFormSubject">Sujet (requis)
+                </label>
             </div>
 
             <!--Message-->
@@ -149,5 +154,4 @@
 
 </div>
 <!-- Material form contact -->
-
 {% endblock %}

@@ -24,8 +24,14 @@ class ContactController
      */
     public function ContactAction(?array $data): void
     {
-        $datas = $this->manager->verifMail($data);
-        $this->view->renderer('Frontend', 'contact', ["donnees" => $datas]);
+        $message = $this->manager->verifMail($data);
+        $getData = $this->manager->getData($data);
+        $tabData = [
+            'listeMessage' => $message,
+            'donnee' => $getData,
+        ];
+        $this->view->renderer('Frontend', 'contact', $tabData);
+
     }
 
 }

@@ -48,8 +48,6 @@ class DashboardController
             }
 
             $errors["token"] = $this->token->compareTokens($data);
-            // var_dump("2", $data['session']['token'], $_SESSION['token']);
-            // die();
             if ($data['session']['token'] === null || is_null($data['session']['token'])) {
                 unset($data['session']['token']);
             }

@@ -17,7 +17,7 @@ class UserManager
     public function __construct()
     {
         $this->userRepository = new UserRepository();
-        $this->user = $this->userRepository->readUser();
+        $this->user = $this->userRepository;
     }
 
     /**
@@ -27,7 +27,7 @@ class UserManager
      */
     public function getUsers(): string
     {
-        return $this->user->getName();
+        return $this->user->readUser()->getName();
     }
 
     /**
@@ -37,7 +37,7 @@ class UserManager
      */
     public function getPass(): string
     {
-        return $this->user->getPassword();
+        return $this->user->readUser()->getPassword();
     }
 
     /**
@@ -48,7 +48,7 @@ class UserManager
      */
     private function checkBddMail($mailPost): bool
     {
-        $mail = $this->user->getMail();
+        $mail = $this->user->readUser()->getMail();
         if ($mail !== $mailPost) {
             return false;
         }
@@ -62,7 +62,7 @@ class UserManager
      *
      * @return void
      */
-    private function message($mdp): void
+    private function message($token): void
     {
         $headers = "MIME-Version: 1.0\r\n..";
         $headers = 'From: From: BmFinance' . "\n";
@@ -79,7 +79,7 @@ class UserManager
 
                 <p>Vous avez cliqué sur le lien pour renouveler son mot de passe:</p>
                 <p>Cliquer sur le lien dessous pour modifier votre mot de passe.</p>
-                <p><a href='http://3bigbangbourse.fr/?p=newPassword&token=" . $mdp . "'>http://3bigbangbourse.fr/?p=newPassword&token=' . $mdp . '</a></p>
+                <p><a href='http://3bigbangbourse.fr/?p=newPassword&token=" . $token . "'>http://3bigbangbourse.fr/?p=newPassword&token=' . $token . '</a></p>
             </body>
         </html>
         ";
@@ -96,15 +96,15 @@ class UserManager
      */
     public function verifMail(array $data): ?array
     {
-
-        $mail = $data['post']['mail'] ?? null;
-        $mdp = $this->user->getPassword();
+        $token = password_hash(random_bytes(5), PASSWORD_DEFAULT);
         $succes = $data["session"]["succes"] ?? null;
         unset($data["session"]["succes"]);
         $error = $data['session']['error'] ?? null;
         unset($data["session"]["error"]);
 
         if (isset($data['post']['submit']) && !empty($data['post']['submit'])) {
+
+            $mail = $this->getMail($data);
 
             if (empty($mail) || !isset($mail)) {
                 $error['empty'] = "Veuillez mettre un mail";
@@ -116,9 +116,10 @@ class UserManager
 
             if (empty($error)) {
                 if ($this->checkBddMail($mail) === true) {
-                    $this->message($mdp);
+                    $this->message($token);
+                    $this->user->insertToken($token);
+                    $this->user->changeActive('false');
                     $succes['message'] = 'Vous allez recevoir un mail de réinitialisation de mot de passe';
-
                 }
                 return $succes;
             }
@@ -126,6 +127,12 @@ class UserManager
         }
 
         return null;
+    }
+
+    public function getMail(array $data): ?string
+    {
+        $mail = htmlentities(strip_tags(trim($data['post']['mail']))) ?? null;
+        return $mail;
     }
 
     /**
@@ -137,10 +144,10 @@ class UserManager
      */
     public function verifUser(array $data): ?bool
     {
-        $mdpUrl = trim(htmlentities($data['get']['token'])) ?? null;
-        $mdp = $this->user->getPassword();
+        $tokenUrl = trim(htmlentities($data['get']['token'])) ?? null;
+        $token = $this->user->readUser()->getToken();
 
-        if ($mdpUrl === null || empty($mdpUrl) || $mdp !== $mdpUrl) {
+        if ($tokenUrl === null || empty($tokenUrl) || $token !== $tokenUrl) {
             return null;
         }
 
@@ -168,7 +175,8 @@ class UserManager
                 $error['mdpWrong'] = 'Mot de passe non conforme, doit avoir minuscule-majuscule-chiffres-caractères';
             }
             if (empty($error)) {
-                $this->userRepository->changeMdp($data);
+                $this->userRepository->changePass($data);
+                $this->userRepository->changeActive('true');
                 $succes['message'] = 'Mot de passe changé';
                 return $succes;
             }

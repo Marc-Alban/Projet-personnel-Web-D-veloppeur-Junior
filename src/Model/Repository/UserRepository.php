@@ -36,10 +36,50 @@ class UserRepository
     }
 
     /**
+     * Methode pour inserer un token dans la bdd lors de la modification de mot de passe
+     *
+     * @param [type] $token
+     * @return void
+     */
+    public function insertToken($token): void
+    {
+        $e = [
+            ':pass' => $token,
+        ];
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET token = :token");
+        $this->pdoStatement->execute($e);
+    }
+
+    /**
+     * Methode qui permet de modifier la valeur active en bdd
+     * true = 1
+     * false = 0
+     *
+     * @param string $bool
+     * @return void
+     */
+    public function changeActive(string $bool): void
+    {
+        $active = '';
+
+        if ($bool === 'false') {
+            $active = false;
+        } else if ($bool === 'true') {
+            $active === true;
+        }
+
+        $e = [
+            ':active' => $active,
+        ];
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET active = :active");
+        $this->pdoStatement->execute($e);
+    }
+
+    /**
      * Methode qui change de mot de passe
      *
      */
-    public function changeMdp($data)
+    public function changePass(array $data): void
     {
         $password = password_hash($data['post']['newMdp'], PASSWORD_DEFAULT);
         $data['session']['mdp'] = $password;

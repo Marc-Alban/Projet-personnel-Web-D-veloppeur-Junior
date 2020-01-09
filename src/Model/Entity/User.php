@@ -9,6 +9,8 @@ class User
     private $lastName;
     private $mail;
     private $password;
+    private $token;
+    private $active;
 
     /**
      * Get the value of password
@@ -103,4 +105,43 @@ class User
         return $this->id;
     }
 
+    /**
+     * Get the value of active
+     */
+    public function getActive(): string
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the value of active
+     *
+     * @return  self
+     */
+    public function setActive($active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of token
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set the value of token
+     *
+     * @return  self
+     */
+    public function setToken($token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
 }
