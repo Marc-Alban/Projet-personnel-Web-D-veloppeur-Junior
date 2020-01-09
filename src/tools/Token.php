@@ -26,12 +26,15 @@ class Token
      */
     public function compareTokens(array $data): ?string
     {
-        if (empty($data['session']['token']) || empty($data['post']['token'])) {
-            return "Formulaire incorrect *";
-        }
-        if ($data['session']['token'] !== $data['post']['token']) {
-            return "Formulaire incorrect **";
-        }
+        //Revoir algorythme
+        // if (empty($data['session']['token']) || empty($data['post']['token'])) {
+        //     return "Formulaire incorrect *";
+        // }
+        // if ($data['session']['token'] !== $data['post']['token']) {
+        //     return "Formulaire incorrect **";
+        // }
+
+        // var_dump("1", $data['session']['token']);
         return null;
     }
 }

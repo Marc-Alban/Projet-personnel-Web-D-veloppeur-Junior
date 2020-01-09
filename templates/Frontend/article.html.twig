@@ -1,8 +1,7 @@
 {% extends 'Frontend/layout.html.twig' %}
 {% block head %} <title>
     {% for post in data %}
-    {{ post.title|raw|convert_encoding("utf-8",
-    "ISO-8859-1") }}
+    {{ post.title}}
 </title>
 {% endfor %}
 {% endblock %}
@@ -10,8 +9,7 @@
 <div class="d-flex flex-row">
     <div class="w-100">
         {% for post in data %}{{
-        post.titleArticle|raw|convert_encoding("utf-8",
-        "ISO-8859-1") }}{% endfor %}
+        post.titleArticle }}{% endfor %}
 
     </div>
     <div class="flex-shrink-1 col-md-4">
@@ -35,8 +33,7 @@
                 <!--Section heading-->
                 <h1 class="text-left h1 pt-4 mb-3">
                     <strong>
-                        {{ post.title|raw|convert_encoding("utf-8",
-                        "ISO-8859-1") }}
+                        {{ post.title }}
                     </strong>
                 </h1>
                 <div class="row">
@@ -44,8 +41,7 @@
                         justify-content-left">
                         <p class="font-small grey-text mb-0"><i class="far
                                 fa-clock-o dark-grey-text"></i>
-                            {{ post.legende|raw|convert_encoding("utf-8",
-                            "ISO-8859-1") }}</p>
+                            {{ post.legende }}</p>
                         <p class="font-small grey-text mb-0"><i class="far
                                 fa-clock-o dark-grey-text"></i>
                             {{ post.date }}</p>
@@ -56,8 +52,7 @@
                 <div class="row mt-3">
 
                     <p class="dark-grey-text article">{{
-                        post.description|raw|convert_encoding("utf-8",
-                        "ISO-8859-1") }}</p>
+                        post.description }}</p>
                 </div>
                 <!--/Grid colomn -->
             </div>

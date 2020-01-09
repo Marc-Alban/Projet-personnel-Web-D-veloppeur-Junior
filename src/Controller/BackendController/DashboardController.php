@@ -48,7 +48,8 @@ class DashboardController
             }
 
             $errors["token"] = $this->token->compareTokens($data);
-
+            // var_dump("2", $data['session']['token'], $_SESSION['token']);
+            // die();
             if ($data['session']['token'] === null || is_null($data['session']['token'])) {
                 unset($data['session']['token']);
             }
@@ -56,8 +57,8 @@ class DashboardController
             if (empty($errors)) {
                 $data['session']['user'] = $pseudo;
                 $data['session']['mdp'] = $password;
-                $nbArticle = count($this->article->listePost());
-                $this->view->renderer('Backend', 'dashboard', ['nbArticle' => $nbArticle]);
+                //$nbArticle = count($this->article->listePost());['nbArticle' => $nbArticle]
+                $this->view->renderer('Backend', 'dashboard', null);
             }
         }
         $this->view->renderer('Frontend', '404', ['errors' => $errors]);

@@ -23,16 +23,15 @@ Performance selon les profils de risque:
             <!-- Card content -->
             <div class="card-body">
                 <!-- Title -->
-                {% autoescape %}
+
                 <h4 class="card-subtitle text-left">{{
-                    graph.title|raw|convert_encoding("utf-8", "ISO-8859-1") }}</h4>
-                {% endautoescape %}
+                    graph.title }}</h4>
+
                 <!-- Text -->
-                {% autoescape %}
+
                 <p class="card-text font-weight-bold text-justify">
-                    {{graph.description|raw|convert_encoding("utf-8",
-                    "ISO-8859-1")}}</p>
-                {% endautoescape %}
+                    {{graph.description}}</p>
+
 
             </div>
         </div>
@@ -52,8 +51,7 @@ Performance selon les profils de risque:
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modaleLabel">{{graph.title|raw|convert_encoding("utf-8",
-                    "ISO-8859-1")}}</h5>
+                <h5 class="modal-title" id="modaleLabel">{{graph.title}}</h5>
                 <button type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -63,8 +61,7 @@ Performance selon les profils de risque:
                 <img class="card-img-top" src="img/{{graph.image}}" alt="Card
                     image cap">
                 <p class="card-text font-weight-bold text-justify">
-                    {{graph.description|raw|convert_encoding("utf-8",
-                    "ISO-8859-1")}}</p>
+                    {{graph.description}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"

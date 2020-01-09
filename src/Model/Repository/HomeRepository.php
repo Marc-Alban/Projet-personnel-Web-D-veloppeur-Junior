@@ -35,7 +35,8 @@ class HomeRepository
         while ($graph = $this->pdoStatement->fetchObject(Graph::class)) {
             $graphs[] = $graph;
         }
-
+        // var_dump($graphs);
+        // die();
         return $graphs;
     }
 
