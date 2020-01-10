@@ -24,17 +24,17 @@ class Token
      * @param array $data
      * @return string|null
      */
-    public function compareTokens(array $data): ?string
+    public function compareTokens(array $data): ?array
     {
+        var_dump($data['session']['token'], $data['post']['token']);
+        die();
         //Revoir algorythme
-        // if (empty($data['session']['token']) || empty($data['post']['token'])) {
-        //     return "Formulaire incorrect *";
-        // }
-        // if ($data['session']['token'] !== $data['post']['token']) {
-        //     return "Formulaire incorrect **";
-        // }
+        if (empty($data['session']['token']) || empty($data['post']['token'])) {
+            $errors['formOne'] = "Formulaire incorrect *";
+        } else if ($data['session']['token'] !== $data['post']['token']) {
+            $errors['formTwo'] = "Formulaire incorrect **";
+        }
 
-        // var_dump("1", $data['session']['token']);
-        return null;
+        return $errors;
     }
 }

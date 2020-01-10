@@ -78,9 +78,10 @@
                     <form action="/?p=dashboard&action=connexion" method="POST">
                       <!--Body-->
                       <div class="md-form mb-5">
+
                         <input type="text" id="Form-User" name="pseudo"
                           class="form-control
-                          validate">
+                          validate" value="{{session.user}}">
                         <label data-error="wrong" data-success="right"
                           for="Form-User">Identifiant</label>
                       </div>

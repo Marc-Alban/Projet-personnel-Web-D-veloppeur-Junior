@@ -2,24 +2,21 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
-use App\Model\Manager\UserManager;
-use App\Tools\Token;
+use App\Model\Manager\ArticleManager;
+use App\Model\Manager\DashboardManager;
 use App\View\View;
 
 class DashboardController
 {
-
     private $view;
-    //private $article;
-    private $user;
-    private $token;
+    private $DashboardManager;
+    private $article;
 
     public function __construct()
     {
         $this->view = new View();
-        //$this->article = new ArticleManager();
-        $this->user = new UserManager();
-        $this->token = new Token();
+        $this->article = new ArticleManager();
+        $this->DashboardManager = new DashboardManager();
     }
 
     /**
@@ -28,36 +25,16 @@ class DashboardController
      *
      * @return void
      */
-    public function DashboardAction(array $data): void
+    public function DashboardAction(array $data)
     {
-        $action = $data['get']['action'] ?? null;
-        $errors = $data['session']['errors'] ?? null;
+        $DashboardManager = $this->DashboardManager->dashboardControl($data);
 
-        if (isset($data['post']['connexion']) && $action === "connexion") {
-            $userBdd = $this->user->getUsers();
-            $pseudo = $data["post"]['pseudo'] ?? null;
-            $passwordBdd = $this->user->getPass();
-            $password = $data["post"]['password'] ?? null;
-            if (empty($pseudo)) {
-                $errors["pseudoEmpty"] = 'Veuillez mettre un pseudo ';
-            } else if (empty($password)) {
-                $errors["passwordEmpty"] = 'Veuillez mettre un mot de passe';
-            } else if (!password_verify($password, $passwordBdd) || $userBdd === null) {
-                $errors['identifiants'] = 'Identifiants Incorrect';
-            }
-
-            $errors["token"] = $this->token->compareTokens($data);
-            if ($data['session']['token'] === null || is_null($data['session']['token'])) {
-                unset($data['session']['token']);
-            }
-
-            if (empty($errors)) {
-                $data['session']['user'] = $pseudo;
-                $data['session']['mdp'] = $password;
-                //$nbArticle = count($this->article->listePost());['nbArticle' => $nbArticle]
-                $this->view->renderer('Backend', 'dashboard', null);
-            }
+        if ($DashboardManager === null || !isset($DashboardManager['succes'])) {
+            $this->view->renderer('Frontend', '404', ['errors' => $DashboardManager]);
+            exit();
         }
-        $this->view->renderer('Frontend', '404', ['errors' => $errors]);
+
+        $countArticle = $this->article->nbPost();
+        $this->view->renderer('Backend', 'dashboard', ['countArticle' => $countArticle]);
     }
 }

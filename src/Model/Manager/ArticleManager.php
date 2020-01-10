@@ -2,14 +2,12 @@
 declare (strict_types = 1);
 namespace App\Model\Manager;
 
-use App\Controller\FrontendController\HomeController;
 use App\Model\Repository\ArticleRepository;
 
 class ArticleManager
 {
 
     private $articleRepository;
-    private $error;
 
     /**
      * Fonction constructeur, instanciation de l'articlerepository
@@ -18,7 +16,6 @@ class ArticleManager
     public function __construct()
     {
         $this->articleRepository = new ArticleRepository();
-        $this->error = new HomeController();
     }
 
     /**
@@ -93,6 +90,18 @@ class ArticleManager
         }
 
         return $this->articleRepository->articleDate($years);
+    }
+
+    /**
+     * Retourne le nombre d'article en bdd
+     *
+     * @return integer
+     */
+    public function nbPost(): int
+    {
+        $nbArticle = $this->articleRepository->countArticle();
+        return (int) $nbArticle;
+
     }
 
 }

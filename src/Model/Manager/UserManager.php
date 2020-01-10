@@ -165,7 +165,7 @@ class UserManager
     public function verifUser(array $data): ?bool
     {
         $tokenUrl = trim(htmlentities($data['get']['token'])) ?? null;
-        $token = $this->user->readUser()->getToken();
+        $token = $this->token();
 
         if ($tokenUrl === null || empty($tokenUrl) || $token !== $tokenUrl) {
             return null;

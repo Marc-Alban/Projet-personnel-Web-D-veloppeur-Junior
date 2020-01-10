@@ -2,18 +2,19 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
-use App\Controller\FrontendController\HomeController;
+use App\Tools\Token;
 use App\View\View;
 
 class FormController
 {
     private $view;
-    private $error;
+    private $Token;
 
     public function __construct()
     {
         $this->view = new View();
-        $this->error = new HomeController();
+        $this->Token = new Token();
+
     }
 
     /**
@@ -23,9 +24,12 @@ class FormController
      */
     public function formAction(array $data): void
     {
-        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
-            $this->view->renderer('Backend', 'form', null);
-        }
-        $this->error->errorAction();
+        // $tokenSession = $data['session']['token'];
+        // if (empty($tokenSession) || !isset($tokenSession) || $tokenSession !== ) {
+        //     $this->view->renderer('Frontend', '404', null);
+        //     exit();
+        // }
+
+        $this->view->renderer('Backend', 'form', null);
     }
 }
