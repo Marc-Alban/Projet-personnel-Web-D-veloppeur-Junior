@@ -48,7 +48,7 @@ class UserManager
      */
     private function checkBddMail($mailPost): bool
     {
-        $mail = $this->user->readUser()->getMail();
+        $mail = $this->user->readUser()->getMailUser();
         if ($mail !== $mailPost) {
             return false;
         }
@@ -96,7 +96,7 @@ class UserManager
      */
     public function verifMail(array $data): ?array
     {
-        $mail = $this->getMail($data);
+        $mail = $this->getMailUser($data);
         $token = password_hash(random_bytes(5), PASSWORD_DEFAULT);
         $succes = $data["session"]["succes"] ?? null;
         unset($data["session"]["succes"]);
@@ -134,13 +134,23 @@ class UserManager
      * @param array $data
      * @return string|null
      */
-    public function getMail(array $data): ?string
+    public function getMailUser(array $data): ?string
     {
         if (isset($data['post']['submit'])) {
             $mail = htmlentities(strip_tags(trim($data['post']['mail']))) ?? null;
             return $mail;
         }
         return null;
+    }
+
+    /**
+     * Retourna la vauler active dans le controller
+     *
+     * @return void
+     */
+    public function getActiveUser()
+    {
+        return $this->user->getActiveValue();
     }
 
     /**

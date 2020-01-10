@@ -25,7 +25,7 @@ class LostPasswordController
     public function LostPasswordAction(array $data): void
     {
         $mailExist = $this->userManager->verifMail($data);
-        $dataMail = $this->userManager->getMail($data);
+        $dataMail = $this->userManager->getMailUser($data);
         $tabData = [
             'mailExist' => $mailExist,
             'dataMail' => $dataMail,

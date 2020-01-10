@@ -108,10 +108,8 @@ class User
     /**
      * Get the value of active
      */
-    public function getActive(): ?string
+    public function getActive(): string
     {
-        // var_dump($this->active);
-        // die();
         return $this->active;
     }
 

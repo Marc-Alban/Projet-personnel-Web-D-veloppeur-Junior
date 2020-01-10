@@ -76,6 +76,16 @@ class UserRepository
     }
 
     /**
+     * Retourne la valeur active dans le manager
+     */
+    public function getActiveValue()
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT active FROM user");
+        $req = $this->pdoStatement->fetch();
+        return $req;
+    }
+
+    /**
      * Methode qui change de mot de passe
      *
      */

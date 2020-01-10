@@ -31,7 +31,7 @@ class DashboardManager
 
         if (isset($data['post']['connexion']) && $action === "connexion") {
 
-            $active = $this->user->getActive();
+            $active = $this->userManager->getActiveUser();
             $userBdd = $this->userManager->getUsers();
             $pseudo = $data["post"]['pseudo'] ?? null;
             $passwordBdd = $this->userManager->getPass();
@@ -49,7 +49,7 @@ class DashboardManager
                 $errors['passWrong'] = 'Identifiant Incorrect--';
             }
 
-            if ($active === "0") {
+            if ($active[0] === "0") {
                 $errors['compteWrong'] = "Compte desactivé";
             }
 
