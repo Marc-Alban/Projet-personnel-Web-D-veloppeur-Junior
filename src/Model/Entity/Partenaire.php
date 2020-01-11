@@ -6,7 +6,7 @@ class Partenaire
 {
     private $id;
     private $legende;
-    private $lien;
+    private $image;
     private $posted;
 
     /**
@@ -31,22 +31,21 @@ class Partenaire
     }
 
     /**
-     * Get the value of lien
-     * @return string
+     * Get the value of image
      */
-    public function getLien(): string
+    public function getImage(): string
     {
-        return $this->lien;
+        return $this->image;
     }
 
     /**
-     * Set the value of lien
+     * Set the value of image
      *
      * @return  self
      */
-    public function setLien(String $lien): self
+    public function setImage(string $image): self
     {
-        $this->lien = $lien;
+        $this->image = $image;
 
         return $this;
     }

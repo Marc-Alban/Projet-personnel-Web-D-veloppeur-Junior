@@ -23,9 +23,9 @@ class GraphController
      */
     public function graphAction(array $data): void
     {
-        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
-            $this->view->renderer('Backend', 'graph', null);
-        }
-        $this->error->errorAction();
+        // if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
+        //     $this->error->errorAction();
+        // }
+        $this->view->renderer('Backend', 'graph', null);
     }
 }

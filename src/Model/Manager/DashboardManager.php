@@ -56,7 +56,7 @@ class DashboardManager
                 $errors['compteWrong'] = "Compte desactivé";
             }
 
-            $errors['token'] = $this->token->compareTokens($data);
+            // $errors['token'] = $this->token->compareTokens($data);
 
             if (empty($errors)) {
                 $succes['succes'] = "Connexion réussie";

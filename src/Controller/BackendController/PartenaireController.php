@@ -2,7 +2,8 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
-use App\Controller\FrontendController\HomeController;
+// use App\Controller\FrontendController\HomeController;
+
 use App\View\View;
 
 class PartenaireController
@@ -13,7 +14,7 @@ class PartenaireController
     public function __construct()
     {
         $this->view = new View();
-        $this->error = new HomeController();
+        // $this->error = new HomeController();
     }
 
     /**
@@ -23,9 +24,10 @@ class PartenaireController
      */
     public function PartenaireAction(array $data): void
     {
-        if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
-            $this->view->renderer('Backend', 'partenaire', null);
-        }
-        $this->error->errorAction();
+        // if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
+        //     $this->error->errorAction();
+        // }
+
+        $this->view->renderer('Backend', 'partenaire', null);
     }
 }
