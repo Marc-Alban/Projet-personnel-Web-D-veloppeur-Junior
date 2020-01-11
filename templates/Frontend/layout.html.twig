@@ -81,7 +81,7 @@
 
                         <input type="text" id="Form-User" name="pseudo"
                           class="form-control
-                          validate" value="{{session.user}}">
+                          validate" value="">
                         <label data-error="wrong" data-success="right"
                           for="Form-User">Identifiant</label>
                       </div>
@@ -99,11 +99,12 @@
                       </div>
 
                       <div class="md-form">
+
                         <input type="hidden" name="token" id="token"
                           value="{{session.token}}" />
                       </div>
 
-                      <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+                      <!-- recaptcha -->
                       <div id="captcha"></div>
 
                       <div class="text-center mb-3">

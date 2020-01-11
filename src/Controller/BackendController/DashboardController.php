@@ -25,7 +25,7 @@ class DashboardController
      *
      * @return void
      */
-    public function DashboardAction(array $data)
+    public function DashboardAction(array $data): void
     {
         $DashboardManager = $this->DashboardManager->dashboardControl($data);
 

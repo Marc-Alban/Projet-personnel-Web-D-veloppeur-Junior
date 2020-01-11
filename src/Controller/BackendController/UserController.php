@@ -21,19 +21,6 @@ class UserController
     }
 
     /**
-     * Retourne le pseudo à la route pour al'afficher dans le formulaire
-     *
-     * @param array $data
-     * @return array|null
-     */
-    public function getUserInfosForm()
-    {
-        //    if(){
-        //        $this->user->getUsers();
-        //    }
-    }
-
-    /**
      * Rendu de la page info utilisateur
      *
      * @return void

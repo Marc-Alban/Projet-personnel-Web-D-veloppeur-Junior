@@ -46,7 +46,7 @@ class UserManager
      *
      * @return void
      */
-    private function checkBddMail($mailPost): bool
+    private function checkBddMail(string $mailPost): bool
     {
         $mail = $this->user->readUser()->getMailUser();
         if ($mail !== $mailPost) {
@@ -62,7 +62,7 @@ class UserManager
      *
      * @return void
      */
-    private function message($token): void
+    private function message(string $token): void
     {
         $headers = "MIME-Version: 1.0\r\n..";
         $headers = 'From: From: BmFinance' . "\n";
@@ -124,7 +124,6 @@ class UserManager
             }
             return $error;
         }
-
         return null;
     }
 
@@ -144,11 +143,11 @@ class UserManager
     }
 
     /**
-     * Retourna la vauler active dans le controller
+     * Retourna la valeur active dans le controller
      *
      * @return void
      */
-    public function getActiveUser()
+    public function getActiveUser(): array
     {
         return $this->user->getActiveValue();
     }

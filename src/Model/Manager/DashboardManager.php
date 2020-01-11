@@ -2,20 +2,17 @@
 declare (strict_types = 1);
 namespace App\Model\Manager;
 
-use App\Model\Entity\User;
 use App\Model\Manager\UserManager;
 use App\Tools\Token;
 
 class DashboardManager
 {
     private $userManager;
-    private $user;
     private $token;
 
     public function __construct()
     {
         $this->userManager = new UserManager();
-        $this->user = new User();
         $this->token = new Token();
     }
 
@@ -36,6 +33,12 @@ class DashboardManager
             $pseudo = $data["post"]['pseudo'] ?? null;
             $passwordBdd = $this->userManager->getPass();
             $password = $data["post"]['password'] ?? null;
+
+            //*********Essaie pour  recrer et qu'il soit comme celui envoyer en post******** */
+            // $this->token->createSessionToken();
+            // var_dump($data);
+            // die();
+            //****************************************************************************** */
 
             if (empty($pseudo) && empty($password)) {
                 $errors["pseudoPasswordEmpty"] = 'Veuillez mettre un contenu';
