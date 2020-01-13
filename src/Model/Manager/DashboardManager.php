@@ -14,6 +14,7 @@ class DashboardManager
     {
         $this->userManager = new UserManager();
         $this->token = new Token();
+        $this->token->createSessionToken();
     }
 
     public function dashboardControl(array $data): ?array
@@ -33,12 +34,6 @@ class DashboardManager
             $pseudo = $data["post"]['pseudo'] ?? null;
             $passwordBdd = $this->userManager->getPass();
             $password = $data["post"]['password'] ?? null;
-
-            //*********Essaie pour  recrer et qu'il soit comme celui envoyer en post******** */
-            // $this->token->createSessionToken();
-            // var_dump($data);
-            // die();
-            //****************************************************************************** */
 
             if (empty($pseudo) && empty($password)) {
                 $errors["pseudoPasswordEmpty"] = 'Veuillez mettre un contenu';

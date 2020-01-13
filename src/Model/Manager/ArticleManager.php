@@ -4,9 +4,11 @@ namespace App\Model\Manager;
 
 use App\Model\Repository\ArticleRepository;
 
+// use App\Tools\Token;
+
 class ArticleManager
 {
-
+    // private $token;
     private $articleRepository;
 
     /**
@@ -16,6 +18,8 @@ class ArticleManager
     public function __construct()
     {
         $this->articleRepository = new ArticleRepository();
+        // $this->token = new Token();
+        // $this->token->createSessionToken();
     }
 
     /**
