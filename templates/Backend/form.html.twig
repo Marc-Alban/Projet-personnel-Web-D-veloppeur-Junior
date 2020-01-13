@@ -4,32 +4,56 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mt-3">
+            {% if data.verif.ok %}
+            {% for succes in data.verif %}
+            <div class="alert alert-primary" role="alert">
+                {{succes}}
+            </div>
+            {% endfor %}
+            {% else %}
+            {% for error in data.verif %}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+            {% endfor %}
+            {% endif %}
             <!-- Card -->
             <div class="card mx-xl-5">
                 <!-- Card body -->
                 <div class="card-body">
-                    <!-- Default form subscription -->
-                    <form method="POST" action="../src/Controller/ArticleController.php">
-                        <!-- Default input name -->
-                        <label for="defaultFormCardName">Titre de </label>
-                        <input type="text" id="defaultFormCardName" name="title" class="form-control">
+                    <!-- form subscription -->
+                    <form method="POST"
+                        action="/?p=form&action=newArticle" enctype="multipart/form-data">
+                        <label for="titleFormCardName">Titre de l'article
+                        </label>
+                        <input type="text" id="titleFormCardName" name="title"
+                            class="form-control">
+                        <br>
+                        <label for="legendeFormCardName">Legende de l'article
+                        </label>
+                        <input type="text" id="legendeFormCardName" name="legende"
+                            class="form-control">
                         <br>
                         <div class="form-group">
-                            <label for="mytextarea">Corps de </label>
-                            <textarea class="form-control" id="mytextarea" rows="7" name="description"></textarea>
+                            <label for="mytextarea">Corps de l'article </label>
+                            <textarea class="form-control" id="mytextarea"
+                                rows="7" name="description"></textarea>
                         </div>
                         <br>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile"
+                                <input type="file" class="custom-file-input"
+                                    id="inputGroupFile" name="imageArticle"
                                     aria-describedby="inputGroupFileAddon">
-                                <label class="custom-file-label" for="inputGroupFile">Choisir une image</label>
+                                <label class="custom-file-label"
+                                    for="inputGroupFile">Choisir une image</label>
                             </div>
                         </div>
                         <br>
                         <label for="start" class="text-center mt-3 md-0 p-0">Date:</label>
                         <div class="md-form m-0">
-                            <input type="date" id="start" name="date" value="2019-01-01" min="2019-01-01"
+                            <input type="date" id="start" name="date"
+                                value="2019-01-01" min="2019-01-01"
                                 max="2099-12-01">
                         </div>
                         <br>
@@ -38,25 +62,32 @@
                             <div class="col-6">
                                 <!-- Default unchecked -->
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked"
+                                    <input type="checkbox"
+                                        class="custom-control-input"
+                                        id="defaultUnchecked"
                                         name="posted">
-                                    <label class="custom-control-label" for="defaultUnchecked">Public</label>
+                                    <label class="custom-control-label"
+                                        for="defaultUnchecked">Public</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <!-- Default unchecked -->
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="lastArticle"
+                                    <input type="checkbox"
+                                        class="custom-control-input"
+                                        name="lastArticle"
                                         id="defaultUnchecked1">
-                                    <label class="custom-control-label" for="defaultUnchecked1">Article de la
+                                    <label class="custom-control-label"
+                                        for="defaultUnchecked1">Article de la
                                         semaine</label>
                                 </div>
                             </div>
                         </div>
                         <br>
                         <div class="text-center py-4 mt-3">
-                            <button class="btn btn-dark" type="submit">Envoyer<i
-                                    class="fa fa-paper-plane-o ml-2"></i></button>
+                            <input class="btn btn-dark" name="submit"
+                                type="submit" value="Envoyer"><i
+                                    class="fa fa-paper-plane-o ml-2"></i></input>
                         </div>
 
                     </form>

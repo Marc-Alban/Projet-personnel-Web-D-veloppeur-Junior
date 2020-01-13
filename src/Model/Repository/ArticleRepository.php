@@ -33,24 +33,46 @@ class ArticleRepository
     public function last(): Object
     {
 
-        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 ORDER BY date DESC LIMIT 1');
+        $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 AND posted = 1 ORDER BY date DESC LIMIT 1');
 
         //execution de la requête
         $executeIsOk = $this->pdoStatement->execute();
 
         if ($executeIsOk) {
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
-            $article = $this->pdoStatement->fetchObject(Article::class);
-            if ($article === false) {
-                return null;
+            $this->article = $this->pdoStatement->fetchObject(Article::class);
+            if ($this->article === false) {
+                $articleFake = (object) [
+                    'id' => '1',
+                    'title' => 'test',
+                    'legende' => 'test',
+                    'description' => 'test',
+                    'image' => 'default.png',
+                    'date' => '2020-01-23 10:00:00',
+                    'posted' => '1',
+                    'lastArticle' => '1',
+                ];
+                return $articleFake;
             }
-            return $article;
+            return $this->article;
         }
 
         if (!$executeIsOk) {
             return false;
         }
 
+    }
+
+    /**
+     * Met à 0 le dernier article
+     *
+     * @return void
+     */
+    public function updateLast(): void
+    {
+
+        $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE lastArticle = 1 AND posted = 1 ");
+        $this->pdoStatement->execute();
     }
 
     /**
@@ -74,14 +96,22 @@ class ArticleRepository
 
         if ($executeIsOk) {
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
-            $article = $this->pdoStatement->fetchObject(Article::class);
-            // var_dump($article);
-            // die();
+            $this->article = $this->pdoStatement->fetchObject(Article::class);
 
-            if ($article === false) {
-                return null;
+            if ($this->article === false) {
+                $articleFake = (object) [
+                    'id' => '1',
+                    'title' => 'test',
+                    'legende' => 'test',
+                    'description' => 'test',
+                    'image' => 'default.png',
+                    'date' => '2020-01-23 10:00:00',
+                    'posted' => '1',
+                    'lastArticle' => '1',
+                ];
+                return $articleFake;
             }
-            return $article;
+            return $this->article;
 
         }
 
@@ -103,77 +133,58 @@ class ArticleRepository
 
         $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY id LIMIT $firstOfPage,$perPage");
 
-        $articles = [];
+        $this->article = [];
 
         while ($article = $this->pdoStatement->fetchObject(Article::class)) {
-            $articles[] = $article;
+            $this->article[] = $article;
         }
 
-        return $articles;
+        return $this->article;
     }
 
     /**
-     * Insert un objet Article en bdd des articles
-     * et met à jour l'objet passé en paramètre en lui
-     * spécifiant un identifiant
+     * insert en bdd
      *
-     * @param Article $article objet de type Article passé par référence
-     * @return bool true si l'objet est inséré en bdd, false si il y a une erreur
-     */
-    private function create(Article $article): bool
-    {
-        $this->pdoStatement = $this->pdo->prepare('INSERT INTO article VALUES (null, :titleArticle, :title, :legende,  :description, :image, :date, :posted, :lastArticle)');
-
-        //liaison paramètres
-        $this->bind($article);
-
-        //execution de la requète
-        $executeIsOk = $this->pdoStatement->execute();
-
-        if ($executeIsOk) {
-            $article = $this->last();
-            return true;
-        }
-
-        if (!$executeIsOk) {
-            return false;
-        }
-    }
-
-    /**
-     * Met à jour un objet Article stocké en bdd
-     *
-     * @param Article $article objet de type Article
-     * @return bool true en cas de succès, false en cas d'erreur
-     */
-    private function update(Article $article): bool
-    {
-        $this->pdoStatement = $this->pdo->prepare('UPDATE article SET null, titleArticle=:titleArticle, title=:title, legende=:legende, description=:description, image=:image, date=:date, posted=:posted, lastArticle=:lastArticle WHERE id=:id LIMIT 1');
-
-        //liaison paramètres
-        $this->bind($article);
-        $this->pdoStatement->bindValue(':id', $article->getId(), PDO::PARAM_INT);
-
-        //execution de la requete
-        return $this->pdoStatement->execute();
-    }
-
-    /**
-     * Factorisation du bindvalue
-     *
-     * @param [type] $article
+     * @param string $title
+     * @param string $legende
+     * @param string $description
+     * @param integer $posted
+     * @param integer $lastArticle
+     * @param string $tmpName
+     * @param string $extention
      * @return void
      */
-    private function bind(Article $article): void
+    public function articleWrite(string $title, string $legende, string $description, string $date, int $posted, int $lastArticle, string $tmpName, string $extention): void
     {
-        $this->pdoStatement->bindValue(':titleArticle', $article->getTitleArticle(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':title', $article->getTitle(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':legende', $article->getLegende(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':description', $article->getDescription());
-        $this->pdoStatement->bindValue(':image', $article->getImage(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':date', $article->getDate());
-        $this->pdoStatement->bindValue(':posted', $article->getPosted(), PDO::PARAM_INT);
-        $this->pdoStatement->bindValue(':lastArticle', $article->getLastArticle(), PDO::PARAM_INT);
+        if (!$tmpName) {
+            $id = "post";
+            $extention = ".png";
+        }
+
+        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM article ORDER BY date = NOW()');
+        $response = $this->pdoStatement->fetch();
+        $id = $response['MAX(id)'] + 1;
+
+        $p = [
+            ':title' => $title,
+            ':legende' => $legende,
+            ':description' => $description,
+            ':image' => $id . "." . $extention,
+            ':date' => $date,
+            ':posted' => $posted,
+            ':lastArticle' => $lastArticle,
+        ];
+
+        $sql = "
+        INSERT INTO article(title, legende, description, image, date, posted, lastArticle)
+        VALUES(:title, :legende, :description, :image, :date, :posted, :lastArticle)
+        ";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($p);
+
+        move_uploaded_file($tmpName, "img/article/" . $id . '.' . $extention);
+
     }
 
     /**
@@ -191,29 +202,6 @@ class ArticleRepository
 
         //execution de la requête
         return $this->pdoStatement->execute();
-    }
-
-    /**
-     *Insere un objet et met à jour l'objet passé en argument en
-     *lui spécifiant un identifiant ou le met à jour dans la bdd s'il en est issu
-     *
-     *@param Article $article objet Article passé par référence
-     *
-     * @return bool true en cas de succès ou false en cas d'erreur
-     */
-    public function save(Article $article): bool
-    {
-        //il faut utiliser la méthode create lorsqu'il s'agit d'un nouvel objet
-        //et la méthode Update lorsque l'objet n'est pas nouveau
-        //Objet n'a pas d'id
-        if (is_null($article->getId())) {
-            return $this->create($article);
-        }
-
-        //Objet ayant un id
-        if (!is_null($article->getId())) {
-            return $this->update($article);
-        }
     }
 
 /**

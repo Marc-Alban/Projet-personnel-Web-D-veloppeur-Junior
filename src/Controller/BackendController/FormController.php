@@ -2,15 +2,18 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
+use App\Model\Manager\ArticleManager;
 use App\View\View;
 
 class FormController
 {
     private $view;
+    private $articleManager;
 
     public function __construct()
     {
         $this->view = new View();
+        $this->articleManager = new ArticleManager();
     }
 
     /**
@@ -20,12 +23,7 @@ class FormController
      */
     public function formAction(array $data): void
     {
-        // $tokenSession = $data['session']['token'];
-        // if (empty($tokenSession) || !isset($tokenSession) || $tokenSession !== ) {
-        //     $this->view->renderer('Frontend', '404', null);
-        //     exit();
-        // }
-
-        $this->view->renderer('Backend', 'form', null);
+        $verif = $this->articleManager->verifForm($data);
+        $this->view->renderer('Backend', 'form', ['verif' => $verif]);
     }
 }
