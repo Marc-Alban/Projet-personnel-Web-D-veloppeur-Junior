@@ -9,6 +9,7 @@ use Twig\Loader\FilesystemLoader;
 class View extends Environment
 {
     private $loader;
+    private $superGlobal;
 
     /**
      * Fonction constructeur instanciant le constructeur parent
@@ -18,6 +19,7 @@ class View extends Environment
     {
         $this->loader = new FilesystemLoader('../templates');
         parent::__construct($this->loader);
+        //$this->superGlobal = new GestionGlobalPhp();
     }
 
     /**
@@ -31,8 +33,12 @@ class View extends Environment
     public function renderer(string $path, string $view, ?array $data): void
     {
         // $session = $data['session'] ?? null;
-
-        $this->addGlobal('session', $_SESSION);
+        //
+        $data['session'] = $_SESSION;
+        // var_dump('data view', $data);
+        // die();
+        $this->addGlobal('session', $data['session']);
+        // $this->addGlobal('session', $this->superGlobal->getSession());
         echo $this->render($path . '/' . $view . '.html.twig', ['data' => $data]);
     }
 }

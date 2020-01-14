@@ -8,7 +8,7 @@ use \PDO;
 
 class Database
 {
-    const DSN = 'mysql:host=localhost;dbname=bmfinance;charset=utf8';
+    const DSN = 'mysql:host=localhost;dbname=bmfinance;charset=utf8mb4';
     const USER = 'root';
     const PASSWORD = '';
     private static $instance = null;

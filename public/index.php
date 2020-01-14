@@ -13,5 +13,8 @@ use App\Tools\Token;
 $token = new Token();
 $_SESSION['token'] = $token->createSessionToken();
 
+//$maSuperGlobale = new GestionGlobalPhp();
+//$maSuperGlobale->setParamSession('token', $token->createSessionToken());
+
 $Router = new Router();
 $Router->action();

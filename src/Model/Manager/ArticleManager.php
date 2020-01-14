@@ -71,12 +71,14 @@ class ArticleManager
         $perPage = 5;
         $total = $this->articleRepository->countArticle();
         $nbPage = ceil($total / $perPage);
-        $current = $data['get']['pp'] ?? null;
+        $current = $data['get']['pp'] ?? 1;
 
-        if (!isset($data['get']['pp']) || empty($data['get']['pp']) || ctype_digit($data['get']['pp']) === false) {
+        if (!isset($current) && empty($current) && ctype_digit($current) === false) {
             $current = 1;
-        } else if ($data['get']['pp'] > $nbPage) {
+        } else if ($current > $nbPage) {
             $current = $nbPage;
+        } else if ($current < $nbPage || $current < 0 || $current === -1) {
+            header("Location: http://3bigbangbourse.fr/?p=listesArticles&pp=1");
         }
 
         $firstOfPage = ($current - 1) * $perPage;
@@ -186,7 +188,9 @@ class ArticleManager
                 }
 
                 if (empty($errors)) {
-                    if ($this->lastArticle === 1 && isset($lastArticle)) {
+                    // var_dump($tabData['lastArticle'], $this->lastArticle);
+                    // die();
+                    if ($this->lastArticle === 1) {
                         $this->articleRepository->updateLast();
                     }
                     $this->articleRepository->articleWrite($tabData['title'], $tabData['legende'], $tabData['description'], $tabData['date'], $tabData['posted'], $tabData['lastArticle'], $tabData['tmpName'], $extention);

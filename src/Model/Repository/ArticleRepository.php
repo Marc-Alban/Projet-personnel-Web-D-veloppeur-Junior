@@ -44,11 +44,11 @@ class ArticleRepository
             if ($this->article === false) {
                 $articleFake = (object) [
                     'id' => '1',
-                    'title' => 'test',
-                    'legende' => 'test',
-                    'description' => 'test',
+                    'title' => 'Pas d\'article en bdd',
+                    'legende' => 'Pas d\'article en bdd',
+                    'description' => 'Pas d\'article en bdd',
                     'image' => 'default.png',
-                    'date' => '2020-01-23 10:00:00',
+                    'date' => '',
                     'posted' => '1',
                     'lastArticle' => '1',
                 ];
@@ -71,7 +71,7 @@ class ArticleRepository
     public function updateLast(): void
     {
 
-        $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE lastArticle = 1 AND posted = 1 ");
+        $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE lastArticle = 1");
         $this->pdoStatement->execute();
     }
 
@@ -101,11 +101,11 @@ class ArticleRepository
             if ($this->article === false) {
                 $articleFake = (object) [
                     'id' => '1',
-                    'title' => 'test',
-                    'legende' => 'test',
-                    'description' => 'test',
+                    'title' => 'Pas d\'article en bdd',
+                    'legende' => 'Pas d\'article en bdd',
+                    'description' => 'Pas d\'article en bdd',
                     'image' => 'default.png',
-                    'date' => '2020-01-23 10:00:00',
+                    'date' => '',
                     'posted' => '1',
                     'lastArticle' => '1',
                 ];
@@ -128,15 +128,29 @@ class ArticleRepository
      * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
      * false si une erreur survient
      */
-    public function readAll($firstOfPage, $perPage): array
+    public function readAll($firstOfPage, $perPage): object
     {
 
         $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY id LIMIT $firstOfPage,$perPage");
 
         $this->article = [];
 
-        while ($article = $this->pdoStatement->fetchObject(Article::class)) {
-            $this->article[] = $article;
+        if (empty($this->article) || $this->pdoStatement === false) {
+            $articleFake = (object) [
+                'id' => '1',
+                'title' => 'Pas d\'article en bdd',
+                'legende' => 'Pas d\'article en bdd',
+                'description' => 'Pas d\'article en bdd',
+                'image' => 'default.png',
+                'date' => '',
+                'posted' => '1',
+                'lastArticle' => '1',
+            ];
+            return $articleFake;
+        };
+
+        while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
+            $this->article[] = $articles;
         }
 
         return $this->article;
