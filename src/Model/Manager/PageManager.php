@@ -18,7 +18,7 @@ class PageManager extends PDOException
     {
         $this->pageRepository = new PageRepository();
     }
-
+/************************************ Read Page ************************************************* */
     /**
      * Retourne la liste des graphs sur le controller page
      *
@@ -26,7 +26,7 @@ class PageManager extends PDOException
      */
     public function readPage(string $data): array
     {
-        return $this->pageRepository->read($data);
+        return $this->pageRepository->readAll($data);
     }
-
+/************************************End Read Page************************************************* */
 }

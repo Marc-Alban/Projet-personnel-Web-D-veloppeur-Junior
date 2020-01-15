@@ -1,18 +1,19 @@
 {% extends 'Frontend/layout.html.twig' %}
+{#---------------------------BLOC-TITLE-----------------------------#}
 {% block head %} <title>Blog</title> {% endblock %}
+{#---------------------------BLOC-TITLE-----------------------------#}
+{#---------------------------BLOC-TITLE-PAGE----------------------------#}
 {% block title %}Blog{% endblock %}
+{#---------------------------BLOC-TITLE-PAGE----------------------------#}
 {% block content %}
-
-<!-- Section: Blog v.2 -->
+{#---------------------------SECTION------------------------------#}
 <section class="text-center my-5">
-    <!-- Section  -->
-    <!-- Liste article -->
+    {#---------------------------LASTE-ARTICLE-----------------------------#}
     {% if data.listeArticle %}
-    <!-- Article last -->
     <div class="mb-5 articleSemaine col-lg-12 col-md-8 col-sm-12">
-        <!-- Card -->
+        {#---------------------------CARD-----------------------------#}
         <div class="card">
-            <!-- Card image -->
+            {#---------------------------CARD-IMAGE-----------------------------#}
             <div class="view overlay">
                 <img class="card-img-top" src="img/article/{{
                     data.lastArticle.image
@@ -21,29 +22,33 @@
                     <div class="mask rgba-white-slight"></div>
                 </a>
             </div>
-            <!-- Card content -->
+            {#---------------------------CARD-IMAGE-----------------------------#}
+            {#---------------------------CARD-CONTENT-----------------------------#}
             <div class="card-body">
-                <!-- Text -->
+                {#---------------------------CARD-DESCRIPTION-----------------------------#}
                 <p class="card-text font-weight-bold text-justify">{{
                     data.lastArticle.description | raw }}</p>
-                <!-- Title -->
+                {#--------------------------END-CARD-DESCRIPTION-----------------------------#}
+                {#---------------------------CARD-TITLE-----------------------------#}
                 <h4 class="card-subtitle text-left">{{
                     data.lastArticle.title }}</h4>
-                <!-- Post data -->
+                {#--------------------------END-CARD-TITLE-----------------------------#}
+                {#---------------------------CARD-DATE-----------------------------#}
                 <p class="text-left">{{ data.lastArticle.date|date('d/m/Y') }}</p>
+                {#--------------------------END-CARD-DATE-----------------------------#}
             </div>
         </div>
-        <!-- Card -->
+        {#--------------------------END-CARD-----------------------------#}
     </div>
-    <!-- lastArticle -->
-    <!-- Grid row -->
+    {#--------------------------END-LASTARTICLE-----------------------------#}
+    {#--------------------------ARTICLE-----------------------------#}
     <div class="row">
-        <!-- Grid column -->
+        {#---------------------------GRILLE-COLONNE-----------------------------#}
         {% for listeArticle in data.listeArticle.articles %}
         <div class="col-lg-6 col-md-8 col-sm-12 mb-4">
-            <!-- Card -->
+            {#---------------------------CARD-----------------------------#}
             <div class="card">
-                <!-- Card image -->
+                {#---------------------------CARD-IMAGE-----------------------------#}
                 <div class="view overlay">
                     <img class="card-img-top" src="img/article/{{
                         listeArticle.image
@@ -52,26 +57,25 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <!-- Card content -->
+                {#---------------------------CARD-CONTENT-----------------------------#}
                 <div class="card-body">
-                    <!-- Text -->
+                    {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">{{
                         listeArticle.description }}</p>
-                    <!-- Title -->
+                    {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
                         listeArticle.title }}</h4>
-                    <!-- Post data -->
+                    {#---------------------------CARD-DATE-----------------------------#}
                     <p class="text-left">{{ listeArticle.date|date('d/m/Y') }}</p>
                 </div>
             </div>
-            <!-- Card -->
-
+            {#--------------------------END-CARD-----------------------------#}
         </div>
-        <!-- Grid column -->
+        {#--------------------------END-GRILLE-COLONNE-----------------------------#}
         {% endfor %}
     </div>
-    <!-- Grid row -->
-    <!-- Pagination -->
+    {#-------------------------END-GRILLE-ROW-----------------------------#}
+    {#--------------------------PAGINATION-----------------------------#}
     <nav aria-label="Page navigation mr-auto">
         <ul class="pagination pg-blue">
             <li class="page-item
@@ -119,17 +123,16 @@
             </li>
         </ul>
     </nav>
-    <!-- EndPagination -->
+    {#-------------------------END-PAGINATION-----------------------------#}
     {% else %}
-
-    <!-- Grid row -->
+    {#--------------------------GRILLE-ROW-----------------------------#}
     <div class="row">
-        <!-- Grid column -->
+        {#--------------------------GRILLE-COLONNE-----------------------------#}
         {% for classementYear in data.classement %}
         <div class="col-lg-6 col-md-8 col-sm-12 mb-4">
-            <!-- Card -->
+            {#---------------------------CARD------------------------------#}
             <div class="card">
-                <!-- Card image -->
+                {#---------------------------CARD-IMAGE-----------------------------#}
                 <div class="view overlay">
                     <img class="card-img-top" src="img/article/{{
                         classementYear.image
@@ -138,31 +141,30 @@
                         <div class="mask rgba-white-slight"></div>
                     </a>
                 </div>
-                <!-- Card content -->
+                {#---------------------------CARD-CONTENT-----------------------------#}
                 <div class="card-body">
-                    <!-- Text -->
+                    {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">{{
                         classementYear.description }}</p>
-                    <!-- Title -->
+                    {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
                         classementYear.title }}</h4>
-                    <!-- Post data -->
+                    {#---------------------------CARD-DATE-----------------------------#}
                     <p class="text-left">{{ classementYear.date|date('d/m/Y') }}</p>
                 </div>
             </div>
-            <!-- Card -->
-
+            {#--------------------------END-CARD------------------------------#}
         </div>
-        <!-- Grid column -->
+        {#--------------------------END-GRILLE-COLONNE-----------------------------#}
         {% endfor %}
     </div>
-    <!-- Grid row -->
+    {#-------------------------END-GRILLE-ROW-----------------------------#}
     {% endif %}
-    <!-- End liste Article -->
+    {#---------------------------END-ARTICLE-----------------------------#}
 </section>
-<!-- Section: Blog v.2 -->
+{#---------------------------END-SECTION-----------------------------#}
 {% endblock %}
-
+{#--------------------------CLASSIFICATION-YEAR-----------------------------#}
 {% block archive %}
 <section class="mb-5">
     <h4 class="font-weight-bold aside"><strong>Archive</strong></h4>
@@ -186,3 +188,4 @@
     </ul>
 </section>
 {% endblock %}
+{#-------------------------END-CLASSIFICATION-YEAR-----------------------------#}

@@ -20,6 +20,18 @@ class UserRepository
         $this->pdo = Database::getPdo();
     }
 
+    /************************************Get Active Value************************************************* */
+    /**
+     * Retourne la valeur active dans le manager
+     */
+    public function getActiveValue()
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT active FROM user");
+        $req = $this->pdoStatement->fetch();
+        return $req;
+    }
+/************************************End Get Active Value************************************************* */
+/************************************Read All Users************************************************* */
 /**
  * Récupère tous les objets user
  *
@@ -28,13 +40,14 @@ class UserRepository
  *
  * @return Object
  */
-    public function readUser(): Object
+    public function readAllUser(): Object
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM user");
         $user = $this->pdoStatement->fetchObject(User::class);
         return $user;
     }
-
+/************************************End Read All Users************************************************* */
+/************************************Insert Token************************************************* */
     /**
      * Methode pour inserer un token dans la bdd lors de la modification de mot de passe
      *
@@ -49,7 +62,8 @@ class UserRepository
         $this->pdoStatement = $this->pdo->prepare("UPDATE user SET token = :token");
         $this->pdoStatement->execute($e);
     }
-
+/************************************End Insert Token************************************************* */
+/************************************Change Active Bdd************************************************* */
     /**
      * Methode qui permet de modifier la valeur active en bdd
      * true = 1
@@ -61,30 +75,19 @@ class UserRepository
     public function changeActive(string $bool): void
     {
         $active = null;
-
         if ($bool === 'false') {
             $active = 0;
         } else if ($bool === 'true') {
             $active = 1;
         }
-
         $e = [
             ':active' => $active,
         ];
         $this->pdoStatement = $this->pdo->prepare("UPDATE user SET active = :active");
         $this->pdoStatement->execute($e);
     }
-
-    /**
-     * Retourne la valeur active dans le manager
-     */
-    public function getActiveValue()
-    {
-        $this->pdoStatement = $this->pdo->query("SELECT active FROM user");
-        $req = $this->pdoStatement->fetch();
-        return $req;
-    }
-
+/************************************End Change Active Bdd************************************************* */
+/************************************Change Password************************************************* */
     /**
      * Methode qui change de mot de passe
      *
@@ -96,9 +99,8 @@ class UserRepository
         $e = [
             ':pass' => $password,
         ];
-
         $this->pdoStatement = $this->pdo->prepare("UPDATE user SET password = :pass");
         $this->pdoStatement->execute($e);
     }
-
+/************************************End Change Password************************************************* */
 }

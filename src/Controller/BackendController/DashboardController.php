@@ -18,7 +18,7 @@ class DashboardController
         $this->article = new ArticleManager();
         $this->DashboardManager = new DashboardManager();
     }
-
+/************************************Page Dashboard************************************************* */
     /**
      * méthode qui permet de vérifier si l'utilisateur sera renvoyé sur la page home avec
      * une erreur lors de la connection ou alors sur la page dashboard et qu'il soit bien connecté.
@@ -27,14 +27,15 @@ class DashboardController
      */
     public function DashboardAction(array $data): void
     {
-        $DashboardManager = $this->DashboardManager->dashboardControl($data);
+        $modalControl = $this->DashboardManager->modalControl($data);
 
-        if ($DashboardManager === null || !isset($DashboardManager['succes'])) {
-            $this->view->renderer('Frontend', '404', ['errors' => $DashboardManager]);
+        if ($modalControl === null || !isset($modalControl['succes'])) {
+            $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
             exit();
         }
 
         $countArticle = $this->article->nbPost();
         $this->view->renderer('Backend', 'dashboard', ['countArticle' => $countArticle]);
     }
+    /************************************End Page Dashboard************************************************* */
 }

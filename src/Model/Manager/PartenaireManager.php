@@ -17,6 +17,7 @@ class PartenaireManager
         $this->partenaireRepository = new PartenaireRepository();
     }
 
+    /************************************liste Partenaire ReadALL************************************************* */
     /**
      * Retourne la liste des partenaire sur le controller home
      *
@@ -26,5 +27,5 @@ class PartenaireManager
     {
         return $this->partenaireRepository->readAll();
     }
-
+/************************************End Liste Partenaire ReadAll************************************************* */
 }

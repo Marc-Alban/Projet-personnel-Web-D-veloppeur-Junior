@@ -8,7 +8,6 @@ use App\Model\Repository\ArticleRepository;
 
 class ArticleManager
 {
-    // private $token;
     private $articleRepository;
     private $title;
     private $legende;
@@ -27,9 +26,26 @@ class ArticleManager
     public function __construct()
     {
         $this->articleRepository = new ArticleRepository();
-        // $this->token = new Token();
-        // $this->token->createSessionToken();
     }
+
+    /******************************Page Article******************************* */
+    /**
+     * Retourne un article avec un id selectionner
+     *
+     * @return Object
+     */
+    public function getPost(?int $id, ?array $data): Object
+    {
+        $id = $data['get']['id'] ?? null;
+        if ($id === null || empty($id)) {
+            // var_dump($this->articleRepository->last());
+            // die();
+            return $this->articleRepository->last();
+        }
+        return $this->articleRepository->read((int) $id);
+    }
+    /**************************End Page Article******************************* */
+    /*************************Liste Article********************************** */
 
     /**
      * Retourne le dernier article dans un tableau
@@ -41,22 +57,6 @@ class ArticleManager
     public function lastArticle(): Object
     {
         return $this->articleRepository->last();
-    }
-
-    /**
-     * Retourne un article avec un id selectionner
-     *
-     * @return Object
-     */
-    public function article(?int $id, ?array $data): Object
-    {
-        $id = $data['get']['id'] ?? null;
-        if ($id === null || empty($id)) {
-            // var_dump($this->articleRepository->last());
-            // die();
-            return $this->articleRepository->last();
-        }
-        return $this->articleRepository->read((int) $id);
     }
 
     /**
@@ -92,7 +92,7 @@ class ArticleManager
     }
 
     /**
-     * Retourne les articles en fonctions
+     * Retourne les articles en fonctions des années
      *
      * @param array $data
      * @return array
@@ -108,6 +108,9 @@ class ArticleManager
         return $this->articleRepository->articleDate($years);
     }
 
+    /************************************End liste Article************************************************* */
+    /************************************Dashboard************************************************* */
+
     /**
      * Retourne le nombre d'article en bdd
      *
@@ -118,31 +121,8 @@ class ArticleManager
         $nbArticle = $this->articleRepository->countArticle();
         return (int) $nbArticle;
     }
-
-    private function dataFormArticle(array $data): array
-    {
-        $this->title = htmlentities(trim($data['post']['title'])) ?? null;
-        $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
-        $this->description = htmlentities(trim($data['post']['description'])) ?? null;
-        $this->date = $data['post']['date'] ?? null;
-        $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
-        $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;
-        $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null;
-        $this->size = $data['files']['imageArticle']['size'] ?? null;
-
-        $tabPost = [
-            "title" => $this->title,
-            "legende" => $this->legende,
-            "description" => $this->description,
-            "date" => $this->date,
-            "posted" => $this->posted,
-            "lastArticle" => $this->lastArticle,
-            "tmpName" => $this->tmpName,
-            "size" => $this->size,
-        ];
-
-        return $tabPost;
-    }
+    /************************************End Dashboard************************************************* */
+    /************************************Formulaire Article Backend**************************************** */
 
     public function verifForm(array $data): ?array
     {
@@ -217,5 +197,41 @@ class ArticleManager
 
         return null;
     }
+    /************************************End Formulaire Article Backend***************************** */
+
+    /************************************Autres************************************************* */
+
+    /**
+     * Renvoie les données à la vue
+     *
+     * @param array $data
+     * @return array
+     */
+    private function dataFormArticle(array $data): array
+    {
+        $this->title = htmlentities(trim($data['post']['title'])) ?? null;
+        $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
+        $this->description = htmlentities(trim($data['post']['description'])) ?? null;
+        $this->date = $data['post']['date'] ?? null;
+        $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
+        $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;
+        $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null;
+        $this->size = $data['files']['imageArticle']['size'] ?? null;
+
+        $tabPost = [
+            "title" => $this->title,
+            "legende" => $this->legende,
+            "description" => $this->description,
+            "date" => $this->date,
+            "posted" => $this->posted,
+            "lastArticle" => $this->lastArticle,
+            "tmpName" => $this->tmpName,
+            "size" => $this->size,
+        ];
+
+        return $tabPost;
+    }
+
+    /************************************ Fin Autres************************************************* */
 
 }

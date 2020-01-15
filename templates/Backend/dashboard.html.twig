@@ -1,30 +1,30 @@
 {% extends 'Backend/layout.html.twig' %}
+{#----------------------------BLOC-Title----------------------------#}
 {% block head %} <title> Tableau de bord </title> {% endblock %}
+{#----------------------------END-BLOC-Title----------------------------#}
 {% block content %}
-
-<!-- *************Bloc *********** -->
+{#----------------------------BLOC-HEAD-DashBoard----------------------------#}
 <div class="container mt-3 my-5 py-5">
     <div class="row">
-
         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-            <!-- Section: Block Content -->
+            {#----------------------------Section----------------------------#}
             <section>
-                <!-- Grid row -->
                 <div class="row">
-
-                    <!-- Grid column -->
+                    {#----------------------------Grid-Column----------------------------#}
                     <div class="col-md-6 col-lg-6 mb-4">
-
-                        <!-- Card -->
+                        {#----------------------------Card----------------------------#}
                         <div class="card primary-color white-text">
                             <div class="card-body d-flex justify-content-around
                                 align-items-center">
                                 <div>
                                     <p class="h2-responsive font-weight-bold
                                         mt-n2 mb-0">{{data.countArticle}}
-                                        article{% if data.countArticle > 1 %}s{%
-                                        elseif data.countArticle <= 1 %}{% endif
-                                            %}
+                                        article
+                                        {% if data.countArticle > 1 %}
+                                        s
+                                        {% elseif data.countArticle <= 1 %}
+
+                                            {% endif %}
                                     </p>
                                 </div>
                                 <div>
@@ -37,16 +37,12 @@
                                 articles<i class="fas fa-arrow-circle-right
                                     pl-2"></i></a>
                         </div>
-                        <!-- Card -->
-
+                        {#----------------------------End-Card----------------------------#}
                     </div>
-                    <!-- Grid column -->
-
-
-                    <!-- Grid column -->
+                    {#----------------------------End-GridColumn----------------------------#}
+                    {#----------------------------Grid-Column----------------------------#}
                     <div class="col-md-6 col-lg-6 mb-4">
-
-                        <!-- Card -->
+                        {#----------------------------Card----------------------------#}
                         <div class="card light-blue lighten-1 white-text">
                             <div class="card-body d-flex justify-content-around
                                 align-items-center">
@@ -64,35 +60,28 @@
                                 liens<i class="fas
                                     fa-arrow-circle-right pl-2"></i></a>
                         </div>
-                        <!-- Card -->
-
+                        {#----------------------------End-Card----------------------------#}
                     </div>
-                    <!-- Grid column -->
-
                 </div>
-                <!-- Grid row -->
-
             </section>
-            <!-- Section: Block Content -->
+            {#----------------------------End-Section----------------------------#}
         </div>
     </div>
 </div>
-<!-- **********************Instagram Api************************ -->
+{#----------------------------END-BLOC-HEAD-DashBoard----------------------------#}
+{#----------------------------Instagram-Api----------------------------#}
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <!-- Card -->
+            {#----------------------------Card----------------------------#}
             <div class="card testimonial-card">
-
-                <!-- Background color -->
+                {#----------------------------BackGround-Card----------------------------#}
                 <div class="card-up indigo lighten-1"></div>
-
-                <!-- Avatar -->
+                {#----------------------------Profil----------------------------#}
                 <div class="avatar mx-auto white">
                     <img src="" alt="" id="profile-pic">
                 </div>
-
-                <!-- Content -->
+                {#----------------------------Card-Body----------------------------#}
                 <div class="card-body">
                     <div class="col-md-12">
                         <h2 id="username"></h2>
@@ -125,15 +114,14 @@
                         </div>
                     </div>
                 </div>
+                {#----------------------------End-Card-Body----------------------------#}
             </div>
-            <!-- Card -->
+            {#----------------------------End-Card----------------------------#}
         </div>
     </div>
 </div>
-<!-- ******************************* -->
-
+{#----------------------------END-Instagram-Api----------------------------#}
 {% endblock %}
-
 {% block javascript %}
 <script src="js/instagrame.js"></script>
 {% endblock %}

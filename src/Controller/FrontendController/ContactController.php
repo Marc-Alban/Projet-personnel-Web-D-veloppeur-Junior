@@ -9,13 +9,15 @@ class ContactController
 {
 
     private $view;
-    private $manager;
+    private $contactManager;
 
     public function __construct()
     {
         $this->view = new View();
-        $this->manager = new ContactManager();
+        $this->contactManager = new ContactManager();
     }
+
+    /************************************Page Contact************************************************* */
 
     /**
      * Rendu de la page contact
@@ -24,14 +26,14 @@ class ContactController
      */
     public function ContactAction(?array $data): void
     {
-        $message = $this->manager->verifMail($data);
-        $getData = $this->manager->getData($data);
+        $message = $this->contactManager->verifFormContact($data);
+        $getData = $this->contactManager->getDataForm($data);
         $tabData = [
             'listeMessage' => $message,
             'donnee' => $getData,
         ];
         $this->view->renderer('Frontend', 'contact', $tabData);
-
     }
+    /************************************End Page Contact************************************************* */
 
 }

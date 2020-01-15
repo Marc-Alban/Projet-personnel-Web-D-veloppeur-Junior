@@ -1,16 +1,20 @@
 {% extends 'Frontend/layout.html.twig' %}
-{% block head %} <title>
+{#---------------------------BLOC-TITLE-----------------------------#}
+{% block head %}
+<title>
     {% for post in data %}
     {{ post.title}}
+    {% endfor %}
 </title>
-{% endfor %}
 {% endblock %}
+{#---------------------------BLOC-TITLE-----------------------------#}
+{#---------------------------BLOC-TITLE-PAGE----------------------------#}
 {% block title %}
 <div class="d-flex flex-row">
     <div class="w-100">
-        {% for post in data %}{{
-        post.titleArticle }}{% endfor %}
-
+        {% for post in data %}
+        {{post.titleArticle}}
+        {% endfor %}
     </div>
     <div class="flex-shrink-1 col-md-4">
         <a href="http://3bigbangbourse.fr/?p=listesArticles">
@@ -19,23 +23,25 @@
     </div>
 </div>
 {% endblock %}
+{#--------------------------END-BLOC-TITLE-PAGE----------------------------#}
 {% block content %}
 {% for post in data %}
-<!--Grid column-->
+{#--------------------------GRILLE-COLONNE----------------------------#}
 <div class="col-md-12">
-    <!--Card-->
+    {#--------------------------CARD----------------------------#}
     <div class="card hoverable pb-5 mx-md-3">
-        <!-- img -->
+        {#--------------------------IMAGE----------------------------#}
         <img class="jarallax-img" src="img/article/{{ post.image }}" alt="">
-        <!-- /img -->
+        {#--------------------------END-IMAGE----------------------------#}
         <div class="card-body">
             <div class="container">
-                <!--Section heading-->
+                {#--------------------------SECTION-HEADING----------------------------#}
                 <h1 class="text-left h1 pt-4 mb-3">
                     <strong>
                         {{ post.title }}
                     </strong>
                 </h1>
+                {#-------------------------END-SECTION-HEADING----------------------------#}
                 <div class="row">
                     <div class="col-md-12 col-xl-12 d-flex
                         justify-content-left">
@@ -47,22 +53,17 @@
                             {{ post.date }}</p>
                     </div>
                 </div>
-
-                <!-- Grid column -->
+                {#--------------------------GRILLE-COLONNE----------------------------#}
                 <div class="row mt-3">
-
                     <p class="dark-grey-text article">{{
                         post.description | raw }}</p>
                 </div>
-                <!--/Grid colomn -->
             </div>
-            <!--/Grid column-->
+            {#--------------------------END-GRILLE-COLONNE----------------------------#}
         </div>
-        <!--/Grid row-->
     </div>
-    <!--/Card-->
-
+    {#--------------------------END-CARD----------------------------#}
 </div>
-<!--/Grid column-->
+{#--------------------------END-GRILLE-COLONNE----------------------------#}
 {% endfor %}
 {% endblock %}

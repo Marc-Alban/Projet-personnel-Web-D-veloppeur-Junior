@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
+    {#----------------------------Encodage-UTF-8---------------------------#}
     <meta charset="UTF-8" />
+    {#----------------------------Responsive-VIEWPORT-CSS---------------------------#}
     <meta name="viewport" content="width=device-width, initial-scale=1,
       shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     {% block head %} {% endblock %}
-
-    <!-- BM icon -->
+    {#----------------------------BM-ICON----------------------------#}
     <link rel="icon" href="img/bm-favicon.ico" type="image/x-icon">
-
-    <!-- Font Awesome -->
+    {#----------------------------Font-Awesome----------------------------#}
     <link rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-
-    <!-- Bootstrap core CSS -->
+    {#----------------------------Material-Design-Bootstrap----------------------------#}
     <link href="css/MDB-Free/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Material Design Bootstrap -->
     <link href="css/MDB-Free/mdb.min.css" rel="stylesheet">
-
-    <!--Style -->
+    {#----------------------------Style-Css---------------------------#}
     <link href="css/frontend.css" rel="stylesheet">
-
+    {#----------------------------JS-RECAPTCHA---------------------------#}
     <script type="text/javascript">
     var verifyCallback = function (response) {
-      alert(response);
+      alert('ok');
     };
     var onloadCallback = function () {
-      // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
-      // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
       grecaptcha.render('captcha', {
         'sitekey': '6LdCHMIUAAAAAAWzKdTsmXFOtMohGlCSx7BXVM-9',
         'callback': verifyCallback,
@@ -38,33 +31,28 @@
       });
     };
   </script>
+    {#---------------------------END-JS-RECAPTCHA---------------------------#}
   </head>
-
   <body class="fixed-sn homepage-v3">
-
-    <!-- Navigation -->
+    {#----------------------------HEADER----------------------------#}
     <header class="navbar-grey">
-
       <div class="container">
         <div class="row">
           <div class="col-lg-12 d-flex">
-            <!-- Navbar brand -->
+            {#----------------------------HEADER-LOGO---------------------------#}
             <a class="navbar-brand mr-auto p-2" href="?p=home"><span>BM</span>Finance</a>
-            {# Modal login #}
-            <!-- User Login -->
+            {#----------------------------MODAL----------------------------#}
             <div id="user" class="p-2" data-toggle="modal"
               data-target="#UserLog">
               <i class="fas fa-user"></i>
             </div>
-
-            <!-- Modal -->
             <div class="modal fade" id="UserLog" tabindex="-1" role="dialog"
               aria-labelledby="TitleModalUser"
               aria-hidden="true">
               <div class="modal-dialog" role="document">
-                <!--Content-->
+                {#----------------------------MODAL-CONTENT----------------------------#}
                 <div class="modal-content form-elegant">
-                  <!--Header-->
+                  {#----------------------------MODAL-HEADER----------------------------#}
                   <div class="modal-header text-center">
                     <h3 class="modal-title w-100 dark-grey-text font-weight-bold
                       my-3" id="TitleModalUser"><strong>Acces Administration</strong></h3>
@@ -73,89 +61,78 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <!--Body-->
+                  {#----------------------------MODAL-CONTENT----------------------------#}
                   <div class="modal-body mx-4">
                     <form action="/?p=dashboard&action=connexion" method="POST">
-                      <!--Body-->
                       <div class="md-form mb-5">
-
+                        {#----------------------------MODAL-PSEUDO----------------------------#}
                         <input type="text" id="Form-User" name="pseudo"
                           class="form-control
                           validate" value="">
                         <label data-error="wrong" data-success="right"
                           for="Form-User">Identifiant</label>
                       </div>
-
+                      {#----------------------------MODAL-PASSWORD----------------------------#}
                       <div class="md-form pb-3">
                         <input type="password" id="Form-pass" name="password"
                           class="form-control
                           validate">
                         <label data-error="wrong" data-success="right"
                           for="Form-pass">Mot de passe</label>
+                        {#----------------------------MODAL-PASSWORD-FORGET---------------------------#}
                         <p class="font-small red-text d-flex
                           justify-content-start"><a href="?p=lostPassword"
                             class="red-text
                             ml-1">*Mot de passe oublié</a></p>
                       </div>
-
+                      {#----------------------------MODAL-HIDDEN----------------------------#}
                       <div class="md-form">
-
                         <input type="hidden" name="token" id="token"
                           value="{{session.token}}" />
                       </div>
-
-                      <!-- recaptcha -->
+                      {#----------------------------MODAL-RECAPTCHA----------------------------#}
                       <div id="captcha"></div>
-
+                      {#----------------------------MODAL-SUBMIT----------------------------#}
                       <div class="text-center mb-3">
                         <input type="submit" name="connexion" class="btn
                           btn-block btn-red
                           btn-rounded z-depth-1a" value="Je me connect">
                       </div>
                     </form>
-
-
                   </div>
                 </div>
-                <!--/.Content-->
+                {#---------------------------END-MODAL-CONTENT----------------------------#}
               </div>
             </div>
-            <!-- Modal -->
-            {# !modal #}
+            {#---------------------------END-MODAL-----------------------------#}
           </div>
         </div>
       </div>
-
+      {#---------------------------HEADER-CONTENT----------------------------#}
       <div class="container">
         <div class="row">
-          <!--Navbar-->
+          {#---------------------------NAVBAR-CONTENT----------------------------#}
           <nav class="navbar navbar-expand-md">
-
-            <!-- Collapse button -->
             <button class="navbar-toggler toggler-example" type="button"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false"
               aria-label="Toggle navigation"><span class="dark-blue-text"><i
                   class="fas fa-bars fa-1x"></i></span></button>
-
-
-            <!-- Collapsible content -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <!-- Links -->
               <ul class="navbar-nav mr-auto">
-                <!-- Dropdown -->
+                {#---------------------------NAVBAR-HOME----------------------------#}
                 <li class="nav-item">
                   <a class="nav-link green" href="?p=home">Accueil</a>
                 </li>
-
-                <!-- Dropdown -->
+                {#--------------------------ONGLET-NAVBAR-BLOG----------------------------#}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle blue"
                     id="navbarDropdownMenuLink1" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Blog</a>
                   <div class="dropdown-menu dropdown-primary"
                     aria-labelledby="navbarDropdownMenuLink">
+                    {#---------------------------NAVBAR-SOUS-MENU-BLOG---------------------------#}
                     <a class="dropdown-item" href="?p=article">Article de la
                       semaine</a>
                     <a class="dropdown-item" href="?p=listesArticles&pp=1">Liste
@@ -164,28 +141,29 @@
                       hebdomadaire</a>
                   </div>
                 </li>
-
-                {% block nav %}
-                <!-- Dropdown -->
+                {#-------------------------END-ONGLET-NAVBAR-BLOG----------------------------#}
+                {#-------------------------ONGLET-NAVBAR-QUI-SOMMES-NOUS-?----------------------------#}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle orange"
                     id="navbarDropdownMenuLink1" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Qui sommes-nous ?</a>
                   <div class="dropdown-menu dropdown-primary"
                     aria-labelledby="navbarDropdownMenuLink">
+                    {#---------------------------NAVBAR-SOUS-MENU-QUI-SOMMES-NOUS-?---------------------------#}
                     <a class="dropdown-item" href="?p=page&title=nosvaleurs">Nos
                       valeurs</a>
                     <a class="dropdown-item" href="?p=page&title=adresse">Adresse</a>
                   </div>
                 </li>
-
-                <!-- Dropdown -->
+                {#------------------------END-ONGLET-NAVBAR-QUI-SOMMES-NOUS-?----------------------------#}
+                {#-------------------------ONGLET-NAVBAR-NOTRE-EXPERTISE----------------------------#}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle yellow"
                     id="navbarDropdownMenuLink1" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Notre expertise</a>
                   <div class="dropdown-menu dropdown-primary"
                     aria-labelledby="navbarDropdownMenuLink">
+                    {#---------------------------NAVBAR-SOUS-MENU-NOTRE-EXPERTISE---------------------------#}
                     <a class="dropdown-item"
                       href="?p=page&title=conseilpatrimonial">Conseil
                       patrimonial</a>
@@ -205,62 +183,55 @@
                       d’investissement</a>
                   </div>
                 </li>
-                {% endblock %}
-
-                <!-- Dropdown -->
+                {#--------------------------END-NAVBAR-SOUS-MENU-NOTRE-EXPERTISE---------------------------#}
+                {#------------------------END-ONGLET-NAVBAR-NOTRE-EXPERTISE----------------------------#}
+                {#------------------------ONGLET-NAVBAR-CONTACT----------------------------#}
                 <li class="nav-item">
                   <a class="nav-link blueStrong" href="?p=contact">Contact</a>
                 </li>
-                <li></li>
+                {#-----------------------END-ONGLET-NAVBAR-CONTACT----------------------------#}
               </ul>
-              <!-- Links -->
             </div>
-            <!-- Collapsible content -->
-
-
           </nav>
-          <!--/.Navbar-->
+          {#-----------------------END-NAVBAR----------------------------#}
         </div>
       </div>
     </header>
-    <!--/ Navigation -->
-
-    <!-- Main layout -->
+    {#-----------------------END-HEADER----------------------------#}
+    {#-----------------------MAIN----------------------------#}
     <main>
       <div class="container-fluid">
-
-        <!-- Magazine -->
         <div class="row mt-5">
-          <!-- container -->
           <div class="container">
             <div class="row">
-              <!-- Main news -->
+              {#-----------------------MAIN-CONTENT-----------------------------#}
               <div class="col-xl-10 col-lg-10 col-md-9">
-                <!--Section: Magazine posts-->
                 <section class="section extra-margins listing-section">
-                  <h4 class="font-weight-bold"><strong>
+                  {#-----------------------MAIN-CONTENT-TITLE----------------------------#}
+                  <h4 class="font-weight-bold">
+                    <strong>
                       {% block title %} {% endblock %}
-                    </strong></h4>
+                    </strong>
+                  </h4>
                   <hr class="red title-hr">
+                  {#-----------------------MAIN-CONTENT-DESCRIPTION----------------------------#}
                   {% block content %}
                   {% endblock %}
                 </section>
-                <!--/Section: Magazine posts-->
               </div>
-              <!--/ Main news -->
-              <!-- Sidebar -->
-
+              {#----------------------END-MAIN-CONTENT-----------------------------#}
+              {#-----------------------SIDEBAR-----------------------------#}
               <div class="col-12 col-md-3 col-lg-2 col-xl-2 widget-column mt-0">
                 <section class="margeAside mb-5">
+                  {#-----------------------SIDEBAR-TITLE-FIRST----------------------------#}
                   <h5 class="font-weight-bold aside">PARTENAIRES</h5>
+                  {#-----------------------SIDEBAR-CONTENT-FIRST----------------------------#}
                   <div class="d-flex justify-content-center">
-                    <!--Grid row-->
                     <div class="col-7 col-sm-4 col-md-10 col-lg-12 col-xl-12">
                       <div class="row mt-4">
-                        <!--Grid column-->
                         <div class="m-auto col-8 col-sm-8 col-md-12 col-lg-12">
-                          <!--Image-->
-                          <!-- <div class="view overlay z-depth-1">
+                          {#-----------------------SIDEBAR-CONTENT-FIRST-IMAGE---------------------------#}
+                          <div class="view overlay z-depth-1">
                             <img src="img/{{session.partenaire.data.image}}"
                               class="img-fluid"
                               alt="Post">
@@ -268,201 +239,188 @@
                               <div class="mask rgba-white-slight waves-effect
                                 waves-light"></div>
                             </a>
-                          </div> -->
-                          <!--Post data-->
-                          <!-- <div class="text-center mt-3">
+                          </div>
+                          {#-----------------------SIDEBAR-CONTENT-FIRST-LINK---------------------------#}
+                          <div class="text-center mt-3">
                             <p class="mb-1 font-weight-bold">
                               <a href="#!" class="text-hover">{{session.partenaire.data.legende}}</a>
                             </p>
                           </div>
-                        </div> -->
-                          <!--Grid column-->
-                          <div class="m-auto col-8 col-sm-8 col-md-12
-                            col-lg-12">
-                            <!--Image-->
-                            <div class="view overlay z-depth-1">
-                              <img src="img/quantalys.jpg" class="img-fluid"
-                                alt="Post">
-                              <a href="#!">
-                                <div class="mask rgba-white-slight waves-effect
-                                  waves-light"></div>
-                              </a>
-                            </div>
-                            <!--Post data-->
-                            <div class="text-center mt-3">
-                              <p class="mb-1 font-weight-bold">
-                                <a href="#!" class="text-hover">Lien</a>
-                              </p>
-                            </div>
-                          </div>
-                          <!--Grid column-->
                         </div>
-                        <!--Grid row-->
+                        {#-----------------------SIDEBAR-CONTENT-FIRST-BLOCK-CONTENT--------------------------#}
+                        <div class="m-auto col-8 col-sm-8 col-md-12
+                          col-lg-12">
+                          {#-----------------------SIDEBAR-CONTENT-FIRST-IMAGE---------------------------#}
+                          <div class="view overlay z-depth-1">
+                            <img src="img/quantalys.jpg" class="img-fluid"
+                              alt="Post">
+                            <a href="#!">
+                              <div class="mask rgba-white-slight waves-effect
+                                waves-light"></div>
+                            </a>
+                          </div>
+                          {#-----------------------SIDEBAR-CONTENT-FIRST-LINK---------------------------#}
+                          <div class="text-center mt-3">
+                            <p class="mb-1 font-weight-bold">
+                              <a href="#!" class="text-hover">Lien</a>
+                            </p>
+                          </div>
+                        </div>
+                        {#----------------------END-SIDEBAR-CONTENT-FIRST-BLOCK-CONTENT--------------------------#}
                       </div>
+                      {#----------------------END-SIDEBAR-CONTENT-FIRST----------------------------#}
                     </div>
-                  </section>
-                  {% block archive %}
-                  {% endblock %}
-                </div>
-
-                <!--/ Sidebar -->
-              </div>
-            </div>
-            <!-- /container -->
-          </div>
-          <!--/ Magazine -->
-        </div>
-      </main>
-      <!--/ Main layout -->
-
-
-      <!-- Footer -->
-      <footer class="page-footer mt-4 pt-4">
-        <!--Footer Links-->
-        <div class="container-fluid">
-
-          <!-- Footer links -->
-          <div class="row text-center text-md-left mt-3 pb-3">
-
-            <div class="container">
-              <div class="row">
-                <!--Grid column-->
-                <div class="col-md-3 col-lg-3 col-xl-3 mr-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">BM Finance</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veniam, quaerat quia molestias quos atque illo
-                    neque necessitatibus tempore. Consectetur, eos.</p>
-                </div>
-                <!--/.Grid column-->
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <!--Grid column-->
-                <div class="col-md-3 col-lg-2 col-xl-2 mr-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Menu</h6>
-                  <p>
-                    <a href="#!">RGPD</a>
-                  </p>
-                  <p>
-                    <a href="#!">Conditions Générale</a>
-                  </p>
-                  <p>
-                    <a href="#!">FAQ</a>
-                  </p>
-                  <p>
-                    <a href="#!">Mentions Légales</a>
-                  </p>
-                </div>
-                <!--/.second column-->
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <!--Grid column-->
-                <div class="col-md-3 col-lg-2 col-xl-2 mr-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Menu</h6>
-                  <p>
-                    <a href="#!">RGPD</a>
-                  </p>
-                  <p>
-                    <a href="#!">Conditions Générale</a>
-                  </p>
-                  <p>
-                    <a href="#!">FAQ</a>
-                  </p>
-                  <p>
-                    <a href="#!">Mentions Légales</a>
-                  </p>
-                </div>
-                <!--/.Third column-->
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <!--Grid column-->
-                <div class="col-md-4 col-lg-3 col-xl-3 mr-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                  <p>
-                    <i class="fas fa-home mr-3"></i>9b charriere blanche ecully</p>
-                  <p>
-                    <i class="fas fa-envelope mr-3"></i>contact@3bbb.fr</p>
-                  <p>
-                    <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                  <p>
-                    <i class="fas fa-print mr-3"></i> Plan du site</p>
-                </div>
-                <!--/.Grid column-->
-
-              </div>
-            </div>
-
-
-          </div>
-          <!-- Footer links -->
-
-          <div class="row py-3 d-flex align-items-center copyright-footer">
-            <div class="container">
-              <div class="row">
-                <!--Grid column-->
-                <div class="col-md-7 col-lg-8">
-
-                  <!--Copyright-->
-                  <p class="text-center text-md-left grey-text">
-                    © 2019 Copyright: <a href="#"> BMFINANCE.fr
-                    </a>
-                  </p>
-                  <!--/.Copyright-->
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-5 col-lg-4 ml-lg-0">
-
-                  <!--Social buttons-->
-                  <div class="social-section text-center mr-auto text-md-left">
-                    <ul class="list-unstyled list-inline">
-                      <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight">
-                          <i class="fab fa-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight">
-                          <i class="fab fa-linkedin-in"></i>
-                        </a>
-                      </li>
-                    </ul>
                   </div>
-                  <!--/.Social buttons-->
-
-                </div>
-                <!--Grid column-->
-
+                  {#----------------------END-SIDEBAR-CONTENT-FIRST----------------------------#}
+                </section>
+                {#-----------------------BLOCK-SIDEBAR-CLASSIFICATION-YEARS-POST-------------------------#}
+                {% block archive %}
+                {% endblock %}
+                {#----------------------END-BLOCK-SIDEBAR-CLASSIFICATION-YEARS-POST-------------------------#}
               </div>
+              {#-----------------------END-SIDEBAR-------------------------#}
             </div>
           </div>
-
         </div>
-      </footer>
-      <!-- Footer -->
-
-
-
-
-      <!-- SCRIPTS -->
-      <script
-        src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
+      </div>
+    </main>
+    {#-----------------------END-MAIN-------------------------#}
+    {#----------------------FOOTER-------------------------#}
+    <footer class="page-footer mt-4 pt-4">
+      <div class="container-fluid">
+        {#----------------------BEFOR-FOOTER-------------------------#}
+        <div class="row text-center text-md-left mt-3 pb-3">
+          <div class="container">
+            <div class="row">
+              {#-----------------------FOOTER-CONTENT-FIRST-COLONNE----------------------#}
+              <div class="col-md-3 col-lg-3 col-xl-3 mr-auto mt-3">
+                {#-----------------------FOOTER-CONTENT-TITLE-----------------------#}
+                <h6 class="text-uppercase mb-4 font-weight-bold">BM
+                  Finance</h6>
+                {#-----------------------FOOTER-CONTENT-DESCRIPTION-----------------------#}
+                <p>Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit.
+                  Veniam, quaerat quia molestias quos atque illo
+                  neque necessitatibus tempore. Consectetur, eos.</p>
+              </div>
+              {#-----------------------FOOTER-CONTENT-FIRST-COLONNE----------------------#}
+              <hr class="w-100 clearfix d-md-none">
+              {#-----------------------FOOTER-CONTENT-SECOND-COLONNE----------------------#}
+              <div class="col-md-3 col-lg-2 col-xl-2 mr-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Menu</h6>
+                <p>
+                  <a href="#!">RGPD</a>
+                </p>
+                <p>
+                  <a href="#!">Conditions Générale</a>
+                </p>
+                <p>
+                  <a href="#!">FAQ</a>
+                </p>
+                <p>
+                  <a href="#!">Mentions Légales</a>
+                </p>
+              </div>
+              {#----------------------END-FOOTER-CONTENT-SECOND-COLONNE----------------------#}
+              <hr class="w-100 clearfix d-md-none">
+              {#----------------------FOOTER-CONTENT-THIRD-COLONNE----------------------#}
+              <div class="col-md-3 col-lg-2 col-xl-2 mr-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Menu</h6>
+                <p>
+                  <a href="#!">RGPD</a>
+                </p>
+                <p>
+                  <a href="#!">Conditions Générale</a>
+                </p>
+                <p>
+                  <a href="#!">FAQ</a>
+                </p>
+                <p>
+                  <a href="#!">Mentions Légales</a>
+                </p>
+              </div>
+              {#----------------------END-FOOTER-CONTENT-THIRD-COLONNE----------------------#}
+              <hr class="w-100 clearfix d-md-none">
+              {#----------------------FOOTER-CONTENT-FOUR-COLONNE----------------------#}
+              <div class="col-md-4 col-lg-3 col-xl-3 mr-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                <p>
+                  <i class="fas fa-home mr-3"></i>9b charriere
+                  blanche ecully</p>
+                <p>
+                  <i class="fas fa-envelope mr-3"></i>contact@3bbb.fr</p>
+                <p>
+                  <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                <p>
+                  <i class="fas fa-print mr-3"></i> Plan du site</p>
+              </div>
+              {#----------------------END-FOOTER-CONTENT-FOUR-COLONNE----------------------#}
+            </div>
+          </div>
+        </div>
+        {#---------------------END-BEFOR-FOOTER-------------------------#}
+        {#----------------------TRUE-FOOTER-------------------------#}
+        <div class="row py-3 d-flex align-items-center
+          copyright-footer">
+          <div class="container">
+            <div class="row">
+              {#---------------------FOOTER-COLONNE-ONE------------------------#}
+              <div class="col-md-7 col-lg-8">
+                {#---------------------FOOTER-Copyright-------------------------#}
+                <p class="text-center text-md-left grey-text">
+                  © 2019 Copyright: <a href="#"> BMFINANCE.fr
+                  </a>
+                </p>
+                {#--------------------END-FOOTER-Copyright-------------------------#}
+              </div>
+              {#--------------------END-FOOTER-COLONNE-ONE------------------------#}
+              {#---------------------FOOTER-COLONNE-TWO------------------------#}
+              <div class="col-md-5 col-lg-4 ml-lg-0">
+                {#---------------------FOOTER-Social-buttons-------------------------#}
+                <div class="social-section text-center mr-auto
+                  text-md-left">
+                  <ul class="list-unstyled list-inline">
+                    {#---------------------FOOTER-Social-buttons-INSTAGRAM------------------------#}
+                    <li class="list-inline-item">
+                      <a class="btn-floating btn-sm
+                        rgba-white-slight">
+                        <i class="fab fa-instagram"></i>
+                      </a>
+                    </li>
+                    {#---------------------FOOTER-Social-buttons-LINKEDIN------------------------#}
+                    <li class="list-inline-item">
+                      <a class="btn-floating btn-sm
+                        rgba-white-slight">
+                        <i class="fab fa-linkedin-in"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                {#--------------------END-FOOTER-Social-buttons-------------------------#}
+              </div>
+              {#--------------------END-FOOTER-COLONNE-TWO------------------------#}
+            </div>
+          </div>
+        </div>
+        {#---------------------END-TRUE-FOOTER-------------------------#}
+      </div>
+    </footer>
+    {#---------------------END-FOOTER-------------------------#}
+    {#---------------------JAVASCRIPT-------------------------#}
+    <script
+      src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+      async defer>
   </script>
-      <!-- JQuery -->
-      <script type="text/javascript" src="js/MDB-Free/jquery.min.js"></script>
-      <!-- Tooltips -->
-      <script type="text/javascript" src="js/MDB-Free/popper.min.js"></script>
-      <!-- Bootstrap core JavaScript -->
-      <script type="text/javascript" src="js/MDB-Free/bootstrap.min.js"></script>
-      <!-- MDB core JavaScript -->
-      <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
-      <!-- Import script -->
-      {% block js %} {% endblock %}
-    </body>
-
-  </html>
+    {#---------------------JQUERY-------------------------#}
+    <script type="text/javascript" src="js/MDB-Free/jquery.min.js"></script>
+    {#---------------------TOOLTIPS-------------------------#}
+    <script type="text/javascript" src="js/MDB-Free/popper.min.js"></script>
+    {#---------------------BOOTSTRAP-JS-------------------------#}
+    <script type="text/javascript"
+      src="js/MDB-Free/bootstrap.min.js"></script>
+    {#--------------------MDB-CORE-JS-------------------------#}
+    <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
+    {#---------------------IMPORT-JS-------------------------#}
+    {% block js %} {% endblock %}
+  </body>
+</html>

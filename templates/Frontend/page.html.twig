@@ -1,48 +1,52 @@
 {% extends 'Frontend/layout.html.twig' %}
-{% block head %} {% for pages in data.page %} <title>
-    {{pages.titlePage|raw|convert_encoding("utf-8",
-    "ISO-8859-1")}}
+{#--------------------------BLOC-TITLE-----------------------------#}
+{% block head %}
+{% for pages in data.page %}
+<title>
+    {{pages.titlePage|raw|convert_encoding("utf-8","ISO-8859-1")}}
 </title>
-{% endfor %} {% endblock %}
-{% block title %} {% for pages in data.page %} Page:
-{{pages.titlePage|raw|convert_encoding("utf-8",
-"ISO-8859-1")}} {% endfor
-%}{%
-endblock %}
+{% endfor %}
+{% endblock %}
+{#-------------------------END-BLOC-TITLE-----------------------------#}
+{#--------------------------BLOC-TITLE-PAGE----------------------------#}
+{% block title %}
+{% for pages in data.page %}
+Page:{{pages.titlePage|raw|convert_encoding("utf-8","ISO-8859-1")}}
+{% endfor %}
+{% endblock %}
+{#-------------------------END-BLOC-TITLE-PAGE----------------------------#}
 {% block content %}
-
-<!--Grid column-->
+{#--------------------------GRILLE-COLONNE-----------------------------#}
 <div class="col-md-12">
-    <!--Card-->
+    {#--------------------------CARD-----------------------------#}
     <div class="card hoverable pb-5 mx-md-3">
-        <!-- img -->
+        {#--------------------------CARD-IMAGE-----------------------------#}
         <img class="jarallax-img"
             src="https://mdbootstrap.com/img/Photos/Others/city7.jpg" alt="">
-        <!-- /img -->
+        {#-------------------------END-CARD-IMAGE-----------------------------#}
+        {#--------------------------CARD-BODy-----------------------------#}
         <div class="card-body">
             <div class="container">
                 {% for pages in data.page %}
-                <!--Section heading-->
+                {#--------------------------CARD-BODY-TITLE-----------------------------#}
                 <h1 class="text-left h1 pt-4 mb-3">
                     <strong>{{pages.title|raw|convert_encoding("utf-8",
                         "ISO-8859-1")}}</strong>
                 </h1>
-                <!-- Grid column -->
+                {#-------------------------END-CARD-BODY-TITLE-----------------------------#}
+                {#-------------------------COLONNE-GRILLE----------------------------#}
                 <div class="row mt-3">
-
+                    {#-------------------------DESCRITPION----------------------------#}
                     <p class="dark-grey-text article">{{pages.description|raw|convert_encoding("utf-8",
                         "ISO-8859-1")}}</p>
-
+                    {#------------------------END-DESCRITPION----------------------------#}
                 </div>
-                <!--/Grid colomn -->
+                {#-------------------------END-COLONNE-GRILLE----------------------------#}
                 {% endfor %}
             </div>
-            <!--/Grid column-->
         </div>
-        <!--/Grid row-->
     </div>
-    <!--/Card-->
+    {#-------------------------END-CARD----------------------------#}
 </div>
-<!--/Grid column-->
-
+{#-------------------------END-GRILLE-COLONNE----------------------------#}
 {% endblock %}

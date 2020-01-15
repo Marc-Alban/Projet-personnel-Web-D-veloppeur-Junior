@@ -20,6 +20,7 @@ class HomeRepository
         $this->pdo = Database::getPdo();
     }
 
+/************************************Read All Graph************************************************* */
     /**
      * Récupère tous les objets Graph
      *
@@ -31,13 +32,11 @@ class HomeRepository
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM graph WHERE posted = 1");
         $graphs = [];
-
         while ($graph = $this->pdoStatement->fetchObject(Graph::class)) {
             $graphs[] = $graph;
         }
-        // var_dump($graphs);
-        // die();
         return $graphs;
     }
+/************************************Read All Graph************************************************* */
 
 }

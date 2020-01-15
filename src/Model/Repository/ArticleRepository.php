@@ -23,6 +23,7 @@ class ArticleRepository
         $this->article = new Article;
     }
 
+/************************************last Article************************************************* */
     /**
      * Récupère le dernier article
      *
@@ -60,9 +61,9 @@ class ArticleRepository
         if (!$executeIsOk) {
             return false;
         }
-
     }
-
+/************************************End last Article************************************************* */
+/************************************ Update last Article with 0 for 1************************************************* */
     /**
      * Met à 0 le dernier article
      *
@@ -74,7 +75,8 @@ class ArticleRepository
         $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE lastArticle = 1");
         $this->pdoStatement->execute();
     }
-
+/************************************End Update last Article with 0 for 1************************************************* */
+/************************************Read Post with id************************************************* */
     /**
      * Récupère un objet Article à partir de son identifiant
      *
@@ -85,19 +87,14 @@ class ArticleRepository
      */
     public function read(int $id): Object
     {
-
         $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE  posted = 1 AND id=:id');
-
         //Liaison paramètres
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-
         //execution de la requête
         $executeIsOk = $this->pdoStatement->execute();
-
         if ($executeIsOk) {
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
             $this->article = $this->pdoStatement->fetchObject(Article::class);
-
             if ($this->article === false) {
                 $articleFake = (object) [
                     'id' => '1',
@@ -112,15 +109,13 @@ class ArticleRepository
                 return $articleFake;
             }
             return $this->article;
-
         }
-
         if (!$executeIsOk) {
             return false;
         }
-
     }
-
+/************************************End Read Post with id************************************************* */
+/************************************Read All Post ************************************************* */
     /**
      * Récupère tous les objet Article dans la bdd
      *
@@ -130,11 +125,8 @@ class ArticleRepository
      */
     public function readAll($firstOfPage, $perPage): object
     {
-
         $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY id LIMIT $firstOfPage,$perPage");
-
         $this->article = [];
-
         if (empty($this->article) || $this->pdoStatement === false) {
             $articleFake = (object) [
                 'id' => '1',
@@ -148,14 +140,13 @@ class ArticleRepository
             ];
             return $articleFake;
         };
-
         while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
             $this->article[] = $articles;
         }
-
         return $this->article;
     }
-
+/************************************End Read All Post ************************************************* */
+/************************************Write Post************************************************* */
     /**
      * insert en bdd
      *
@@ -174,11 +165,9 @@ class ArticleRepository
             $id = "post";
             $extention = ".png";
         }
-
         $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM article ORDER BY date = NOW()');
         $response = $this->pdoStatement->fetch();
         $id = $response['MAX(id)'] + 1;
-
         $p = [
             ':title' => $title,
             ':legende' => $legende,
@@ -188,19 +177,16 @@ class ArticleRepository
             ':posted' => $posted,
             ':lastArticle' => $lastArticle,
         ];
-
         $sql = "
         INSERT INTO article(title, legende, description, image, date, posted, lastArticle)
         VALUES(:title, :legende, :description, :image, :date, :posted, :lastArticle)
         ";
-
         $query = $this->pdo->prepare($sql);
         $query->execute($p);
-
         move_uploaded_file($tmpName, "img/article/" . $id . '.' . $extention);
-
     }
-
+/************************************End Write Post************************************************* */
+/************************************Delete Post Bdd With ID************************************************* */
     /**
      * Supprime un objet Article stocké en bdd
      *
@@ -210,17 +196,16 @@ class ArticleRepository
     public function delete(Article $article): bool
     {
         $this->pdoStatement = $this->pdo->prepare('DELETE FROM article WHERE id=:id LIMIT 1');
-
         //Liaison paramètres
         $this->pdoStatement->bindValue(':id', $article->getId(), PDO::PARAM_INT);
-
         //execution de la requête
         return $this->pdoStatement->execute();
     }
-
+/************************************End Delete Post Bdd With ID************************************************* */
+/************************************Count Post in BDD************************************************* */
 /**
- * Renvoie le nombre d'article stocké dans la table article et s'il
- * n'y a rien alors renvoie null
+ * Renvoie le nombre d'article stocké dans la table article
+ * et s'il n'y a rien alors renvoie null
  *
  * @return string|null
  */
@@ -234,7 +219,8 @@ class ArticleRepository
         }
         return null;
     }
-
+/************************************End Count Post in BDD************************************************* */
+/************************************Return Post With Year************************************************* */
     /**
      * Retourne les articles en fonctions de la date données dans l'url
      * sinon  si c'est false ou null alors par défaults ce sera 2019
@@ -247,5 +233,6 @@ class ArticleRepository
         $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE YEAR( date ) = $years");
         return $this->pdoStatement->fetchAll();
     }
+/************************************End Return Post With Year************************************************* */
 
 }

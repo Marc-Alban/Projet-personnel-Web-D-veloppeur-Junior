@@ -5,6 +5,7 @@ namespace App\Model\Manager;
 class ContactManager
 {
 
+    /************************************Contenu Mail Contact************************************************* */
 /**
  * Envoie les données dans le formulaire de contact
  *
@@ -61,19 +62,20 @@ class ContactManager
 ';
 
         mail("millet.marcalban@gmail.com", "Page Contact - BmFinance.com", $message, $headers);
-
     }
+    /************************************End Contenu Mail Contact************************************************* */
 
+/************************************Verif Form Contact************************************************* */
 /**
  * Vérifie le formulaire de contact
  *
  * @param [type] $data
  */
-    public function verifMail(array $data): ?array
+    public function verifFormContact(array $data): ?array
     {
         if (isset($data['post']['submit'])) {
 
-            $tab = $this->getData($data);
+            $tab = $this->getDataForm($data);
             $sujet = $tab['sujet'];
             $tel = $tab['tel'];
             $mail = $tab['mail'];
@@ -136,8 +138,16 @@ class ContactManager
         }
         return null;
     }
+    /************************************End Verif Form Contact************************************************* */
 
-    public function getData(array $data): array
+    /************************************Data Form Contact************************************************* */
+    /**
+     * Récupération des données du formulaire
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getDataForm(array $data): array
     {
         $tabData = [];
         if (isset($data['post']['submit'])) {
@@ -158,5 +168,6 @@ class ContactManager
         }
         return $tabData;
     }
+    /************************************End Data Form Contact************************************************* */
 
 }

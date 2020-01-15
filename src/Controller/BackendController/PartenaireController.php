@@ -9,12 +9,10 @@ use App\View\View;
 class PartenaireController
 {
     private $view;
-    private $error;
 
     public function __construct()
     {
         $this->view = new View();
-        // $this->error = new HomeController();
     }
 
     /**
@@ -24,9 +22,6 @@ class PartenaireController
      */
     public function PartenaireAction(array $data): void
     {
-        // if (!empty($data['session']['pseudo']) || !empty($data['session']['mdp'])) {
-        //     $this->error->errorAction();
-        // }
 
         $this->view->renderer('Backend', 'partenaire', null);
     }

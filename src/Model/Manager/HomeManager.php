@@ -17,7 +17,7 @@ class HomeManager
     {
         $this->homeRepository = new HomeRepository();
     }
-
+/************************************Liste Graph BDD************************************************* */
     /**
      * Retourne la liste des graphs sur le controller home
      *
@@ -27,5 +27,5 @@ class HomeManager
     {
         return $this->homeRepository->readAll();
     }
-
+/************************************End Liste Graph BDD************************************************* */
 }

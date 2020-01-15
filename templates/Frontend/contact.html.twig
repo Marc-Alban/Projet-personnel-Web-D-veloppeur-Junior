@@ -1,41 +1,44 @@
 {% extends 'Frontend/layout.html.twig' %}
+{#--------------------------BLOC-ITLE-----------------------------#}
 {% block head %}
 <title>Contactez-nous</title>
 {% endblock %}
+{#-------------------------END-BLOC-ITLE-----------------------------#}
+{#--------------------------BLOC-ITLE-PAGE----------------------------#}
 {% block title %}Contactez-nous{% endblock %}
+{#-------------------------END-BLOC-ITLE-PAGE----------------------------#}
 {% block content %}
-
+{#--------------------------CONDITION-DATA----------------------------#}
 {% if data.listeMessage.send %}
+{#--------------------------SUCCES-MESSAGE----------------------------#}
 {% for success in data.listeMessage %}
-<!-- Success strat -->
 <div class="alert alert-primary" role="alert">
     {{success}}
 </div>
 {% endfor %}
-<!-- Success end -->
+{#-------------------------END-CONDITION-DATA----------------------------#}
+{#-------------------------END-SUCCES-MESSAGE----------------------------#}
 {% endif %}
-
+{#--------------------------CONDITION-DATA----------------------------#}
 {% if data.listeMessage.tab %}
+{#--------------------------ERROR-MESSAGE----------------------------#}
 {% for errors in data.listeMessage.tab %}
-<!-- Erreur strat -->
 <div class="alert alert-danger" role="alert">
     {{errors}}
 </div>
-<!-- Erreur end -->
 {% endfor %}
+{#--------------------------ERROR-MESSAGE----------------------------#}
 {% endif %}
-<!-- Material form contact -->
+{#--------------------------END-CONDITION-DATA----------------------------#}
+{#--------------------------CARD---------------------------#}
 <div class="card">
-    <!--Card content-->
+    {#--------------------------CARD-CONTENT----------------------------#}
     <div class="card-body px-lg-5 pt-0">
-
-        <!-- Form -->
         <form class="text-center" style="color: #757575;" action="?p=contact"
             method="POST">
-
             <div class="form-row">
                 <div class="col">
-                    <!-- Name -->
+                    {#--------------------------NAME----------------------------#}
                     <div class="md-form">
                         <input type="text" name="nameLastname"
                             id="materialContactFormName" class="form-control"
@@ -43,21 +46,22 @@
                         <label for="materialContactFormName">Nom et prénom
                             (requis)</label>
                     </div>
+                    {#-------------------------END-NAME----------------------------#}
                 </div>
                 <div class="col">
-                    <!-- E-mail -->
+                    {#--------------------------EMAIL----------------------------#}
                     <div class="md-form">
                         <input type="email" name="mail"
                             id="materialContactFormEmail" class="form-control"
                             value="{{data.donnee.mail}}">
                         <label for="materialContactFormEmail">E-mail (requis)</label>
                     </div>
+                    {#-------------------------END-EMAIL----------------------------#}
                 </div>
             </div>
-
             <div class="form-row">
                 <div class="col">
-                    <!-- Phone number -->
+                    {#--------------------------PHONE-NUMBER----------------------------#}
                     <div class="md-form">
                         <input type="tel" name="telephone"
                             id="materialRegisterFormPhone" class="form-control"
@@ -66,19 +70,20 @@
                         <label for="materialRegisterFormPhone">Téléphone
                             (requis)</label>
                     </div>
+                    {#-------------------------END-PHONE-NUMBER----------------------------#}
                 </div>
                 <div class="col">
-                    <!-- CP -->
+                    {#--------------------------CP---------------------------#}
                     <div class="md-form">
                         <input type="text" name="codepostal"
                             id="materialContactCP" class="form-control"
                             value="{{data.donnee.cp}}">
                         <label for="materialContactFormCP">Code postal (requis)</label>
                     </div>
+                    {#-------------------------END-CP---------------------------#}
                 </div>
             </div>
-
-            <!-- Option  -->
+            {#--------------------------LISTE-OPTION---------------------------#}
             <div class="md-form">
                 <select class="browser-default custom-select mb-4" name="liste"
                     id="select">
@@ -123,35 +128,31 @@
                     </option>
                 </select>
             </div>
-            <!-- Subject -->
+            {#-------------------------END-LISTE-OPTION---------------------------#}
+            {#-------------------------SUBJECT---------------------------#}
             <div class="md-form">
                 <input type="text" name="sujet" id="materialContactSubject"
                     class="form-control" value="{{data.donnee.sujet}}">
                 <label for="materialContactFormSubject">Sujet (requis)
                 </label>
             </div>
-
-            <!--Message-->
+            {#-------------------------END-SUBJECT---------------------------#}
+            {#-------------------------MESSAGE---------------------------#}
             <div class="md-form">
                 <textarea id="materialContactFormMessage" name="message"
                     class="form-control
                     md-textarea" rows="3"></textarea>
                 <label for="materialContactFormMessage">Message (requis)</label>
             </div>
-
-            <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+            {#-------------------------END-MESSAGE---------------------------#}
             <div id="contact"></div>
-
-            <!-- Send button -->
+            {#-------------------------SUBMIT---------------------------#}
             <button class="btn btn-red btn-rounded btn-block z-depth-0 my-4
                 waves-effect" name="submit" type="submit">Envoyer
                 ma demande</button>
-
         </form>
-        <!-- Form -->
-
     </div>
-
+    {#-------------------------END-CARD-CONTENT----------------------------#}
 </div>
-<!-- Material form contact -->
+{#-------------------------END-CARD----------------------------#}
 {% endblock %}

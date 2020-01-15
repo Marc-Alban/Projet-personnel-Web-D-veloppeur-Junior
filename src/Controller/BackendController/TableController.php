@@ -16,17 +16,18 @@ class TableController
         $this->partenaireManager = new PartenaireManager();
 
     }
+/************************************Page table************************************************* */
 
     /**
      * Rendu des listes sous form de tableau
      *
      * @return void
      */
-    public function TableAction(array $data): void
+    public function TableAction(): void
     {
-
         $partenaire = $this->partenaireManager->listePartenaire();
-
         $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire]);
     }
+/************************************End Page Table************************************************* */
+
 }

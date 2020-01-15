@@ -17,7 +17,6 @@ class Router
 
     public function __construct()
     {
-
         $this->id = $_GET['id'] ?? null;
         $this->action = $_GET['action'] ?? null;
         $this->page = $_GET['p'] ?? "home";
@@ -25,9 +24,8 @@ class Router
         $this->pageFront = ['Home', 'Article', 'ListesArticles', 'Contact', 'Page', 'NewPassword', 'LostPassword'];
         $this->pageBack = ['Dashboard', 'Form', 'Graph', 'Partenaire', 'Table', 'User'];
         $this->home = new HomeController;
-
     }
-
+/************************************Controller************************************************* */
     /**
      * Renvoie le bon controller en fonction de la page qui est passé
      *
@@ -40,9 +38,9 @@ class Router
         } else if (in_array($this->pageMaj, $this->pageBack)) {
             return 'App\Controller\BackendController\\' . $this->pageMaj . "Controller";
         }
-
     }
-
+/************************************End Controller************************************************* */
+/************************************Call Function With Controller************************************************* */
     /**
      * Appel le controller et appelle la bonne
      *  méthode sur le controller appelé
@@ -56,7 +54,8 @@ class Router
         $methode = $this->pageMaj . 'Action';
         return $controller->$methode($datas);
     }
-
+/************************************End Call Function With Controller************************************************* */
+/************************************Algo Action************************************************* */
     /**
      * Si il y a des paramètres dans l'url alors
      * on fait un algo pour savoir quoi mettre dans les méthodes
@@ -68,7 +67,6 @@ class Router
         if (in_array($this->pageMaj, $this->pageFront) || in_array($this->pageMaj, $this->pageBack)) {
             if (($this->action === null && $this->id === null) || ($this->action !== null && $this->id !== null || $this->action !== null && $this->id === null)) {
                 $this->call(['get' => $_GET, 'post' => $_POST, 'files' => $_FILES, 'session' => $_SESSION]);
-
             } else if ($this->action === null && $this->id !== null) {
                 $this->call(['post' => $_POST, 'get' => $_GET, 'session' => $_SESSION]);
             }
@@ -76,7 +74,8 @@ class Router
             $this->error();
         }
     }
-
+/************************************End Algo Action************************************************* */
+/************************************Return Error Action************************************************* */
     /**
      * Renvoie la page 404 si rien n'est trouvée !
      *
@@ -87,5 +86,5 @@ class Router
         $this->home->errorAction();
         exit();
     }
-
+/************************************End Return Error Action************************************************ */
 }

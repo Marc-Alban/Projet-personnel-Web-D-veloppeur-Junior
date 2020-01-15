@@ -1,15 +1,17 @@
 {% extends 'Backend/layout.html.twig' %}
+{#----------------------------BLOC-Title----------------------------#}
 {% block head %} <title> Page graphique </title> {% endblock %}
+{#----------------------------END-BLOC-Title----------------------------#}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-12 mt-3">
-            <!-- Card -->
+            {#----------------------------Card----------------------------#}
             <div class="card mx-xl-5">
-                <!-- Card body -->
+                {#----------------------------Card-Body----------------------------#}
                 <div class="card-body">
-                    <!-- Default form subscription -->
                     <form>
+                        {#----------------------------Selection-Catégorie-graph----------------------------#}
                         <div class="input-group">
                             <select class="browser-default custom-select">
                                 <option selected>Prudent</option>
@@ -19,31 +21,34 @@
                             </select>
                         </div>
                         <br>
+                        {#----------------------------File-Image-Graph----------------------------#}
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile"
+                                <input type="file" class="custom-file-input"
+                                    id="inputGroupFile"
                                     aria-describedby="inputGroupFileAddon">
-                                <label class="custom-file-label" for="inputGroupFile">Choisir une image</label>
+                                <label class="custom-file-label"
+                                    for="inputGroupFile">Choisir une image</label>
                             </div>
                         </div>
                         <br>
-                        <!-- Default input email -->
-                        <label for="defaultFormCardDesc" class="grey-text font-weight-light">Legende</label>
-                        <input type="text" id="defaultFormCardDesc" class="form-control">
+                        {#----------------------------Legende-Graph----------------------------#}
+                        <label for="defaultFormCardDesc" class="grey-text
+                            font-weight-light">Legende</label>
+                        <input type="text" id="defaultFormCardDesc"
+                            class="form-control">
                         <br>
-
+                        {#----------------------------Submit----------------------------#}
                         <div class="text-center py-4 mt-3">
                             <button class="btn btn-dark" type="submit">Envoyer<i
                                     class="fa fa-paper-plane-o ml-2"></i></button>
                         </div>
                     </form>
-                    <!-- Default form subscription -->
                 </div>
-                <!-- Card body -->
+                {#----------------------------END-CARD-BODY----------------------------#}
             </div>
-            <!-- Card -->
+            {#----------------------------END-CARD----------------------------#}
         </div>
     </div>
 </div>
-
 {% endblock %}

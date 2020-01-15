@@ -13,6 +13,7 @@ class Database
     const PASSWORD = '';
     private static $instance = null;
 
+/************************************PDO Connexion************************************************* */
     /**
      * Retourne la base de donnée si elle n'existe pas
      * Sinon reprend la bdd existante
@@ -21,7 +22,6 @@ class Database
      */
     public static function getPdo(): PDO
     {
-
         try {
             if (self::$instance === null) {
                 self::$instance = new PDO(self::DSN, self::USER, self::PASSWORD);
@@ -30,6 +30,6 @@ class Database
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
-
     }
+/************************************End PDO Connexion************************************************* */
 }

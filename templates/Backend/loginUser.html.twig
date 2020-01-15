@@ -1,57 +1,72 @@
 {% extends 'Backend/layout.html.twig' %}
+{#---------------------------BLOC-Title-----------------------------#}
 {% block head %} <title> Gestion de compte </title> {% endblock %}
+{#---------------------------END-BLOC-TITLE-----------------------------#}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-12 mt-3">
-            <!-- Card -->
+            {#---------------------------Card-----------------------------#}
             <div class="card mx-xl-5">
-                <!-- Card body -->
+                {#---------------------------Card-Body-----------------------------#}
                 <div class="card-body">
-                    <!-- Default form subscription -->
                     <form>
                         <p class="h4 text-center py-4">Gestion de compte</p>
-                        <!-- Default input name -->
-                        <label for="defaultFormCardName" class="grey-text font-weight-light">Nom</label>
-                        <input type="text" id="defaultFormCardName" class="form-control">
+                        {#---------------------------Input-Name-----------------------------#}
+                        <label for="defaultFormCardName" class="grey-text
+                            font-weight-light">Nom</label>
+                        <input type="text" id="defaultFormCardName"
+                            class="form-control">
                         <br>
-                        <!-- Default input last_name -->
-                        <label for="defaultFormCardLastName" class="grey-text font-weight-light">Prénoms</label>
-                        <input type="text" id="defaultFormCardLastName" class="form-control">
+                        {#---------------------------Input-Last_Name-----------------------------#}
+                        <label for="defaultFormCardLastName" class="grey-text
+                            font-weight-light">Prénoms</label>
+                        <input type="text" id="defaultFormCardLastName"
+                            class="form-control">
                         <br>
-                        <!-- Default input email -->
-                        <label for="defaultFormCardEmail" class="grey-text font-weight-light">E-mail</label>
-                        <input type="email" id="defaultFormCardEmail" class="form-control">
+                        {#---------------------------Input-Email-----------------------------#}
+                        <label for="defaultFormCardEmail" class="grey-text
+                            font-weight-light">E-mail</label>
+                        <input type="email" id="defaultFormCardEmail"
+                            class="form-control">
                         <br>
-                        <!-- Default input email -->
-                        <label for="defaultFormCardEmail" class="grey-text font-weight-light">E-mail</label>
-                        <input type="email" id="defaultFormCardEmail" class="form-control">
+                        {#---------------------------Input-Confirm-Email-----------------------------#}
+                        <label for="defaultFormCardEmail" class="grey-text
+                            font-weight-light">E-mail</label>
+                        <input type="email" id="defaultFormCardEmail"
+                            class="form-control">
                         <br>
                         <div class="form-row">
                             <div class="col-6">
-                                <!-- Default input pass -->
-                                <label for="defaultFormCardPassword" class="grey-text font-weight-light">Mot de
+                                {#---------------------------Input-Paswword-----------------------------#}
+                                <label for="defaultFormCardPassword"
+                                    class="grey-text font-weight-light">Mot de
                                     passe</label>
-                                <input type="password" id="defaultFormCardPassword" class="form-control">
+                                <input type="password"
+                                    id="defaultFormCardPassword"
+                                    class="form-control">
                             </div>
                             <div class="col-6">
-                                <!-- Default input pass -->
+                                {#---------------------------Input-Paswword-Confirmatio-----------------------------#}
                                 <label for="defaultFormCardPasswordConf"
-                                    class="grey-text font-weight-light">Confirmation mot de passe</label>
-                                <input type="password" id="defaultFormCardPasswordConf" class="form-control">
+                                    class="grey-text font-weight-light">Confirmation
+                                    mot de passe</label>
+                                <input type="password"
+                                    id="defaultFormCardPasswordConf"
+                                    class="form-control">
                             </div>
                         </div>
                         <br>
+                        {#---------------------------Submit-----------------------------#}
                         <div class="text-center py-4 mt-3">
                             <button class="btn btn-dark" type="submit">Enregistrer<i
                                     class="fa fa-paper-plane-o ml-2"></i></button>
                         </div>
                     </form>
-                    <!-- Default form subscription -->
                 </div>
-                <!-- Card body -->
+                {#---------------------------END-CARD-BODY-----------------------------#}
             </div>
-            <!-- Card -->
+            {#---------------------------END-CARD-----------------------------#}
         </div>
     </div>
 </div>

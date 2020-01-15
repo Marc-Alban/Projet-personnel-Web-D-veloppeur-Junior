@@ -1,35 +1,42 @@
 {% extends 'Frontend/layout.html.twig' %}
-{% block head %} <title>Nouveau mot de passe</title> {% endblock %}
-{% block title %}Nouveau mot de passe{% endblock %}
+{#--------------------------BLOC-TITLE-----------------------------#}
+{% block head %}
+<title>Nouveau mot de passe</title>
+{% endblock %}
+{#-------------------------END-BLOC-TITLE-----------------------------#}
+{#--------------------------BLOC-TITLE-PAGE----------------------------#}
+{% block title %}
+Nouveau mot de passe
+{% endblock %}
+{#-------------------------END-BLOC-TITLE-PAGE----------------------------#}
 {% block content %}
+{#-------------------------CONDITION-DATA---------------------------#}
 {% if data.newPass.message %}
+{#-------------------------SUCCES-MESSAGE-------------------------#}
 {% for succes in data.newPass %}
-<!-- Success strat -->
 <div class="alert alert-primary" role="alert">
     {{succes}}
 </div>
-<!-- Success end -->
 {% endfor %}
+{#------------------------EDN-SUCCES-MESSAGE-------------------------#}
+{#-------------------------ELSE-CONDITION-------------------------#}
 {% else %}
+{#-------------------------ERRORS-MESSAGE-------------------------#}
 {% for errors in data.newPass %}
-<!-- Erreur strat -->
 <div class="alert alert-danger" role="alert">
     {{errors}}
 </div>
-<!-- Erreur end -->
 {% endfor %}
+{#------------------------EDN-ERRORS-MESSAGE-------------------------#}
 {% endif %}
-    <!-- Card -->
+{#------------------------EDN-CONDITION-DATA-------------------------#}
+{#------------------------CARD-------------------------#}
     <div class="card">
-
-        <!-- Card body -->
+{#------------------------CARD-BODY------------------------#}
         <div class="card-body">
-
-            <!-- Material form register -->
             <form action="/?p=newPassword&token={{data.token}}"
                 method="POST">
-
-                <!-- Material input password -->
+{#------------------------CARD-PASSWORD------------------------#}
                 <div class="md-form">
                     <i class="fa fa-lock prefix grey-text"></i>
                     <input type="password" id="materialFormCardPasswordEx"
@@ -39,8 +46,8 @@
                         class="font-weight-light">Entrer votre mot de passe
                         (requis)</label>
                 </div>
-
-                <!-- Material input email -->
+{#-----------------------END-CARD-PASSWORD------------------------#}
+{#-----------------------CARD-PASSWORD-CONFIRMATION-----------------------#}
                 <div class="md-form">
                     <i class="fa fa-exclamation-triangle prefix grey-text"></i>
                     <input type="password" id="materialFormCardConfirmEx"
@@ -50,19 +57,15 @@
                         class="font-weight-light">Confirmation mot de passe
                         (requis)</label>
                 </div>
-
+{#-----------------------END-CARD-PASSWORD-CONFIRMATION-----------------------#}
+{#-----------------------SUBMI------------------------#}
                 <div class="text-center py-4 mt-3">
                     <input class="btn btn-red" name="submit" type="submit"
                         value="Envoyer"></input>
             </div>
         </form>
-        <!-- Material form register -->
-
     </div>
-    <!-- Card body -->
-
+{#-----------------------END-CARD-BODY------------------------#}
 </div>
-<!-- Card -->
-
-
+{#-----------------------END-CARD------------------------#}
 {% endblock %}

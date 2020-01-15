@@ -7,14 +7,18 @@ require_once '../vendor/autoload.php';
 use App\Tools\Router;
 use App\Tools\Token;
 
+$token = new Token();
+$Router = new Router();
+//$maSuperGlobale = new GestionGlobalPhp();
+
+/************************************Partenaire Session************************************************* */
 // $partenaireManager = new PartenaireManager();
 // $_SESSION['partenaire'] = $partenaireManager->listePartenaire();
-
-$token = new Token();
+/************************************End Partenaire Session************************************************* */
+/************************************Token Session************************************************* */
 $_SESSION['token'] = $token->createSessionToken();
-
-//$maSuperGlobale = new GestionGlobalPhp();
 //$maSuperGlobale->setParamSession('token', $token->createSessionToken());
-
-$Router = new Router();
+/************************************End Token Session************************************************* */
+/************************************Instance Router************************************************* */
 $Router->action();
+/************************************End Instance Router************************************************* */

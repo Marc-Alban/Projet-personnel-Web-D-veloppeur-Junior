@@ -1,16 +1,19 @@
 {% extends 'Backend/layout.html.twig' %}
+{#---------------------------BLOC-Title-----------------------------#}
 {% block head %} <title> Page insertion </title> {% endblock %}
+{#---------------------------BLOC-Title-----------------------------#}
 {% block content %}
-<!-- Card -->
+{#--------------------------CARD-----------------------------#}
+
 <div class="container">
     <div class="row">
         <div class="card mx-xl-5 col-12 col-sm-8 col-md-8 col-lg-8 mt-3">
-            <!-- Card body -->
+            {#---------------------------CARD-BODY-----------------------------#}
             <div class="card-body">
-                <!-- Default form subscription -->
                 <form>
                     <div class="input-group">
                         <div class="custom-file">
+                            {#---------------------------INPUT-IMAGE-----------------------------#}
                             <input type="file" class="custom-file-input"
                                 id="inputGroupFile"
                                 aria-describedby="inputGroupFileAddon">
@@ -19,21 +22,22 @@
                         </div>
                     </div>
                     <br>
-                    <!-- Default input email -->
+                    {#---------------------------INPUT-EMAIL-----------------------------#}
                     <label for="defaultFormCardLink" class="grey-text
                         font-weight-light">Lien partenaire</label>
                     <input type="email" id="defaultFormCardLink"
                         class="form-control">
+                    {#---------------------------SUBMIT-----------------------------#}
                     <div class="text-center py-4 mt-3">
                         <button class="btn btn-black" type="submit">Envoyer<i
                                 class="fa fa-paper-plane-o ml-2"></i></button>
                     </div>
                 </form>
-                <!-- Default form subscription -->
             </div>
-            <!-- Card body -->
+            {#---------------------------END-CARD-BODy-----------------------------#}
         </div>
     </div>
 </div>
-<!-- Card -->
+{#---------------------------END-CARD-----------------------------#}
+
 {% endblock %}

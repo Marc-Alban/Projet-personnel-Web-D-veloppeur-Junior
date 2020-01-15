@@ -18,6 +18,7 @@ class NewPasswordController
         $this->userManager = new UserManager();
         $this->home = new HomeController();
     }
+    /************************************Page New Password************************************************* */
 
     /**
      * Rendu de la page nouveau password
@@ -29,18 +30,15 @@ class NewPasswordController
         if (!isset($data['get']['token']) || empty($data['get']['token'])) {
             $this->home->errorAction();
         }
-
         if (isset($data['get']['token']) || !empty($data['get']['token'])) {
             if ($this->userManager->verifUser($data) === null) {
                 header('Location: http://3bigbangbourse.fr/?p=lostPassword');
             }
-
             $newPass = $this->userManager->changeMdp($data);
-            $token = $this->userManager->token();
+            $token = $this->userManager->getTokenBdd();
             $this->view->renderer('Frontend', 'new', ['newPass' => $newPass, 'token' => $token]);
-
         }
-
     }
+    /************************************ End Page New password************************************************* */
 
 }

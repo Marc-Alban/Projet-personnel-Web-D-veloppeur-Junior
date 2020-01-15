@@ -24,6 +24,7 @@ class ArticleController
         $this->view = new View();
     }
 
+    /************************************Page Article************************************************* */
     /**
      * Retourne un article sur la page article cibler par l'id passé en paramètre
      *
@@ -32,8 +33,9 @@ class ArticleController
     public function ArticleAction(array $data): void
     {
         $id = $data['get']['id'] ?? null;
-        $post = $this->articleManager->article((int) $id, $data);
+        $post = $this->articleManager->getPost((int) $id, $data);
         $this->view->renderer('Frontend', 'article', ['post' => $post]);
     }
+    /************************************End Page Article************************************************* */
 
 }

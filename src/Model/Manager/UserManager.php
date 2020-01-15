@@ -19,7 +19,7 @@ class UserManager
         $this->userRepository = new UserRepository();
         $this->user = $this->userRepository;
     }
-
+/************************************Get Users************************************************* */
     /**
      * Retourne le nom de l'utilisateur
      *
@@ -27,9 +27,10 @@ class UserManager
      */
     public function getUsers(): string
     {
-        return $this->user->readUser()->getName();
+        return $this->user->readAllUser()->getName();
     }
-
+/************************************End Get Users************************************************* */
+/************************************Get Pass************************************************* */
     /**
      * Retourne le mot de passe
      *
@@ -37,8 +38,51 @@ class UserManager
      */
     public function getPass(): string
     {
-        return $this->user->readUser()->getPassword();
+        return $this->user->readAllUser()->getPassword();
     }
+/************************************End Get Pass************************************************* */
+/************************************Get MailForm Page LostPass************************************************* */
+    /**
+     * Récupère le mail dans le formulaire sinon renvoie null si rien
+     *
+     * @param array $data
+     * @return string|null
+     */
+    public function getMailForm(array $data): ?string
+    {
+        if (isset($data['post']['submit'])) {
+            $mail = htmlentities(strip_tags(trim($data['post']['mail']))) ?? null;
+            return $mail;
+        }
+        return null;
+    }
+/************************************End Get MailForm Page LostPass************************************************* */
+/************************************Get Active User************************************************* */
+
+    /**
+     * Retourna la valeur active dans le controller
+     *
+     * @return void
+     */
+    public function getActiveUser(): array
+    {
+        return $this->user->getActiveValue();
+    }
+/************************************End Get Active User************************************************* */
+/************************************Get Token Bdd************************************************* */
+    /**
+     * Récupère le token dans la bdd
+     *
+     * @param array $data
+     * @return string
+     */
+    public function getTokenBdd(): string
+    {
+        $token = $this->user->readAllUser()->getToken();
+        return $token;
+    }
+/************************************End Get Token Bdd************************************************* */
+/************************************Check BDD Mail************************************************* */
 
     /**
      * Verifie si le mail existe bien en bdd
@@ -48,14 +92,15 @@ class UserManager
      */
     private function checkBddMail(string $mailPost): bool
     {
-        $mail = $this->user->readUser()->getMailUser();
+        $mail = $this->user->readAllUser()->getMailUser();
         if ($mail !== $mailPost) {
             return false;
         }
-
         return true;
-
     }
+/************************************End Check BDD Mail ************************************************* */
+/************************************Mail New Pass************************************************* */
+
     /**
      * Message du mail que va recevoir l'utilisateur lors
      * de la réinitialisation de son mot de passe.
@@ -85,8 +130,9 @@ class UserManager
         ";
 
         mail("millet.marcalban@gmail.com", "Page LostPassword - BmFinance.com", $message, $headers);
-
     }
+/************************************End Mail New Pass************************************************* */
+/************************************Verif Mail Form************************************************* */
 
     /**
      * Verifie le champ mail et affiche les erreurs
@@ -96,7 +142,7 @@ class UserManager
      */
     public function verifMail(array $data): ?array
     {
-        $mail = $this->getMailUser($data);
+        $mail = $this->getMailForm($data);
         $token = password_hash(random_bytes(5), PASSWORD_DEFAULT);
         $succes = $data["session"]["succes"] ?? null;
         unset($data["session"]["succes"]);
@@ -126,44 +172,8 @@ class UserManager
         }
         return null;
     }
-
-    /**
-     * Récupère le mail dans le formulaire sinon renvoie null si rien
-     *
-     * @param array $data
-     * @return string|null
-     */
-    public function getMailUser(array $data): ?string
-    {
-        if (isset($data['post']['submit'])) {
-            $mail = htmlentities(strip_tags(trim($data['post']['mail']))) ?? null;
-            return $mail;
-        }
-        return null;
-    }
-
-    /**
-     * Retourna la valeur active dans le controller
-     *
-     * @return void
-     */
-    public function getActiveUser(): array
-    {
-        return $this->user->getActiveValue();
-    }
-
-    /**
-     * Récupère le token dans la bdd
-     *
-     * @param array $data
-     * @return string
-     */
-    public function token(): string
-    {
-        $token = $this->user->readUser()->getToken();
-        return $token;
-    }
-
+/************************************End Verif Mail Form************************************************* */
+/************************************Verif UserToken************************************************* */
     /**
      * Verification du bon utilisateur pour acceder à la page
      * newPassword, si null renvoie sur la page lostPassword,
@@ -174,15 +184,14 @@ class UserManager
     public function verifUser(array $data): ?bool
     {
         $tokenUrl = trim(htmlentities($data['get']['token'])) ?? null;
-        $token = $this->token();
-
+        $token = $this->getTokenBdd();
         if ($tokenUrl === null || empty($tokenUrl) || $token !== $tokenUrl) {
             return null;
         }
-
         return true;
     }
-
+/************************************End Verif UserToken************************************************* */
+/************************************Change Password************************************************* */
     /**
      * Methode pour changer le mot de passe
      *
@@ -219,5 +228,6 @@ class UserManager
         }
         return null;
     }
+/************************************End Change Password************************************************* */
 
 }

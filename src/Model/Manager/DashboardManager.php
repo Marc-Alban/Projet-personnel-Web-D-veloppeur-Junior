@@ -17,7 +17,14 @@ class DashboardManager
         $this->token->createSessionToken();
     }
 
-    public function dashboardControl(array $data): ?array
+    /************************************Modal Control************************************************* */
+    /**
+     * Méthode pour verifié le formulaire de la modal
+     *
+     * @param array $data
+     * @return array|null
+     */
+    public function modalControl(array $data): ?array
     {
         $action = $data['get']['action'] ?? null;
 
@@ -61,5 +68,6 @@ class DashboardManager
         }
         return null;
     }
+    /************************************End Modal Control************************************************* */
 
 }

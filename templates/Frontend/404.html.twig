@@ -1,17 +1,22 @@
 {% extends 'Frontend/layout.html.twig' %}
+{#---------------------------BLOC-TITLE-----------------------------#}
 {% block head %} <title>Page not found</title> {% endblock %}
+{#--------------------------END-BLOC-TITLE-----------------------------#}
+{#---------------------------BLOC-TITLE-PAGE-----------------------------#}
 {% block title %}{% if data.errors %} Erreur connexion: {% else %} 404 : ERROR{%
 endif %}{% endblock %}
-
+{#---------------------------END-BLOC-TITLE-PAGE-----------------------------#}
 {% block content %}
+{#---------------------------CONDITION------------------------------#}
 {% if data.errors %}
-<!-- Erreur strat -->
+{#---------------------------BLOC-ERRORS-----------------------------#}
 {% for error in data.errors %}
 <div class="alert alert-danger" role="alert">
     {{error}}
 </div>
 {% endfor %}
-<!-- Erreur end -->
+{#--------------------------END-BLOC-ERRORS-----------------------------#}
+{#--------------------------ELSE-CONDITION------------------------------#}
 {% else %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -20,4 +25,5 @@ endif %}{% endblock %}
     </div>
 </div>
 {% endif %}
+{#--------------------------END-CONDITION------------------------------#}
 {% endblock %}

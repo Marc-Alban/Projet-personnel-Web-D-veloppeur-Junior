@@ -16,7 +16,7 @@ class LostPasswordController
         $this->view = new View();
         $this->userManager = new UserManager();
     }
-
+    /************************************Page Password Lost************************************************* */
     /**
      * Rendu de la page password perdu
      *
@@ -25,13 +25,13 @@ class LostPasswordController
     public function LostPasswordAction(array $data): void
     {
         $mailExist = $this->userManager->verifMail($data);
-        $dataMail = $this->userManager->getMailUser($data);
+        $dataMail = $this->userManager->getMailForm($data);
         $tabData = [
             'mailExist' => $mailExist,
             'dataMail' => $dataMail,
         ];
-
         $this->view->renderer('Frontend', 'lost', $tabData);
-
     }
+    /************************************End Page Password Lost************************************************* */
+
 }

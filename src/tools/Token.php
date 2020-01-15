@@ -4,8 +4,9 @@ namespace App\Tools;
 
 class Token
 {
-
     private $token;
+
+/************************************Create Token Session************************************************ */
 /**
  * Créer les tokens
  *
@@ -18,7 +19,8 @@ class Token
         //return $data['session']['token'];
         return $this->token;
     }
-
+/************************************End Create Token Session************************************************ */
+/************************************Compare Token Session************************************************ */
     /**
      * Compare les tokens
      *
@@ -33,4 +35,5 @@ class Token
         }
         return null;
     }
+/************************************End Compare Token Session************************************************ */
 }

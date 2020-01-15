@@ -20,14 +20,15 @@ class PageRepository
         $this->pdo = Database::getPdo();
     }
 
+/************************************Read All Page************************************************* */
     /**
-     * Récupère tous les objets PAge
+     * Récupère tous les objets Page
      *
      * @return bool|Page|null
      * false si l'objet n'a pu être inséré, objet Page si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function read(string $data): array
+    public function readAll(string $data): array
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM page WHERE posted = 1");
         $pages = [];
@@ -36,10 +37,9 @@ class PageRepository
             if ($data === $title) {
                 $pages[] = $page;
             }
-
         }
-
         return $pages;
     }
+/************************************End Read All Page************************************************* */
 
 }

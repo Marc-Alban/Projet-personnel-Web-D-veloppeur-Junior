@@ -22,6 +22,7 @@ class HomeController
         $this->HomeManager = new HomeManager();
         $this->view = new View();
     }
+    /************************************Page Acceuil************************************************* */
 
     /**
      * Renvoie la page d'index avec ou sans id
@@ -33,7 +34,8 @@ class HomeController
         $graph = $this->HomeManager->listeGraph();
         $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
     }
-
+    /************************************End Page Accueil************************************************* */
+    /************************************Page Error 404************************************************* */
     /**
      * Retourne la page 404
      *
@@ -43,4 +45,6 @@ class HomeController
     {
         $this->view->renderer('Frontend', '404', null);
     }
+    /************************************End Page Error 404************************************************* */
+
 }

@@ -22,7 +22,7 @@ class ListesArticlesController
         $this->articleManager = new ArticleManager();
         $this->view = new View();
     }
-
+    /************************************Page Blog************************************************* */
     /**
      * Retourne la liste des articles sur la page blog
      *
@@ -45,5 +45,6 @@ class ListesArticlesController
 
         $this->view->renderer('Frontend', 'blog', $tabData);
     }
+    /************************************End Page blog************************************************* */
 
 }

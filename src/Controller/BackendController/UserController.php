@@ -13,15 +13,17 @@ class UserController
     {
         $this->view = new View();
     }
+/************************************Page Infos Users************************************************* */
 
     /**
      * Rendu de la page info utilisateur
      *
      * @return void
      */
-    public function UserAction(array $data): void
+    public function UserAction(): void
     {
         $this->view->renderer('Backend', 'loginUser', null);
     }
+/************************************End Page Infos Users************************************************* */
 
 }

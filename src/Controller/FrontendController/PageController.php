@@ -24,6 +24,7 @@ class PageController
         $this->view = new View();
     }
 
+    /************************************Page Page************************************************* */
     /**
      * Rendu des pages
      *
@@ -35,4 +36,6 @@ class PageController
 
         $this->view->renderer('Frontend', 'page', ['page' => $page]);
     }
+    /************************************End Page page************************************************* */
+
 }

@@ -20,6 +20,7 @@ class PartenaireRepository
         $this->pdo = Database::getPdo();
     }
 
+    /************************************Read All Partenaire************************************************* */
     /**
      * Récupère tous les objets Partenaire
      *
@@ -31,11 +32,11 @@ class PartenaireRepository
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM partenaire WHERE posted = 1");
         $partenaire = [];
-
         while ($partenaires = $this->pdoStatement->fetchObject(Partenaire::class)) {
             $partenaire[] = $partenaires;
         }
         return $partenaire;
     }
+/************************************End Read All Partenaire************************************************* */
 
 }

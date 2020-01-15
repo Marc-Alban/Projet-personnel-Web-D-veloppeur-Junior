@@ -22,6 +22,7 @@ class View extends Environment
         //$this->superGlobal = new GestionGlobalPhp();
     }
 
+/************************************Render View************************************************ */
     /**
      * Retourne la vue en fonction des paramètre passés
      *
@@ -41,4 +42,5 @@ class View extends Environment
         // $this->addGlobal('session', $this->superGlobal->getSession());
         echo $this->render($path . '/' . $view . '.html.twig', ['data' => $data]);
     }
+/************************************End Render View************************************************ */
 }

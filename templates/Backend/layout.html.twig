@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
+        {#----------------------------Encodage-UTF-8---------------------------#}
         <meta charset="UTF-8">
+        {#----------------------------Responsive-VIEWPORT-CSS---------------------------#}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         {% block head %} {% endblock %}
-        <!-- BM icon -->
+        {#----------------------------BM-ICON----------------------------#}
         <link rel="icon" href="img/bm-favicon.ico" type="image/x-icon">
-
-        <!-- Font Awesome -->
+        {#----------------------------Font-Awesome----------------------------#}
         <link rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-        <!-- Bootstrap core CSS -->
+        {#----------------------------Material-Design-Bootstrap----------------------------#}
         <link rel="stylesheet" href="css/MDB-FREE/bootstrap.min.css">
-        <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="css/MDB-FREE/mdb.min.css">
-
-
-        {# style #}
+        {#----------------------------Style-Css---------------------------#}
         <link rel="stylesheet" href="css/backend.css">
     </head>
-
     <body>
         <header class="navbar navbar-dark black">
             <div class="container">
                 <div class="d-flex topNavBack">
-                    <!--Navbar -->
+                    {#----------------------------NAVBAR----------------------------#}
                     <nav class="mb-1 navbar navbar-expand-md p-2">
                         <button class="navbar-toggler" type="button"
                             data-toggle="collapse"
@@ -40,13 +36,14 @@
                             id="navbarSupportedContent-333">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
+                                    {#----------------------------DashBoard---------------------------#}
                                     <a class="nav-link"
                                         href="?p=dashboard&action=connexion">
                                         Tableau de bord
-                                        <!-- <span class="sr-only">(current)</span> -->
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
+                                    {#----------------------------Partenaire----------------------------#}
                                     <a class="nav-link dropdown-toggle"
                                         id="navbarDropdownMenuLink-333"
                                         data-toggle="dropdown"
@@ -55,13 +52,16 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-default"
                                         aria-labelledby="navbarDropdownMenuLink-333">
+                                        {#----------------------------Create-Link---------------------------#}
                                         <a class="dropdown-item"
                                             href="?p=partenaire">Créer un lien</a>
+                                        {#----------------------------Liste-Link----------------------------#}
                                         <a class="dropdown-item"
                                             href="?p=table">Liste des liens</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
+                                    {#---------------------------Article---------------------------#}
                                     <a class="nav-link dropdown-toggle"
                                         id="navbarDropdownMenuLink-333"
                                         data-toggle="dropdown"
@@ -70,8 +70,10 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-default"
                                         aria-labelledby="navbarDropdownMenuLink-333">
+                                        {#----------------------------Create-Post----------------------------#}
                                         <a class="dropdown-item" href="?p=form">Créer
                                             un article</a>
+                                        {#----------------------------Liste-Post----------------------------#}
                                         <a class="dropdown-item"
                                             href="?p=table">Liste des articles</a>
                                     </div>
@@ -85,6 +87,7 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-default"
                                         aria-labelledby="navbarDropdownMenuLink-333">
+                                        {#---------------------------Liste-Page----------------------------#}
                                         <a class="dropdown-item"
                                             href="?p=table">Liste des pages</a>
                                     </div>
@@ -98,8 +101,10 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-default"
                                         aria-labelledby="navbarDropdownMenuLink-333">
+                                        {#---------------------------Create-Graphique----------------------------#}
                                         <a class="dropdown-item"
                                             href="?p=graph">Créer graphiques</a>
+                                        {#---------------------------Liste-Graphique----------------------------#}
                                         <a class="dropdown-item"
                                             href="?p=table">Liste des graphiques</a>
                                     </div>
@@ -107,14 +112,18 @@
                             </ul>
                         </div>
                     </nav>
+                    {#----------------------------END-NAVBAR----------------------------#}
+                    {#---------------------------BTN-----------------------------#}
                     <div class="ml-auto p-2">
                         <ul class="navbar-nav ml-auto nav-flex-icons">
                             <li class="nav-item">
+                                {#---------------------------BTN-BackSite----------------------------#}
                                 <a class="nav-link waves-effect waves-light"
                                     href="?p=home">
                                     <button class="btn btn-light btn-Gestion">Retour
                                         site</button>
                                 </a>
+                                {#---------------------------BTN-UserProfile----------------------------#}
                                 <a class="nav-link waves-effect waves-light"
                                     href="?p=user">
                                     <button class="btn btn-light btn-Gestion">Gestion
@@ -123,24 +132,20 @@
                             </li>
                         </ul>
                     </div>
+                    {#---------------------------END-BTN-----------------------------#}
                 </div>
             </div>
         </header>
-
-
-        <!--/.Navbar -->
         {% block content %}
         {% endblock %}
-
-        <!-- jQuery -->
+        {#---------------------------Jquery/JavaScript-----------------------------#}
         <script type="text/javascript" src="js/MDB-Free/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
+        {#---------------------------Bootstrap-Tool-----------------------------#}
         <script type="text/javascript" src="js/MDB-Free/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
         <script type="text/javascript" src="js/MDB-Free/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
+        {#---------------------------MDN-Javascript-----------------------------#}
         <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
-        <!-- Script Tiny MCE -->
+        {#---------------------------Tiny-MCE-JAvascript-----------------------------#}
         <script src='js/tinymce/tinymce.min.js' referrerpolicy="origin"></script>
         <script>
         tinymce.init({
@@ -148,13 +153,10 @@
             encoding: "UTF-8",
             mode: "textareas",
             height: 1500
-
         });
-    </script>
-        <!--/.Navbar -->
+        </script>
+        {#---------------------------Add-JavaScritp-----------------------------#}
         {% block javascript %}
         {% endblock %}
-
     </body>
-
 </html>
