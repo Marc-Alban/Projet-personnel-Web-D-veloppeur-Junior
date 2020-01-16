@@ -24,9 +24,10 @@ class PageManager extends PDOException
      *
      * @return array
      */
-    public function readPage(string $data): array
+    public function readPage(?string $data): array
     {
-        return $this->pageRepository->readAll($data);
+        $page = $this->pageRepository->readAll($data);
+        return $page;
     }
 /************************************End Read Page************************************************* */
 }

@@ -18,7 +18,8 @@
                                     <div class="table-responsive">
                                         {#---------------------------TABLE-----------------------------#}
                                         <table class="table">
-                                            {#---------------------------HEAD-TABLE-----------------------------#}
+                                            {% if data.partenaire %}
+                                            {#---------------------------HEAD-TABLE-Partenaire-----------------------------#}
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -36,9 +37,8 @@
                                                 </tr>
                                             </thead>
                                             {#---------------------------END-HEAD-Table-----------------------------#}
-                                            {#---------------------------BODY-Table-----------------------------#}
+                                            {#---------------------------BODY-Table-Partenaire-----------------------------#}
                                             <tbody>
-                                                {% if data.partenaire %}
                                                 {% for partenaires in
                                                 data.partenaire %}
                                                 <tr>
@@ -66,11 +66,67 @@
                                                     </td>
                                                 </tr>
                                                 {% endfor %}
-                                                {% else %}
+                                            </tbody>
+                                            {#---------------------------END-BODY-Table-----------------------------#}
+                                            {% elseif data.article %}
+                                            {#---------------------------HEAD-TABLE-Article-----------------------------#}
+                                            <thead>
                                                 <tr>
                                                     <th>
+                                                        Titre
                                                     </th>
+                                                    <th>
+                                                        Legende
+                                                    </th>
+                                                    <th>
+                                                        Description
+                                                    </th>
+                                                    <th>
+                                                        Image
+                                                    </th>
+                                                    <th>
+                                                        Date
+                                                    </th>
+                                                    <th>
+                                                        Posté
+                                                    </th>
+                                                    <th>
+                                                        Dernier Article
+                                                    </th>
+                                                    <th>
+                                                        Modification
+                                                    </th>
+                                                    <th>
+                                                        Supprimer
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            {#---------------------------END-HEAD-Table-----------------------------#}
+                                            {#---------------------------BODY-Table-Article-----------------------------#}
+                                            <tbody>
+                                                {% for articleListe in
+                                                data.article.articleAll %}
+                                                <tr>
                                                     <td>
+                                                        {{articleListe.title}}
+                                                    </td>
+                                                    <td>
+                                                        {{articleListe.legende}}
+                                                    </td>
+                                                    <td>
+                                                        {{articleListe.description|raw|striptags}}
+                                                    </td>
+                                                    <td>
+                                                        {{articleListe.image}}
+                                                    </td>
+                                                    <td>
+                                                        {{articleListe.date}}
+                                                    </td>
+                                                    <td>
+                                                        {{articleListe.posted}}
+                                                    </td>
+                                                    <td>
+                                                        {{articleListe.lastArticle}}
                                                     </td>
                                                     <td>
                                                         <a class="teal-text"
@@ -80,7 +136,6 @@
                                                                 class="fas
                                                                 fa-pencil-alt"></i></a>
                                                     </td>
-                                                    {% block table %}
                                                     <td>
                                                         <a class="red-text"
                                                             data-toggle="tooltip"
@@ -89,11 +144,146 @@
                                                                 class="fas
                                                                 fa-times"></i></a>
                                                     </td>
-                                                    {% endblock %}
                                                 </tr>
-                                                {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                            {#--------------------------END-BODY-Table-----------------------------#}
+                                            {% elseif data.graphique %}
+                                            {#---------------------------HEAD-TABLE-Partenaire-----------------------------#}
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Titre
+                                                    </th>
+                                                    <th>
+                                                        Description
+                                                    </th>
+                                                    <th>
+                                                        Image
+                                                    </th>
+                                                    <th>
+                                                        Posté
+                                                    </th>
+                                                    <th>
+                                                        Modification
+                                                    </th>
+                                                    <th>
+                                                        Supprimer
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            {#---------------------------END-HEAD-Table-----------------------------#}
+                                            {#---------------------------BODY-Table-Partenaire-----------------------------#}
+                                            <tbody>
+                                                {% for graphiques in
+                                                data.graphique %}
+                                                <tr>
+                                                    <th>
+                                                        {{graphiques.title}}
+                                                    </th>
+                                                    <td>
+                                                        {{graphiques.description}}
+                                                    </td>
+                                                    <td>
+                                                        {{graphiques.image}}
+                                                    </td>
+                                                    <td>
+                                                        {{graphiques.posted}}
+                                                    </td>
+                                                    <td>
+                                                        <a class="teal-text"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Update"><i
+                                                                class="fas
+                                                                fa-pencil-alt"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="red-text"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Delete"><i
+                                                                class="fas
+                                                                fa-times"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
                                             </tbody>
                                             {#---------------------------END-BODY-Table-----------------------------#}
+                                            {% elseif data.page %}
+                                            {#---------------------------HEAD-TABLE-Partenaire-----------------------------#}
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Titre de la page
+                                                    </th>
+                                                    <th>
+                                                        Titre
+                                                    </th>
+                                                    <th>
+                                                        Description
+                                                    </th>
+                                                    <th>
+                                                        Image
+                                                    </th>
+                                                    <th>
+                                                        Posté
+                                                    </th>
+                                                    <th>
+                                                        Modification
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            {#---------------------------END-HEAD-Table-----------------------------#}
+                                            {#---------------------------BODY-Table-Partenaire-----------------------------#}
+                                            <tbody>
+                                                {% for pages in
+                                                data.page %}
+                                                <tr>
+                                                    <th>
+                                                        {{pages.titlePage}}
+                                                    </th>
+                                                    <th>
+                                                        {{pages.title}}
+                                                    </th>
+                                                    <td>
+                                                        {{pages.description}}
+                                                    </td>
+                                                    <td>
+                                                        {{pages.image}}
+                                                    </td>
+                                                    <td>
+                                                        {{pages.posted}}
+                                                    </td>
+                                                    <td>
+                                                        <a class="teal-text"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Update"><i
+                                                                class="fas
+                                                                fa-pencil-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                            {#---------------------------END-BODY-Table-----------------------------#}
+                                            {% else %}
+                                            {#---------------------------Erreur-TABLE-----------------------------#}
+                                            <thead>
+                                                <p><strong><center>Erreur</center></strong></p>
+                                            </thead>
+                                            {#---------------------------END-Erreur-Table-----------------------------#}
+                                            {#---------------------------Erreur-Table-----------------------------#}
+                                            <tbody>
+                                                <p>
+                                                    <strong>
+                                                        <center>Aucune données à
+                                                            cette URL !</center>
+                                                    </strong>
+                                                </p>
+                                            </tbody>
+                                            {#---------------------------END-Erreur-Table-----------------------------#}
+                                            {% endif %}
                                         </table>
                                         {#---------------------------END-TABLE-----------------------------#}
                                     </div>

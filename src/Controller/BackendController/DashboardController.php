@@ -4,6 +4,7 @@ namespace App\Controller\BackendController;
 
 use App\Model\Manager\ArticleManager;
 use App\Model\Manager\DashboardManager;
+use App\Model\Manager\PartenaireManager;
 use App\View\View;
 
 class DashboardController
@@ -11,11 +12,13 @@ class DashboardController
     private $view;
     private $DashboardManager;
     private $article;
+    private $partenaire;
 
     public function __construct()
     {
         $this->view = new View();
         $this->article = new ArticleManager();
+        $this->partenaire = new PartenaireManager();
         $this->DashboardManager = new DashboardManager();
     }
 /************************************Page Dashboard************************************************* */
@@ -35,7 +38,8 @@ class DashboardController
         }
 
         $countArticle = $this->article->nbPost();
-        $this->view->renderer('Backend', 'dashboard', ['countArticle' => $countArticle]);
+        $countPartenaire = $this->partenaire->nbPartenaire();
+        $this->view->renderer('Backend', 'dashboard', ['countArticle' => $countArticle, 'countPartenaire' => $countPartenaire]);
     }
     /************************************End Page Dashboard************************************************* */
 }

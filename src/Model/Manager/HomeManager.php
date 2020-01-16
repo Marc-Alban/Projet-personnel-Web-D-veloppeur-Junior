@@ -25,7 +25,8 @@ class HomeManager
      */
     public function listeGraph(): array
     {
-        return $this->homeRepository->readAll();
+        $graph = $this->homeRepository->readAll();
+        return $graph;
     }
 /************************************End Liste Graph BDD************************************************* */
 }

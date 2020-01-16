@@ -38,5 +38,17 @@ class PartenaireRepository
         return $partenaire;
     }
 /************************************End Read All Partenaire************************************************* */
+/************************************Count partenaire************************************************* */
+    public function countpartenaire(): ?string
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM partenaire WHERE posted = 1");
+        $req = $this->pdoStatement->fetch();
+        if ($req) {
+            $total = $req['total'];
+            return $total;
+        }
+        return null;
+    }
+/************************************End Count partenaire************************************************* */
 
 }

@@ -20,7 +20,6 @@ class GraphController
      */
     public function graphAction(array $data): void
     {
-
         $this->view->renderer('Backend', 'graph', null);
     }
 }

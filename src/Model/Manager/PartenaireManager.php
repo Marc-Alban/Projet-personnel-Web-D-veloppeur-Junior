@@ -28,4 +28,12 @@ class PartenaireManager
         return $this->partenaireRepository->readAll();
     }
 /************************************End Liste Partenaire ReadAll************************************************* */
+/************************************nb Partenaire************************************************* */
+    public function nbPartenaire(): int
+    {
+        $nbPartenaire = $this->partenaireRepository->countpartenaire();
+        return (int) $nbPartenaire;
+    }
+/************************************End nb Partenaire************************************************* */
+
 }

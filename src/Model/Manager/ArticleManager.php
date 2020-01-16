@@ -82,12 +82,14 @@ class ArticleManager
         }
 
         $firstOfPage = ($current - 1) * $perPage;
-        $articles = $this->articleRepository->readAll($firstOfPage, $perPage);
+        $articles = $this->articleRepository->readArticleAll($firstOfPage, $perPage);
+        $articleAll = $this->articleRepository->readAll($firstOfPage, $perPage);
 
         return $tabArticle = [
             'current' => (int) $current,
             'nbPage' => (int) $nbPage,
             'articles' => $articles,
+            'articleAll' => $articleAll,
         ];
 
     }

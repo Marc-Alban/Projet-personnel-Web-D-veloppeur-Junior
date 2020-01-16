@@ -28,13 +28,15 @@ class PageRepository
      * false si l'objet n'a pu être inséré, objet Page si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function readAll(string $data): array
+    public function readAll(?string $data): array
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM page WHERE posted = 1");
         $pages = [];
         while ($page = $this->pdoStatement->fetchObject(Page::class)) {
             $title = strtolower(str_replace(' ', '', $page->getTitlePage()));
             if ($data === $title) {
+                $pages[] = $page;
+            } else if ($data === null) {
                 $pages[] = $page;
             }
         }
