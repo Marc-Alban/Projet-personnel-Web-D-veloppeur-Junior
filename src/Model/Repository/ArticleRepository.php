@@ -98,9 +98,9 @@ class ArticleRepository
             if ($this->article === false) {
                 $articleFake = (object) [
                     'id' => '1',
-                    'title' => 'Pas d\'article en bdd',
-                    'legende' => 'Pas d\'article en bdd',
-                    'description' => 'Pas d\'article en bdd',
+                    'title' => 'Que le dernier article en bdd',
+                    'legende' => 'Défault',
+                    'description' => 'Que le dernier article en bdd',
                     'image' => 'default.png',
                     'date' => '',
                     'posted' => '1',
@@ -123,16 +123,21 @@ class ArticleRepository
      * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
      * false si une erreur survient
      */
-    public function readAll($firstOfPage, $perPage): object
+    public function readAll($firstOfPage, $perPage): array
     {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article) AND posted = 1 AND lastArticle = 0 ORDER BY id LIMIT $firstOfPage,$perPage");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT id FROM article WHERE lastArticle = 1) AND posted = 1 ORDER BY id LIMIT $firstOfPage,$perPage");
         $this->article = [];
-        if (empty($this->article) || $this->pdoStatement === false) {
-            $articleFake = (object) [
+        $articles = 1;
+        while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
+            $this->article[] = $articles;
+            $articles++;
+        }
+        if (empty($this->article) || $this->article === false) {
+            $articleFake[] = [
                 'id' => '1',
-                'title' => 'Pas d\'article en bdd',
-                'legende' => 'Pas d\'article en bdd',
-                'description' => 'Pas d\'article en bdd',
+                'title' => 'Que le dernier article en bdd',
+                'legende' => 'Défault',
+                'description' => 'Que le dernier article en bdd',
                 'image' => 'default.png',
                 'date' => '',
                 'posted' => '1',
@@ -140,9 +145,7 @@ class ArticleRepository
             ];
             return $articleFake;
         };
-        while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
-            $this->article[] = $articles;
-        }
+
         return $this->article;
     }
 /************************************End Read All Post ************************************************* */

@@ -18,8 +18,8 @@ class View extends Environment
     public function __construct()
     {
         $this->loader = new FilesystemLoader('../templates');
-        parent::__construct($this->loader);
         //$this->superGlobal = new GestionGlobalPhp();
+        parent::__construct($this->loader);
     }
 
 /************************************Render View************************************************ */
@@ -34,7 +34,6 @@ class View extends Environment
     public function renderer(string $path, string $view, ?array $data): void
     {
         // $session = $data['session'] ?? null;
-        //
         $data['session'] = $_SESSION;
         // var_dump('data view', $data);
         // die();

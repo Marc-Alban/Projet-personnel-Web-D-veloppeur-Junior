@@ -28,7 +28,7 @@ class ArticleManager
         $this->articleRepository = new ArticleRepository();
     }
 
-    /******************************Page Article******************************* */
+    /******************************Get Post******************************* */
     /**
      * Retourne un article avec un id selectionner
      *
@@ -44,9 +44,8 @@ class ArticleManager
         }
         return $this->articleRepository->read((int) $id);
     }
-    /**************************End Page Article******************************* */
-    /*************************Liste Article********************************** */
-
+    /**************************End GetPost******************************* */
+    /*************************Laste Article********************************** */
     /**
      * Retourne le dernier article dans un tableau
      * ou false si il n'y a rien
@@ -58,7 +57,8 @@ class ArticleManager
     {
         return $this->articleRepository->last();
     }
-
+    /*************************End Laste Article********************************** */
+    /*************************Pagination********************************** */
     /**
      * Méthode pour la pagination des articles
      * sur la page blog
@@ -82,34 +82,34 @@ class ArticleManager
         }
 
         $firstOfPage = ($current - 1) * $perPage;
+        $articles = $this->articleRepository->readAll($firstOfPage, $perPage);
 
         return $tabArticle = [
             'current' => (int) $current,
             'nbPage' => (int) $nbPage,
-            'articles' => $this->articleRepository->readAll($firstOfPage, $perPage),
+            'articles' => $articles,
         ];
 
     }
-
+    /*************************End Pagination********************************* */
+    /*************************Classification********************************* */
     /**
-     * Retourne les articles en fonctions des années
+     * Retourne les articles en fonctions des années passé dans l'url
      *
      * @param array $data
      * @return array
      */
-    public function classification(array $data): array
+    public function classificationGetYearsPost(array $data): array
     {
         $years = $data['get']['years'] ?? null;
-
         if (!isset($data['get']['years']) || empty($data['get']['years']) || ctype_digit($data['get']['years']) === false) {
             $years = 2019;
         }
-
         return $this->articleRepository->articleDate($years);
     }
 
-    /************************************End liste Article************************************************* */
-    /************************************Dashboard************************************************* */
+    /************************************End Classification************************************************* */
+    /************************************Dashboard Nombre post************************************************* */
 
     /**
      * Retourne le nombre d'article en bdd
@@ -121,38 +121,25 @@ class ArticleManager
         $nbArticle = $this->articleRepository->countArticle();
         return (int) $nbArticle;
     }
-    /************************************End Dashboard************************************************* */
-    /************************************Formulaire Article Backend**************************************** */
-
+    /************************************End Dashboard Nombre post************************************************* */
+    /************************************Formulaire Article Vrefifcation Backend**************************************** */
     public function verifForm(array $data): ?array
     {
-
         $submit = $data['post']['submit'] ?? null;
         $action = $data['get']['action'] ?? null;
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
-
         if ($submit) {
-
             $tabData = $this->dataFormArticle($data);
-
             $extentions = ['jpg', 'png', 'gif', 'jpeg'];
-
             $this->file = $data['files']['imageArticle']['name'];
-
             if (empty($data['files']['imageArticle']['name'])) {
                 $this->file = 'default.png';
             }
-
-            // var_dump($this->file);
-            // die();
-
             $extention = strtolower(substr(strrchr($this->file, '.'), 1));
             $tailleMax = 2097152;
-
             //Nouvel article
             if ($action === 'newArticle') {
-
                 if (empty($tabData['title']) || empty($tabData['description'])) {
                     $errors['contenu'] = 'Veuillez renseigner un contenu !';
                 } else if (empty($tabData['title'])) {
@@ -166,10 +153,7 @@ class ArticleManager
                 } else if ($tabData['size'] > $tailleMax) {
                     $errors['size'] = "Image trop grande, mettre une image en dessous de 2 MO ";
                 }
-
                 if (empty($errors)) {
-                    // var_dump($tabData['lastArticle'], $this->lastArticle);
-                    // die();
                     if ($this->lastArticle === 1) {
                         $this->articleRepository->updateLast();
                     }
@@ -178,7 +162,6 @@ class ArticleManager
                     return $succes;
                 }
             }
-
             //Modification article
             if ($action === "articleModif") {
                 $id = (int) $data['get']['id'];
@@ -191,16 +174,12 @@ class ArticleManager
                     //$postManager->editImageChapter($id, $title, $description, $tmpName, $extention, $posted);
                 }
             }
-
             return $errors;
         }
-
         return null;
     }
-    /************************************End Formulaire Article Backend***************************** */
-
+    /************************************End Formulaire Article Vrefifcation Backend***************************** */
     /************************************Autres************************************************* */
-
     /**
      * Renvoie les données à la vue
      *
@@ -217,7 +196,6 @@ class ArticleManager
         $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;
         $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null;
         $this->size = $data['files']['imageArticle']['size'] ?? null;
-
         $tabPost = [
             "title" => $this->title,
             "legende" => $this->legende,
@@ -228,10 +206,7 @@ class ArticleManager
             "tmpName" => $this->tmpName,
             "size" => $this->size,
         ];
-
         return $tabPost;
     }
-
     /************************************ Fin Autres************************************************* */
-
 }

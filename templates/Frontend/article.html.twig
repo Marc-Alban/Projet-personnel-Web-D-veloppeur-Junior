@@ -18,45 +18,58 @@
     </div>
     <div class="flex-shrink-1 col-md-4">
         <a href="http://3bigbangbourse.fr/?p=listesArticles">
-            <button type="button" class="btn btn-danger">Retour
-                blog</button></a>
+            <button type="button" class="btn btn-danger">
+                Retour blog
+            </button>
+        </a>
     </div>
 </div>
 {% endblock %}
 {#--------------------------END-BLOC-TITLE-PAGE----------------------------#}
 {% block content %}
-{% for post in data %}
 {#--------------------------GRILLE-COLONNE----------------------------#}
 <div class="col-md-12">
     {#--------------------------CARD----------------------------#}
     <div class="card hoverable pb-5 mx-md-3">
         {#--------------------------IMAGE----------------------------#}
-        <img class="jarallax-img" src="img/article/{{ post.image }}" alt="">
+        <img class="jarallax-img" src="img/article/{% for post in data %}{{
+            post.image }}{% endfor %}" alt="">
         {#--------------------------END-IMAGE----------------------------#}
         <div class="card-body">
             <div class="container">
                 {#--------------------------SECTION-HEADING----------------------------#}
                 <h1 class="text-left h1 pt-4 mb-3">
                     <strong>
+                        {% for post in data %}
                         {{ post.title }}
+                        {% endfor %}
                     </strong>
                 </h1>
                 {#-------------------------END-SECTION-HEADING----------------------------#}
                 <div class="row">
                     <div class="col-md-12 col-xl-12 d-flex
                         justify-content-left">
-                        <p class="font-small grey-text mb-0"><i class="far
-                                fa-clock-o dark-grey-text"></i>
-                            {{ post.legende }}</p>
-                        <p class="font-small grey-text mb-0"><i class="far
-                                fa-clock-o dark-grey-text"></i>
-                            {{ post.date }}</p>
+                        <p class="font-small grey-text mb-0">
+                            <i class="far fa-clock-o dark-grey-text"></i>
+                            {% for post in data %}
+                            {{ post.legende }}
+                            {% endfor %}
+                        </p>
+                        <p class="font-small grey-text mb-0">
+                            <i class="far fa-clock-o dark-grey-text"></i>
+                            {% for post in data %}
+                            {{ post.date }}
+                            {% endfor %}
+                        </p>
                     </div>
                 </div>
                 {#--------------------------GRILLE-COLONNE----------------------------#}
                 <div class="row mt-3">
-                    <p class="dark-grey-text article">{{
-                        post.description | raw }}</p>
+                    <p class="dark-grey-text article">
+                        {% for post in data %}
+                        {{ post.description | raw }}
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
             {#--------------------------END-GRILLE-COLONNE----------------------------#}
@@ -65,5 +78,4 @@
     {#--------------------------END-CARD----------------------------#}
 </div>
 {#--------------------------END-GRILLE-COLONNE----------------------------#}
-{% endfor %}
 {% endblock %}

@@ -30,17 +30,21 @@ class ListesArticlesController
      */
     public function ListesArticlesAction(array $data): void
     {
+
         $lastArticle = $this->articleManager->lastArticle();
+
         if (isset($data['get']['years']) && !empty($data['get']['years'])) {
-            $classement = $this->articleManager->classification($data);
-        } else if (isset($data['get']['pp']) || !empty($data['get']['pp']) || empty($data['get']['pp'])) {
-            $listeArticle = $this->articleManager->pagination($data);
+            $classement = $this->articleManager->classificationGetYearsPost($data);
+        } else if (isset($data['get']['pp']) || !empty($data['get']['pp'])) {
+            $paginationListeArticle = $this->articleManager->pagination($data);
+        } else if (!isset($data['get']['pp']) || empty($data['get']['pp'])) {
+            header("Location: http://3bigbangbourse.fr/?p=listesArticles&pp=1");
         }
 
         $tabData = [
-            'listeArticle' => $listeArticle ?? null,
-            'lastArticle' => $lastArticle,
+            'paginationListeArticle' => $paginationListeArticle ?? null,
             'classement' => $classement ?? null,
+            'lastArticle' => $lastArticle,
         ];
 
         $this->view->renderer('Frontend', 'blog', $tabData);
