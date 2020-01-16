@@ -3,8 +3,13 @@
 {% block head %} <title>Page not found</title> {% endblock %}
 {#--------------------------END-BLOC-TITLE-----------------------------#}
 {#---------------------------BLOC-TITLE-PAGE-----------------------------#}
-{% block title %}{% if data.errors %} Erreur connexion: {% else %} 404 : ERROR{%
-endif %}{% endblock %}
+{% block title %}
+{% if data.errors %}
+Erreur connexion:
+{% else %}
+404 : ERROR
+{% endif %}
+{% endblock %}
 {#---------------------------END-BLOC-TITLE-PAGE-----------------------------#}
 {% block content %}
 {#---------------------------CONDITION------------------------------#}

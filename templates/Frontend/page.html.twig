@@ -11,7 +11,7 @@
 {#--------------------------BLOC-TITLE-PAGE----------------------------#}
 {% block title %}
 {% for pages in data.page %}
-Page:{{pages.titlePage|raw|convert_encoding("utf-8","ISO-8859-1")}}
+{{pages.titlePage|raw|convert_encoding("utf-8","ISO-8859-1")}}
 {% endfor %}
 {% endblock %}
 {#-------------------------END-BLOC-TITLE-PAGE----------------------------#}
