@@ -67,7 +67,7 @@
                 <div class="row mt-3">
                     <p class="dark-grey-text article">
                         {% for post in data %}
-                        {{ post.description | raw }}
+                        {{ post.description|raw|striptags }}
                         {% endfor %}
                     </p>
                 </div>

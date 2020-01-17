@@ -34,7 +34,7 @@ class TableController
     public function TableAction(array $data): void
     {
         $liste = $data['get']['liste'] ?? null;
-        $pp = $data['get']['perpage'] ?? null;
+        $perpage = $data['get']['perpage'] ?? null;
         $partenaire = null;
         $article = null;
         $graphique = null;
@@ -42,16 +42,16 @@ class TableController
 
         if ($liste === "listePartenaires") {
             $partenaire = $this->partenaireManager->listePartenaire();
-        } else if ($liste === "listeArticlesBack" && isset($pp)) {
+        } else if ($liste === "listeArticlesBack" && isset($perpage)) {
             $article = $this->articleManager->pagination($data);
+            // var_dump($article);
+            // die();
         } else if ($liste === "listeGraphiques") {
             $graphique = $this->graph->listeGraph();
         } else if ($liste === "listePages") {
             $page = $this->pageManager->readPage(null);
         } else if (!isset($liste) || empty($liste)) {
             header("Location: http://3bigbangbourse.fr/?p=dashboard&action=connexion");
-        } else if ($liste === "listeArticlesBack" && !isset($pp) && empty($pp)) {
-            header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
         }
 
         $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire, "article" => $article, "graphique" => $graphique, "page" => $page]);

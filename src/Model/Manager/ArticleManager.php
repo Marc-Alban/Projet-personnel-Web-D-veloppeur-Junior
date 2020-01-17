@@ -60,7 +60,7 @@ class ArticleManager
     /*************************End Laste Article********************************** */
     /*************************Pagination********************************** */
     /**
-     * Méthode pour la pagination des articles
+     * Méthode pour la pagination des articles et l'affichage de tous les articles
      * sur la page blog
      *
      * @param array $data
@@ -71,22 +71,36 @@ class ArticleManager
         $perPage = 5;
         $total = $this->articleRepository->countArticle();
         $nbPage = ceil($total / $perPage);
-        $current = $data['get']['pp'] ?? 1;
+        $current = $data['get']['pp'] ?? null;
+        $perCurrent = $data['get']['perpage'] ?? null;
+        $articlesFront = null;
+        $articleAll = null;
 
-        if (!isset($current) || empty($current) || ctype_digit($current) === false || $current <= 0) {
-            $current = 1;
-        } else if ($current > $nbPage) {
-            $current = $nbPage;
+        if (isset($current)) {
+            if (!isset($current) || empty($current) || ctype_digit($current) === false || $current <= 0) {
+                $current = 1;
+            } else if ($current > $nbPage) {
+                $current = $nbPage;
+            }
+            $firstOfPage = ($current - 1) * $perPage;
+            $articlesFront = $this->articleRepository->readArticleAll($firstOfPage, $perPage);
         }
 
-        $firstOfPage = ($current - 1) * $perPage;
-        $articles = $this->articleRepository->readArticleAll($firstOfPage, $perPage);
-        $articleAll = $this->articleRepository->readAll($firstOfPage, $perPage);
+        if (isset($perCurrent)) {
+            if (!isset($perCurrent) || empty($perCurrent) || ctype_digit($perCurrent) === false || $perCurrent <= 0) {
+                $perCurrent = 1;
+            } else if ($perCurrent > $nbPage) {
+                $perCurrent = $nbPage;
+            }
+            $twoOfPage = ($perCurrent - 1) * $perPage;
+            $articleAll = $this->articleRepository->readAll($twoOfPage, $perPage);
+        }
 
         return $tabArticle = [
             'current' => (int) $current,
+            'perCurrent' => (int) $perCurrent,
             'nbPage' => (int) $nbPage,
-            'articles' => $articles,
+            'articles' => $articlesFront,
             'articleAll' => $articleAll,
         ];
 
@@ -134,6 +148,7 @@ class ArticleManager
         if ($submit) {
 
             $this->dataFormArticle($data);
+
             $extentions = ['jpg', 'png', 'gif', 'jpeg'];
 
             if (empty($this->file) || $this->file === null) {
@@ -184,24 +199,53 @@ class ArticleManager
         return null;
     }
     /************************************End Formulaire Article Vrefifcation Backend***************************** */
-    /************************************Autres************************************************* */
+    /************************************Get Data Form Back************************************************* */
     /**
      * Renvoie les données à la vue
+     * si rien retourne null
      *
      * @param array $data
      * @return array
      */
-    private function dataFormArticle(array $data): void
+    public function getDatasForm(array $data): ?array
     {
-        $this->title = htmlentities(trim($data['post']['title'])) ?? null;
-        $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
-        $this->description = htmlentities(trim($data['post']['description'])) ?? null;
-        $this->date = $data['post']['date'] ?? null;
-        $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
-        $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;
-        $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null;
-        $this->size = $data['files']['imageArticle']['size'] ?? null;
-        $this->file = $data['files']['imageArticle']['name'] ?? null;
+        if (isset($data['post']['submit'])) {
+            $this->dataFormArticle($data);
+            $formData = [
+                'title' => $this->title,
+                'legende' => $this->legende,
+                'description' => $this->description,
+                'date' => $this->date,
+                'posted' => $this->posted,
+                'lastArticle' => $this->lastArticle,
+            ];
+            return $formData;
+        }
+        return null;
+    }
+    /************************************End Get Data Form Back************************************************* */
+    /************************************Autres************************************************* */
+    /**
+     * Renvoie les données
+     *
+     * @param array $data
+     * @return array
+     */
+    private function dataFormArticle(array $data): array
+    {
+        $tabData = [
+            $this->title = htmlentities(trim($data['post']['title'])) ?? null,
+            $this->legende = htmlentities(trim($data['post']['legende'])) ?? null,
+            $this->description = htmlentities(trim($data['post']['description'])) ?? null,
+            $this->date = $data['post']['date'] ?? null,
+            $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0,
+            $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0,
+            $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null,
+            $this->size = $data['files']['imageArticle']['size'] ?? null,
+            $this->file = $data['files']['imageArticle']['name'] ?? null,
+        ];
+        return $tabData;
     }
     /************************************ Fin Autres************************************************* */
+
 }

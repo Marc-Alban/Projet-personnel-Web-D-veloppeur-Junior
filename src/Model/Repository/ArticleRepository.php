@@ -85,7 +85,7 @@ class ArticleRepository
      * false si l'objet n'a pu être inséré, objet Article si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function read(int $id): Object
+    public function read(int $id): ?Object
     {
         $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE  posted = 1 AND id=:id');
         //Liaison paramètres
@@ -98,20 +98,21 @@ class ArticleRepository
             if ($this->article === false) {
                 $articleFake = (object) [
                     'id' => '1',
-                    'title' => 'Que le dernier article en bdd',
+                    'title' => 'Article inconnu',
                     'legende' => 'Défault',
-                    'description' => 'Que le dernier article en bdd',
+                    'description' => 'Article inconnu',
                     'image' => 'default.png',
                     'date' => '',
                     'posted' => '1',
-                    'lastArticle' => '1',
+                    'lastArticle' => '0',
                 ];
                 return $articleFake;
             }
             return $this->article;
         }
+
         if (!$executeIsOk) {
-            return false;
+            return null;
         }
     }
 /************************************End Read Post with id************************************************* */

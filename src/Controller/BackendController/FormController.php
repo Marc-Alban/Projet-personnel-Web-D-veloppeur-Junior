@@ -24,7 +24,7 @@ class FormController
     public function formAction(array $data): void
     {
         $verif = $this->articleManager->verifForm($data);
-
-        $this->view->renderer('Backend', 'form', ['verif' => $verif]);
+        $dataForm = $this->articleManager->getDatasForm($data);
+        $this->view->renderer('Backend', 'form', ['verif' => $verif, "dataForm" => $dataForm]);
     }
 }
