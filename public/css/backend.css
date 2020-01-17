@@ -28,6 +28,13 @@
     width: 100%;
 }
 
+/* Dashboard - Nav*/
+.dropdown-item:hover {
+    text-decoration: none;
+    background-color: #000000 !important;
+    color: #fff !important;
+}
+
 @media screen and (max-width: 640px) {
 
     table,

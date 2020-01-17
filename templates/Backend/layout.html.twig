@@ -85,7 +85,7 @@
                                         id="navbarDropdownMenuLink-333"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
-                                        aria-expanded="false">page
+                                        aria-expanded="false">Page
                                     </a>
                                     <div class="dropdown-menu dropdown-default"
                                         aria-labelledby="navbarDropdownMenuLink-333">
@@ -120,19 +120,33 @@
                     {#---------------------------BTN-----------------------------#}
                     <div class="ml-auto p-2">
                         <ul class="navbar-nav ml-auto nav-flex-icons">
-                            <li class="nav-item">
-                                {#---------------------------BTN-BackSite----------------------------#}
-                                <a class="nav-link waves-effect waves-light"
-                                    href="?p=home">
-                                    <button class="btn btn-light btn-Gestion">Retour
-                                        site</button>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"
+                                    id="navbarDropdownMenuLink-333"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"> <i class="fas
+                                        fa-user"></i>
+                                        Profil
                                 </a>
-                                {#---------------------------BTN-UserProfile----------------------------#}
-                                <a class="nav-link waves-effect waves-light"
-                                    href="?p=user">
-                                    <button class="btn btn-light btn-Gestion">Gestion
-                                        du compte</button>
-                                </a>
+                                <div class="dropdown-menu dropdown-default"
+                                    aria-labelledby="navbarDropdownMenuLink-333">
+                                    {#---------------------------Retour-Home----------------------------#}
+                                    <a class="dropdown-item"
+                                        href="?p=home">
+                                        Retour site</a>
+                                    </a>
+                                    {#---------------------------BTN-UserProfile----------------------------#}
+                                    <a class="dropdown-item"
+                                        href="?p=user">
+                                        Gestion du compte
+                                    </a>
+                                    {#---------------------------BTN-UserProfile----------------------------#}
+                                    <a class="dropdown-item"
+                                    href="">
+                                    Déconnexion
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </div>

@@ -26,7 +26,8 @@
                 <div class="card-body">
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">{{
-                        data.lastArticle.description|raw}}</p>
+                        data.lastArticle.description|raw|striptags|convert_encoding('UTF-8',
+                        'iso-2022-jp')|u.truncate(200, '...')}}</p>
                     {#--------------------------END-CARD-DESCRIPTION-----------------------------#}
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
@@ -64,7 +65,8 @@
                 <div class="card-body">
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">
-                        {{paginationListeArticle.description|raw}}
+                        {{paginationListeArticle.description|raw|striptags|convert_encoding('UTF-8',
+                        'iso-2022-jp')|u.truncate(200, '...')}}
                     </p>
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">
@@ -157,7 +159,8 @@
                 <div class="card-body">
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">{{
-                        classementYear.description }}</p>
+                        classementYear.description|raw|striptags|convert_encoding('UTF-8',
+                        'iso-2022-jp')|u.truncate(200, '...') }}</p>
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
                         classementYear.title }}</h4>

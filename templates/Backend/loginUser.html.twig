@@ -10,48 +10,78 @@
             <div class="card mx-xl-5">
                 {#---------------------------Card-Body-----------------------------#}
                 <div class="card-body">
-                    <form>
+                    <form action="/?p=user&action=save" method="POST">
                         <p class="h4 text-center py-4">Gestion de compte</p>
-                        {#---------------------------Input-Name-----------------------------#}
-                        <label for="defaultFormCardName" class="grey-text
-                            font-weight-light">Nom</label>
-                        <input type="text" id="defaultFormCardName"
-                            class="form-control">
+                        <div class="form-row">
+                            <div class="col-6">
+                                {#---------------------------Input-Name-----------------------------#}
+                                <label for="defaultFormCardName"
+                                    class="black-text
+                                    font-weight-light">Nom</label>
+                                <input type="text" name="name"
+                                    id="defaultFormCardName"
+                                    class="form-control" value="{% for datasUser
+                                    in
+                                    data.userData %}{{datasUser.name}}{% endfor
+                                    %}">
+                            </div>
+                            <div class="col-6">
+                                {#---------------------------Input-Last_Name-----------------------------#}
+                                <label for="defaultFormCardLastName"
+                                    class="black-text
+                                    font-weight-light">Prénoms</label>
+                                <input type="text" name="lastName"
+                                    id="defaultFormCardLastName"
+                                    class="form-control" value="{% for datasUser
+                                    in
+                                    data.userData %}{{datasUser.lastName}}{%
+                                    endfor %}">
+                            </div>
+                        </div>
                         <br>
-                        {#---------------------------Input-Last_Name-----------------------------#}
-                        <label for="defaultFormCardLastName" class="grey-text
-                            font-weight-light">Prénoms</label>
-                        <input type="text" id="defaultFormCardLastName"
-                            class="form-control">
-                        <br>
-                        {#---------------------------Input-Email-----------------------------#}
-                        <label for="defaultFormCardEmail" class="grey-text
-                            font-weight-light">E-mail</label>
-                        <input type="email" id="defaultFormCardEmail"
-                            class="form-control">
-                        <br>
-                        {#---------------------------Input-Confirm-Email-----------------------------#}
-                        <label for="defaultFormCardEmail" class="grey-text
-                            font-weight-light">E-mail</label>
-                        <input type="email" id="defaultFormCardEmail"
-                            class="form-control">
+                        <div class="form-row">
+                            <div class="col-6">
+                                {#---------------------------Input-Email-----------------------------#}
+                                <label for="defaultFormCardEmail"
+                                    class="black-text
+                                    font-weight-light">E-mail</label>
+                                <input type="email" name="mail"
+                                    id="defaultFormCardEmail"
+                                    class="form-control" value="{% for datasUser
+                                    in
+                                    data.userData %}{{datasUser.mail}}{% endfor
+                                    %}">
+                            </div>
+                            <div class="col-6">
+                                {#---------------------------Input-Confirm-Email-----------------------------#}
+                                <label for="defaultFormCardEmailConf"
+                                    class="black-text
+                                    font-weight-light">Confirmation de l'e-mail</label>
+                                <input type="email" name="mailConf"
+                                    id="defaultFormCardEmailConf"
+                                    class="form-control" value="{% for datasUser
+                                        in
+                                        data.userData %}{{datasUser.mail}}{% endfor
+                                        %}">
+                            </div>
+                        </div>
                         <br>
                         <div class="form-row">
                             <div class="col-6">
                                 {#---------------------------Input-Paswword-----------------------------#}
                                 <label for="defaultFormCardPassword"
-                                    class="grey-text font-weight-light">Mot de
+                                    class="black-text font-weight-light">Mot de
                                     passe</label>
-                                <input type="password"
+                                <input type="password" name="newMdp"
                                     id="defaultFormCardPassword"
                                     class="form-control">
                             </div>
                             <div class="col-6">
                                 {#---------------------------Input-Paswword-Confirmatio-----------------------------#}
                                 <label for="defaultFormCardPasswordConf"
-                                    class="grey-text font-weight-light">Confirmation
+                                    class="black-text font-weight-light">Confirmation
                                     mot de passe</label>
-                                <input type="password"
+                                <input type="password" name="newMdpConf"
                                     id="defaultFormCardPasswordConf"
                                     class="form-control">
                             </div>
@@ -59,8 +89,8 @@
                         <br>
                         {#---------------------------Submit-----------------------------#}
                         <div class="text-center py-4 mt-3">
-                            <button class="btn btn-dark" type="submit">Enregistrer<i
-                                    class="fa fa-paper-plane-o ml-2"></i></button>
+                            <input type="submit" class="btn btn-dark" name="submit" value="Enregistrer">
+                            </input>
                         </div>
                     </form>
                 </div>
@@ -70,5 +100,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

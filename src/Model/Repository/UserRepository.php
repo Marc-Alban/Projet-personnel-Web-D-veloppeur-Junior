@@ -63,6 +63,70 @@ class UserRepository
         $this->pdoStatement->execute($e);
     }
 /************************************End Insert Token************************************************* */
+/************************************Change Name Bdd************************************************* */
+    /**
+     * Methode pour mettre à jour le nom dans la bdd
+     *
+     * @param [type] $token
+     * @return void
+     */
+    public function updateName(array $data): void
+    {
+        $e = [
+            ':name' => $data['post']['name'],
+        ];
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET name = :name");
+        $this->pdoStatement->execute($e);
+    }
+/************************************End Change Name Bdd************************************************* */
+/************************************Change lastName Bdd************************************************* */
+    /**
+     * Methode pour mettre à jour le nom dans la bdd
+     *
+     * @param [type] $token
+     * @return void
+     */
+    public function updateLastName(array $data): void
+    {
+        $e = [
+            ':lastName' => $data['post']['lastName'],
+        ];
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET lastName = :lastName");
+        $this->pdoStatement->execute($e);
+    }
+/************************************End Change lastName Bdd************************************************* */
+/************************************Change mail Bdd************************************************* */
+    /**
+     * Methode pour mettre à jour le nom dans la bdd
+     *
+     * @param [type] $token
+     * @return void
+     */
+    public function updateMail(array $data): void
+    {
+        $e = [
+            ':mail' => $data['post']['mail'],
+        ];
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET mail = :mail");
+        $this->pdoStatement->execute($e);
+    }
+/************************************End Change mail Bdd************************************************* */
+/************************************Change password Bdd************************************************* */
+    /**
+     * Methode pour mettre à jour le nom dans la bdd
+     *
+     * @param [type] $token
+     * @return void
+     */
+    public function updatePassword(array $data): void
+    {
+        $e = [
+            ':password' => $data['post']['newMdp'],
+        ];
+        $this->pdoStatement = $this->pdo->prepare("UPDATE user SET password = :password");
+        $this->pdoStatement->execute($e);
+    }
+/************************************End Change password Bdd************************************************* */
 /************************************Change Active Bdd************************************************* */
     /**
      * Methode qui permet de modifier la valeur active en bdd

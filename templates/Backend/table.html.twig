@@ -114,7 +114,10 @@
                                                         {{articleListe.legende}}
                                                     </td>
                                                     <td>
-                                                        {{articleListe.description|raw|striptags}}
+                                                        {{
+                                                        articleListe.description|raw|striptags|convert_encoding('UTF-8',
+                                                        'iso-2022-jp')|u.truncate(200)
+                                                        }}
                                                     </td>
                                                     <td>
                                                         {{articleListe.image}}

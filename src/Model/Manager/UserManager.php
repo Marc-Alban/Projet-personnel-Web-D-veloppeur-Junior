@@ -9,6 +9,10 @@ class UserManager
 
     private $userRepository;
     private $user;
+    private $name;
+    private $lastName;
+    private $mail;
+    private $mailConf;
 
     /**
      * Fonction constructeur, instanciation du userRepository
@@ -18,7 +22,48 @@ class UserManager
     {
         $this->userRepository = new UserRepository();
         $this->user = $this->userRepository;
+
     }
+    /************************************Get All Form User************************************************* */
+    /**
+     * Retourne la table user sauf le password
+     *
+     * @return string
+     */
+    public function getAllUsersForm(array $data): void
+    {
+        $this->name = htmlentities(trim($data['post']['name'])) ?? null;
+        $this->lastName = htmlentities(trim($data['post']['lastName'])) ?? null;
+        $this->mail = htmlentities(trim($data['post']['mail'])) ?? null;
+        $this->mailConf = htmlentities(trim($data['post']['mailConf'])) ?? null;
+    }
+/************************************End Get Users************************************************* */
+    /************************************Factorisation VerifPassword************************************************* */
+    /**
+     * Retourne l'entiereté de la table user
+     *
+     * @return string
+     */
+    public function verifPass(array $data): ?array
+    {
+        $newMdp = htmlentities(trim($data['post']['newMdp'])) ?? null;
+        $newMdpConf = htmlentities(trim($data['post']['newMdpConf'])) ?? null;
+
+        if ($newMdp === null || empty($newMdp)) {
+            return $errors['newMdpEmpty'] = "Veuillez mettre un mot de passe";
+        } else if ($newMdpConf === null || empty($newMdpConf)) {
+            $errors['newMdpConfEmpty'] = "Veuillez mettre un mot de passe de confirmation";
+        } else if (strlen($newMdp) < 6 || strlen($newMdpConf) < 6) {
+            $errors['mdpLen'] = "Veuillez mettre un mot de passe de plus de 6 caractères";
+        } else if ($newMdp !== $newMdpConf) {
+            $errors['mdpErrors'] = "Mot de passe pas identique";
+        } else if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$#', $newMdp)) {
+            $errors['mdpWrong'] = 'Mot de passe non conforme, doit avoir minuscule-majuscule-chiffres-caractères';
+        }
+
+        return $errors;
+    }
+/************************************End Factorisation VerifPassword************************************************* */
 /************************************Get Users************************************************* */
     /**
      * Retourne le nom de l'utilisateur
@@ -82,6 +127,54 @@ class UserManager
         return $token;
     }
 /************************************End Get Token Bdd************************************************* */
+/************************************Set Name Bdd************************************************* */
+    /**
+     * Modifie le nom dans la bdd
+     *
+     * @param array $data
+     * @return string
+     */
+    public function setNameBdd(array $data): void
+    {
+        $this->user->updateName($data);
+    }
+/************************************End Set name Bdd************************************************* */
+/************************************Set lastName Bdd************************************************* */
+    /**
+     * Modifie le prénom dans la bdd
+     *
+     * @param array $data
+     * @return string
+     */
+    public function setlastNameBdd(array $data): void
+    {
+        $this->user->updateLastName($data);
+    }
+/************************************End Set lastname Bdd************************************************* */
+/************************************Set Mail Bdd************************************************* */
+    /**
+     * Modifie le mail dans la bdd
+     *
+     * @param array $data
+     * @return string
+     */
+    public function setMailBdd(array $data): void
+    {
+        $this->user->updateMail($data);
+    }
+/************************************End Set Mail Bdd************************************************* */
+/************************************Set Password Bdd************************************************* */
+    /**
+     * Modifie le nom dans la bdd
+     *
+     * @param array $data
+     * @return string
+     */
+    public function setPasswordBdd(array $data): void
+    {
+        password_hash($this->user->updatePassword($data), PASSWORD_DEFAULT);
+    }
+/************************************End Set Password Bdd************************************************* */
 /************************************Check BDD Mail************************************************* */
 
     /**
@@ -191,6 +284,65 @@ class UserManager
         return true;
     }
 /************************************End Verif UserToken************************************************* */
+/************************************FormDataUser************************************************* */
+    /**
+     * Met à jour les données sur le fomulaire back
+     * pour ensuite les mettres à jours en bdd
+     *
+     */
+    public function dataFormBack(array $data)
+    {
+        if (isset($data['post']['submit'])) {
+
+            $this->getAllUsersForm($data);
+
+            $action = $data['get']['action'] ?? null;
+
+            $name = $this->name;
+            $lastName = $this->lastName;
+            $mail = $this->mail;
+            $mailConf = $this->mailConf;
+
+            $errors = $data["session"]["error"] ?? null;
+            unset($data["session"]["error"]);
+
+            $succes = $data["session"]["succes"] ?? null;
+            unset($data["session"]["succes"]);
+
+            if ($action === null || empty($action) || !isset($action)) {
+                return null;
+            }
+
+            if ($name === null || empty($name)) {
+                $errors['emptyName'] = "Veuillez mettre un nom";
+            } else if ($lastName === null || empty($lastName)) {
+                $errors['emptyLastName'] = "Veuillez mettre un prénom";
+            } else if ($mail === null || empty($mail)) {
+                $errors['emptyMail'] = "Veuillez mettre un mail";
+            } else if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mail)) {
+                $errors['mailWrong'] = "L'adresse e-mail est invalide";
+            } else if ($mailConf === null || empty($mailConf)) {
+                $errors['emptyMailConf'] = "Veuillez mettre un mail de confirmation";
+            } else if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mailConf)) {
+                $errors['mailConfWrong'] = "L'adresse e-mail de confirmation est invalide";
+            }
+            $this->verifPass($data);
+            var_dump($this->verifPass($data));
+            die();
+
+            if (!empty($errors)) {
+                $this->setNameBdd($data);
+                $this->setLastNameBdd($data);
+                $this->setMailBdd($data);
+                $this->setPasswordBdd($data);
+                $succes["update"] = "Utilisateur mis à jour";
+                return $succes;
+            }
+
+            return $errors;
+        }
+    }
+/************************************End FormDataUser************************************************* */
 /************************************Change Password************************************************* */
     /**
      * Methode pour changer le mot de passe
@@ -202,22 +354,13 @@ class UserManager
     {
         $submit = $data['post']['submit'] ?? null;
         if ($submit) {
-            $newMdp = trim(htmlentities($data['post']['newMdp'])) ?? null;
-            $newMdpConf = trim(htmlentities($data['post']['newMdpConf'])) ?? null;
+
             $error = $data['session']['error'] ?? null;
             unset($data["session"]["error"]);
+            $this->getAllUsersForm($data);
 
-            if ($newMdp === null || empty($newMdp)) {
-                $error['newMdpEmpty'] = "Veuillez mettre un mot de passe";
-            } else if ($newMdpConf === null || empty($newMdpConf)) {
-                $error['newMdpConfEmpty'] = "Veuillez mettre un mot de passe de confirmation";
-            } else if (strlen($newMdp) < 6 || strlen($newMdpConf) < 6) {
-                $error['mdpLen'] = "Veuillez mettre un mot de passe de plus de 6 caractères";
-            } else if ($newMdp !== $newMdpConf) {
-                $error['mdpError'] = "Mot de passe pas identique";
-            } else if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$#', $newMdp)) {
-                $error['mdpWrong'] = 'Mot de passe non conforme, doit avoir minuscule-majuscule-chiffres-caractères';
-            }
+            $this->verifPass($data);
+
             if (empty($error)) {
                 $this->userRepository->changePass($data);
                 $this->userRepository->changeActive('true');
