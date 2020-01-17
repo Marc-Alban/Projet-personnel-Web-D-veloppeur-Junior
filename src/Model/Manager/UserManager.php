@@ -8,7 +8,6 @@ class UserManager
 {
 
     private $userRepository;
-    private $user;
     private $name;
     private $lastName;
     private $mail;
@@ -21,8 +20,6 @@ class UserManager
     public function __construct()
     {
         $this->userRepository = new UserRepository();
-        $this->user = $this->userRepository;
-
     }
     /************************************Get All Form User************************************************* */
     /**
@@ -72,7 +69,7 @@ class UserManager
      */
     public function getUsers(): string
     {
-        return $this->user->readAllUser()->getName();
+        return $this->userRepository->readAllUser()->getName();
     }
 /************************************End Get Users************************************************* */
 /************************************Get Pass************************************************* */
@@ -83,7 +80,7 @@ class UserManager
      */
     public function getPass(): string
     {
-        return $this->user->readAllUser()->getPassword();
+        return $this->userRepository->readAllUser()->getPassword();
     }
 /************************************End Get Pass************************************************* */
 /************************************Get MailForm Page LostPass************************************************* */
@@ -111,7 +108,7 @@ class UserManager
      */
     public function getActiveUser(): array
     {
-        return $this->user->getActiveValue();
+        return $this->userRepository->getActiveValue();
     }
 /************************************End Get Active User************************************************* */
 /************************************Get Token Bdd************************************************* */
@@ -123,7 +120,7 @@ class UserManager
      */
     public function getTokenBdd(): string
     {
-        $token = $this->user->readAllUser()->getToken();
+        $token = $this->userRepository->readAllUser()->getToken();
         return $token;
     }
 /************************************End Get Token Bdd************************************************* */
@@ -136,7 +133,7 @@ class UserManager
      */
     public function setNameBdd(array $data): void
     {
-        $this->user->updateName($data);
+        $this->userRepository->updateName($data);
     }
 /************************************End Set name Bdd************************************************* */
 /************************************Set lastName Bdd************************************************* */
@@ -148,7 +145,7 @@ class UserManager
      */
     public function setlastNameBdd(array $data): void
     {
-        $this->user->updateLastName($data);
+        $this->userRepository->updateLastName($data);
     }
 /************************************End Set lastname Bdd************************************************* */
 /************************************Set Mail Bdd************************************************* */
@@ -160,7 +157,7 @@ class UserManager
      */
     public function setMailBdd(array $data): void
     {
-        $this->user->updateMail($data);
+        $this->userRepository->updateMail($data);
     }
 /************************************End Set Mail Bdd************************************************* */
 /************************************Set Password Bdd************************************************* */
@@ -172,7 +169,7 @@ class UserManager
      */
     public function setPasswordBdd(array $data): void
     {
-        password_hash($this->user->updatePassword($data), PASSWORD_DEFAULT);
+        password_hash($this->userRepository->updatePassword($data), PASSWORD_DEFAULT);
     }
 /************************************End Set Password Bdd************************************************* */
 /************************************Check BDD Mail************************************************* */
@@ -185,7 +182,7 @@ class UserManager
      */
     private function checkBddMail(string $mailPost): bool
     {
-        $mail = $this->user->readAllUser()->getMailUser();
+        $mail = $this->userRepository->readAllUser()->getMail();
         if ($mail !== $mailPost) {
             return false;
         }
@@ -255,8 +252,8 @@ class UserManager
             if (empty($error)) {
                 if ($this->checkBddMail($mail) === true) {
                     $this->message($token);
-                    $this->user->insertToken($token);
-                    $this->user->changeActive('false');
+                    $this->userRepository->insertToken($token);
+                    $this->userRepository->changeActive('false');
                     $succes['message'] = 'Vous allez recevoir un mail de réinitialisation de mot de passe';
                 }
                 return $succes;
@@ -353,11 +350,11 @@ class UserManager
     public function changeMdp(array $data): ?array
     {
         $submit = $data['post']['submit'] ?? null;
+
         if ($submit) {
 
             $error = $data['session']['error'] ?? null;
             unset($data["session"]["error"]);
-            $this->getAllUsersForm($data);
 
             $this->verifPass($data);
 

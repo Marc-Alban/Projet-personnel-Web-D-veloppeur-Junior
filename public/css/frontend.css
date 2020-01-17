@@ -1,4 +1,8 @@
 /* ***************Style générale des pages******************** */
+main {
+    min-height: 50vh !important;
+}
+
 a {
     color: black;
 }
@@ -6,7 +10,6 @@ a {
 a:hover {
     color: black;
 }
-
 
 /* ***************Header******************** */
 
