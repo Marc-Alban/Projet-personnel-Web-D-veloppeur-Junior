@@ -44,14 +44,14 @@ class TableController
             $partenaire = $this->partenaireManager->listePartenaire();
         } else if ($liste === "listeArticlesBack" && isset($pp)) {
             $article = $this->articleManager->pagination($data);
-        } else if ($liste === "listeArticlesBack" && !isset($pp) && empty($pp)) {
-            header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
         } else if ($liste === "listeGraphiques") {
             $graphique = $this->graph->listeGraph();
         } else if ($liste === "listePages") {
             $page = $this->pageManager->readPage(null);
         } else if (!isset($liste) || empty($liste)) {
             header("Location: http://3bigbangbourse.fr/?p=dashboard&action=connexion");
+        } else if ($liste === "listeArticlesBack" && !isset($pp) && empty($pp)) {
+            header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
         }
 
         $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire, "article" => $article, "graphique" => $graphique, "page" => $page]);
