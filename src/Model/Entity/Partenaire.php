@@ -7,6 +7,7 @@ class Partenaire
     private $id;
     private $legende;
     private $image;
+    private $link;
     private $posted;
 
     /**
@@ -80,4 +81,23 @@ class Partenaire
         return $this->id;
     }
 
+    /**
+     * Get the value of link
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Set the value of link
+     *
+     * @return  self
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
 }

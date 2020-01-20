@@ -32,10 +32,9 @@ class DashboardController
     {
         $modalControl = $this->DashboardManager->modalControl($data);
 
-        if ($modalControl === null || !isset($modalControl['succes'])) {
-            $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
-            exit();
-        }
+        // if ($modalControl === null || !isset($modalControl['succes'])) {
+        //     $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
+        // }
 
         $countArticle = $this->article->nbPost();
         $countPartenaire = $this->partenaire->nbPartenaire();

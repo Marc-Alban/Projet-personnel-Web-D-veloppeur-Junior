@@ -34,8 +34,9 @@ class PartenaireRepository
         $partenaire = [];
         while ($partenaires = $this->pdoStatement->fetchObject(Partenaire::class)) {
             $partenaire[] = $partenaires;
+            $partenaire++;
         }
-        return $partenaire;
+        return (array) $partenaire;
     }
 /************************************End Read All Partenaire************************************************* */
 /************************************Count partenaire************************************************* */

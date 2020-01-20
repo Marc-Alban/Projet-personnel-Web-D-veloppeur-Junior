@@ -19,7 +19,7 @@ class PartenaireManager
 
     /************************************liste Partenaire ReadALL************************************************* */
     /**
-     * Retourne la liste des partenaire sur le controller home
+     * Retourne la liste des partenaires sur le controller home
      *
      * @return array
      */
