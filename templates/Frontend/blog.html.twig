@@ -88,8 +88,8 @@
     <nav aria-label="Page navigation mr-auto">
         <ul class="pagination pg-blue">
             <li class="page-item
-                {% if data.paginationListeArticle.current == 1 or
-                data.paginationListeArticle.current <1 %}
+                {% if data.paginationListeArticle.current == 1
+                or data.paginationListeArticle.current <1 %}
                 disabled
                 {% endif %}">
                 <a class="page-link" aria-label="Previous" href="{% if

@@ -68,7 +68,7 @@ class ArticleManager
      */
     public function pagination(array $data): array
     {
-        $perPage = 5;
+        $perPage = 4;
         $total = $this->articleRepository->countArticle();
         $nbPage = ceil($total / $perPage);
         $current = $data['get']['pp'] ?? null;

@@ -31,7 +31,7 @@ class ArticleRepository
      * false si l'objet n'a pu être inséré, objet Article si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function last(): Object
+    public function last(): ?Object
     {
 
         $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 AND posted = 1 ORDER BY date DESC LIMIT 1');
@@ -59,7 +59,7 @@ class ArticleRepository
         }
 
         if (!$executeIsOk) {
-            return false;
+            return null;
         }
     }
 /************************************End last Article************************************************* */
@@ -116,24 +116,16 @@ class ArticleRepository
         }
     }
 /************************************End Read Post with id************************************************* */
-/************************************Read All Post With LastAticle ************************************************* */
-    /**
-     * Récupère tous les objet Article dans la bdd
-     *
-     * @return array|bool
-     * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
-     * false si une erreur survient
-     */
-    public function readAll($firstOfPage, $perPage): array
+/************************************Not Repeat Read All************************************************* */
+    private function notRepeatReadAll()
     {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date LIMIT $firstOfPage,$perPage");
         $this->article = [];
         $articles = 1;
         while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
             $this->article[] = $articles;
             $articles++;
         }
-        if (empty($this->article) || $this->article === false) {
+        if ($this->article === false) {
             $articleFake[] = [
                 'id' => '1',
                 'title' => 'Que le dernier article en bdd',
@@ -148,6 +140,22 @@ class ArticleRepository
         };
 
         return $this->article;
+
+    }
+/************************************End Not Repeat Read All************************************************* */
+/************************************Read All Post With LastAticle ************************************************* */
+    /**
+     * Récupère tous les objet Article dans la bdd
+     *
+     * @return array|bool
+     * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
+     * false si une erreur survient
+     */
+    public function readAll($firstOfPage, $perPage): array
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date LIMIT $firstOfPage,$perPage");
+        return $this->notRepeatReadAll();
+
     }
 /************************************End Read All Post With Last Article************************************************* */
 /************************************Read All Post Not LastAticle ************************************************* */
@@ -160,28 +168,8 @@ class ArticleRepository
      */
     public function readArticleAll($firstOfPage, $perPage): array
     {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT id FROM article WHERE lastArticle = 1) AND posted = 1 ORDER BY id LIMIT $firstOfPage,$perPage");
-        $this->article = [];
-        $articles = 1;
-        while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
-            $this->article[] = $articles;
-            $articles++;
-        }
-        if (empty($this->article) || $this->article === false) {
-            $articleFake[] = [
-                'id' => '1',
-                'title' => 'Que le dernier article en bdd',
-                'legende' => 'Défault',
-                'description' => 'Que le dernier article en bdd',
-                'image' => 'default.png',
-                'date' => '',
-                'posted' => '1',
-                'lastArticle' => '1',
-            ];
-            return $articleFake;
-        };
-
-        return $this->article;
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ORDER BY id LIMIT $firstOfPage,$perPage");
+        return $this->notRepeatReadAll();
     }
 /************************************End Read All Post Not Last Article************************************************* */
 /************************************Write Post************************************************* */
@@ -249,7 +237,7 @@ class ArticleRepository
  */
     public function countArticle(): ?string
     {
-        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE posted = 1 ");
+        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ");
         $req = $this->pdoStatement->fetch();
         if ($req) {
             $total = $req['total'];
