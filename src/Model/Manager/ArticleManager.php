@@ -180,7 +180,7 @@ class ArticleManager
                         $this->articleRepository->updateLast();
                     }
                     $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $extention);
-                    $succes['ok'] = "Article bien enregistré";
+                    $succes['succesArticle'] = "Article bien enregistré";
                     return $succes;
                 }
             }

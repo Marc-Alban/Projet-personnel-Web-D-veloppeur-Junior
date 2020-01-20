@@ -30,7 +30,7 @@ class PartenaireRepository
      */
     public function readAll(): array
     {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM partenaire WHERE posted = 1");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM partenaire");
         $partenaire = [];
         while ($partenaires = $this->pdoStatement->fetchObject(Partenaire::class)) {
             $partenaire[] = $partenaires;
@@ -42,7 +42,7 @@ class PartenaireRepository
 /************************************Count partenaire************************************************* */
     public function countpartenaire(): ?string
     {
-        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM partenaire WHERE posted = 1");
+        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM partenaire ");
         $req = $this->pdoStatement->fetch();
         if ($req) {
             $total = $req['total'];
@@ -51,5 +51,30 @@ class PartenaireRepository
         return null;
     }
 /************************************End Count partenaire************************************************* */
+/************************************Add partenaire in Bdd************************************************* */
+    public function addBddPartenaire(?string $legende, ?string $link, string $tmpName, string $extention): void
+    {
+        if (!$tmpName) {
+            $id = "default";
+            $extention = ".png";
+        }
+        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM partenaire ORDER BY id');
+        $response = $this->pdoStatement->fetch();
+        $id = $response['MAX(id)'] + 1;
+        $p = [
+            ':id' => $id,
+            ':legende' => $legende,
+            ':image' => $id . "." . $extention,
+            ':link' => $link,
+        ];
+        $sql = "
+    INSERT INTO partenaire(id, legende, image, link)
+    VALUES(:id, :legende, :image, :link,)
+    ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($p);
+        move_uploaded_file($tmpName, "img/partenaire/" . $id . '.' . $extention);
+    }
+/************************************End Add partenaire in Bdd************************************************* */
 
 }

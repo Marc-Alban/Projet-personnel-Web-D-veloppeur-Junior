@@ -1,20 +1,39 @@
 {% extends 'Backend/layout.html.twig' %}
 {#---------------------------BLOC-Title-----------------------------#}
-{% block head %} <title> Page insertion </title> {% endblock %}
+{% block head %} <title> Page partenaire </title> {% endblock %}
 {#---------------------------BLOC-Title-----------------------------#}
 {% block content %}
-{#--------------------------CARD-----------------------------#}
 
+{#--------------------------CARD-----------------------------#}
 <div class="container">
     <div class="row">
         <div class="card mx-xl-5 col-12 col-sm-8 col-md-8 col-lg-8 mt-3">
+            <br>
+                 {#----------------------------Succes-Submit---------------------------#}
+     {% if data.verifAndAddPartenaire.successPartenaire %}
+        {% for succes in data.verifAndAddPartenaire %}
+        <div class="alert alert-primary" role="alert">
+            {{succes}}
+        </div>
+        {% endfor %}
+ {#----------------------------END-Succes-Submit---------------------------#}
+ {#----------------------------Errors-Submit---------------------------#}
+     {% else %}
+        {% for error in data.verifAndAddPartenaire %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endfor %}
+     {% endif %}
+ {#----------------------------END-Errors-Submit---------------------------#}
+ <br>
             {#---------------------------CARD-BODY-----------------------------#}
             <div class="card-body">
-                <form>
+                <form action="http://3bigbangbourse.fr/?p=partenaire&action=send" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <div class="custom-file">
                             {#---------------------------INPUT-IMAGE-----------------------------#}
-                            <input type="file" class="custom-file-input"
+                            <input type="file"  name="imagePartenaire" class="custom-file-input"
                                 id="inputGroupFile"
                                 aria-describedby="inputGroupFileAddon">
                             <label class="custom-file-label"
@@ -22,15 +41,21 @@
                         </div>
                     </div>
                     <br>
-                    {#---------------------------INPUT-EMAIL-----------------------------#}
-                    <label for="defaultFormCardLink" class="grey-text
+                    {#---------------------------INPUT-Lengende-----------------------------#}
+                    <label for="Legende" class="grey-text
+                        font-weight-light">Legende</label>
+                    <input type="text" name="legende" id="Legende"
+                        class="form-control">
+                    <br>
+                    {#---------------------------INPUT-Link-----------------------------#}
+                    <label for="Link" class="grey-text
                         font-weight-light">Lien partenaire</label>
-                    <input type="email" id="defaultFormCardLink"
+                    <input type="text" name="link" id="Link"
                         class="form-control">
                     {#---------------------------SUBMIT-----------------------------#}
                     <div class="text-center py-4 mt-3">
-                        <button class="btn btn-black" type="submit">Envoyer<i
-                                class="fa fa-paper-plane-o ml-2"></i></button>
+                        <input class="btn btn-black" name="submit" type="submit" value="Envoyer"><i
+                                class="fa fa-paper-plane-o ml-2"></i></input>
                     </div>
                 </form>
             </div>
