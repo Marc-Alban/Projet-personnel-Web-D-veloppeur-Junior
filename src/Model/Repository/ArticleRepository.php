@@ -228,16 +228,35 @@ class ArticleRepository
         return $this->pdoStatement->execute();
     }
 /************************************End Delete Post Bdd With ID************************************************* */
-/************************************Count Post in BDD************************************************* */
+/************************************Count Post in BDD Frontend************************************************* */
 /**
- * Renvoie le nombre d'article stocké dans la table article
+ * Renvoie le nombre d'article stocké dans la table article sur le frontend
  * et s'il n'y a rien alors renvoie null
  *
  * @return string|null
  */
-    public function countArticle(): ?string
+    public function countArticleFront(): ?string
     {
         $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ");
+        return $this->notRepeatCount();
+    }
+/************************************End Count Post in BDD Frontend************************************************* */
+/************************************Count Post in BDD Backend************************************************* */
+/**
+ * Renvoie le nombre d'article stocké dans la table article sur le backend
+ * et s'il n'y a rien alors renvoie null
+ *
+ * @return string|null
+ */
+    public function countArticleBack(): ?string
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE posted = 1 ");
+        return $this->notRepeatCount();
+    }
+/************************************End Count Post in BDD************************************************* */
+/************************************Factorisation Count************************************************* */
+    private function notRepeatCount(): ?string
+    {
         $req = $this->pdoStatement->fetch();
         if ($req) {
             $total = $req['total'];
@@ -245,7 +264,7 @@ class ArticleRepository
         }
         return null;
     }
-/************************************End Count Post in BDD************************************************* */
+/************************************End Factorisation Count************************************************* */
 /************************************Return Post With Year************************************************* */
     /**
      * Retourne les articles en fonctions de la date données dans l'url

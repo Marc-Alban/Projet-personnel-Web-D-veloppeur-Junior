@@ -283,6 +283,7 @@
                             </div>
                         </div>
                         {#---------------------------END-START-TABLE-CONTENT-----------------------------#}
+                        <br>
                         {% if data.article %}
                         {#--------------------------PAGINATION-----------------------------#}
                         <nav aria-label="Page navigation mr-auto">
@@ -297,11 +298,11 @@
                                         href="{% if
                                         data.article.perCurrent != 1
                                         %}
-                                        ?p=listesArticles&perpage={{data.article.perCurrent
+                                        ?p=table&liste=listeArticlesBack&perpage={{data.article.perCurrent
                                         -
                                         1 }}
                                         {% else %}
-                                        ?p=listesArticles&perpage={{data.article.perCurrent
+                                        ?p=table&liste=listeArticlesBack&perpage={{data.article.perCurrent
                                         }}
                                         {% endif %}">
                                         <span aria-hidden="true">&laquo;</span>
@@ -314,7 +315,8 @@
                                 %}
                                 <li class="page-item active"><a
                                         class="page-link"
-                                        href="?p=listesArticles&perpage={{ i
+                                        href="?p=table&liste=listeArticlesBack&perpage={{
+                                        i
                                         }}">{{ i
                                         }}</a></li>
                                 {% else %}
@@ -323,7 +325,8 @@
                                     %}
                                     disabled
                                     {% endif %}"><a class="page-link"
-                                        href="?p=listesArticles&perpage={{ i
+                                        href="?p=table&liste=listeArticlesBack&perpage={{
+                                        i
                                         }}">{{ i
                                         }}</a></li>
                                 {% endif %}
@@ -338,11 +341,11 @@
                                         href="{% if
                                         data.article.perCurrent !=
                                         data.article.nbPage %}
-                                        ?p=listesArticles&perpage={{data.article.perCurrent
+                                        ?p=table&liste=listeArticlesBack&perpage={{data.article.perCurrent
                                         +
                                         1 }}
                                         {% else %}
-                                        ?p=listesArticles&perpage={{data.article.perCurrent
+                                        ?p=table&liste=listeArticlesBack&perpage={{data.article.perCurrent
                                         }}
                                         {% endif %}">
                                         <span aria-hidden="true">&raquo;</span>

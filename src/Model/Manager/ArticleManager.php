@@ -69,14 +69,14 @@ class ArticleManager
     public function pagination(array $data): array
     {
         $perPage = 4;
-        $total = $this->articleRepository->countArticle();
-        $nbPage = ceil($total / $perPage);
         $current = $data['get']['pp'] ?? null;
         $perCurrent = $data['get']['perpage'] ?? null;
         $articlesFront = null;
         $articleAll = null;
 
         if (isset($current)) {
+            $total = $this->articleRepository->countArticleFront();
+            $nbPage = ceil($total / $perPage);
             if (!isset($current) || empty($current) || ctype_digit($current) === false || $current <= 0) {
                 $current = 1;
             } else if ($current > $nbPage) {
@@ -87,6 +87,8 @@ class ArticleManager
         }
 
         if (isset($perCurrent)) {
+            $total = $this->articleRepository->countArticleBack();
+            $nbPage = ceil($total / $perPage);
             if (!isset($perCurrent) || empty($perCurrent) || ctype_digit($perCurrent) === false || $perCurrent <= 0) {
                 $perCurrent = 1;
             } else if ($perCurrent > $nbPage) {
@@ -132,7 +134,7 @@ class ArticleManager
      */
     public function nbPost(): int
     {
-        $nbArticle = $this->articleRepository->countArticle();
+        $nbArticle = $this->articleRepository->countArticleBack();
         return (int) $nbArticle;
     }
     /************************************End Dashboard Nombre post************************************************* */
