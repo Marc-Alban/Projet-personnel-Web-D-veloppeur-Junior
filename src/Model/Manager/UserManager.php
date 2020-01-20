@@ -12,6 +12,7 @@ class UserManager
     private $lastName;
     private $mail;
     private $mailConf;
+    private $error;
 
     /**
      * Fonction constructeur, instanciation du userRepository
@@ -35,30 +36,47 @@ class UserManager
         $this->mailConf = htmlentities(trim($data['post']['mailConf'])) ?? null;
     }
 /************************************End Get Users************************************************* */
+    /************************************Return Datas Form User************************************************* */
+    /**
+     * Retourne la table user sauf le password
+     *
+     * @return string
+     */
+    public function FormUser(array $data): ?array
+    {
+        $this->getAllUsersForm($data);
+        $tabDataFormUser = [
+            'name' => $this->name,
+            'lastName' => $this->lastName,
+            'mail' => $this->mail,
+            'mailConf' => $this->mailConf,
+        ];
+        return $tabDataFormUser;
+    }
+/************************************End Return Datas Form User************************************************* */
     /************************************Factorisation VerifPassword************************************************* */
     /**
      * Retourne l'entiereté de la table user
      *
      * @return string
      */
-    public function verifPass(array $data): ?array
+    public function verifPass(array $data): ?string
     {
         $newMdp = htmlentities(trim($data['post']['newMdp'])) ?? null;
         $newMdpConf = htmlentities(trim($data['post']['newMdpConf'])) ?? null;
 
         if ($newMdp === null || empty($newMdp)) {
-            return $errors['newMdpEmpty'] = "Veuillez mettre un mot de passe";
+            $this->error = "Veuillez mettre un mot de passe";
         } else if ($newMdpConf === null || empty($newMdpConf)) {
-            $errors['newMdpConfEmpty'] = "Veuillez mettre un mot de passe de confirmation";
+            $this->error = "Veuillez mettre un mot de passe de confirmation";
         } else if (strlen($newMdp) < 6 || strlen($newMdpConf) < 6) {
-            $errors['mdpLen'] = "Veuillez mettre un mot de passe de plus de 6 caractères";
+            $this->error = "Veuillez mettre un mot de passe de plus de 6 caractères";
         } else if ($newMdp !== $newMdpConf) {
-            $errors['mdpErrors'] = "Mot de passe pas identique";
+            $this->error = "Mot de passe pas identique";
         } else if (!preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{6,}$#', $newMdp)) {
-            $errors['mdpWrong'] = 'Mot de passe non conforme, doit avoir minuscule-majuscule-chiffres-caractères';
+            $this->error = 'Mot de passe non conforme, doit avoir minuscule-majuscule-chiffres-caractères';
         }
-
-        return $errors;
+        return $this->error;
     }
 /************************************End Factorisation VerifPassword************************************************* */
 /************************************Get Users************************************************* */
@@ -169,7 +187,9 @@ class UserManager
      */
     public function setPasswordBdd(array $data): void
     {
-        password_hash($this->userRepository->updatePassword($data), PASSWORD_DEFAULT);
+        $passwordForm = $data['post']['newMdp'] ?? null;
+        $mdp = password_hash($passwordForm, PASSWORD_DEFAULT);
+        $this->userRepository->updatePassword($mdp);
     }
 /************************************End Set Password Bdd************************************************* */
 /************************************Check BDD Mail************************************************* */
@@ -287,29 +307,22 @@ class UserManager
      * pour ensuite les mettres à jours en bdd
      *
      */
-    public function dataFormBack(array $data)
+    public function dataFormBack(array $data): ?array
     {
         if (isset($data['post']['submit'])) {
-
             $this->getAllUsersForm($data);
-
             $action = $data['get']['action'] ?? null;
-
             $name = $this->name;
             $lastName = $this->lastName;
             $mail = $this->mail;
             $mailConf = $this->mailConf;
-
             $errors = $data["session"]["error"] ?? null;
             unset($data["session"]["error"]);
-
             $succes = $data["session"]["succes"] ?? null;
             unset($data["session"]["succes"]);
-
             if ($action === null || empty($action) || !isset($action)) {
                 return null;
             }
-
             if ($name === null || empty($name)) {
                 $errors['emptyName'] = "Veuillez mettre un nom";
             } else if ($lastName === null || empty($lastName)) {
@@ -322,12 +335,10 @@ class UserManager
                 $errors['emptyMailConf'] = "Veuillez mettre un mail de confirmation";
             } else if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mailConf)) {
                 $errors['mailConfWrong'] = "L'adresse e-mail de confirmation est invalide";
+            } else if ($this->verifPass($data)) {
+                $errors['errorMdp'] = $errors . $this->error;
             }
-            $this->verifPass($data);
-            var_dump($this->verifPass($data));
-            die();
-
-            if (!empty($errors)) {
+            if (empty($errors)) {
                 $this->setNameBdd($data);
                 $this->setLastNameBdd($data);
                 $this->setMailBdd($data);
@@ -335,9 +346,9 @@ class UserManager
                 $succes["update"] = "Utilisateur mis à jour";
                 return $succes;
             }
-
             return $errors;
         }
+        return null;
     }
 /************************************End FormDataUser************************************************* */
 /************************************Change Password************************************************* */
@@ -349,24 +360,31 @@ class UserManager
      */
     public function changeMdp(array $data): ?array
     {
-        $submit = $data['post']['submit'] ?? null;
+        if ($this->userRepository->getActiveValue() === 1) {
 
-        if ($submit) {
+            $submit = $data['post']['submit'] ?? null;
 
-            $error = $data['session']['error'] ?? null;
-            unset($data["session"]["error"]);
+            if ($submit) {
 
-            $this->verifPass($data);
+                $errors = $data['session']['error'] ?? null;
+                unset($data["session"]["error"]);
 
-            if (empty($error)) {
-                $this->userRepository->changePass($data);
-                $this->userRepository->changeActive('true');
-                $succes['message'] = 'Mot de passe changé';
-                return $succes;
+                if ($this->verifPass($data)) {
+                    $errors['errorMdp'] = $errors . $this->error;
+                }
+
+                if (empty($errors)) {
+                    $this->userRepository->changePass($data);
+                    $this->userRepository->changeActive('true');
+                    $succes['message'] = "Mot de passe changé";
+                    return $succes;
+                }
+
+                return $errors;
             }
-            return $error;
+            return null;
         }
-        return null;
+        header("Location: http://3bigbangbourse.fr/?p=lostPassword");
     }
 /************************************End Change Password************************************************* */
 

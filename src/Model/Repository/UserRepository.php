@@ -115,15 +115,15 @@ class UserRepository
 /************************************End Change mail Bdd************************************************* */
 /************************************Change password Bdd************************************************* */
     /**
-     * Methode pour mettre à jour le nom dans la bdd
+     * Methode pour mettre à jour le mot de passe dans la bdd
      *
      * @param [type] $token
      * @return void
      */
-    public function updatePassword(array $data): void
+    public function updatePassword(string $mdp): void
     {
         $e = [
-            ':password' => $data['post']['newMdp'],
+            ':password' => $mdp,
         ];
         $this->pdoStatement = $this->pdo->prepare("UPDATE user SET password = :password");
         $this->pdoStatement->execute($e);
