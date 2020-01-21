@@ -42,7 +42,7 @@ class PartenaireManager
         return (int) $nbPartenaire;
     }
 /************************************End nb Partenaire************************************************* */
-/************************************Verif Cahmp Add************************************************* */
+/************************************Verif Champ Add************************************************* */
     public function verifChampsPartenaire(): ?string
     {
         $extentions = ['jpg', 'png', 'gif', 'jpeg'];
@@ -63,9 +63,9 @@ class PartenaireManager
         }
         return $this->error;
     }
-/************************************End Verif Cahmp Add************************************************* */
+/************************************End Verif Champ Add************************************************* */
 /************************************Factorisation Partenaire************************************************* */
-    public function factorisationpartenaire($data)
+    public function factorisationPartenaire($data)
     {
         $this->link = htmlentities(trim($data['post']['link'])) ?? null;
         $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
@@ -92,7 +92,7 @@ class PartenaireManager
         unset($data['session']['errors']);
         /*************Send**************** */
         if ($action === 'send' && isset($submit)) {
-            $this->factorisationpartenaire($data);
+            $this->factorisationPartenaire($data);
             if ($this->verifChampsPartenaire()) {
                 $errors['errorImage'] = $errors . $this->error;
             }

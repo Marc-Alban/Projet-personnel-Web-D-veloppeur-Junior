@@ -2,15 +2,18 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
+use App\Model\Manager\HomeManager;
 use App\View\View;
 
 class GraphController
 {
     private $view;
+    private $homeManager;
 
     public function __construct()
     {
         $this->view = new View();
+        $this->homeManager = new HomeManager();
     }
 
     /**
@@ -20,6 +23,7 @@ class GraphController
      */
     public function graphAction(array $data): void
     {
-        $this->view->renderer('Backend', 'graph', null);
+        $verifAndAddGraph = $this->homeManager->graph($data);
+        $this->view->renderer('Backend', 'graph', ['verifAndAddGraph' => $verifAndAddGraph]);
     }
 }

@@ -30,7 +30,7 @@ class HomeRepository
      */
     public function readAll(): array
     {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM graph WHERE posted = 1");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM graph");
         $graphs = [];
         while ($graph = $this->pdoStatement->fetchObject(Graph::class)) {
             $graphs[] = $graph;
@@ -38,5 +38,24 @@ class HomeRepository
         return $graphs;
     }
 /************************************Read All Graph************************************************* */
+/************************************Add graph in Bdd************************************************* */
+    public function addBddGraph(string $title, string $legende, string $tmpName, string $extention): void
+    {
+        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM graph ORDER BY id');
+        $response = $this->pdoStatement->fetch();
+        $id = $response['MAX(id)'] + 1;
+        $p = [
+            ':title' => $title,
+            ':legende' => $legende,
+            ':image' => $id . "." . $extention,
+        ];
+        $sql = "
+    INSERT INTO `graph`(`title`, `legende`, `image`) VALUES (:title,:legende,:image)
+    ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($p);
+        move_uploaded_file($tmpName, "img/graphique/" . $id . '.' . $extention);
+    }
+/************************************End Add partenaire in Bdd************************************************* */
 
 }
