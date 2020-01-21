@@ -71,8 +71,8 @@ class PartenaireManager
         $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
         $this->tmpName = $data['files']['imagePartenaire']['tmp_name'] ?? null;
         $this->size = $data['files']['imagePartenaire']['size'] ?? null;
-        $this->file = $data['files']['imagePartenaire']['name'] ?? null;
-        $this->extention = strtolower(substr(strrchr($this->file, '.'), 1)) ?? '.png';
+        $this->file = (empty($data['files']['imagePartenaire']['name'])) ? 'default.png' : $data['files']['imagePartenaire']['name'];
+        $this->extention = strtolower(substr(strrchr($this->file, '.'), 1)) ?? null;
     }
 /************************************End Factorisation Partenaire************************************************* */
 /************************************liste Partenaire Add********************************************************* */
