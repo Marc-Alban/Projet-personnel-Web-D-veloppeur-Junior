@@ -43,5 +43,19 @@ class PageRepository
         return $pages;
     }
 /************************************End Read All Page************************************************* */
+/************************************Read Page ID************************************************* */
+    /**
+     * Récupère l'objet Page avec son id
+     * false si l'objet n'a pu être inséré, objet Page si une
+     * correspondance est trouvé, NULL s'il n'y a aucune correspondance
+     */
+    public function readPageId(array $data): object
+    {
+        $id = (int) htmlentities(trim($data['get']['id']));
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM page WHERE id=$id");
+        $page = $this->pdoStatement->fetchObject(Page::class);
+        return $page;
+    }
+/************************************End Read Page ID************************************************* */
 
 }

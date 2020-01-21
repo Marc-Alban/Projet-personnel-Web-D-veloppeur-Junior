@@ -42,8 +42,8 @@ class PartenaireManager
         return (int) $nbPartenaire;
     }
 /************************************End nb Partenaire************************************************* */
-/************************************Verif Champ Add************************************************* */
-    public function verifChampsPartenaire(): ?string
+/************************************check Field Add************************************************* */
+    public function checkFieldsPartenaire(): ?string
     {
         $extentions = ['jpg', 'png', 'gif', 'jpeg'];
         $tailleMax = 2097152;
@@ -63,9 +63,9 @@ class PartenaireManager
         }
         return $this->error;
     }
-/************************************End Verif Champ Add************************************************* */
-/************************************Factorisation Partenaire************************************************* */
-    public function factorisationPartenaire($data)
+/************************************End check Field Add************************************************* */
+/************************************dataPost Partenaire************************************************* */
+    public function dataPostPartenaire($data)
     {
         $this->link = htmlentities(trim($data['post']['link'])) ?? null;
         $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
@@ -74,7 +74,7 @@ class PartenaireManager
         $this->file = (empty($data['files']['imagePartenaire']['name'])) ? 'default.png' : $data['files']['imagePartenaire']['name'];
         $this->extention = strtolower(substr(strrchr($this->file, '.'), 1)) ?? null;
     }
-/************************************End Factorisation Partenaire************************************************* */
+/************************************End dataPost Partenaire************************************************* */
 /************************************liste Partenaire Add********************************************************* */
     /**
      * Insert en bdd un nouveau partenaire s'il n'ya pas d"erreur sinon renvoie null
@@ -92,8 +92,8 @@ class PartenaireManager
         unset($data['session']['errors']);
         /*************Send**************** */
         if ($action === 'send' && isset($submit)) {
-            $this->factorisationPartenaire($data);
-            if ($this->verifChampsPartenaire()) {
+            $this->dataPostPartenaire($data);
+            if ($this->checkFieldsPartenaire()) {
                 $errors['errorImage'] = $errors . $this->error;
             }
             if (empty($errors)) {

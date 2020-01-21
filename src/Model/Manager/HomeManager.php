@@ -36,8 +36,8 @@ class HomeManager
         return $graph;
     }
 /************************************End Liste Graph BDD************************************************* */
-/************************************Verif champ graph************************************************* */
-    public function verifChampsGraph(): ?string
+/************************************check Fielsgraph************************************************* */
+    public function checkFielsGraph(): ?string
     {
         $extentions = ['jpg', 'png', 'gif', 'jpeg'];
         $tailleMax = 2097152;
@@ -55,9 +55,9 @@ class HomeManager
         }
         return $this->error;
     }
-/************************************End Verif champ graph************************************************* */
-/************************************Factorisation graph************************************************* */
-    public function factorisationGraph($data)
+/************************************End check Fielsgraph************************************************* */
+/************************************dataPost graph************************************************* */
+    public function dataPostGraph($data): void
     {
         $this->select = $data['post']['selectGraph'];
         $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
@@ -66,7 +66,7 @@ class HomeManager
         $this->file = (empty($data['files']['imageGraph']['name'])) ? 'default.png' : $data['files']['imageGraph']['name'];
         $this->extention = strtolower(substr(strrchr($this->file, '.'), 1)) ?? null;
     }
-/************************************End Factorisation graph************************************************* */
+/************************************End dataPost graph************************************************* */
 /************************************liste graph Add********************************************************* */
 /**
  * Insert en bdd un nouveau graph s'il n'ya pas d"erreur sinon renvoie null
@@ -84,8 +84,8 @@ class HomeManager
         unset($data['session']['errors']);
         /*************Send**************** */
         if ($action === 'send' && isset($submit)) {
-            $this->factorisationGraph($data);
-            if ($this->verifChampsGraph()) {
+            $this->dataPostGraph($data);
+            if ($this->checkFielsGraph()) {
                 $errors['errorImage'] = $errors . $this->error;
             }
             if (empty($errors)) {

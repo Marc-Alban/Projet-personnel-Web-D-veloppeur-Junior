@@ -32,7 +32,14 @@ class PageController
      */
     public function PageAction(array $data): void
     {
-        $page = $this->pageManager->readPage($data['get']['title']);
+        $title = $data['get']['title'] ?? 'home';
+        $id = $data['get']['id'] ?? null;
+        $page = $this->pageManager->readPage($data);
+
+        if (isset($title) && !empty($title) && $title === 'UpdatePage' && isset($id) && !empty($id)) {
+            $verifUpdatePage = $this->pageManager->verifPageUpdate($data);
+            $this->view->renderer('Backend', 'page', ['page' => $page, 'verifUpdatePage' => $verifUpdatePage]);
+        }
 
         $this->view->renderer('Frontend', 'page', ['page' => $page]);
     }

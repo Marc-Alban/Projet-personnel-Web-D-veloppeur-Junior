@@ -75,7 +75,7 @@ class ArticleManager
         $articleAll = null;
 
         if (isset($current)) {
-            $total = $this->articleRepository->countArticleFront();
+            $total = $this->articleRepository->count('front');
             $nbPage = ceil($total / $perPage);
             if (!isset($current) || empty($current) || ctype_digit($current) === false || $current <= 0) {
                 $current = 1;
@@ -83,11 +83,11 @@ class ArticleManager
                 $current = $nbPage;
             }
             $firstOfPage = ($current - 1) * $perPage;
-            $articlesFront = $this->articleRepository->readArticleAll($firstOfPage, $perPage);
+            $articlesFront = $this->articleRepository->articleReadAll($firstOfPage, $perPage, 'readArticleAll');
         }
 
         if (isset($perCurrent)) {
-            $total = $this->articleRepository->countArticleBack();
+            $total = $this->articleRepository->count('back');
             $nbPage = ceil($total / $perPage);
             if (!isset($perCurrent) || empty($perCurrent) || ctype_digit($perCurrent) === false || $perCurrent <= 0) {
                 $perCurrent = 1;
@@ -95,7 +95,7 @@ class ArticleManager
                 $perCurrent = $nbPage;
             }
             $twoOfPage = ($perCurrent - 1) * $perPage;
-            $articleAll = $this->articleRepository->readAll($twoOfPage, $perPage);
+            $articleAll = $this->articleRepository->articleReadAll($twoOfPage, $perPage, 'readAll');
         }
 
         return $tabArticle = [
@@ -134,7 +134,7 @@ class ArticleManager
      */
     public function nbPost(): int
     {
-        $nbArticle = $this->articleRepository->countArticleBack();
+        $nbArticle = $this->articleRepository->count('back');
         return (int) $nbArticle;
     }
     /************************************End Dashboard Nombre post************************************************* */

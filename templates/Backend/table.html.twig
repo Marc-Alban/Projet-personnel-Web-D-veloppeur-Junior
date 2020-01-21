@@ -49,11 +49,13 @@
                                                         {{partenaires.legende}}
                                                     </td>
                                                     <td>
-                                                        <a class="teal-text"
+                                                        <a
+                                                            href="http://3bigbangbourse.fr/?p=partenaire&{{partenaires.id}}"
+                                                            class="teal-text"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
-                                                            title="Update"><i
-                                                                class="fas
+                                                            title="Update">
+                                                            <i class="fas
                                                                 fa-pencil-alt"></i></a>
                                                     </td>
                                                     <td>
@@ -115,8 +117,7 @@
                                                     </td>
                                                     <td>
                                                         {{
-                                                        articleListe.description|raw|striptags|convert_encoding('UTF-8',
-                                                        'iso-2022-jp')|u.truncate(200)
+                                                        articleListe.descriptionExtrait
                                                         }}
                                                     </td>
                                                     <td>
@@ -132,7 +133,9 @@
                                                         {{articleListe.lastArticle}}
                                                     </td>
                                                     <td>
-                                                        <a class="teal-text"
+                                                        <a
+                                                            href="http://3bigbangbourse.fr/?p=form&id={{articleListe.id}}"
+                                                            class="teal-text"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title="Update"><i
@@ -185,7 +188,9 @@
                                                         {{graphiques.image}}
                                                     </td>
                                                     <td>
-                                                        <a class="teal-text"
+                                                        <a
+                                                            href="http://3bigbangbourse.fr/?p=graph&id={{graphiques.id}}"
+                                                            class="teal-text"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title="Update"><i
@@ -242,7 +247,9 @@
                                                         {{pages.posted}}
                                                     </td>
                                                     <td>
-                                                        <a class="teal-text"
+                                                        <a
+                                                            href="http://3bigbangbourse.fr/?p=page&title=UpdatePage&id={{pages.id}}"
+                                                            class="teal-text"
                                                             data-toggle="tooltip"
                                                             data-placement="top"
                                                             title="Update"><i

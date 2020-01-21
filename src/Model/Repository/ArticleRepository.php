@@ -117,8 +117,17 @@ class ArticleRepository
     }
 /************************************End Read Post with id************************************************* */
 /************************************Not Repeat Read All************************************************* */
-    private function notRepeatReadAll()
+    public function articleReadAll(int $firstOfPage, int $perPage, string $side): array
     {
+
+        if (isset($side) && !empty($side) && $side !== null) {
+            if ($side === "readAll") {
+                $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date LIMIT $firstOfPage,$perPage");
+            } else if ($side === "readArticleAll") {
+                $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ORDER BY id LIMIT $firstOfPage,$perPage");
+            }
+        }
+
         $this->article = [];
         $articles = 1;
         while ($articles = $this->pdoStatement->fetchObject(Article::class)) {
@@ -138,40 +147,9 @@ class ArticleRepository
             ];
             return $articleFake;
         };
-
         return $this->article;
-
     }
 /************************************End Not Repeat Read All************************************************* */
-/************************************Read All Post With LastAticle ************************************************* */
-    /**
-     * Récupère tous les objet Article dans la bdd
-     *
-     * @return array|bool
-     * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
-     * false si une erreur survient
-     */
-    public function readAll($firstOfPage, $perPage): array
-    {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date LIMIT $firstOfPage,$perPage");
-        return $this->notRepeatReadAll();
-
-    }
-/************************************End Read All Post With Last Article************************************************* */
-/************************************Read All Post Not LastAticle ************************************************* */
-    /**
-     * Récupère tous les objet Article dans la bdd
-     *
-     * @return array|bool
-     * tableau d'objet Article ou un tableau vide s'il n'y pas d'objet en bdd
-     * false si une erreur survient
-     */
-    public function readArticleAll($firstOfPage, $perPage): array
-    {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ORDER BY id LIMIT $firstOfPage,$perPage");
-        return $this->notRepeatReadAll();
-    }
-/************************************End Read All Post Not Last Article************************************************* */
 /************************************Write Post************************************************* */
     /**
      * insert en bdd
@@ -228,35 +206,17 @@ class ArticleRepository
         return $this->pdoStatement->execute();
     }
 /************************************End Delete Post Bdd With ID************************************************* */
-/************************************Count Post in BDD Frontend************************************************* */
-/**
- * Renvoie le nombre d'article stocké dans la table article sur le frontend
- * et s'il n'y a rien alors renvoie null
- *
- * @return string|null
- */
-    public function countArticleFront(): ?string
+/************************************Not repeat Count************************************************* */
+    public function count(string $side): ?string
     {
-        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ");
-        return $this->notRepeatCount();
-    }
-/************************************End Count Post in BDD Frontend************************************************* */
-/************************************Count Post in BDD Backend************************************************* */
-/**
- * Renvoie le nombre d'article stocké dans la table article sur le backend
- * et s'il n'y a rien alors renvoie null
- *
- * @return string|null
- */
-    public function countArticleBack(): ?string
-    {
-        $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE posted = 1 ");
-        return $this->notRepeatCount();
-    }
-/************************************End Count Post in BDD************************************************* */
-/************************************Factorisation Count************************************************* */
-    private function notRepeatCount(): ?string
-    {
+        if (isset($side) && !empty($side) && $side !== null) {
+            if ($side === 'front') {
+                $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ");
+            } else if ($side === 'back') {
+                $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE posted = 1 ");
+            }
+        }
+
         $req = $this->pdoStatement->fetch();
         if ($req) {
             $total = $req['total'];
@@ -264,7 +224,7 @@ class ArticleRepository
         }
         return null;
     }
-/************************************End Factorisation Count************************************************* */
+/************************************End Not repeat Count************************************************* */
 /************************************Return Post With Year************************************************* */
     /**
      * Retourne les articles en fonctions de la date données dans l'url

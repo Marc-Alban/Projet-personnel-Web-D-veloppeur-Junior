@@ -24,10 +24,37 @@ class PageManager extends PDOException
      *
      * @return array
      */
-    public function readPage(?string $data): array
+    public function readPage(?array $data): ?array
     {
-        $page = $this->pageRepository->readAll($data);
+        $title = $data['get']['title'] ?? null;
+        $page = $data['get']['p'] ?? null;
+        $id = $data['get']['id'] ?? null;
+        $pageId = [];
+        if (isset($page) && !empty($page) && isset($title) && !empty($title) && isset($id) && !empty($id)) {
+            $pageId[] = $this->pageRepository->readPageId($data);
+            return $pageId;
+        }
+        $page = $this->pageRepository->readAll($title);
         return $page;
     }
 /************************************End Read Page************************************************* */
+/************************************ Update Page ************************************************* */
+    /**
+     * Verifie le formulaire de mise à jour des pages
+     *
+     * @return array
+     */
+    public function verifPageUpdate(array $data): void
+    {
+        $update = $data['get']['update'] ?? null;
+
+        if (isset($update)) {
+            $tmpName = $data['post']['imagePage'] ?? null;
+            $namePage = $data['post']['namePage'] ?? null;
+            $titlePage = $data['get']['titlePage'] ?? null;
+            $bodyPage = $data['get']['bodyPage'] ?? null;
+
+        }
+    }
+/************************************End Update Page************************************************* */
 }

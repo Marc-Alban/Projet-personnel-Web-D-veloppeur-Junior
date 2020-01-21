@@ -111,6 +111,11 @@ class Article
         return $this->description;
     }
 
+    public function getDescriptionExtrait(): string
+    {
+        return substr(strip_tags(html_entity_decode($this->description, ENT_QUOTES, 'UTF-8')), 0, 200) . '...';
+    }
+
     /**
      * Set the value of description
      *
