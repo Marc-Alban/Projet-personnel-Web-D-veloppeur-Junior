@@ -94,7 +94,7 @@ class PartenaireManager
         if ($action === 'send' && isset($submit)) {
             $this->factorisationpartenaire($data);
             if ($this->verifChampsPartenaire()) {
-                $errors['errorMdp'] = $errors . $this->error;
+                $errors['errorImage'] = $errors . $this->error;
             }
             if (empty($errors)) {
                 $this->partenaireRepository->addBddPartenaire($this->legende, $this->tmpName, $this->link, $this->extention);

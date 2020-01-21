@@ -52,25 +52,19 @@ class PartenaireRepository
     }
 /************************************End Count partenaire************************************************* */
 /************************************Add partenaire in Bdd************************************************* */
-    public function addBddPartenaire(?string $legende, ?string $link, string $tmpName, string $extention): void
+    public function addBddPartenaire(string $legende, string $tmpName, string $link, string $extention): void
     {
-        if (!$tmpName) {
-            $id = "default";
-            $extention = ".png";
-        }
         $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM partenaire ORDER BY id');
         $response = $this->pdoStatement->fetch();
         $id = $response['MAX(id)'] + 1;
         $p = [
-            ':id' => $id,
             ':legende' => $legende,
             ':image' => $id . "." . $extention,
             ':link' => $link,
         ];
         $sql = "
-    INSERT INTO partenaire(id, legende, image, link)
-    VALUES(:id, :legende, :image, :link,)
-    ";
+        INSERT INTO `partenaire`(`legende`, `image`, `link`) VALUES (:legende,:image,:link)
+        ";
         $query = $this->pdo->prepare($sql);
         $query->execute($p);
         move_uploaded_file($tmpName, "img/partenaire/" . $id . '.' . $extention);
