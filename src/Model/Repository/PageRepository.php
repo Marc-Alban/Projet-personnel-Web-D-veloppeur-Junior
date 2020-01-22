@@ -30,7 +30,7 @@ class PageRepository
      */
     public function readAll(?string $data): array
     {
-        $this->pdoStatement = $this->pdo->query("SELECT * FROM page WHERE posted = 1");
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM page");
         $pages = [];
         while ($page = $this->pdoStatement->fetchObject(Page::class)) {
             $title = strtolower(str_replace(' ', '', $page->getTitlePage()));
@@ -57,5 +57,25 @@ class PageRepository
         return $page;
     }
 /************************************End Read Page ID************************************************* */
-
+/************************************Page Update Bdd************************************************* */
+    /**
+     * Insert en bdd les données des pages modifié avec id une fois vérifiées
+     */
+    public function addBddPage(string $titlePage, string $title, string $description, string $tmpName, string $extention, string $id): void
+    {
+        $idInt = (int) $id;
+        $p = [
+            ':titlePage' => $titlePage,
+            ':title' => $title,
+            ':description' => $description,
+            ':image' => $idInt . "." . $extention,
+        ];
+        $sql = "
+        UPDATE `page` SET `titlePage`=:titlePage,`title`=:title,`description`=:description,`image`=:image WHERE id = $idInt
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($p);
+        move_uploaded_file($tmpName, "img/page/" . $idInt . '.' . $extention);
+    }
+/************************************End Page Update Bdd************************************************* */
 }

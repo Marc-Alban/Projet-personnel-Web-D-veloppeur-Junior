@@ -9,28 +9,6 @@ class Page
     private $title;
     private $description;
     private $image;
-    private $posted;
-
-    /**
-     * Get the value of posted
-     * @return string
-     */
-    public function getPosted(): string
-    {
-        return $this->posted;
-    }
-
-    /**
-     * Set the value of posted
-     *
-     * @return  self
-     */
-    public function setPosted(String $posted): self
-    {
-        $this->posted = $posted;
-
-        return $this;
-    }
 
     /**
      * Get the value of image

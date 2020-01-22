@@ -37,10 +37,9 @@ class PageController
         $page = $this->pageManager->readPage($data);
 
         if (isset($title) && !empty($title) && $title === 'UpdatePage' && isset($id) && !empty($id)) {
-            $verifUpdatePage = $this->pageManager->verifPageUpdate($data);
-            $this->view->renderer('Backend', 'page', ['page' => $page, 'verifUpdatePage' => $verifUpdatePage]);
+            $updatePage = $this->pageManager->updateBddPage($data);
+            $this->view->renderer('Backend', 'page', ['page' => $page, 'updatePage' => $updatePage]);
         }
-
         $this->view->renderer('Frontend', 'page', ['page' => $page]);
     }
     /************************************End Page page************************************************* */
