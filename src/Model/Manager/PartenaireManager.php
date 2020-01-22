@@ -84,31 +84,39 @@ class PartenaireManager
      */
     public function partenaire(array $data): ?array
     {
-        $update = null;
         $action = $data['get']['action'] ?? null;
         $id = $data['get']['id'] ?? null;
         $submit = $data['post']['submit'] ?? null;
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
-        /*************Send**************** */
-        if ($action === 'send' && isset($submit)) {
+
+        if ($submit) {
             $this->dataPostPartenaire($data);
             if ($this->checkFieldsPartenaire()) {
                 $errors['errorImage'] = $errors . $this->error;
             }
             if (empty($errors)) {
-                $this->partenaireRepository->addBddPartenaire($this->legende, $this->tmpName, $this->link, $this->extention);
-                $succes['successPartenaire'] = "Article bien enregistré";
+                /*************Send**************** */
+                if ($action === 'send' && $id === null) {
+                    $this->partenaireRepository->addBddPartenaire($this->legende, $this->tmpName, $this->link, $this->extention, null);
+                    $succes['successPartenaire'] = "Partenaire Enregistré";
+                    /*************Update**************** */
+                } else if ($action === 'update' && $id !== null) {
+                    $this->partenaireRepository->addBddPartenaire($this->legende, $this->tmpName, $this->link, $this->extention, $id);
+                    $succes['successUpdatePartenaire'] = "Partenaire Mis à jour";
+                }
                 return $succes;
             }
             return $errors;
         }
-        /*************Update**************** */
-        if (isset($action) && $action === 'update' && isset($id) && isset($update)) {
-
-        }
         return null;
     }
 /************************************End Liste Partenaire Add************************************************* */
+/************************************Del Liste Partenaire************************************************* */
+    public function delPartenaireBdd(int $id): void
+    {
+        $this->partenaireRepository->deletePartenaire($id);
+    }
+/************************************End Del Liste Partenaire************************************************* */
 
 }

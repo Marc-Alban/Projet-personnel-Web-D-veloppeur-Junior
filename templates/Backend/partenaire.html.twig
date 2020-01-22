@@ -29,7 +29,7 @@
  <br>
             {#---------------------------CARD-BODY-----------------------------#}
             <div class="card-body">
-                <form action="http://3bigbangbourse.fr/?p=partenaire&action=send" method="POST" enctype="multipart/form-data">
+                <form action="http://3bigbangbourse.fr/?p=partenaire{% if data.id == null %}&action=send{% elseif data.id %}&action=update&id={{data.id}}{% endif %}" method="POST" enctype="multipart/form-data">
                     <div class="input-group">
                         <div class="custom-file">
                             {#---------------------------INPUT-IMAGE-----------------------------#}
@@ -37,7 +37,7 @@
                                 id="inputGroupFile"
                                 aria-describedby="inputGroupFileAddon">
                             <label class="custom-file-label"
-                                for="inputGroupFile">Choisir une image</label>
+                                for="inputGroupFile" >Choisir une image</label>
                         </div>
                     </div>
                     <br>
@@ -45,16 +45,16 @@
                     <label for="Legende" class="grey-text
                         font-weight-light">Legende</label>
                     <input type="text" name="legende" id="Legende"
-                        class="form-control">
+                        class="form-control" value="{% for dataspartenaire in data.session.partenaire %}{{dataspartenaire.legende}}{% endfor %} ">
                     <br>
                     {#---------------------------INPUT-Link-----------------------------#}
                     <label for="Link" class="grey-text
                         font-weight-light">Lien partenaire</label>
                     <input type="text" name="link" id="Link"
-                        class="form-control">
+                        class="form-control" value="{% for dataspartenaire in data.session.partenaire %}{{dataspartenaire.link}}{% endfor %}">
                     {#---------------------------SUBMIT-----------------------------#}
                     <div class="text-center py-4 mt-3">
-                        <input class="btn btn-black" name="submit" type="submit" value="Envoyer"><i
+                        <input class="btn btn-black" name="submit" type="submit" value="{% if data.id == null %}Envoyer{% elseif data.id %}Mettre à jour{% endif %}"><i
                                 class="fa fa-paper-plane-o ml-2"></i></input>
                     </div>
                 </form>

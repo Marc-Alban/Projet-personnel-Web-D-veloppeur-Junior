@@ -35,17 +35,23 @@ class TableController
     {
         $liste = $data['get']['liste'] ?? null;
         $perpage = $data['get']['perpage'] ?? null;
+        $action = $data['get']['action'] ?? null;
+        $id = $data['get']['id'] ?? null;
+        $idInt = (int) $id;
         $partenaire = null;
         $article = null;
         $graphique = null;
         $page = null;
 
         if ($liste === "listePartenaires") {
+            if ($action === "delete" && isset($idInt) && !empty($idInt) && is_int($idInt)) {
+                $this->partenaireManager->delPartenaireBdd($idInt);
+            } else if ($idInt === false || $idInt === null || is_string($idInt)) {
+                header("Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires");
+            }
             $partenaire = $this->partenaireManager->listePartenaire();
         } else if ($liste === "listeArticlesBack" && isset($perpage)) {
             $article = $this->articleManager->pagination($data);
-            // var_dump($article);
-            // die();
         } else if ($liste === "listeGraphiques") {
             $graphique = $this->graph->listeGraph();
         } else if ($liste === "listePages") {

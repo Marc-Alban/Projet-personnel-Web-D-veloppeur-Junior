@@ -26,7 +26,7 @@ class PartenaireController
     public function PartenaireAction(array $data): void
     {
         $verifAndAddPartenaire = $this->partenaireManager->partenaire($data);
-        $this->view->renderer('Backend', 'partenaire', ['verifAndAddPartenaire' => $verifAndAddPartenaire]);
-
+        $id = $data['get']['id'] ?? null;
+        $this->view->renderer('Backend', 'partenaire', ['verifAndAddPartenaire' => $verifAndAddPartenaire, 'id' => $id]);
     }
 }
