@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 21 jan. 2020 à 08:40
+-- Généré le :  mer. 22 jan. 2020 à 10:29
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.3.5
 
@@ -64,7 +64,6 @@ CREATE TABLE IF NOT EXISTS `graph` (
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `image` varchar(255) NOT NULL DEFAULT 'graph.png',
-  `posted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
@@ -72,11 +71,11 @@ CREATE TABLE IF NOT EXISTS `graph` (
 -- Déchargement des données de la table `graph`
 --
 
-INSERT INTO `graph` (`id`, `title`, `description`, `image`, `posted`) VALUES
-(1, 'Prudent', 'Légende de l\'image', 'Prudent.png', 1),
-(2, 'Equilibré', 'Légende de l\'image', 'Equilibre.png', 1),
-(3, 'Dynamique', 'Légende de l\'image', 'Dynamique.png', 1),
-(4, 'Autre', 'Légende de l\'image', 'Performance.png', 1);
+INSERT INTO `graph` (`id`, `title`, `description`, `image`) VALUES
+(1, 'Prudent', 'Légende de l\'image', 'Prudent.png'),
+(2, 'Equilibré', 'Légende de l\'image', 'Equilibre.png'),
+(3, 'Dynamique', 'Légende de l\'image', 'Dynamique.png'),
+(4, 'Autre', 'Légende de l\'image', 'Performance.png');
 
 -- --------------------------------------------------------
 
@@ -91,22 +90,21 @@ CREATE TABLE IF NOT EXISTS `page` (
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `image` varchar(255) NOT NULL,
-  `posted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `page`
 --
 
-INSERT INTO `page` (`id`, `titlePage`, `title`, `description`, `image`, `posted`) VALUES
-(1, 'Nos Valeurs', 'Je suis le titre de la page', 'Je suis la descrtiption de la page nos valeurs bla bla bla', 'default.png', 1),
-(2, 'Adresse', 'Je suis le titre de la page', 'Je suis la descrtiption de la page adresse bla bla bla', 'default.png', 1),
-(3, 'Conseil patrimonial', 'Je suis le titre de la page', 'Je suis la descrtiption de la page conseil patrimonial  bla bla bla', 'default.png', 1),
-(4, 'Conseil en investissement financier', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Conseil en investissement financier  bla bla bla', 'default.png', 1),
-(5, 'Conseil en investissement immobilier', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Conseil en investissement immobilier  bla bla bla', 'default.png', 1),
-(6, 'Autres solutions d\'investissement', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Autres solutions d’investissement  bla bla bla', 'default.png', 1),
-(7, 'Contact', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Contact  bla bla bla', 'default.png', 1);
+INSERT INTO `page` (`id`, `titlePage`, `title`, `description`, `image`) VALUES
+(1, 'Nos Valeurs', 'Je suis le titre de la page', '&lt;p&gt;&amp;lt;p&amp;gt;Je suis la descrtiption de la page nos valeurs bla bla bla&amp;lt;/p&amp;gt;&lt;/p&gt;', '1.jpg'),
+(2, 'Adresse', 'Je suis le titre de la page', 'Je suis la descrtiption de la page adresse bla bla bla', 'default.png'),
+(3, 'Conseil patrimonial', 'Je suis le titre de la page', 'Je suis la descrtiption de la page conseil patrimonial  bla bla bla', 'default.png'),
+(4, 'Conseil en investissement financier', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Conseil en investissement financier  bla bla bla', 'default.png'),
+(5, 'Conseil en investissement immobilier', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Conseil en investissement immobilier  bla bla bla', 'default.png'),
+(6, 'Autres solutions d\'investissement', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Autres solutions d’investissement  bla bla bla', 'default.png'),
+(7, 'Contact', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Contact  bla bla bla', 'default.png');
 
 -- --------------------------------------------------------
 

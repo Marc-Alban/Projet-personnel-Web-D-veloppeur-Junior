@@ -72,6 +72,9 @@
                         {#{{paginationListeArticle.description|raw|striptags|convert_encoding('UTF-8',
                         'iso-2022-jp')|u.truncate(200, '...')}}#}
                     </p>
+                    <p class="card-text font-weight-bold text-justify">
+                        {{paginationListeArticle.descriptionExtrait}}
+                    </p>
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">
                         {{paginationListeArticle.title }}
@@ -162,9 +165,11 @@
                 {#---------------------------CARD-CONTENT-----------------------------#}
                 <div class="card-body">
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
-                    <p class="card-text font-weight-bold text-justify">{{
+                    {# <p class="card-text font-weight-bold text-justify">{{
                         classementYear.description|raw|striptags|convert_encoding('UTF-8',
-                        'iso-2022-jp')|u.truncate(200, '...') }}</p>
+                        'iso-2022-jp')|u.truncate(200, '...') }}</p>#}
+                    <p class="card-text font-weight-bold text-justify">{{
+                        classementYear.descriptionExtrait}}</p>
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
                         classementYear.title }}</h4>

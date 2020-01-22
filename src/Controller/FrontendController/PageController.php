@@ -39,8 +39,9 @@ class PageController
         if (isset($title) && !empty($title) && $title === 'UpdatePage' && isset($id) && !empty($id)) {
             $updatePage = $this->pageManager->updateBddPage($data);
             $this->view->renderer('Backend', 'page', ['page' => $page, 'updatePage' => $updatePage]);
+        } else if (isset($title) && !empty($title) && $title !== 'UpdatePage' && !isset($id) && empty($id)) {
+            $this->view->renderer('Frontend', 'page', ['page' => $page]);
         }
-        $this->view->renderer('Frontend', 'page', ['page' => $page]);
     }
     /************************************End Page page************************************************* */
 
