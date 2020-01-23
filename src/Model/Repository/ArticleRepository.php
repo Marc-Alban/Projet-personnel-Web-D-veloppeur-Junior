@@ -23,6 +23,16 @@ class ArticleRepository
         $this->article = new Article;
     }
 
+    public function getIdBddArticle(string $id): ?array
+    {
+        $this->pdoStatement = $this->pdo->query('SELECT id FROM article WHERE id =' . $id);
+        $executeIsOk = $this->pdoStatement->execute();
+        if ($executeIsOk) {
+            $idBdd = $this->pdoStatement->fetch();
+            return $idBdd;
+        }
+        return null;
+    }
 /************************************last Article************************************************* */
     /**
      * Récupère le dernier article
@@ -71,23 +81,13 @@ class ArticleRepository
      */
     public function updateLast(): void
     {
-
         $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE lastArticle = 1");
         $this->pdoStatement->execute();
     }
 /************************************End Update last Article with 0 for 1************************************************* */
-/************************************Read Post with id************************************************* */
-    /**
-     * Récupère un objet Article à partir de son identifiant
-     *
-     * @param int $id identifiant d'un article
-     * @return bool|Article
-     * false si l'objet n'a pu être inséré, objet Article si une
-     * correspondance est trouvé, NULL s'il n'y a aucune correspondance
-     */
-    public function read(int $id): ?Object
+/************************************Read Article with id************************************************* */
+    public function readId(int $id): ?object
     {
-        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE  posted = 1 AND id=:id');
         //Liaison paramètres
         $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
         //execution de la requête
@@ -114,6 +114,37 @@ class ArticleRepository
         if (!$executeIsOk) {
             return null;
         }
+    }
+/************************************End Read Article with id************************************************* */
+/************************************ReadAllPost with id************************************************* */
+    /**
+     * Récupère un objet Article à partir de son identifiant et l'envoie sur le back
+     *
+     * @param int $id identifiant d'un article
+     * @return bool|Article
+     * false si l'objet n'a pu être inséré, objet Article si une
+     * correspondance est trouvé, NULL s'il n'y a aucune correspondance
+     */
+    public function readBack(int $id): ?object
+    {
+        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE id=:id');
+        return $this->readId($id);
+
+    }
+/************************************End ReadAllPost with id************************************************* */
+/************************************Read Post with id************************************************* */
+    /**
+     * Récupère un objet Article à partir de son identifiant et l'envoie sur le front
+     *
+     * @param int $id identifiant d'un article
+     * @return bool|Article
+     * false si l'objet n'a pu être inséré, objet Article si une
+     * correspondance est trouvé, NULL s'il n'y a aucune correspondance
+     */
+    public function read(int $id): ?object
+    {
+        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM article WHERE posted = 1 AND id=:id');
+        return $this->readId($id);
     }
 /************************************End Read Post with id************************************************* */
 /************************************Not Repeat Read All************************************************* */
@@ -163,48 +194,68 @@ class ArticleRepository
      * @param string $extention
      * @return void
      */
-    public function articleWrite(string $title, string $legende, string $description, string $date, int $posted, int $lastArticle, string $tmpName, string $extention): void
+    public function articleWrite(string $title, string $legende, string $description, string $date, int $posted, int $lastArticle, string $tmpName, string $extention, ?string $id): void
     {
-        if (!$tmpName) {
-            $id = "post";
-            $extention = ".png";
-        }
-        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM article ORDER BY date = NOW()');
-        $response = $this->pdoStatement->fetch();
-        $id = $response['MAX(id)'] + 1;
-        $p = [
-            ':title' => $title,
-            ':legende' => $legende,
-            ':description' => $description,
-            ':image' => $id . "." . $extention,
-            ':date' => $date,
-            ':posted' => $posted,
-            ':lastArticle' => $lastArticle,
-        ];
-        $sql = "
-        INSERT INTO article(title, legende, description, image, date, posted, lastArticle)
-        VALUES(:title, :legende, :description, :image, :date, :posted, :lastArticle)
+
+        if ($id === null && empty($id)) {
+            $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM article ORDER BY date = NOW()');
+            $response = $this->pdoStatement->fetch();
+            $id = $response['MAX(id)'] + 1;
+            $p = [
+                ':title' => $title,
+                ':legende' => $legende,
+                ':description' => $description,
+                ':image' => $id . "." . $extention,
+                ':date' => $date,
+                ':posted' => $posted,
+                ':lastArticle' => $lastArticle,
+            ];
+            $sql = "
+            INSERT INTO article(title, legende, description, image, date, posted, lastArticle)
+            VALUES(:title, :legende, :description, :image, :date, :posted, :lastArticle)
+            ";
+        } else if ($id !== null && !empty($id)) {
+
+            $p = [
+                ':title' => $title,
+                ':legende' => $legende,
+                ':description' => $description,
+                ':image' => $id . "." . $extention,
+                ':date' => $date,
+                ':posted' => $posted,
+                ':lastArticle' => $lastArticle,
+            ];
+            $sql = "
+        UPDATE `article` SET `title`=:title,`legende`=:legende,`description`=:description, `image`=:image,`date`=:date, `posted`=:posted,`lastArticle`=:lastArticle where id = $id
         ";
+        }
+
         $query = $this->pdo->prepare($sql);
         $query->execute($p);
         move_uploaded_file($tmpName, "img/article/" . $id . '.' . $extention);
     }
 /************************************End Write Post************************************************* */
 /************************************Delete Post Bdd With ID************************************************* */
-    /**
-     * Supprime un objet Article stocké en bdd
-     *
-     * @param Article $article objet de type Article
-     * @return bool true en cas de succès, false en cas d'erreur
-     */
-    public function delete(Article $article): bool
+/************************************Del Liste Partenaire************************************************* */
+    public function deleteArticle(int $id): void
     {
-        $this->pdoStatement = $this->pdo->prepare('DELETE FROM article WHERE id=:id LIMIT 1');
-        //Liaison paramètres
-        $this->pdoStatement->bindValue(':id', $article->getId(), PDO::PARAM_INT);
-        //execution de la requête
-        return $this->pdoStatement->execute();
+        $this->pdoStatement = $this->pdo->query("SELECT id, image FROM article WHERE id = $id");
+        $image = $this->pdoStatement->fetch();
+        $extention = explode('.', $image['image']);
+
+        if ($this->count("back") > "2" || $this->count("back") > 2 && $id === $image["id"]) {
+
+            $sql = "
+        DELETE FROM `article` WHERE id = $id
+        ";
+            $query = $this->pdo->prepare($sql);
+            $query->execute();
+            unlink("img/article/" . $image['id'] . "." . $extention[1]);
+        }
+        header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
+
     }
+/************************************End Del Liste Partenaire************************************************* */
 /************************************End Delete Post Bdd With ID************************************************* */
 /************************************Not repeat Count************************************************* */
     public function count(string $side): ?string
@@ -216,7 +267,6 @@ class ArticleRepository
                 $this->pdoStatement = $this->pdo->query("SELECT count(*) AS total FROM article WHERE posted = 1 ");
             }
         }
-
         $req = $this->pdoStatement->fetch();
         if ($req) {
             $total = $req['total'];

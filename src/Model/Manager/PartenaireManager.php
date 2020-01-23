@@ -90,7 +90,7 @@ class PartenaireManager
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
 
-        if ($submit) {
+        if (isset($submit)) {
             $this->dataPostPartenaire($data);
             if ($this->checkFieldsPartenaire()) {
                 $errors['errorImage'] = $errors . $this->error;

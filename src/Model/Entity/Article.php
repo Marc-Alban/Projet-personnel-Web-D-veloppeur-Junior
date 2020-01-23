@@ -111,6 +111,13 @@ class Article
         return $this->description;
     }
 
+    public function getDescriptionArticle(): string
+    {
+        $string = $this->description;
+        $decodeString = strip_tags(html_entity_decode($string));
+        return htmlspecialchars_decode($decodeString);
+    }
+
     public function getDescriptionExtrait(): string
     {
         return substr(strip_tags(html_entity_decode($this->description, ENT_QUOTES, 'UTF-8')), 0, 200) . '...';

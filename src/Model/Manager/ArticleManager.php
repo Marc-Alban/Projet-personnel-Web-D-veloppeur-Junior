@@ -18,6 +18,8 @@ class ArticleManager
     private $file;
     private $tmpName;
     private $size;
+    private $error;
+    private $extention;
 
     /**
      * Fonction constructeur, instanciation de l'articlerepository
@@ -38,8 +40,6 @@ class ArticleManager
     {
         $id = $data['get']['id'] ?? null;
         if ($id === null || empty($id)) {
-            // var_dump($this->articleRepository->last());
-            // die();
             return $this->articleRepository->last();
         }
         return $this->articleRepository->read((int) $id);
@@ -141,59 +141,32 @@ class ArticleManager
     /************************************Formulaire Article Vrefifcation Backend**************************************** */
     public function verifForm(array $data): ?array
     {
-        $submit = $data['post']['submit'] ?? null;
         $action = $data['get']['action'] ?? null;
-
+        $id = $data['get']['id'] ?? null;
+        $submit = $data['post']['submit'] ?? null;
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
 
-        if ($submit) {
-
+        if (isset($submit)) {
             $this->dataFormArticle($data);
-
-            $extentions = ['jpg', 'png', 'gif', 'jpeg'];
-
-            if (empty($this->file) || $this->file === null) {
-                $this->file = 'default.png';
+            if ($this->verifDataFormArticle()) {
+                $errors['formData'] = $errors . $this->error;
             }
-
-            $extention = strtolower(substr(strrchr($this->file, '.'), 1));
-            $tailleMax = 2097152;
-
-            //Nouvel article
-            if ($action === 'newArticle') {
-                if (empty($this->title) || empty($this->description)) {
-                    $errors['contenu'] = 'Veuillez renseigner un contenu !';
-                } else if (empty($this->title)) {
-                    $errors['emptyTitle'] = "Veuillez mettre un titre";
-                } else if (empty($this->description)) {
-                    $errors['emptyDesc'] = "Veuillez mettre un paragraphe";
-                } else if (empty($this->tmpName)) {
-                    $errors['imageVide'] = 'Image obligatoire pour un article ! ';
-                } else if (!in_array($extention, $extentions)) {
-                    $errors['image'] = 'Image n\'est pas valide! ';
-                } else if ($this->size > $tailleMax) {
-                    $errors['size'] = "Image trop grande, mettre une image en dessous de 2 MO ";
-                }
-                if (empty($errors)) {
+            if (empty($errors)) {
+                //Nouvel article
+                if ($action === 'newArticle') {
                     if ($this->lastArticle === 1) {
                         $this->articleRepository->updateLast();
                     }
-                    $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $extention);
+                    $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, null);
                     $succes['succesArticle'] = "Article bien enregistré";
                     return $succes;
                 }
-            }
-            //Modification article
-            if ($action === "articleModif") {
-                $id = (int) $data['get']['id'];
-                //$postManager->editChapter($id, $title, $description, $posted);
-                if (!isset($file) || empty($file)) {
-                    $errors['empty'] = 'Image manquante ! ';
-                } else if (!in_array($extention, $extentions)) {
-                    $errors['valide'] = 'Image n\'est pas valide! ';
-                } else if (empty($errors)) {
-                    //$postManager->editImageChapter($id, $title, $description, $tmpName, $extention, $posted);
+                //Modification article
+                if ($action === "articleModif") {
+                    $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, $id);
+                    $succes['succesArticle'] = "Article bien mis à jour";
+                    return $succes;
                 }
             }
             return $errors;
@@ -201,6 +174,57 @@ class ArticleManager
         return null;
     }
     /************************************End Formulaire Article Vrefifcation Backend***************************** */
+    /************************************Del Liste Article************************************************* */
+    public function delArticleBdd(int $id): void
+    {
+        $this->articleRepository->deleteArticle($id);
+    }
+/************************************End Del Liste Partenaire************************************************* */
+    /************************************Formulaire Article Vrefifcation data Backend***************************** */
+    public function verifDataFormArticle(): ?string
+    {
+        $extentions = ['jpg', 'png', 'gif', 'jpeg'];
+        $tailleMax = 2097152;
+
+        if (empty($this->title) && empty($this->tmpName) && empty($this->description)) {
+            $this->error = 'Veuillez renseigner un contenu !';
+        } else if (empty($this->title)) {
+            $this->error = "Veuillez mettre un titre";
+        } else if (empty($this->legende)) {
+            $this->error = "Veuillez mettre une legende";
+        } else if (empty($this->description)) {
+            $this->error = "Veuillez mettre un paragraphe";
+        } else if (empty($this->tmpName)) {
+            $this->error = 'Image obligatoire pour un article ! ';
+        } else if (!in_array($this->extention, $extentions)) {
+            $this->error = 'Image n\'est pas valide! ';
+        } else if ($this->size > $tailleMax) {
+            $this->error = "Image trop grande, mettre une image en dessous de 2 MO ";
+        }
+        return $this->error;
+    }
+    /************************************End Formulaire Article Vrefifcation data Backend***************************** */
+    /************************************DataFormArticle************************************************* */
+    /**
+     * Renvoie les données
+     *
+     * @param array $data
+     * @return array
+     */
+    public function dataFormArticle(array $data): void
+    {
+        $this->title = htmlentities(trim($data['post']['title'])) ?? null;
+        $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
+        $this->description = htmlentities(trim($data['post']['description'])) ?? null;
+        $this->date = $data['post']['date'] ?? null;
+        $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
+        $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;
+        $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null;
+        $this->size = $data['files']['imageArticle']['size'] ?? null;
+        $this->file = (empty($data['files']['imagePartenaire']['name'])) ? 'default.png' : $data['files']['imagePartenaire']['name'];
+        $this->extention = strtolower(substr(strrchr($this->file, '.'), 1)) ?? null;
+    }
+    /************************************End DataFormArticle************************************************* */
     /************************************Get Data Form Back************************************************* */
     /**
      * Renvoie les données à la vue
@@ -209,45 +233,35 @@ class ArticleManager
      * @param array $data
      * @return array
      */
-    public function getDatasForm(array $data): ?array
+    public function getDatasForm(array $data): ?object
     {
-        if (isset($data['post']['submit'])) {
-            $this->dataFormArticle($data);
-            $formData = [
-                'title' => $this->title,
-                'legende' => $this->legende,
-                'description' => $this->description,
-                'date' => $this->date,
-                'posted' => $this->posted,
-                'lastArticle' => $this->lastArticle,
-            ];
-            return $formData;
+        $action = $data['get']['action'] ?? null;
+        $idInt = $data['get']['id'] ?? null;
+        $id = (int) $idInt;
+
+        if ($idInt !== null && isset($id) && !empty($id)) {
+            $idBdd = $this->articleRepository->getIdBddArticle($idInt);
+            if ($idInt === $idBdd['id']) {
+                return $this->articleRepository->readBack($id);
+            }
         }
+
+        if ($action === "newArticle") {
+            $this->dataFormArticle($data);
+            $objectDataForm = (object) [
+                "title" => $this->title,
+                "legende" => $this->legende,
+                "description" => $this->description,
+                "date" => $this->date,
+                "posted" => $this->posted,
+                "lastArticle" => $this->lastArticle,
+                "file" => $this->file,
+            ];
+            return $objectDataForm;
+        }
+
         return null;
     }
     /************************************End Get Data Form Back************************************************* */
-    /************************************Autres************************************************* */
-    /**
-     * Renvoie les données
-     *
-     * @param array $data
-     * @return array
-     */
-    private function dataFormArticle(array $data): array
-    {
-        $tabData = [
-            $this->title = htmlentities(trim($data['post']['title'])) ?? null,
-            $this->legende = htmlentities(trim($data['post']['legende'])) ?? null,
-            $this->description = htmlentities(trim($data['post']['description'])) ?? null,
-            $this->date = $data['post']['date'] ?? null,
-            $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0,
-            $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0,
-            $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null,
-            $this->size = $data['files']['imageArticle']['size'] ?? null,
-            $this->file = $data['files']['imageArticle']['name'] ?? null,
-        ];
-        return $tabData;
-    }
-    /************************************ Fin Autres************************************************* */
 
 }

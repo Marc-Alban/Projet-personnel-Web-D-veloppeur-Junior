@@ -51,6 +51,11 @@ class TableController
             }
             $partenaire = $this->partenaireManager->listePartenaire();
         } else if ($liste === "listeArticlesBack" && isset($perpage)) {
+            if ($action === "delete" && isset($idInt) && !empty($idInt) && is_int($idInt)) {
+                $this->articleManager->delArticleBdd($idInt);
+            } else if ($idInt === false || $idInt === null || is_string($idInt)) {
+                header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
+            }
             $article = $this->articleManager->pagination($data);
         } else if ($liste === "listeGraphiques") {
             $graphique = $this->graph->listeGraph();
