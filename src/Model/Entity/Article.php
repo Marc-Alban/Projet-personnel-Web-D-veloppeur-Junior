@@ -113,14 +113,13 @@ class Article
 
     public function getDescriptionArticle(): string
     {
-        $string = $this->description;
-        $decodeString = strip_tags(html_entity_decode($string));
-        return htmlspecialchars_decode($decodeString);
+        $htmldecode = strip_tags(htmlspecialchars_decode(html_entity_decode($this->description, ENT_QUOTES, 'UTF-8')));
+        return $htmldecode;
     }
 
     public function getDescriptionExtrait(): string
     {
-        return substr(strip_tags(html_entity_decode($this->description, ENT_QUOTES, 'UTF-8')), 0, 200) . '...';
+        return substr(strip_tags(htmlspecialchars_decode(html_entity_decode($this->description, ENT_QUOTES, 'UTF-8'))), 0, 200) . '...';
     }
 
     /**

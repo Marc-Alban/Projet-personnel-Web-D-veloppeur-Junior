@@ -31,7 +31,7 @@
                     {#--------------------------END-CARD-DESCRIPTION-----------------------------#}
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">{{
-                        data.lastArticle.descriptionExtrait}}</p>
+                        data.lastArticle.descriptionExtrait|raw }}</p>
                     {#--------------------------END-CARD-DESCRIPTION-----------------------------#}
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
@@ -73,7 +73,7 @@
                         'iso-2022-jp')|u.truncate(200, '...')}}#}
                     </p>
                     <p class="card-text font-weight-bold text-justify">
-                        {{paginationListeArticle.descriptionExtrait}}
+                        {{paginationListeArticle.descriptionExtrait|raw }}
                     </p>
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">
