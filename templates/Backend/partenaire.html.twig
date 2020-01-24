@@ -9,9 +9,9 @@
     <div class="row">
         <div class="card mx-xl-5 col-12 col-sm-8 col-md-8 col-lg-8 mt-3">
             <br>
-                 {#----------------------------Succes-Submit---------------------------#}
-     {% if data.verifAndAddPartenaire.successPartenaire %}
-        {% for succes in data.verifAndAddPartenaire %}
+    {#----------------------------Succes-Submit---------------------------#}
+     {% if data.verifPartenaire.successUpdatePartenaire %}
+        {% for succes in data.verifPartenaire %}
         <div class="alert alert-primary" role="alert">
             {{succes}}
         </div>
@@ -19,7 +19,7 @@
  {#----------------------------END-Succes-Submit---------------------------#}
  {#----------------------------Errors-Submit---------------------------#}
      {% else %}
-        {% for error in data.verifAndAddPartenaire %}
+        {% for error in data.verifPartenaire %}
         <div class="alert alert-danger" role="alert">
             {{error}}
         </div>
@@ -30,9 +30,13 @@
             {#---------------------------CARD-BODY-----------------------------#}
             <div class="card-body">
                 <form action="http://3bigbangbourse.fr/?p=partenaire{% if data.id == null %}&action=send{% elseif data.id %}&action=update&id={{data.id}}{% endif %}" method="POST" enctype="multipart/form-data">
-                    <div class="input-group">
+                    {#---------------------------INPUT-IMAGE-----------------------------#}
+                    {% if data.datapartenaire.image %}
+                    <label for="inputGroupFile" class="grey-text
+                font-weight-light">Attention: Veuillez mettre une image pour la mise à jour</label>
+                {% endif %}
+                    <div class="inlabelut-group">
                         <div class="custom-file">
-                            {#---------------------------INPUT-IMAGE-----------------------------#}
                             <input type="file"  name="imagePartenaire" class="custom-file-input"
                                 id="inputGroupFile"
                                 aria-describedby="inputGroupFileAddon">
@@ -45,13 +49,13 @@
                     <label for="Legende" class="grey-text
                         font-weight-light">Legende</label>
                     <input type="text" name="legende" id="Legende"
-                        class="form-control" value="{% for dataspartenaire in data.session.partenaire %}{{dataspartenaire.legende}}{% endfor %} ">
+                        class="form-control" value="{{data.datapartenaire.legende}}">
                     <br>
                     {#---------------------------INPUT-Link-----------------------------#}
                     <label for="Link" class="grey-text
                         font-weight-light">Lien partenaire</label>
                     <input type="text" name="link" id="Link"
-                        class="form-control" value="{% for dataspartenaire in data.session.partenaire %}{{dataspartenaire.link}}{% endfor %}">
+                        class="form-control" value="{{data.datapartenaire.link}}">
                     {#---------------------------SUBMIT-----------------------------#}
                     <div class="text-center py-4 mt-3">
                         <input class="btn btn-black" name="submit" type="submit" value="{% if data.id == null %}Envoyer{% elseif data.id %}Mettre à jour{% endif %}"><i

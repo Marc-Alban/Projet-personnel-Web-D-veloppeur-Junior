@@ -95,7 +95,7 @@ class HomeManager
             if (empty($errors)) {
                 /*************Update**************** */
                 $this->homeRepository->updateBddGraph($this->select, $this->legende, $this->tmpName, $this->extention, $id);
-                $this->succesTable();
+                $this->succesGraph();
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques&action=update');
             }
             return $errors;
@@ -111,10 +111,12 @@ class HomeManager
         return $dataBdd;
     }
 /************************************End Retourne donnée graph************************************************* */
-    public function succesTable(): array
+/************************************Retourne donnée succes graph************************************************* */
+    public function succesGraph(): array
     {
         $succes['successGraph'] = "Article bien mis à jour";
         return $succes;
     }
+/************************************End Retourne donnée succes graph************************************************* */
 
 }

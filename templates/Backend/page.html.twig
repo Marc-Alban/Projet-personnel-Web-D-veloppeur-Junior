@@ -35,6 +35,10 @@
                         enctype="multipart/form-data">
                         <br>
                         {#----------------------------File-Image-page----------------------------#}
+                        {% if data.page %}<label class="grey-text"
+                        for="File">Attention : Veuillez mettre une date pour une mise à jour !</label>
+                        <br>
+                        {% endif %}
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="imagePage" class="custom-file-input" id="File"
@@ -46,15 +50,15 @@
                         </div>
                         <br>
                         {#----------------------------Name-Page----------------------------#}
-                        <label for="ImagePage" class="grey-text
+                        <label for="titlePage" class="grey-text
                             font-weight-light">Nom de la page</label>
-                        <input type="text" name="namePage" id="Image" class="form-control"
+                        <input type="text" name="namePage" id="titlePage" class="form-control"
                             value="{% for pages in data.page %}{{pages.titlePage}}{% endfor %}">
                         <br>
                         {#----------------------------Titre-Page----------------------------#}
-                        <label for="TitlePage" class="grey-text
+                        <label for="Title" class="grey-text
                         font-weight-light">Titre de la page</label>
-                        <input type="text" name="titlePage" id="TitlePage" class="form-control"
+                        <input type="text" name="titlePage" id="Title" class="form-control"
                             value="{% for pages in data.page %}{{pages.title}}{% endfor %}">
                         <br>
                         {#----------------------------Description-Page----------------------------#}

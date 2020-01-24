@@ -35,6 +35,17 @@ class PartenaireManager
         return $this->partenaireRepository->readAll();
     }
 /************************************End Liste Partenaire ReadAll************************************************* */
+    /************************************Partenaire ID************************************************* */
+    /**
+     * Retourne la liste des partenaires sur le controller home
+     *
+     * @return array
+     */
+    public function getDataBddPartenaire(int $id): ?object
+    {
+        return $this->partenaireRepository->readPartenaire($id);
+    }
+/************************************End Partenaire IDs************************************************* */
 /************************************nb Partenaire************************************************* */
     public function nbPartenaire(): int
     {
@@ -82,10 +93,9 @@ class PartenaireManager
      *
      * @return array
      */
-    public function partenaire(array $data): ?array
+    public function partenaire(array $data, ?string $id): ?array
     {
         $action = $data['get']['action'] ?? null;
-        $id = $data['get']['id'] ?? null;
         $submit = $data['post']['submit'] ?? null;
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
@@ -103,7 +113,7 @@ class PartenaireManager
                     /*************Update**************** */
                 } else if ($action === 'update' && $id !== null) {
                     $this->partenaireRepository->addBddPartenaire($this->legende, $this->tmpName, $this->link, $this->extention, $id);
-                    $succes['successUpdatePartenaire'] = "Partenaire Mis à jour";
+                    $succes['successUpdatePartenaire'] = "Partenaire Mise à jour";
                 }
                 return $succes;
             }

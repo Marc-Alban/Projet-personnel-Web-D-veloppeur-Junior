@@ -11,10 +11,10 @@ $token = new Token();
 $Router = new Router();
 //$maSuperGlobale = new GestionGlobalPhp();
 
-/************************************Partenaire Session************************************************* */
+/************************************Page Title Session************************************************* */
 $partenaireManager = new PartenaireManager();
 $_SESSION['partenaire'] = $partenaireManager->listePartenaire();
-/************************************End Partenaire Session************************************************* */
+/************************************End Page Title Session************************************************* */
 /************************************Token Session************************************************* */
 $_SESSION['token'] = $token->createSessionToken();
 //$maSuperGlobale->setParamSession('token', $token->createSessionToken());

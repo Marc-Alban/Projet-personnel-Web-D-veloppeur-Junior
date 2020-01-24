@@ -13,6 +13,12 @@
                 {{succes}}
             </div>
             {% endfor %}
+            {% elseif data.pageSucces %}
+            {% for succes in data.pageSucces %}
+            <div class="alert alert-primary" role="alert">
+                {{succes}}
+            </div>
+            {% endfor %}
             {% endif %}
             <div class="col-12">
                 <div class="row">

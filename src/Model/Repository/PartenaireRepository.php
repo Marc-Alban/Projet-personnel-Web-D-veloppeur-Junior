@@ -39,6 +39,26 @@ class PartenaireRepository
         return (array) $partenaire;
     }
 /************************************End Read All Partenaire************************************************* */
+    /************************************Read Partenaire************************************************* */
+    /**
+     * Récupère
+     *
+     * @return bool|Partenaire|null
+     * false si l'objet n'a pu être inséré, objet Partenaire si une
+     * correspondance est trouvé, NULL s'il n'y a aucune correspondance
+     */
+    public function readPartenaire(int $id): ?object
+    {
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM partenaire WHERE id = $id");
+        $partenaire = $this->pdoStatement->fetchObject(Partenaire::class);
+        if ($partenaire !== false) {
+            return $partenaire;
+        } else if ($partenaire === false) {
+            return null;
+        }
+
+    }
+/************************************End Read Partenaire************************************************* */
 /************************************Count partenaire************************************************* */
     public function countpartenaire(): ?string
     {

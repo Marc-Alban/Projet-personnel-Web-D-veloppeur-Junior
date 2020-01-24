@@ -44,8 +44,6 @@ class UserRepository
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM user");
         $user = $this->pdoStatement->fetchObject(User::class);
-        // var_dump($user);
-        // die();
         return $user;
     }
 /************************************End Read All Users************************************************* */

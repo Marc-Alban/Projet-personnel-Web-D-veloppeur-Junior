@@ -30,8 +30,6 @@ class UserController
         if (isset($data['get']['action'])) {
             $dataFormUser = $this->userManager->FormUser($data);
         }
-        // var_dump($dataFormUser, $data);
-        // die();
         $this->view->renderer('Backend', 'loginUser', ['userData' => $userData, 'dataFormUser' => $dataFormUser]);
     }
 /************************************End Page Infos Users************************************************* */

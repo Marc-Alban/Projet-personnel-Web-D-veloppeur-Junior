@@ -25,8 +25,18 @@ class PartenaireController
      */
     public function PartenaireAction(array $data): void
     {
-        $verifAndAddPartenaire = $this->partenaireManager->partenaire($data);
+        $datapartenaire = null;
         $id = $data['get']['id'] ?? null;
-        $this->view->renderer('Backend', 'partenaire', ['verifAndAddPartenaire' => $verifAndAddPartenaire, 'id' => $id]);
+        if ($id !== null) {
+            $idInt = (int) $id;
+            if ($idInt !== 0) {
+                $datapartenaire = $this->partenaireManager->getDataBddPartenaire($idInt);
+            }
+            if ($datapartenaire === null) {
+                header('Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires');
+            }
+        }
+        $verifPartenaire = $this->partenaireManager->partenaire($data, $id);
+        $this->view->renderer('Backend', 'partenaire', ['verifPartenaire' => $verifPartenaire, 'id' => $id, 'datapartenaire' => $datapartenaire]);
     }
 }

@@ -46,6 +46,12 @@ class PageManager extends PDOException
         return $page;
     }
 /************************************End Read Page************************************************* */
+/************************************get Title************************************************* */
+    public function getTitleDataForm(): ?string
+    {
+        return $this->titlePage;
+    }
+/************************************End get Title************************************************* */
 /************************************ dataFormPage ************************************************* */
     /**
      * Factorisation des données dans une fonction
@@ -113,12 +119,21 @@ class PageManager extends PDOException
             }
             if (empty($errors)) {
                 $this->pageRepository->addBddPage($this->titlePage, $this->title, $this->description, $this->tmpName, $this->extention, $id);
-                $succes['successPage'] = "Page bien enregistré";
-                return $succes;
+                $this->getTitleDataForm();
+                $this->succesPage();
+                header('Location: http://3bigbangbourse.fr/?p=table&liste=listePages&action=update');
             }
             return $errors;
         }
         return null;
     }
 /************************************End Update Page************************************************* */
+/************************************Return data succes Page************************************************* */
+    public function succesPage(): array
+    {
+        $succes['successPage'] = "Page bien mise à jour";
+        return $succes;
+    }
+/************************************End Return data succes Page************************************************* */
+
 }
