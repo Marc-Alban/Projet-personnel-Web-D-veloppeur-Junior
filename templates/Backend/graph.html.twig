@@ -8,8 +8,8 @@
         <div class="col-12 mt-3">
             <br>
             {#----------------------------Succes-Submit---------------------------#}
-{% if data.verifAndAddGraph.successGraph %}
-   {% for succes in data.verifAndAddGraph %}
+{% if data.graph.successGraph %}
+   {% for succes in data.graph %}
    <div class="alert alert-primary" role="alert">
        {{succes}}
    </div>
@@ -17,7 +17,7 @@
 {#----------------------------END-Succes-Submit---------------------------#}
 {#----------------------------Errors-Submit---------------------------#}
 {% else %}
-   {% for error in data.verifAndAddGraph %}
+   {% for error in data.graph %}
    <div class="alert alert-danger" role="alert">
        {{error}}
    </div>
@@ -29,28 +29,57 @@
             <div class="card mx-xl-5">
                 {#----------------------------Card-Body----------------------------#}
                 <div class="card-body">
-                    <form action="http://3bigbangbourse.fr/?p=graph&action=send"
+                    <form action="http://3bigbangbourse.fr/?p=graph&action=update&id={{data.dataWithId.id }}"
                         method="POST" enctype="multipart/form-data">
                         {#----------------------------Selection-Catégorie-graph----------------------------#}
+                        <label for="Categorie" class="grey-text
+                            font-weight-light">Catégorie</label>
                         <div class="input-group">
                             <select class="browser-default custom-select"
-                                name="selectGraph">
-                                <option value="Prudent" selected>Prudent</option>
+                                name="selectGraph" id="Categorie" >
+                                {% if data.dataWithId.title == 'Prudent' %}
+                                <option value="{{data.dataWithId.title }}" selected>{{data.dataWithId.title }}</option>
                                 <option value="Equilibré">Equilibré</option>
                                 <option value="Dynamique">Dynamique</option>
                                 <option value="Autre">Autre</option>
+                                {% endif %}
+                            {#----------------------------Selection-Catégorie-graph----------------------------#}
+                            {% if data.dataWithId.title == 'Equilibré' %}
+                            <option value="{{data.dataWithId.title }}" selected>{{data.dataWithId.title }}</option>
+                            <option value="Prudent">Prudent</option>
+                            <option value="Dynamique">Dynamique</option>
+                            <option value="Autre">Autre</option>
+                            {% endif %}
+                        {#----------------------------Selection-Catégorie-graph----------------------------#}
+                                {% if data.dataWithId.title == 'Dynamique' %}
+                                <option value="{{data.dataWithId.title }}" selected>{{data.dataWithId.title }}</option>
+                                <option value="Prudent">Prudent</option>
+                                <option value="Equilibré">Equilibré</option>
+                                <option value="Autre">Autre</option>
+                                {% endif %}
+                        {#----------------------------Selection-Catégorie-graph----------------------------#}
+                                {% if data.dataWithId.title == 'Autre' %}
+                                <option value="{{data.dataWithId.title }}" selected>{{data.dataWithId.title }}</option>
+                                <option value="Prudent">Prudent</option>
+                                <option value="Equilibré">Equilibré</option>
+                                <option value="Dynamique">Dynamique</option>
+                                {% endif %}
                             </select>
                         </div>
                         <br>
                         {#----------------------------File-Image-Graph----------------------------#}
+                        <label for="inputGroupFile" class="grey-text
+                        font-weight-light">Attention : Mettre une image pour ma la mise à jour !</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="imageGraph"
                                     class="custom-file-input"
                                     id="inputGroupFile"
-                                    aria-describedby="inputGroupFileAddon">
+                                    aria-describedby="inputGroupFileAddon"
+                                    value="{{ data.dataWithId.image }}"
+                                    >
                                 <label class="custom-file-label"
-                                    for="inputGroupFile">Choisir une image</label>
+                                    for="inputGroupFile">{{ data.dataWithId.image }}</label>
                             </div>
                         </div>
                         <br>
@@ -58,11 +87,11 @@
                         <label for="defaultFormCardDesc" class="grey-text
                             font-weight-light">Legende</label>
                         <input type="text" name="legende" id="defaultFormCardDesc"
-                            class="form-control">
+                            class="form-control" value="{{ data.dataWithId.descriptionExtrait }}">
                         <br>
                         {#----------------------------Submit----------------------------#}
                         <div class="text-center py-4 mt-3">
-                            <input class="btn btn-dark" type="submit" name="submit" value="Envoyer"><i
+                            <input class="btn btn-dark" type="submit" name="submit" value="Mettre à jour"><i
                                     class="fa fa-paper-plane-o ml-2"></i></input>
                         </div>
                     </form>

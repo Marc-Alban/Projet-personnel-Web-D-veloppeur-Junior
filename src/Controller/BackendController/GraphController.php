@@ -23,7 +23,9 @@ class GraphController
      */
     public function graphAction(array $data): void
     {
-        $verifAndAddGraph = $this->homeManager->graph($data);
-        $this->view->renderer('Backend', 'graph', ['verifAndAddGraph' => $verifAndAddGraph]);
+
+        $dataWithId = $this->homeManager->dataWithId($data);
+        $graph = $this->homeManager->graphUpdate($data);
+        $this->view->renderer('Backend', 'graph', ['graph' => $graph, 'dataWithId' => $dataWithId]);
     }
 }

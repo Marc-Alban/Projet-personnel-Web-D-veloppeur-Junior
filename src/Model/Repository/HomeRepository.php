@@ -38,19 +38,31 @@ class HomeRepository
         return $graphs;
     }
 /************************************Read All Graph************************************************* */
-/************************************Add graph in Bdd************************************************* */
-    public function addBddGraph(string $title, string $legende, string $tmpName, string $extention): void
+/************************************Read Graph With Id************************************************* */
+    /**
+     * Récupère un objet Graph
+     *
+     * @return bool|Graph|null
+     * false si l'objet n'a pu être récupéré, objet Graph si une
+     * correspondance est trouvé
+     */
+    public function readWithId(string $id): object
     {
-        $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM graph ORDER BY id');
-        $response = $this->pdoStatement->fetch();
-        $id = $response['MAX(id)'] + 1;
+        $this->pdoStatement = $this->pdo->query("SELECT * FROM graph WHERE id = $id");
+        $graph = $this->pdoStatement->fetchObject(Graph::class);
+        return $graph;
+    }
+/************************************Read Graph Graph With Id************************************************* */
+/************************************Add graph in Bdd************************************************* */
+    public function updateBddGraph(string $select, string $legende, string $tmpName, string $extention, string $id): void
+    {
         $p = [
-            ':title' => $title,
-            ':legende' => $legende,
+            ':title' => $select,
+            ':description' => $legende,
             ':image' => $id . "." . $extention,
         ];
         $sql = "
-    INSERT INTO `graph`(`title`, `legende`, `image`) VALUES (:title,:legende,:image)
+    UPDATE `graph` SET `title`=:title,`description`=:description,`image`=:image where id = $id
     ";
         $query = $this->pdo->prepare($sql);
         $query->execute($p);

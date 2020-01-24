@@ -43,6 +43,17 @@ class Graph
     }
 
     /**
+     * Get the value of description
+     * @return string
+     */
+    public function getDescriptionExtrait(): string
+    {
+        $string = $this->description;
+        $decodeString = strip_tags(html_entity_decode($string));
+        return strip_tags(htmlspecialchars_decode($decodeString));
+    }
+
+    /**
      * Set the value of description
      *
      * @return  self

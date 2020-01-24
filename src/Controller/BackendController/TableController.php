@@ -37,11 +37,14 @@ class TableController
         $perpage = $data['get']['perpage'] ?? null;
         $action = $data['get']['action'] ?? null;
         $id = $data['get']['id'] ?? null;
+        $action = $data['get']['action'] ?? null;
+
         $idInt = (int) $id;
         $partenaire = null;
         $article = null;
         $graphique = null;
         $page = null;
+        $graph = null;
 
         if ($liste === "listePartenaires") {
             if ($action === "delete" && isset($idInt) && !empty($idInt) && is_int($idInt)) {
@@ -59,13 +62,16 @@ class TableController
             $article = $this->articleManager->pagination($data);
         } else if ($liste === "listeGraphiques") {
             $graphique = $this->graph->listeGraph();
+            if (isset($action) && $action === 'update') {
+                $graph = $this->graph->succesTable();
+            }
         } else if ($liste === "listePages") {
             $page = $this->pageManager->readPage(null);
         } else if (!isset($liste) || empty($liste)) {
             header("Location: http://3bigbangbourse.fr/?p=dashboard&action=connexion");
         }
 
-        $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire, "article" => $article, "graphique" => $graphique, "page" => $page]);
+        $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire, "article" => $article, "graphique" => $graphique, 'graph' => $graph, "page" => $page]);
     }
 /************************************End Page Table************************************************* */
 

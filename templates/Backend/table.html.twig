@@ -7,6 +7,13 @@
     {#---------------------------SECTION-----------------------------#}
     <section class="section team-section mt-3">
         <div class="row">
+            {% if data.graph.successGraph %}
+            {% for succes in data.graph %}
+            <div class="alert alert-primary" role="alert">
+                {{succes}}
+            </div>
+            {% endfor %}
+            {% endif %}
             <div class="col-12">
                 <div class="row">
                     <div class="col-md-12 mb-1">
@@ -186,7 +193,7 @@
                                                         {{graphiques.title}}
                                                     </th>
                                                     <td>
-                                                        {{graphiques.description}}
+                                                        {{graphiques.descriptionExtrait}}
                                                     </td>
                                                     <td>
                                                         {{graphiques.image}}
@@ -239,7 +246,7 @@
                                                         {{pages.title}}
                                                     </th>
                                                     <td>
-                                                        {{pages.description}}
+                                                        {{pages.descriptionExtrait}}
                                                     </td>
                                                     <td>
                                                         {{pages.image}}

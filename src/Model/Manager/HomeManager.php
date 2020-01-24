@@ -46,8 +46,10 @@ class HomeManager
             $this->error = 'Veuillez renseigner un contenu !';
         } else if (empty($this->legende)) {
             $this->error = "Veuillez mettre une legende";
+        } else if ($this->legende > 20) {
+            $this->error = "Legende trop grand veuillez mettre moins de caractères";
         } else if (empty($this->tmpName)) {
-            $this->error = 'Image obligatoire pour un partenaire ! ';
+            $this->error = 'Image obligatoire';
         } else if (!in_array($this->extention, $extentions)) {
             $this->error = 'Image n\'est pas valide! ';
         } else if ($this->size > $tailleMax) {
@@ -67,40 +69,52 @@ class HomeManager
         $this->extention = strtolower(substr(strrchr($this->file, '.'), 1)) ?? null;
     }
 /************************************End dataPost graph************************************************* */
-/************************************liste graph Add********************************************************* */
+/************************************Update graph Add********************************************************* */
 /**
- * Insert en bdd un nouveau graph s'il n'ya pas d"erreur sinon renvoie null
+ * Met à jour en bdd un graph s'il n'ya pas d"erreur sinon renvoie error
  * Ou bien alors met à jour un lien sur la même page
  *
  * @return array
  */
-    public function graph(array $data): ?array
+    public function graphUpdate(array $data): ?array
     {
-        $update = null;
+
         $action = $data['get']['action'] ?? null;
         $id = $data['get']['id'] ?? null;
-        $submit = $data['post']['submit'] ?? null;
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
-        /*************Send**************** */
-        if ($action === 'send' && isset($submit)) {
+
+        $dataBdd = $this->homeRepository->readWithId($id);
+        $idBdd = $dataBdd->getId();
+
+        if (isset($action) && $action === 'update' && isset($id) && $id === $idBdd) {
             $this->dataPostGraph($data);
             if ($this->checkFielsGraph()) {
                 $errors['errorImage'] = $errors . $this->error;
             }
             if (empty($errors)) {
-                $this->homeRepository->addBddGraph($this->select, $this->legende, $this->tmpName, $this->extention);
-                $succes['successGraph'] = "Article bien enregistré";
-                return $succes;
+                /*************Update**************** */
+                $this->homeRepository->updateBddGraph($this->select, $this->legende, $this->tmpName, $this->extention, $id);
+                $this->succesTable();
+                header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques&action=update');
             }
             return $errors;
         }
-        /*************Update**************** */
-        if (isset($action) && $action === 'update' && isset($id) && isset($update)) {
-
-        }
         return null;
     }
-/************************************End Liste Partenaire Add************************************************* */
+/************************************End Update graph Add************************************************ */
+/************************************Retourne donnée graph************************************************* */
+    public function dataWithId(array $data)
+    {
+        $id = $data['get']['id'] ?? null;
+        $dataBdd = $this->homeRepository->readWithId($id);
+        return $dataBdd;
+    }
+/************************************End Retourne donnée graph************************************************* */
+    public function succesTable(): array
+    {
+        $succes['successGraph'] = "Article bien mis à jour";
+        return $succes;
+    }
 
 }
