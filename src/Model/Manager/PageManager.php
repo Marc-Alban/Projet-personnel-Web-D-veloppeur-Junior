@@ -40,6 +40,9 @@ class PageManager extends PDOException
         $pageId = [];
         if (isset($page) && !empty($page) && isset($title) && !empty($title) && isset($id) && !empty($id)) {
             $pageId[] = $this->pageRepository->readPageId($data);
+            if ($pageId[0] === null) {
+                header('Location:http://3bigbangbourse.fr/?p=table&liste=listePages');
+            }
             return $pageId;
         }
         $page = $this->pageRepository->readAll($title);

@@ -49,12 +49,20 @@ class PageRepository
      * false si l'objet n'a pu être inséré, objet Page si une
      * correspondance est trouvé, NULL s'il n'y a aucune correspondance
      */
-    public function readPageId(array $data): object
+    public function readPageId(array $data): ?object
     {
         $id = (int) htmlentities(trim($data['get']['id']));
         $this->pdoStatement = $this->pdo->query("SELECT * FROM page WHERE id=$id");
-        $page = $this->pdoStatement->fetchObject(Page::class);
-        return $page;
+        if ($this->pdoStatement) {
+            $page = $this->pdoStatement->fetchObject(Page::class);
+            if ($page === false) {
+                return null;
+            }
+            return $page;
+        } else if (!$this->pdoStatement) {
+            return null;
+        }
+        return null;
     }
 /************************************End Read Page ID************************************************* */
 /************************************Page Update Bdd************************************************* */

@@ -95,7 +95,8 @@ class ArticleManager
                 $perCurrent = $nbPage;
             }
             $twoOfPage = ($perCurrent - 1) * $perPage;
-            $articleAll = $this->articleRepository->articleReadAll($twoOfPage, $perPage, 'readAll');
+            $ofPage = (int) $twoOfPage;
+            $articleAll = $this->articleRepository->articleReadAll($ofPage, $perPage, 'readAll');
         }
 
         return $tabArticle = [

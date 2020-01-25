@@ -22,14 +22,19 @@ class ArticleRepository
         $this->pdo = Database::getPdo();
         $this->article = new Article;
     }
-
+/************************************GetArticle in BDD************************************************* */
     public function getIdBddArticle(string $id): ?array
     {
         $this->pdoStatement = $this->pdo->query('SELECT id FROM article WHERE id =' . $id);
         $executeIsOk = $this->pdoStatement->execute();
         if ($executeIsOk) {
             $idBdd = $this->pdoStatement->fetch();
+            if ($idBdd === false) {
+                return null;
+            }
             return $idBdd;
+        } else if ($executeIsOk === false) {
+            return null;
         }
         return null;
     }
@@ -150,7 +155,6 @@ class ArticleRepository
 /************************************Not Repeat Read All************************************************* */
     public function articleReadAll(int $firstOfPage, int $perPage, string $side): array
     {
-
         if (isset($side) && !empty($side) && $side !== null) {
             if ($side === "readAll") {
                 $this->pdoStatement = $this->pdo->query("SELECT * FROM article ORDER BY date LIMIT $firstOfPage,$perPage");
@@ -158,7 +162,6 @@ class ArticleRepository
                 $this->pdoStatement = $this->pdo->query("SELECT * FROM article WHERE id!=(SELECT max(id) FROM article WHERE lastArticle = 1) AND posted = 1 ORDER BY id LIMIT $firstOfPage,$perPage");
             }
         }
-
         $this->article = [];
         $articles = 1;
         while ($articles = $this->pdoStatement->fetchObject(Article::class)) {

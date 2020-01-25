@@ -46,11 +46,19 @@ class HomeRepository
      * false si l'objet n'a pu être récupéré, objet Graph si une
      * correspondance est trouvé
      */
-    public function readWithId(string $id): object
+    public function readWithId(string $id): ?object
     {
         $this->pdoStatement = $this->pdo->query("SELECT * FROM graph WHERE id = $id");
-        $graph = $this->pdoStatement->fetchObject(Graph::class);
-        return $graph;
+        if ($this->pdoStatement) {
+            $graph = $this->pdoStatement->fetchObject(Graph::class);
+            if ($graph === false) {
+                return null;
+            }
+            return $graph;
+        } else if (!$this->pdoStatement) {
+            return null;
+        }
+        return null;
     }
 /************************************Read Graph Graph With Id************************************************* */
 /************************************Add graph in Bdd************************************************* */

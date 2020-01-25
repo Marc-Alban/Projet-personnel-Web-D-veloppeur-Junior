@@ -84,8 +84,15 @@ class HomeManager
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
 
-        $dataBdd = $this->homeRepository->readWithId($id);
-        $idBdd = $dataBdd->getId();
+        if ($id !== null) {
+            $dataBdd = $this->homeRepository->readWithId($id);
+            if ($dataBdd === null) {
+                header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques');
+            }
+            $idBdd = $dataBdd->getId();
+        } else if ($id === null) {
+            header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques');
+        }
 
         if (isset($action) && $action === 'update' && isset($id) && $id === $idBdd) {
             $this->dataPostGraph($data);
