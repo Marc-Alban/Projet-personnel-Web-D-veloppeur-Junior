@@ -5,5 +5,10 @@ namespace App\Tools;
 
 class GestionGlobal
 {
+    public function setParamSession($name, $instance): array
+    {
+        $_SESSION["$name"] = $instance;
+        return $_SESSION;
+    }
 
 }
