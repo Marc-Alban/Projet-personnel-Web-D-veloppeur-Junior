@@ -41,6 +41,12 @@
           <div class="col-lg-12 d-flex" id="haut">
             {#----------------------------HEADER-LOGO---------------------------#}
             <a class="navbar-brand mr-auto p-2" href="?p=home"><span>BM</span>Finance</a>
+            {% if session.user %}
+            <a href="http://3bigbangbourse.fr/?p=dashboard&action=connexion"
+              class="p-2"> <i
+                class="fas
+                fa-user"></i> {{session.user}}</a>
+            {% else %}
             {#----------------------------MODAL----------------------------#}
             <div id="user" class="p-2" data-toggle="modal"
               data-target="#UserLog">
@@ -105,6 +111,7 @@
               </div>
             </div>
             {#---------------------------END-MODAL-----------------------------#}
+            {% endif %}
           </div>
         </div>
       </div>

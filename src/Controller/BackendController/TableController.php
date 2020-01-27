@@ -33,6 +33,9 @@ class TableController
      */
     public function TableAction(array $data): void
     {
+        if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        }
         $liste = $data['get']['liste'] ?? null;
         $perpage = $data['get']['perpage'] ?? null;
         $action = $data['get']['action'] ?? null;

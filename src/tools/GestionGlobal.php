@@ -5,15 +5,18 @@ namespace App\Tools;
 
 class GestionGlobal
 {
+/************************************getSession************************************************ */
+    public function getSession(): array
+    {
+        return $_SESSION;
+    }
+/************************************End getSession************************************************ */
+/************************************setParamSession************************************************ */
     public function setParamSession($name, $instance): array
     {
         $_SESSION["$name"] = $instance;
         return $_SESSION;
     }
-
-    public function getSession()
-    {
-        return $_SESSION;
-    }
+/************************************End setParamSession*********************************************** */
 
 }

@@ -23,7 +23,9 @@ class GraphController
      */
     public function graphAction(array $data): void
     {
-
+        if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        }
         $dataWithId = $this->homeManager->dataWithId($data);
         $graph = $this->homeManager->graphUpdate($data);
         $this->view->renderer('Backend', 'graph', ['graph' => $graph, 'dataWithId' => $dataWithId]);

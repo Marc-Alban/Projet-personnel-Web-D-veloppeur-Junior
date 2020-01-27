@@ -3,18 +3,20 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Manager\UserManager;
+use App\Tools\GestionGlobal;
 use App\Tools\Token;
 
 class DashboardManager
 {
     private $userManager;
     private $token;
+    private $maSuperGlobale;
 
     public function __construct()
     {
         $this->userManager = new UserManager();
         $this->token = new Token();
-        $this->token->createSessionToken();
+        $this->maSuperGlobale = new GestionGlobal();
     }
 
     /************************************Modal Control************************************************* */
@@ -57,10 +59,16 @@ class DashboardManager
             if ($active[0] === "0") {
                 $errors['compteWrong'] = "Compte desactivé";
             }
-
-            // $errors['token'] = $this->token->compareTokens($data);
+            /************************************Token Session************************************************* */
+            $this->maSuperGlobale->setParamSession('token', $this->token->createSessionToken());
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['token'] = "Formulaire incorrect*";
+            }
+            /************************************End Token Session************************************************* */
 
             if (empty($errors)) {
+                $this->maSuperGlobale->setParamSession('user', $userBdd);
+                $this->maSuperGlobale->setParamSession('active', $active);
                 $succes['succes'] = "Connexion réussie";
                 return $succes;
             }

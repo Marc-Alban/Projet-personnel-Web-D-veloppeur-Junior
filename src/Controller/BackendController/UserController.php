@@ -25,6 +25,9 @@ class UserController
      */
     public function UserAction(array $data): void
     {
+        if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        }
         $dataFormUser = null;
         $userData = $this->userManager->dataFormBack($data);
         if (isset($data['get']['action'])) {
@@ -33,5 +36,17 @@ class UserController
         $this->view->renderer('Backend', 'loginUser', ['userData' => $userData, 'dataFormUser' => $dataFormUser]);
     }
 /************************************End Page Infos Users************************************************* */
+/************************************Users Log Out ************************************************* */
+/**
+ * Permet la déconnexion de l'utilisateur
+ * Supprime la session en court
+ *
+ * @return void
+ */
+    public function logoutUser(): void
+    {
+        session_destroy();
+    }
+/************************************End Users Log Out ************************************************* */
 
 }

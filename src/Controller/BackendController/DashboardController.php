@@ -2,9 +2,11 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
+use App\Controller\BackendController\UserController;
 use App\Model\Manager\ArticleManager;
 use App\Model\Manager\DashboardManager;
 use App\Model\Manager\PartenaireManager;
+use App\Tools\Token;
 use App\View\View;
 
 class DashboardController
@@ -13,6 +15,7 @@ class DashboardController
     private $DashboardManager;
     private $article;
     private $partenaire;
+    private $userController;
 
     public function __construct()
     {
@@ -20,6 +23,8 @@ class DashboardController
         $this->article = new ArticleManager();
         $this->partenaire = new PartenaireManager();
         $this->DashboardManager = new DashboardManager();
+        $this->token = new Token();
+        $this->userController = new UserController();
     }
 /************************************Page Dashboard************************************************* */
     /**
@@ -28,17 +33,23 @@ class DashboardController
      *
      * @return void
      */
-    public function DashboardAction(array $data): void
+    public function DashboardAction(array $data)
     {
+        $action = $data['get']['action'] ?? null;
         $modalControl = $this->DashboardManager->modalControl($data);
 
-        // if ($modalControl === null || !isset($modalControl['succes'])) {
-        //     $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
-        // }
-
+        if (!isset($modalControl['succes']) && $modalControl === null) {
+            return $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
+        } else if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        } else if (isset($action) && $action === "logout") {
+            $this->userController->logoutUser();
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        }
         $countArticle = $this->article->nbPost();
         $countPartenaire = $this->partenaire->nbPartenaire();
         $this->view->renderer('Backend', 'dashboard', ['countArticle' => $countArticle, 'countPartenaire' => $countPartenaire]);
+
     }
     /************************************End Page Dashboard************************************************* */
 }

@@ -23,6 +23,10 @@ class FormController
      */
     public function formAction(array $data): void
     {
+        if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        }
+
         $verif = $this->articleManager->verifForm($data);
         $dataForm = $this->articleManager->getDatasForm($data);
         $this->view->renderer('Backend', 'form', ['verif' => $verif, "dataForm" => $dataForm]);

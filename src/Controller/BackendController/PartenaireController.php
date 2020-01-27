@@ -25,6 +25,9 @@ class PartenaireController
      */
     public function PartenaireAction(array $data): void
     {
+        if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+            header('Location: http://3bigbangbourse.fr/?p=home');
+        }
         $datapartenaire = null;
         $id = $data['get']['id'] ?? null;
         if ($id !== null) {
