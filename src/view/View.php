@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 namespace App\View;
 
+use App\Tools\GestionGlobal;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -18,7 +19,7 @@ class View extends Environment
     public function __construct()
     {
         $this->loader = new FilesystemLoader('../templates');
-        //$this->superGlobal = new GestionGlobalPhp();
+        $this->superGlobal = new GestionGlobal();
         parent::__construct($this->loader);
     }
 
@@ -33,13 +34,7 @@ class View extends Environment
      */
     public function renderer(string $path, string $view, ?array $data): void
     {
-        // $session = $data['session'] ?? null;
-        //
-        $data['session'] = $_SESSION;
-        // var_dump('data view', $data);
-        // die();
-        $this->addGlobal('session', $data['session']);
-        // $this->addGlobal('session', $this->superGlobal->getSession());
+        $this->addGlobal('session', $this->superGlobal->getSession());
         echo $this->render($path . '/' . $view . '.html.twig', ['data' => $data]);
     }
 /************************************End Render View************************************************ */

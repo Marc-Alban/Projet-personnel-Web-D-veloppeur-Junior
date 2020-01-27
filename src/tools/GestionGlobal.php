@@ -11,4 +11,9 @@ class GestionGlobal
         return $_SESSION;
     }
 
+    public function getSession()
+    {
+        return $_SESSION;
+    }
+
 }
