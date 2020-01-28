@@ -157,9 +157,10 @@
                   <div class="dropdown-menu dropdown-primary"
                     aria-labelledby="navbarDropdownMenuLink">
                     {#---------------------------NAVBAR-SOUS-MENU-QUI-SOMMES-NOUS-?---------------------------#}
-                    <a class="dropdown-item" href="?p=page&title=nosvaleurs">Nos
-                      valeurs</a>
-                    <a class="dropdown-item" href="?p=page&title=adresse">Adresse</a>
+                    <a class="dropdown-item"
+                      href="?p=page&title={{session.titlePageLink[0]}}">{{session.titlePage[0]}}</a>
+                    <a class="dropdown-item"
+                      href="?p=page&title={{session.titlePageLink[1]}}">{{session.titlePage[1]}}</a>
                   </div>
                 </li>
                 {#------------------------END-ONGLET-NAVBAR-QUI-SOMMES-NOUS-?----------------------------#}
@@ -172,29 +173,21 @@
                     aria-labelledby="navbarDropdownMenuLink">
                     {#---------------------------NAVBAR-SOUS-MENU-NOTRE-EXPERTISE---------------------------#}
                     <a class="dropdown-item"
-                      href="?p=page&title=conseilpatrimonial">Conseil
-                      patrimonial</a>
+                      href="?p=page&title={{session.titlePageLink[2]}}">{{session.titlePage[2]}}</a>
                     <a class="dropdown-item"
-                      href="?p=page&title=conseileninvestissementfinancier">Conseil
-                      en
-                      investissement
-                      financier</a>
+                      href="?p=page&title={{session.titlePageLink[3]}}">{{session.titlePage[3]}}</a>
                     <a class="dropdown-item"
-                      href="?p=page&title=conseileninvestissementimmobilier">Conseil
-                      en
-                      investissement
-                      immobilier</a>
+                      href="?p=page&title={{session.titlePageLink[4]}}">{{session.titlePage[4]}}</a>
                     <a class="dropdown-item"
-                      href="?p=page&title=autressolutionsd'investissement">Autres
-                      solutions
-                      d’investissement</a>
+                      href="?p=page&title={{session.titlePageLink[5]}}">{{session.titlePage[5]}}</a>
                   </div>
                 </li>
                 {#--------------------------END-NAVBAR-SOUS-MENU-NOTRE-EXPERTISE---------------------------#}
                 {#------------------------END-ONGLET-NAVBAR-NOTRE-EXPERTISE----------------------------#}
                 {#------------------------ONGLET-NAVBAR-CONTACT----------------------------#}
                 <li class="nav-item">
-                  <a class="nav-link blueStrong" href="?p=contact">Contact</a>
+                  <a class="nav-link blueStrong"
+                    href="?p={{session.titlePageLink[6]}}">{{session.titlePage[6]}}</a>
                 </li>
                 {#-----------------------END-ONGLET-NAVBAR-CONTACT----------------------------#}
               </ul>

@@ -49,10 +49,17 @@ class PageManager extends PDOException
         return $page;
     }
 /************************************End Read Page************************************************* */
-/************************************get Title************************************************* */
-    public function getTitleDataForm(): ?string
+/************************************get TitlePage For Link************************************************* */
+    public function getTitleData(?string $link, ?string $nav): ?array
     {
-        return $this->titlePage;
+        if ($link === 'link' && $nav === null) {
+            $page = $this->pageRepository->readAllTitlePage('min', null);
+            return $page;
+        } else if ($link === null && $nav === 'nav') {
+            $page = $this->pageRepository->readAllTitlePage(null, 'maj');
+            return $page;
+        }
+        return null;
     }
 /************************************End get Title************************************************* */
 /************************************ dataFormPage ************************************************* */
@@ -122,7 +129,6 @@ class PageManager extends PDOException
             }
             if (empty($errors)) {
                 $this->pageRepository->addBddPage($this->titlePage, $this->title, $this->description, $this->tmpName, $this->extention, $id);
-                $this->getTitleDataForm();
                 $this->succesPage();
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listePages&action=update');
             }
