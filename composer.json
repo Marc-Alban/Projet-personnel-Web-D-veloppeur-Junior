@@ -9,7 +9,8 @@
         "twig/twig": "^3.0",
         "symfony/security-csrf": "^5.0",
         "symfony/string": "^5.0",
-        "twig/string-extra": "^3.0"
+        "twig/string-extra": "^3.0",
+        "google/recaptcha": "1.2"
     },
     "autoload": {
         "psr-4": {

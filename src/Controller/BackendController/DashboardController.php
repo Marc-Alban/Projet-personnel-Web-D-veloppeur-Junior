@@ -37,10 +37,9 @@ class DashboardController
     {
         $action = $data['get']['action'] ?? null;
         $modalControl = $this->DashboardManager->modalControl($data);
-
-        if (!isset($modalControl['succes']) && $modalControl === null) {
+        if (!isset($modalControl['succes']) && $modalControl !== null) {
             return $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
-        } else if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
+        } else if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && empty($data['session']['active'][0])) {
             header('Location: http://3bigbangbourse.fr/?p=home');
         } else if (isset($action) && $action === "logout") {
             $this->userController->logoutUser();

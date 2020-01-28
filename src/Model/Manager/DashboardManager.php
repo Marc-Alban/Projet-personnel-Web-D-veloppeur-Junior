@@ -11,12 +11,15 @@ class DashboardManager
     private $userManager;
     private $token;
     private $maSuperGlobale;
+    private $recaptcha;
 
     public function __construct()
     {
         $this->userManager = new UserManager();
         $this->token = new Token();
         $this->maSuperGlobale = new GestionGlobal();
+        $this->recaptcha = new \ReCaptcha\ReCaptcha('6LcqetMUAAAAAIWWA33d1ZbkfuEEP8MjP4Yf_Avd');
+
     }
 
     /************************************Modal Control************************************************* */
@@ -38,11 +41,16 @@ class DashboardManager
 
         if (isset($data['post']['connexion']) && $action === "connexion") {
 
+            // var_dump($data['post']['g-recaptcha-response']);
+            // die();
+
             $active = $this->userManager->getActiveUser();
             $userBdd = $this->userManager->getUsers();
             $pseudo = $data["post"]['pseudo'] ?? null;
             $passwordBdd = $this->userManager->getPass();
             $password = $data["post"]['password'] ?? null;
+            $captcha = $data['post']['g-recaptcha-response'];
+            $resp = $this->recaptcha->verify($captcha);
 
             if (empty($pseudo) && empty($password)) {
                 $errors["pseudoPasswordEmpty"] = 'Veuillez mettre un contenu';
@@ -51,9 +59,11 @@ class DashboardManager
             } else if (empty($password)) {
                 $errors["passwordEmpty"] = 'Veuillez mettre un mot de passe';
             } else if ($userBdd !== $pseudo) {
-                $errors['pseudoWrong'] = 'Identifiant Incorrect-';
+                $errors['pseudoWrong'] = 'Identifiant Incorrect';
             } else if (!password_verify($password, $passwordBdd)) {
-                $errors['passWrong'] = 'Identifiant Incorrect--';
+                $errors['passWrong'] = 'Identifiant Incorrect';
+            } else if (!$resp->isSuccess()) {
+                $errors['erreurCaptcha'] = "Veuillez Cocher la case du captcha.";
             }
 
             if ($active[0] === "0") {
@@ -62,7 +72,7 @@ class DashboardManager
             /************************************Token Session************************************************* */
             $this->maSuperGlobale->setParamSession('token', $this->token->createSessionToken());
             if ($this->token->compareTokens($data) !== null) {
-                $errors['token'] = "Formulaire incorrect*";
+                $errors['token'] = "Formulaire incorrect";
             }
             /************************************End Token Session************************************************* */
 

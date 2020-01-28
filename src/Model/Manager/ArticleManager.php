@@ -83,7 +83,8 @@ class ArticleManager
                 $current = $nbPage;
             }
             $firstOfPage = ($current - 1) * $perPage;
-            $articlesFront = $this->articleRepository->articleReadAll($firstOfPage, $perPage, 'readArticleAll');
+            $FofPage = (int) $firstOfPage;
+            $articlesFront = $this->articleRepository->articleReadAll($FofPage, $perPage, 'readArticleAll');
         }
 
         if (isset($perCurrent)) {
@@ -95,8 +96,8 @@ class ArticleManager
                 $perCurrent = $nbPage;
             }
             $twoOfPage = ($perCurrent - 1) * $perPage;
-            $ofPage = (int) $twoOfPage;
-            $articleAll = $this->articleRepository->articleReadAll($ofPage, $perPage, 'readAll');
+            $TofPage = (int) $twoOfPage;
+            $articleAll = $this->articleRepository->articleReadAll($TofPage, $perPage, 'readAll');
         }
 
         return $tabArticle = [
