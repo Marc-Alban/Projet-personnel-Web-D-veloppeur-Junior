@@ -33,6 +33,7 @@ a:hover {
     color: #e30614;
 }
 
+
 /* ***************Modal-Form******************** */
 
 .md-form input:not([type]):focus:not([readonly]),
@@ -283,7 +284,7 @@ footer .copyright-footer {
 /* ***************Responsive >768px******************** */
 @media screen and (min-width:768px) {
     .navbar-brand {
-        font-size: 3.5em;
+        font-size: 2em;
     }
 
     .margeAside {

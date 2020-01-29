@@ -53,6 +53,6 @@ xhr.onreadystatechange = function() {
   }
 }
 
-xhr.open("GET", "https://www.instagram.com/3bbigbangbourse?__a=1", true);
+xhr.open("GET", "https://www.instagram.com/les3soldatsblancs?__a=1", true);
 xhr.responseType = "json";
 xhr.send();

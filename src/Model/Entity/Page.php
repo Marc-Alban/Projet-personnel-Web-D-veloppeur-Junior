@@ -102,6 +102,16 @@ class Page
     }
 
     /**
+     * Get the value of title Page
+     * @return string
+     */
+    public function getTitlePageExtrait(): string
+    {
+        $string = $this->titlePage;
+        return htmlspecialchars_decode(html_entity_decode($string));
+    }
+
+    /**
      * Set the value of titlePage
      *
      * @return  self
@@ -109,7 +119,6 @@ class Page
     public function setTitlePage($titlePage): self
     {
         $this->titlePage = $titlePage;
-
         return $this;
     }
 }

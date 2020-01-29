@@ -33,7 +33,11 @@ class PageRepository
         $this->pdoStatement = $this->pdo->query("SELECT * FROM page");
         $pages = [];
         while ($page = $this->pdoStatement->fetchObject(Page::class)) {
-            $title = strtolower(str_replace(' ', '', $page->getTitlePage()));
+            //$stringBlank = str_replace(' ', '', $page->getTitlePageExtrait());
+            // $string = str_replace('é', 'e', $stringBlank);
+            //$title = strtolower($string);
+            $title = str_replace(' ', '', strtolower($page->getTitlePageExtrait()));
+
             if ($data === $title) {
                 $pages[] = $page;
             } else if ($data === null) {
@@ -57,9 +61,11 @@ class PageRepository
         $pages = [];
         while ($page = $this->pdoStatement->fetchObject(Page::class)) {
             if ($min === 'min' && $maj === null) {
-                $pages[] = strtolower(str_replace(' ', '', $page->getTitlePage()));
+                //$stringBlank = str_replace(' ', '', $page->getTitlePageExtrait());
+                //$string = str_replace('é', 'e', $stringBlank);
+                $pages[] = str_replace(' ', '', strtolower($page->getTitlePageExtrait()));
             } else if ($min === null && $maj === 'maj') {
-                $pages[] = $page->getTitlePage();
+                $pages[] = $page->getTitlePageExtrait();
             }
         }
         return $pages;

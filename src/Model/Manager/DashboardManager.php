@@ -41,9 +41,6 @@ class DashboardManager
 
         if (isset($data['post']['connexion']) && $action === "connexion") {
 
-            // var_dump($data['post']['g-recaptcha-response']);
-            // die();
-
             $active = $this->userManager->getActiveUser();
             $userBdd = $this->userManager->getUsers();
             $pseudo = $data["post"]['pseudo'] ?? null;
