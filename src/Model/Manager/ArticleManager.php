@@ -177,9 +177,19 @@ class ArticleManager
     }
     /************************************End Formulaire Article Vrefifcation Backend***************************** */
     /************************************Del Liste Article************************************************* */
-    public function delArticleBdd(int $id): void
+    public function delArticleBdd(int $id, array $data): array
     {
+
+        $errors = $data["session"]["errors"] ?? null;
+        unset($data["session"]["errors"]);
+
+        if ($this->nbPost() <= "2" || $this->nbPost() <= 2) {
+            $errors['nbPost'] = "Impossible de supprimer en dessous de 2 articles ! ";
+            return $errors;
+        }
         $this->articleRepository->deleteArticle($id);
+        header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
+        exit();
     }
 /************************************End Del Liste Partenaire************************************************* */
     /************************************Formulaire Article Vrefifcation data Backend***************************** */

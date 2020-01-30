@@ -19,6 +19,14 @@
                 {{succes}}
             </div>
             {% endfor %}
+            {% elseif data.delArticle %}
+            <div class="alert alert-danger" role="alert">
+                {{data.delArticle.nbPost}}
+            </div>
+            {% elseif data.delPartenaire %}
+            <div class="alert alert-danger" role="alert">
+                {{data.delPartenaire.nbPartenaire}}
+            </div>
             {% endif %}
             <div class="col-12">
                 <div class="row">
@@ -37,7 +45,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>
-                                                        Titre
+                                                        Image
                                                     </th>
                                                     <th>
                                                         Contenu
@@ -173,7 +181,7 @@
                                             {% endfor %}
                                             {#--------------------------END-BODY-Table-----------------------------#}
                                             {% elseif data.graphique %}
-                                            {#---------------------------HEAD-TABLE-Partenaire-----------------------------#}
+                                            {#---------------------------HEAD-TABLE-Graphique-----------------------------#}
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -190,8 +198,8 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                            {#---------------------------END-HEAD-Table-----------------------------#}
-                                            {#---------------------------BODY-Table-Partenaire-----------------------------#}
+                                            {#---------------------------END-HEAD-Graphique-----------------------------#}
+                                            {#---------------------------BODY-Table-Graphique-----------------------------#}
                                             <tbody>
                                                 {% for graphiques in
                                                 data.graphique %}
@@ -220,7 +228,7 @@
                                             </tbody>
                                             {#---------------------------END-BODY-Table-----------------------------#}
                                             {% elseif data.page %}
-                                            {#---------------------------HEAD-TABLE-Partenaire-----------------------------#}
+                                            {#---------------------------HEAD-TABLE-Page-----------------------------#}
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -241,7 +249,7 @@
                                                 </tr>
                                             </thead>
                                             {#---------------------------END-HEAD-Table-----------------------------#}
-                                            {#---------------------------BODY-Table-Partenaire-----------------------------#}
+                                            {#---------------------------BODY-Table-Page-----------------------------#}
                                             <tbody>
                                                 {% for pages in
                                                 data.page %}

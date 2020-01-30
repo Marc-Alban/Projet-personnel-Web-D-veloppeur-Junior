@@ -62,7 +62,7 @@ class HomeManager
     public function dataPostGraph($data): void
     {
         $this->select = $data['post']['selectGraph'];
-        $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
+        $this->legende = htmlspecialchars(trim($data['post']['legende'])) ?? null;
         $this->tmpName = $data['files']['imageGraph']['tmp_name'] ?? null;
         $this->size = $data['files']['imageGraph']['size'] ?? null;
         $this->file = (empty($data['files']['imageGraph']['name'])) ? 'default.png' : $data['files']['imageGraph']['name'];
@@ -89,13 +89,11 @@ class HomeManager
             if ($dataBdd === null) {
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques');
                 exit();
-
             }
             $idBdd = $dataBdd->getId();
         } else if ($id === null) {
             header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques');
             exit();
-
         }
 
         if (isset($action) && $action === 'update' && isset($id) && $id === $idBdd) {
@@ -109,7 +107,6 @@ class HomeManager
                 $this->succesGraph();
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques&action=update');
                 exit();
-
             }
             return $errors;
         }

@@ -10,7 +10,7 @@
         <div class="card mx-xl-5 col-12 col-sm-8 col-md-8 col-lg-8 mt-3">
             <br>
     {#----------------------------Succes-Submit---------------------------#}
-     {% if data.verifPartenaire.successUpdatePartenaire %}
+     {% if data.verifPartenaire.successUpdatePartenaire or data.verifPartenaire.successPartenaire %}
         {% for succes in data.verifPartenaire %}
         <div class="alert alert-primary" role="alert">
             {{succes}}

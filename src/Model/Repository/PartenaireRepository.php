@@ -74,32 +74,34 @@ class PartenaireRepository
 /************************************Add partenaire in Bdd************************************************* */
     public function addBddPartenaire(string $legende, string $tmpName, string $link, string $extention, ?string $id): void
     {
-        if ($id === null) {
-            $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM partenaire ORDER BY id');
-            $response = $this->pdoStatement->fetch();
-            $id = $response['MAX(id)'] + 1;
-            $p = [
-                ':legende' => $legende,
-                ':image' => $id . "." . $extention,
-                ':link' => $link,
-            ];
-            $sql = "
+
+        if ($this->countpartenaire() < "4" || $this->countpartenaire() < 4) {
+            if ($id === null) {
+                $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM partenaire ORDER BY id');
+                $response = $this->pdoStatement->fetch();
+                $id = $response['MAX(id)'] + 1;
+                $p = [
+                    ':legende' => $legende,
+                    ':image' => $id . "." . $extention,
+                    ':link' => $link,
+                ];
+                $sql = "
             INSERT INTO `partenaire`(`legende`, `image`, `link`) VALUES (:legende,:image,:link)
             ";
-        } else if ($id !== null) {
-            $p = [
-                ':legende' => $legende,
-                ':image' => $id . "." . $extention,
-                ':link' => $link,
-            ];
-            $sql = "
+            } else if ($id !== null) {
+                $p = [
+                    ':legende' => $legende,
+                    ':image' => $id . "." . $extention,
+                    ':link' => $link,
+                ];
+                $sql = "
         UPDATE `partenaire` SET `legende`=:legende,`image`=:image,`link`=:link where id = $id
         ";
+            }
+            $query = $this->pdo->prepare($sql);
+            $query->execute($p);
+            move_uploaded_file($tmpName, "img/partenaire/" . $id . '.' . $extention);
         }
-
-        $query = $this->pdo->prepare($sql);
-        $query->execute($p);
-        move_uploaded_file($tmpName, "img/partenaire/" . $id . '.' . $extention);
     }
 /************************************End Add partenaire in Bdd************************************************* */
 /************************************Del Liste Partenaire************************************************* */
@@ -109,19 +111,12 @@ class PartenaireRepository
         $this->pdoStatement = $this->pdo->query("SELECT id, image FROM partenaire WHERE id = $id");
         $image = $this->pdoStatement->fetch();
         $extention = explode('.', $image['image']);
-
-        if ($this->countpartenaire() > "2" || $this->countpartenaire() > 2 || $id === $image["id"]) {
-            $sql = "
+        $sql = "
             DELETE FROM `partenaire` WHERE id = $id
             ";
-            $query = $this->pdo->prepare($sql);
-            $query->execute();
-            unlink("img/partenaire/" . $image['id'] . "." . $extention[1]);
-        }
-
-        header("Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires");
-        exit();
-
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        unlink("img/partenaire/" . $image['id'] . "." . $extention[1]);
     }
 /************************************End Del Liste Partenaire************************************************* */
 }

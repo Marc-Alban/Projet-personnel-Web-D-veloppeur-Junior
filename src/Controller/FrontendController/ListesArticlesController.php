@@ -40,7 +40,6 @@ class ListesArticlesController
         } else if (!isset($data['get']['pp']) || empty($data['get']['pp'])) {
             header("Location: http://3bigbangbourse.fr/?p=listesArticles&pp=1");
             exit();
-
         }
 
         $tabData = [

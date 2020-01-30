@@ -199,7 +199,6 @@ class ArticleRepository
      */
     public function articleWrite(string $title, string $legende, string $description, string $date, int $posted, int $lastArticle, string $tmpName, string $extention, ?string $id): void
     {
-
         if ($id === null && empty($id)) {
             $this->pdoStatement = $this->pdo->query('SELECT MAX(id) FROM article ORDER BY date = NOW()');
             $response = $this->pdoStatement->fetch();
@@ -218,7 +217,6 @@ class ArticleRepository
             VALUES(:title, :legende, :description, :image, :date, :posted, :lastArticle)
             ";
         } else if ($id !== null && !empty($id)) {
-
             $p = [
                 ':title' => $title,
                 ':legende' => $legende,
@@ -239,26 +237,18 @@ class ArticleRepository
     }
 /************************************End Write Post************************************************* */
 /************************************Delete Post Bdd With ID************************************************* */
-/************************************Del Liste Partenaire************************************************* */
     public function deleteArticle(int $id): void
     {
         $this->pdoStatement = $this->pdo->query("SELECT id, image FROM article WHERE id = $id");
-        $image = $this->pdoStatement->fetch();
-        $extention = explode('.', $image['image']);
-
-        if ($this->count("back") > "2" || $this->count("back") > 2 && $id === $image["id"]) {
-
-            $sql = "
+        $article = $this->pdoStatement->fetch();
+        $extention = explode('.', $article['image']);
+        $sql = "
         DELETE FROM `article` WHERE id = $id
         ";
-            $query = $this->pdo->prepare($sql);
-            $query->execute();
-            unlink("img/article/" . $image['id'] . "." . $extention[1]);
-        }
-        header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
-        exit();
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        unlink("img/article/" . $article['id'] . "." . $extention[1]);
     }
-/************************************End Del Liste Partenaire************************************************* */
 /************************************End Delete Post Bdd With ID************************************************* */
 /************************************Not repeat Count************************************************* */
     public function count(string $side): ?string

@@ -64,17 +64,18 @@ class HomeRepository
 /************************************Add graph in Bdd************************************************* */
     public function updateBddGraph(string $select, string $legende, string $tmpName, string $extention, string $id): void
     {
+
         $p = [
             ':title' => $select,
             ':description' => $legende,
-            ':image' => $id . "." . $extention,
+            ':image' => $select . "." . $extention,
         ];
         $sql = "
     UPDATE `graph` SET `title`=:title,`description`=:description,`image`=:image where id = $id
     ";
         $query = $this->pdo->prepare($sql);
         $query->execute($p);
-        move_uploaded_file($tmpName, "img/graphique/" . $id . '.' . $extention);
+        move_uploaded_file($tmpName, "img/graphique/" . $select . '.' . $extention);
     }
 /************************************End Add partenaire in Bdd************************************************* */
 

@@ -105,6 +105,10 @@ class PartenaireManager
             if ($this->checkFieldsPartenaire()) {
                 $errors['errorImage'] = $errors . $this->error;
             }
+            if ($this->nbPartenaire() >= "4" || $this->nbPartenaire() >= 4) {
+                $errors['nbPartenaire'] = "Impossible d'inserer plus de 4 partenaires ! ";
+                return $errors;
+            }
             if (empty($errors)) {
                 /*************Send**************** */
                 if ($action === 'send' && $id === null) {
@@ -123,9 +127,18 @@ class PartenaireManager
     }
 /************************************End Liste Partenaire Add************************************************* */
 /************************************Del Liste Partenaire************************************************* */
-    public function delPartenaireBdd(int $id): void
+    public function delPartenaireBdd(int $id, array $data): array
     {
+        $errors = $data["session"]["errors"] ?? null;
+        unset($data["session"]["errors"]);
+
+        if ($this->nbPartenaire() <= "2" || $this->nbPartenaire() <= 2) {
+            $errors['nbPartenaire'] = "Impossible de supprimer en dessous de 2 partenaires ! ";
+            return $errors;
+        }
         $this->partenaireRepository->deletePartenaire($id);
+        header("Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires");
+        exit();
     }
 /************************************End Del Liste Partenaire************************************************* */
 
