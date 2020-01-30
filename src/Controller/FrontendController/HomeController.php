@@ -27,7 +27,6 @@ class HomeController
         $this->view = new View();
         $this->token = new Token();
         $this->maSuperGlobale = new GestionGlobal();
-
     }
     /************************************Page Acceuil************************************************* */
 

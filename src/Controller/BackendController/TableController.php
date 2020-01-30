@@ -35,6 +35,8 @@ class TableController
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
             header('Location: http://3bigbangbourse.fr/?p=home');
+            exit();
+
         }
         $liste = $data['get']['liste'] ?? null;
         $perpage = $data['get']['perpage'] ?? null;
@@ -55,6 +57,8 @@ class TableController
                 $this->partenaireManager->delPartenaireBdd($idInt);
             } else if ($idInt === false || $idInt === null || is_string($idInt)) {
                 header("Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires");
+                exit();
+
             }
             $partenaire = $this->partenaireManager->listePartenaire();
         } else if ($liste === "listeArticlesBack" && isset($perpage)) {
@@ -62,6 +66,8 @@ class TableController
                 $this->articleManager->delArticleBdd($idInt);
             } else if ($idInt === false || $idInt === null || is_string($idInt)) {
                 header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
+                exit();
+
             }
             $article = $this->articleManager->pagination($data);
         } else if ($liste === "listeGraphiques") {
@@ -78,6 +84,8 @@ class TableController
             }
         } else if (!isset($liste) || empty($liste)) {
             header("Location: http://3bigbangbourse.fr/?p=dashboard&action=connexion");
+            exit();
+
         }
 
         $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire, "article" => $article, "graphique" => $graphique, 'graph' => $graph, "page" => $page, "pageSucces" => $pageSucces]);

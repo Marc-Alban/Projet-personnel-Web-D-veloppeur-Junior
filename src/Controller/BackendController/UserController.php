@@ -27,6 +27,8 @@ class UserController
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
             header('Location: http://3bigbangbourse.fr/?p=home');
+            exit();
+
         }
         $dataFormUser = null;
         $userData = $this->userManager->dataFormBack($data);

@@ -33,6 +33,8 @@ class NewPasswordController
         if (isset($data['get']['token']) || !empty($data['get']['token'])) {
             if ($this->userManager->verifUser($data) === null) {
                 header('Location: http://3bigbangbourse.fr/?p=lostPassword');
+                exit();
+
             }
             $newPass = $this->userManager->changeMdp($data);
             $token = $this->userManager->getTokenBdd();

@@ -120,6 +120,7 @@ class PartenaireRepository
         }
 
         header("Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires");
+        exit();
 
     }
 /************************************End Del Liste Partenaire************************************************* */

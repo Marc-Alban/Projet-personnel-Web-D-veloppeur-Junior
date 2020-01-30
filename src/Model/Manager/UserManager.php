@@ -385,6 +385,7 @@ class UserManager
             return null;
         }
         header("Location: http://3bigbangbourse.fr/?p=lostPassword");
+        exit();
     }
 /************************************End Change Password************************************************* */
 

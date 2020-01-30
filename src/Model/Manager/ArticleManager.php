@@ -217,7 +217,7 @@ class ArticleManager
     {
         $this->title = htmlentities(trim($data['post']['title'])) ?? null;
         $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
-        $this->description = html_entity_decode(trim($data['post']['description'])) ?? null;
+        $this->description = $data['post']['description'] ?? null;
         $this->date = $data['post']['date'] ?? null;
         $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
         $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;

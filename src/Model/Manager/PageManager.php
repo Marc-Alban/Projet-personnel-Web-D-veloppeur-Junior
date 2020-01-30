@@ -42,6 +42,8 @@ class PageManager extends PDOException
             $pageId[] = $this->pageRepository->readPageId($data);
             if ($pageId[0] === null) {
                 header('Location:http://3bigbangbourse.fr/?p=table&liste=listePages');
+                exit();
+
             }
             return $pageId;
         }
@@ -131,6 +133,8 @@ class PageManager extends PDOException
                 $this->pageRepository->addBddPage($this->titlePage, $this->title, $this->description, $this->tmpName, $this->extention, $id);
                 $this->succesPage();
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listePages&action=update');
+                exit();
+
             }
             return $errors;
         }

@@ -27,6 +27,8 @@ class PartenaireController
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
             header('Location: http://3bigbangbourse.fr/?p=home');
+            exit();
+
         }
         $datapartenaire = null;
         $id = $data['get']['id'] ?? null;
@@ -37,6 +39,8 @@ class PartenaireController
             }
             if ($datapartenaire === null) {
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listePartenaires');
+                exit();
+
             }
         }
         $verifPartenaire = $this->partenaireManager->partenaire($data, $id);

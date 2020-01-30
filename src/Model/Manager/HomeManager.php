@@ -88,10 +88,14 @@ class HomeManager
             $dataBdd = $this->homeRepository->readWithId($id);
             if ($dataBdd === null) {
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques');
+                exit();
+
             }
             $idBdd = $dataBdd->getId();
         } else if ($id === null) {
             header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques');
+            exit();
+
         }
 
         if (isset($action) && $action === 'update' && isset($id) && $id === $idBdd) {
@@ -104,6 +108,8 @@ class HomeManager
                 $this->homeRepository->updateBddGraph($this->select, $this->legende, $this->tmpName, $this->extention, $id);
                 $this->succesGraph();
                 header('Location: http://3bigbangbourse.fr/?p=table&liste=listeGraphiques&action=update');
+                exit();
+
             }
             return $errors;
         }

@@ -256,7 +256,7 @@ class ArticleRepository
             unlink("img/article/" . $image['id'] . "." . $extention[1]);
         }
         header("Location: http://3bigbangbourse.fr/?p=table&liste=listeArticlesBack&perpage=1");
-
+        exit();
     }
 /************************************End Del Liste Partenaire************************************************* */
 /************************************End Delete Post Bdd With ID************************************************* */
