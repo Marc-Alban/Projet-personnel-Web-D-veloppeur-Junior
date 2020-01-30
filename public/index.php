@@ -14,11 +14,11 @@ $maSuperGlobale = new GestionGlobal();
 $partenaireManager = new PartenaireManager();
 $pageManager = new PageManager();
 
-/************************************Page Title Session************************************************* */
+/************************************Paramètre Session************************************************* */
 // $_SESSION['partenaire'] = $partenaireManager->listePartenaire();
 $maSuperGlobale->setParamSession('partenaire', $partenaireManager->listePartenaire());
-/************************************End Page Title Session************************************************* */
-/************************************End Page Title Session************************************************* */
+/************************************End Paramètre Session************************************************* */
+/************************************Page Title Session************************************************* */
 $maSuperGlobale->setParamSession('titlePageLink', $pageManager->getTitleData('link', null));
 $maSuperGlobale->setParamSession('titlePage', $pageManager->getTitleData(null, 'nav'));
 /************************************End Page Title Session************************************************* */

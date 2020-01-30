@@ -36,7 +36,7 @@ class PageRepository
             //$stringBlank = str_replace(' ', '', $page->getTitlePageExtrait());
             // $string = str_replace('é', 'e', $stringBlank);
             //$title = strtolower($string);
-            $title = str_replace(' ', '', strtolower($page->getTitlePageExtrait()));
+            $title = str_replace(' ', '', mb_strtolower($page->getTitlePageExtrait(), 'UTF-8'));
 
             if ($data === $title) {
                 $pages[] = $page;
@@ -63,7 +63,7 @@ class PageRepository
             if ($min === 'min' && $maj === null) {
                 //$stringBlank = str_replace(' ', '', $page->getTitlePageExtrait());
                 //$string = str_replace('é', 'e', $stringBlank);
-                $pages[] = str_replace(' ', '', strtolower($page->getTitlePageExtrait()));
+                $pages[] = str_replace(' ', '', mb_strtolower($page->getTitlePageExtrait(), 'UTF-8'));
             } else if ($min === null && $maj === 'maj') {
                 $pages[] = $page->getTitlePageExtrait();
             }
