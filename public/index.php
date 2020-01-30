@@ -15,7 +15,6 @@ $partenaireManager = new PartenaireManager();
 $pageManager = new PageManager();
 
 /************************************Paramètre Session************************************************* */
-// $_SESSION['partenaire'] = $partenaireManager->listePartenaire();
 $maSuperGlobale->setParamSession('partenaire', $partenaireManager->listePartenaire());
 /************************************End Paramètre Session************************************************* */
 /************************************Page Title Session************************************************* */

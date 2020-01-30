@@ -16,8 +16,8 @@ class DashboardManager
     public function __construct()
     {
         $this->userManager = new UserManager();
-        $this->token = new Token();
         $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
         $this->recaptcha = new \ReCaptcha\ReCaptcha('6LcqetMUAAAAAIWWA33d1ZbkfuEEP8MjP4Yf_Avd');
 
     }
@@ -67,7 +67,6 @@ class DashboardManager
                 $errors['compteWrong'] = "Compte desactivé";
             }
             /************************************Token Session************************************************* */
-            $this->maSuperGlobale->setParamSession('token', $this->token->createSessionToken());
             if ($this->token->compareTokens($data) !== null) {
                 $errors['token'] = "Formulaire incorrect";
             }

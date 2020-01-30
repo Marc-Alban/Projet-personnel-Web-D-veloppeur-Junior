@@ -3,6 +3,8 @@ declare (strict_types = 1);
 namespace App\Controller\FrontendController;
 
 use App\Model\Manager\HomeManager;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 use App\View\View;
 
 class HomeController
@@ -10,6 +12,8 @@ class HomeController
 
     private $HomeManager;
     private $view;
+    private $token;
+    private $maSuperGlobale;
     /**
      * Fonction constructeur:
      * Récupère  la fonction parent construct "Twig/Environement"
@@ -21,6 +25,9 @@ class HomeController
     {
         $this->HomeManager = new HomeManager();
         $this->view = new View();
+        $this->token = new Token();
+        $this->maSuperGlobale = new GestionGlobal();
+
     }
     /************************************Page Acceuil************************************************* */
 
@@ -31,6 +38,7 @@ class HomeController
      */
     public function HomeAction(): void
     {
+        $this->maSuperGlobale->setParamSession('token', $this->token->createSessionToken());
         $graph = $this->HomeManager->listeGraph();
         $this->view->renderer('Frontend', 'home', ['graph' => $graph]);
     }
