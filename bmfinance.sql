@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 27 jan. 2020 à 09:24
+-- Généré le :  mer. 29 jan. 2020 à 14:09
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.3.5
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `page` (
   `description` text NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `page`
@@ -102,7 +102,11 @@ INSERT INTO `page` (`id`, `titlePage`, `title`, `description`, `image`) VALUES
 (4, 'Conseil en investissement financier', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Conseil en investissement financier  bla bla bla', 'default.png'),
 (5, 'Conseil en investissement immobilier', 'Je suis le titre de la page', '&lt;p&gt;Je suis la descrtiption de la page Conseil en investissement immobilier bla bla bla&lt;/p&gt;', '5.jpg'),
 (6, 'Autres solutions d\'investissement', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Autres solutions d’investissement  bla bla bla', 'default.png'),
-(7, 'Contact', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Contact  bla bla bla', 'default.png');
+(7, 'Contact', 'Je suis le titre de la page', 'Je suis la descrtiption de la page Contact  bla bla bla', 'default.png'),
+(8, 'RGPD', 'Règle des données personnelles', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dolorum ratione necessitatibus quasi sed ipsum, quibusdam provident minima eligendi iure incidunt eius delectus aspernatur quam quas dolore, nesciunt obcaecati similique?', 'default.png'),
+(9, 'Conditions Générale', 'Titre condition', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ullam laudantium, alias deleniti harum id dignissimos distinctio maxime, aspernatur exercitationem tenetur magni voluptates vel. Culpa cupiditate maiores animi hic dicta?', 'default.png'),
+(10, 'FAQ', 'titre', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ullam laudantium, alias deleniti harum id dignissimos distinctio maxime, aspernatur exercitationem tenetur magni voluptates vel. Culpa cupiditate maiores animi hic dicta?', 'default.png'),
+(11, 'Mentions Légales', 'Titre', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ullam laudantium, alias deleniti harum id dignissimos distinctio maxime, aspernatur exercitationem tenetur magni voluptates vel. Culpa cupiditate maiores animi hic dicta?', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -180,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `lastName`, `mail`, `password`, `token`, `active`) VALUES
-(2, 'Millet', 'Marc-Alban', 'test@live.fr', '$2y$10$DCGO9Y66GUjkXPblYsky6O0mW2DdYOAvGtNy0UK9T5PnXIbCg3PZK', '$2y$10$Yz.2xg1UhOa8WvnrUMrxBuuF0u1odJrmE8kiegvIn339gqRYrPJxS', 1);
+(2, 'Bertrand', 'Millet', 'bertrand.millet69@orange.fr', '$2y$10$xhEMoJLH4m2VQnsX9LoB.Orrow7a3bL6KX77S338HxoNLn76IxTOm', '776735263a35c2a4e568067c32122383babc44f5271912e7d2624af7bf4aec65', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
