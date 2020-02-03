@@ -40,11 +40,11 @@ class DashboardController
         if (!isset($modalControl['succes']) && $modalControl !== null) {
             return $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
         } else if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && empty($data['session']['active'][0])) {
-            header('Location: http://3bigbangbourse.fr/?p=home');
+            header('Location: http://projet5.marcalban/?p=home');
             exit();
         } else if (isset($action) && $action === "logout") {
             $this->userController->logoutUser();
-            header('Location: http://3bigbangbourse.fr/?p=home');
+            header('Location: http://projet5.marcalban/?p=home');
             exit();
         }
         $countArticle = $this->article->nbPost();

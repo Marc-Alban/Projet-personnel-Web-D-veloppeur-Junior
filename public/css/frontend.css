@@ -125,6 +125,11 @@ a:hover {
     cursor: pointer;
 }
 
+.carImg,
+.cardHome {
+    cursor: pointer;
+}
+
 /* ***************Colonne Nav******************** */
 
 .green {

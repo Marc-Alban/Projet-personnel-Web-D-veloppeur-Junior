@@ -40,7 +40,7 @@ class ContactManager
             <td>' . $data['post']['mail'] . '</td>
         </tr>
         <tr>
-            <td>Code Postale</td>
+            <td>Code Postal</td>
             <td>' . $data['post']['codepostal'] . '</td>
         </tr>
         <tr>
@@ -61,7 +61,7 @@ class ContactManager
 </html>
 ';
 
-        mail("millet.marcalban@gmail.com", "Page Contact - BmFinance.com", $message, $headers);
+        mail("marcalban@live.fr", "Page Contact - BmFinance.com", $message, $headers);
     }
     /************************************End Contenu Mail Contact************************************************* */
 
@@ -123,7 +123,7 @@ class ContactManager
 
             if (!empty($cp)) {
                 if (!preg_match('#^[0-9]{5}$#', $cp)) {
-                    $errors['tab']['cpWrong'] = "Le Code postale est invalide";
+                    $errors['tab']['cpWrong'] = "Le Code postal est invalide";
                 }
             }
 
