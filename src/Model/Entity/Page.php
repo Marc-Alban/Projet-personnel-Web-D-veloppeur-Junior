@@ -108,7 +108,8 @@ class Page
     public function getTitlePageExtrait(): string
     {
         $string = $this->titlePage;
-        return $string;
+        $decodeString = strip_tags(html_entity_decode($string));
+        return strip_tags(htmlspecialchars_decode($decodeString));
     }
 
     /**

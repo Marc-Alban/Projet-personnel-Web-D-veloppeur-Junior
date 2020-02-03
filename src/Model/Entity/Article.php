@@ -119,7 +119,7 @@ class Article
 
     public function getDescriptionExtrait(): string
     {
-        return substr(strip_tags($this->description), 0, 200) . '...';
+        return substr(strip_tags(htmlspecialchars_decode(html_entity_decode($this->description, ENT_QUOTES, 'UTF-8'))), 0, 200);
     }
 
     /**

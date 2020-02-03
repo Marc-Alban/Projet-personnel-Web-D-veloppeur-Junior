@@ -71,9 +71,9 @@ class PageManager extends PDOException
      */
     public function dataFormPage(array $data): void
     {
-        $this->titlePage = htmlentities(trim($data['post']['namePage'])) ?? null;
-        $this->title = htmlentities(trim($data['post']['titlePage'])) ?? null;
-        $this->description = htmlentities(trim($data['post']['bodyPage'])) ?? null;
+        $this->titlePage = $data['post']['namePage'] ?? null;
+        $this->title = $data['post']['titlePage'] ?? null;
+        $this->description = $data['post']['bodyPage'] ?? null;
         $this->size = $data['files']['imagePage']['size'] ?? null;
         $this->tmpName = $data['files']['imagePage']['tmp_name'] ?? null;
         $this->files = (empty($data['files']['imagePage']['name'])) ? 'default.png' : $data['files']['imagePage']['name'];

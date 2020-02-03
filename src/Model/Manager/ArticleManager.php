@@ -225,8 +225,8 @@ class ArticleManager
      */
     public function dataFormArticle(array $data): void
     {
-        $this->title = htmlentities(trim($data['post']['title'])) ?? null;
-        $this->legende = htmlentities(trim($data['post']['legende'])) ?? null;
+        $this->title = $data['post']['title'] ?? null;
+        $this->legende = $data['post']['legende'] ?? null;
         $this->description = $data['post']['description'] ?? null;
         $this->date = $data['post']['date'] ?? null;
         $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
