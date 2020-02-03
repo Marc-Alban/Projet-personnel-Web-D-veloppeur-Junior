@@ -17,6 +17,18 @@
         <link rel="stylesheet" href="css/MDB-FREE/mdb.min.css">
         {#----------------------------Style-Css---------------------------#}
         <link rel="stylesheet" href="css/backend.css">
+        {#----------------------------Tiny mce---------------------------#}
+        <script src="https://cdn.tiny.cloud/1/in04li4nf9lhag0ztzpssnf1ols8ivglsvh5ft0mz6ujlsgb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>tinymce.init({
+            selector: '#mytextarea',
+            encoding: "UTF-8",
+            mode: "textareas",
+            language : 'fr_FR',
+            element_format : 'html',
+            height: 1500,
+            entity_encoding : "raw",
+            toolbar_drawer: 'floating',
+        });</script>
     </head>
     <body>
         <header class="navbar navbar-dark black">
@@ -160,16 +172,6 @@
         <script type="text/javascript" src="js/MDB-Free/bootstrap.min.js"></script>
         {#---------------------------MDN-Javascript-----------------------------#}
         <script type="text/javascript" src="js/MDB-Free/mdb.min.js"></script>
-        {#---------------------------Tiny-MCE-JAvascript-----------------------------#}
-        <script src='js/tinymce/tinymce.min.js' referrerpolicy="origin"></script>
-        <script>
-        tinymce.init({
-            selector: '#mytextarea',
-            encoding: "UTF-8",
-            mode: "textareas",
-            height: 1500
-        });
-        </script>
         {#---------------------------Add-JavaScritp-----------------------------#}
         {% block javascript %}
         {% endblock %}
