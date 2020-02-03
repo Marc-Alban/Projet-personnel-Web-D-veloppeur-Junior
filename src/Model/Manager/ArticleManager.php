@@ -191,7 +191,7 @@ class ArticleManager
             return $errors;
         }
         $this->articleRepository->deleteArticle($id);
-        header("Location: http://projet5.marcalban/?p=table&liste=listeArticlesBack&perpage=1");
+        header("Location: http://projet5.marcalban.fr/?p=table&liste=listeArticlesBack&perpage=1");
         exit();
     }
 /************************************End Del Liste Partenaire************************************************* */

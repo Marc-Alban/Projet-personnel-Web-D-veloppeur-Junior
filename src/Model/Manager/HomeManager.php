@@ -87,12 +87,12 @@ class HomeManager
         if ($id !== null) {
             $dataBdd = $this->homeRepository->readWithId($id);
             if ($dataBdd === null) {
-                header('Location: http://projet5.marcalban/?p=table&liste=listeGraphiques');
+                header('Location: http://projet5.marcalban.fr/?p=table&liste=listeGraphiques');
                 exit();
             }
             $idBdd = $dataBdd->getId();
         } else if ($id === null) {
-            header('Location: http://projet5.marcalban/?p=table&liste=listeGraphiques');
+            header('Location: http://projet5.marcalban.fr/?p=table&liste=listeGraphiques');
             exit();
         }
 
@@ -105,7 +105,7 @@ class HomeManager
                 /*************Update**************** */
                 $this->homeRepository->updateBddGraph($this->select, $this->legende, $this->tmpName, $this->extention, $id);
                 $this->succesGraph();
-                header('Location: http://projet5.marcalban/?p=table&liste=listeGraphiques&action=update');
+                header('Location: http://projet5.marcalban.fr/?p=table&liste=listeGraphiques&action=update');
                 exit();
             }
             return $errors;

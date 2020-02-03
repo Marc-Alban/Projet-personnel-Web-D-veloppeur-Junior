@@ -18,37 +18,18 @@
         {#----------------------------Style-Css---------------------------#}
         <link rel="stylesheet" href="css/backend.css">
         {#----------------------------Tiny mce---------------------------#}
-        <script src="https://cdn.tiny.cloud/1/in04li4nf9lhag0ztzpssnf1ols8ivglsvh5ft0mz6ujlsgb/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="./js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
         <script>tinymce.init({
             selector: '#mytextarea',
             encoding: "UTF-8",
-            language : 'fr_FR',
             element_format : 'html',
             height: 1500,
             entity_encoding : "raw",
             toolbar_drawer: 'floating',
-    mode : "textarea",
-    plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media pdf codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
-    imagetools_cors_hosts: ['picsum.photos'],
-    menubar: 'file edit view insert format tools table help',
-    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pdf link anchor codesample | ltr rtl',
-    toolbar_sticky: true,
-    autosave_ask_before_unload: true,
-    autosave_interval: "30s",
-    autosave_prefix: "{path}{query}-{id}-",
-    autosave_restore_when_empty: false,
-    autosave_retention: "2m",
-    image_advtab: true,
-    content_css: [
-      '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-    ],
-    importcss_append: true,
-    image_caption: true,
-    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-    noneditable_noneditable_class: "mceNonEditable",
-    toolbar_drawer: 'sliding',
-    contextmenu: "link image imagetools table",
-        });</script>
+            mode : "textarea",
+            verify_html : false,
+            });
+    </script>
     </head>
     <body>
         <header class="navbar navbar-dark black">
@@ -172,7 +153,7 @@
                                     </a>
                                     {#---------------------------BTN-UserProfile----------------------------#}
                                     <a class="dropdown-item"
-                                    href="http://projet5.marcalban/?p=dashboard&action=logout">
+                                    href="http://projet5.marcalban.fr/?p=dashboard&action=logout">
                                     Déconnexion
                                     </a>
                                 </div>

@@ -29,7 +29,7 @@
  <br>
             {#---------------------------CARD-BODY-----------------------------#}
             <div class="card-body">
-                <form action="http://projet5.marcalban/?p=partenaire{% if data.id == null %}&action=send{% elseif data.id %}&action=update&id={{data.id}}{% endif %}" method="POST" enctype="multipart/form-data">
+                <form action="http://projet5.marcalban.fr/?p=partenaire{% if data.id == null %}&action=send{% elseif data.id %}&action=update&id={{data.id}}{% endif %}" method="POST" enctype="multipart/form-data">
                     {#---------------------------INPUT-IMAGE-----------------------------#}
                     {% if data.datapartenaire.image %}
                     <label for="inputGroupFile" class="grey-text

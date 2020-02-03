@@ -234,7 +234,7 @@ class UserManager
 
                 <p>Vous avez cliqué sur le lien pour renouveler son mot de passe:</p>
                 <p>Cliquer sur le lien dessous pour modifier votre mot de passe.</p>
-                <p><a href='http://projet5.marcalban/?p=newPassword&token=" . $token . "'>http://projet5.marcalban/?p=newPassword&token=' . $token . '</a></p>
+                <p><a href='http://projet5.marcalban.fr/?p=newPassword&token=" . $token . "'>http://projet5.marcalban.fr/?p=newPassword&token=' . $token . '</a></p>
             </body>
         </html>
         ";
@@ -384,7 +384,7 @@ class UserManager
             }
             return null;
         }
-        header("Location: http://projet5.marcalban/?p=lostPassword");
+        header("Location: http://projet5.marcalban.fr/?p=lostPassword");
         exit();
     }
 /************************************End Change Password************************************************* */

@@ -41,7 +41,7 @@ class PageManager extends PDOException
         if (isset($page) && !empty($page) && isset($title) && !empty($title) && isset($id) && !empty($id)) {
             $pageId[] = $this->pageRepository->readPageId($data);
             if ($pageId[0] === null) {
-                header('Location:http://projet5.marcalban/?p=table&liste=listePages');
+                header('Location:http://projet5.marcalban.fr/?p=table&liste=listePages');
                 exit();
             }
             return $pageId;
@@ -131,7 +131,7 @@ class PageManager extends PDOException
             if (empty($errors)) {
                 $this->pageRepository->addBddPage($this->titlePage, $this->title, $this->description, $this->tmpName, $this->extention, $id);
                 $this->succesPage();
-                header('Location: http://projet5.marcalban/?p=table&liste=listePages&action=update');
+                header('Location: http://projet5.marcalban.fr/?p=table&liste=listePages&action=update');
                 exit();
             }
             return $errors;

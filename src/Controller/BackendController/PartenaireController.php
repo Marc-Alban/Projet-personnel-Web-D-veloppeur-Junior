@@ -26,7 +26,7 @@ class PartenaireController
     public function PartenaireAction(array $data): void
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
-            header('Location: http://projet5.marcalban/?p=home');
+            header('Location: http://projet5.marcalban.fr/?p=home');
             exit();
         }
         $datapartenaire = null;
@@ -37,7 +37,7 @@ class PartenaireController
                 $datapartenaire = $this->partenaireManager->getDataBddPartenaire($idInt);
             }
             if ($datapartenaire === null) {
-                header('Location: http://projet5.marcalban/?p=table&liste=listePartenaires');
+                header('Location: http://projet5.marcalban.fr/?p=table&liste=listePartenaires');
                 exit();
             }
         }

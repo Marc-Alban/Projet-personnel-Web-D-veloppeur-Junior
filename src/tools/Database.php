@@ -8,10 +8,10 @@ use \PDO;
 
 class Database
 {
-    const HOST = 'localhost';
-    const DATABASE = 'bmfinance';
-    const USER = 'root';
-    const PASSWORD = '';
+    const HOST = 'db5000285322.hosting-data.io';
+    const DATABASE = 'dbs278576';
+    const USER = 'dbu79211';
+    const PASSWORD = '479c329d49fa8297ab78ed988EF.67512';
     private static $instance = null;
 
 /************************************PDO Connexion************************************************* */

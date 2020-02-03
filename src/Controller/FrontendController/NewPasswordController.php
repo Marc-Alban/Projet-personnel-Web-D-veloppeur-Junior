@@ -32,7 +32,7 @@ class NewPasswordController
         }
         if (isset($data['get']['token']) || !empty($data['get']['token'])) {
             if ($this->userManager->verifUser($data) === null) {
-                header('Location: http://projet5.marcalban/?p=lostPassword');
+                header('Location: http://projet5.marcalban.fr/?p=lostPassword');
                 exit();
             }
             $newPass = $this->userManager->changeMdp($data);
