@@ -158,7 +158,7 @@ class ArticleManager
                 //Nouvel article
                 if ($action === 'newArticle') {
                     if ($this->lastArticle === 1) {
-                        $this->articleRepository->updateLast();
+                        $this->articleRepository->updateLast($data);
                     }
                     $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, null);
                     $succes['succesArticle'] = "Article bien enregistré";
@@ -167,7 +167,7 @@ class ArticleManager
                 //Modification article
                 if ($action === "articleModif") {
                     if ($this->lastArticle === 1) {
-                        $this->articleRepository->updateLast();
+                        $this->articleRepository->updateLast($data);
                     }
                     $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, $id);
                     $succes['succesArticle'] = "Article bien mise à jour";
@@ -185,9 +185,12 @@ class ArticleManager
 
         $errors = $data["session"]["errors"] ?? null;
         unset($data["session"]["errors"]);
-
+        $last = $this->lastArticle();
         if ($this->nbPost() <= "2" || $this->nbPost() <= 2) {
             $errors['nbPost'] = "Impossible de supprimer en dessous de 2 articles ! ";
+            return $errors;
+        } else if ($last->getId() === $data['get']['id']) {
+            $errors['lastArticle'] = "Impossible de supprimer le dernier articles veuillez mettre à jour les articles ! ";
             return $errors;
         }
         $this->articleRepository->deleteArticle($id);

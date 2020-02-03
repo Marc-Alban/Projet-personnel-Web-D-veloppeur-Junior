@@ -20,9 +20,11 @@
             </div>
             {% endfor %}
             {% elseif data.delArticle %}
+            {% for errors in data.delArticle %}
             <div class="alert alert-danger" role="alert">
-                {{data.delArticle.nbPost}}
+                {{errors}}
             </div>
+            {% endfor %}
             {% elseif data.delPartenaire %}
             <div class="alert alert-danger" role="alert">
                 {{data.delPartenaire.nbPartenaire}}

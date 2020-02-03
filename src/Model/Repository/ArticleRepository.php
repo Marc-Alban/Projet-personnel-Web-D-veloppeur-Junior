@@ -84,14 +84,17 @@ class ArticleRepository
      *
      * @return void
      */
-    public function updateLast(): void
+    public function updateLast(array $data): void
     {
-        $requete = $this->pdo->prepare("SELECT * FROM article WHERE lastArticle = 1");
-        $executeIsOk = $requete->execute();
-        if ($executeIsOk === true) {
-            $idRequete = $requete->fetchObject(Article::class);
-            $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE id = " . $idRequete->getId());
-            $this->pdoStatement->execute();
+        $action = $data['get']['action'];
+        if ($action === 'articleModif') {
+            $requete = $this->pdo->prepare("SELECT * FROM article WHERE lastArticle = 1");
+            $executeIsOk = $requete->execute();
+            if ($executeIsOk === true) {
+                $idRequete = $requete->fetchObject(Article::class);
+                $this->pdoStatement = $this->pdo->prepare("UPDATE article SET lastArticle = 0 WHERE id = " . $idRequete->getId());
+                $this->pdoStatement->execute();
+            }
         }
 
     }
