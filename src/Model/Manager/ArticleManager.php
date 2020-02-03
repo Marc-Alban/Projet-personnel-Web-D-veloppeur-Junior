@@ -166,6 +166,9 @@ class ArticleManager
                 }
                 //Modification article
                 if ($action === "articleModif") {
+                    if ($this->lastArticle === 1) {
+                        $this->articleRepository->updateLast();
+                    }
                     $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, $id);
                     $succes['succesArticle'] = "Article bien mise à jour";
                     return $succes;
