@@ -273,12 +273,19 @@ footer .copyright-footer {
     background: #000 !important;
 }
 
+
+/* ***************Responsive <767px******************** */
+@media screen and (max-width:450px) {
+
+    .login {
+        position: relative;
+        left: -150px;
+        top: 30px;
+    }
+}
+
 /* ***************Responsive <767px******************** */
 @media screen and (max-width:767px) {
-    .navbar-brand {
-        position: relative;
-        left: 60px;
-    }
 
     .navbar-expand-md {
         position: relative;
