@@ -1,4 +1,0 @@
-    // const DSN = 'mysql:host=db5000285322.hosting-data.io;dbname=dbs278576;charset=utf8mb4';
-    // const USER = 'dbu79211';
-    // const PASSWORD = '479c329d49fa8297ab78ed988EF.67512';
-    // private static $instance = null;
