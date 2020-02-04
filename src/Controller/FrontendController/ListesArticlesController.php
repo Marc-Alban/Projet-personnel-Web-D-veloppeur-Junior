@@ -38,7 +38,7 @@ class ListesArticlesController
         } else if (isset($data['get']['pp']) || !empty($data['get']['pp'])) {
             $paginationListeArticle = $this->articleManager->pagination($data);
         } else if (!isset($data['get']['pp']) || empty($data['get']['pp'])) {
-            header("Location: http://projet5.marcalban.fr/?p=listesArticles&pp=1");
+            header("Location: index.php?p=listesArticles&pp=1");
             exit();
         }
 

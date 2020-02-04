@@ -34,7 +34,7 @@ class TableController
     public function TableAction(array $data): void
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
-            header('Location: http://projet5.marcalban.fr/?p=home');
+            header('Location: index.php?p=home');
             exit();
         }
         $liste = $data['get']['liste'] ?? null;
@@ -57,7 +57,7 @@ class TableController
             if ($action === "delete" && isset($idInt) && !empty($idInt) && is_int($idInt)) {
                 $delPartenaire = $this->partenaireManager->delPartenaireBdd($idInt, $data);
             } else if ($idInt === false || $idInt === null || is_string($idInt)) {
-                header("Location: http://projet5.marcalban.fr/?p=table&liste=listePartenaires");
+                header("Location: index.php?p=table&liste=listePartenaires");
                 exit();
             }
             $partenaire = $this->partenaireManager->listePartenaire();
@@ -65,7 +65,7 @@ class TableController
             if ($action === "delete" && isset($idInt) && !empty($idInt) && is_int($idInt)) {
                 $delArticle = $this->articleManager->delArticleBdd($idInt, $data);
             } else if ($idInt === false || $idInt === null || is_string($idInt)) {
-                header("Location: http://projet5.marcalban.fr/?p=table&liste=listeArticlesBack&perpage=1");
+                header("Location: index.php?p=table&liste=listeArticlesBack&perpage=1");
                 exit();
             }
             $article = $this->articleManager->pagination($data);
@@ -80,7 +80,7 @@ class TableController
                 $pageSucces = $this->pageManager->succesPage();
             }
         } else if (!isset($liste) || empty($liste)) {
-            header("Location: http://projet5.marcalban.fr/?p=dashboard&action=connexion");
+            header("Location: index.php?p=dashboard&action=connexion");
             exit();
         }
         $this->view->renderer('Backend', 'table', ['partenaire' => $partenaire, "article" => $article, "delArticle" => $delArticle, "delPartenaire" => $delPartenaire, "graphique" => $graphique, 'graph' => $graph, "page" => $page, "pageSucces" => $pageSucces]);

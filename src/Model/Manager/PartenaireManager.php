@@ -137,7 +137,7 @@ class PartenaireManager
             return $errors;
         }
         $this->partenaireRepository->deletePartenaire($id);
-        header("Location: http://projet5.marcalban.fr/?p=table&liste=listePartenaires");
+        header("Location: index.php?p=table&liste=listePartenaires");
         exit();
     }
 /************************************End Del Liste Partenaire************************************************* */

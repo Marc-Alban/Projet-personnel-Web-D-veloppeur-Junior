@@ -24,7 +24,7 @@ class GraphController
     public function graphAction(array $data): void
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
-            header('Location: http://projet5.marcalban.fr/?p=home');
+            header('Location: index.php?p=home');
             exit();
         }
         $dataWithId = $this->homeManager->dataWithId($data);
