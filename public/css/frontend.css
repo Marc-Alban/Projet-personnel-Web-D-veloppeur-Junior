@@ -15,7 +15,6 @@ a:hover {
 
 .navbar-grey {
     position: relative;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
 }
 
@@ -51,7 +50,6 @@ a:hover {
 .md-form input[type="search-md"]:focus:not([readonly]),
 .md-form textarea.md-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #e30614;
-    -webkit-box-shadow: 0 1px 0 0 #e30614;
     box-shadow: 0 1px 0 0 #e30614;
 }
 
@@ -77,7 +75,6 @@ a:hover {
 
 
 .navbar {
-    -webkit-box-shadow: none;
     box-shadow: none;
     padding-top: 0;
     padding-bottom: 0;
@@ -237,7 +234,6 @@ a#cRetour {
     z-index: 99999;
     transition: all ease-in 0.2s;
     backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
     text-decoration: none;
 }
 

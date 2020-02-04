@@ -42,13 +42,13 @@ Performance selon les profils de risque:
 {#-------------------------MODAL---------------------------#}
 {% for graph in data.graph %}
 <div class="modal fade" id="graph{{graph.id}}" tabindex="-1" role="dialog"
-    aria-labelledby="modaleLabel"
-    aria-hidden="true">
+    aria-labelledby="navbarDropdownMenuLink-333" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 {#-------------------------MODAL-TITLE--------------------------#}
-                <h5 class="modal-title font-weight-bold" id="modaleLabel">{{graph.title}}</h5>
+                <h5 class="modal-title font-weight-bold"
+                    class="navbarDropdownMenuLink-333">{{graph.title}}</h5>
                 {#------------------------END-MODAL-TITLE--------------------------#}
                 <button type="button" class="close" data-dismiss="modal"
                     aria-label="Close">
