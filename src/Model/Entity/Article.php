@@ -111,12 +111,6 @@ class Article
         return $this->description;
     }
 
-    public function getDescriptionArticle(): string
-    {
-        $htmldecode = strip_tags($this->description);
-        return $htmldecode;
-    }
-
     public function getDescriptionExtrait(): string
     {
         return substr(strip_tags($this->description), 0, 200);

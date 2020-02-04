@@ -65,11 +65,9 @@
                 </div>
                 {#--------------------------GRILLE-COLONNE----------------------------#}
                 <div class="row mt-3">
-                    <p class="dark-grey-text article">
-                        {% for post in data %}
-                        {{ post.descriptionArticle }}
-                        {% endfor %}
-                    </p>
+                    {% for post in data %}
+                    {{ post.description }}
+                    {% endfor %}
                 </div>
             </div>
             {#--------------------------END-GRILLE-COLONNE----------------------------#}

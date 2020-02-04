@@ -64,8 +64,8 @@
                         {#----------------------------Description-Page----------------------------#}
                         <label for="mytextarea" class="grey-text
                         font-weight-light">Corps de la page </label>
-                        <textarea class="form-control" id="mytextarea" rows="7"
-                            name="bodyPage">{% for pages in data.page %}{{pages.descriptionExtrait}}{% endfor %}</textarea>
+                        <textarea class="form-control"  rows="7"
+                            name="bodyPage">{% for pages in data.page %}{{pages.description}}{% endfor %}</textarea>
                         <br>
                         {#----------------------------Submit----------------------------#}
                         <div class="text-center py-4 mt-3">

@@ -40,13 +40,8 @@
                 {#---------------------------CARD-CONTENT-----------------------------#}
                 <div class="card-body">
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
-                    {# <p class="card-text font-weight-bold text-justify">{{
-                        data.lastArticle.description|raw|striptags|convert_encoding('UTF-8',
-                        'iso-2022-jp')|u.truncate(200, '...')}}</p>#}
-                    {#--------------------------END-CARD-DESCRIPTION-----------------------------#}
-                    {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">{{
-                        data.lastArticle.descriptionExtrait|raw }}</p>
+                        data.lastArticle.descriptionExtrait }}</p>
                     {#--------------------------END-CARD-DESCRIPTION-----------------------------#}
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">{{
@@ -84,11 +79,7 @@
                 <div class="card-body">
                     {#---------------------------CARD-DESCRIPTION-----------------------------#}
                     <p class="card-text font-weight-bold text-justify">
-                        {#{{paginationListeArticle.description|raw|striptags|convert_encoding('UTF-8',
-                        'iso-2022-jp')|u.truncate(200, '...')}}#}
-                    </p>
-                    <p class="card-text font-weight-bold text-justify">
-                        {{paginationListeArticle.descriptionExtrait|raw }}
+                        {{paginationListeArticle.descriptionExtrait }}
                     </p>
                     {#---------------------------CARD-TITLE-----------------------------#}
                     <h4 class="card-subtitle text-left">

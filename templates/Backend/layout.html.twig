@@ -18,8 +18,8 @@
         {#----------------------------Style-Css---------------------------#}
         <link rel="stylesheet" href="css/backend.css">
         {#----------------------------Tiny mce---------------------------#}
-        <script src="./js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
-        <script>tinymce.init({
+          <script src="https://cdn.tiny.cloud/1/joep9i1bob9i9uybj5gom76dmn2wr6k8in5n2kjjawj51bnd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <!-- <script>tinymce.init({
             selector: '#mytextarea',
             encoding: "UTF-8",
             element_format : 'html',
@@ -32,7 +32,7 @@
                 toolbar: 'undo bold italic styleselect'
             }
         });
-    </script>
+    </script> -->
     </head>
     <body>
         <header class="navbar navbar-dark black">
@@ -169,5 +169,15 @@
         {#---------------------------Add-JavaScritp-----------------------------#}
         {% block javascript %}
         {% endblock %}
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                encoding: "UTF-8",
+                height: '1500px',
+                forced_root_block : false,
+force_br_newlines : true,
+force_p_newlines : false,
+            });
+        </script>
     </body>
 </html>
