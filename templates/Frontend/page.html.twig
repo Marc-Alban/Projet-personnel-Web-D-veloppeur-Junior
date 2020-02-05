@@ -36,11 +36,9 @@
                 </h1>
                 {#-------------------------END-CARD-BODY-TITLE-----------------------------#}
                 {#-------------------------COLONNE-GRILLE----------------------------#}
-                <div class="row mt-3">
-                    {#-------------------------DESCRITPION----------------------------#}
-                    <p class="dark-grey-text article">{{pages.description}}</p>
-                    {#------------------------END-DESCRITPION----------------------------#}
-                </div>
+                {#-------------------------DESCRITPION----------------------------#}
+                <p class="dark-grey-text article">{{pages.description|raw}}</p>
+                {#------------------------END-DESCRITPION----------------------------#}
                 {#-------------------------END-COLONNE-GRILLE----------------------------#}
                 {% endfor %}
             </div>

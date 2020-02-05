@@ -64,11 +64,11 @@
                     </div>
                 </div>
                 {#--------------------------GRILLE-COLONNE----------------------------#}
-                <div class="row mt-3">
+                <p class="card-text text-justify">
                     {% for post in data %}
-                    {{ post.description }}
+                    {{ post.description|raw }}
                     {% endfor %}
-                </div>
+                </p>
             </div>
             {#--------------------------END-GRILLE-COLONNE----------------------------#}
         </div>

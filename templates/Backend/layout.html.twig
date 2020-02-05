@@ -18,21 +18,7 @@
         {#----------------------------Style-Css---------------------------#}
         <link rel="stylesheet" href="css/backend.css">
         {#----------------------------Tiny mce---------------------------#}
-          <script src="https://cdn.tiny.cloud/1/joep9i1bob9i9uybj5gom76dmn2wr6k8in5n2kjjawj51bnd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <!-- <script>tinymce.init({
-            selector: '#mytextarea',
-            encoding: "UTF-8",
-            element_format : 'html',
-            height: '1500px',
-            entity_encoding : "raw",
-            verify_html : false,
-            mobile: {
-                theme: 'mobile',
-                plugins: 'autosave lists autolink',
-                toolbar: 'undo bold italic styleselect'
-            }
-        });
-    </script> -->
+        <script src="https://cdn.tiny.cloud/1/joep9i1bob9i9uybj5gom76dmn2wr6k8in5n2kjjawj51bnd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     </head>
     <body>
         <header class="navbar navbar-dark black">
@@ -175,8 +161,12 @@
                 encoding: "UTF-8",
                 height: '1500px',
                 forced_root_block : false,
-force_br_newlines : true,
-force_p_newlines : false,
+                force_br_newlines : true,
+                force_p_newlines : false,
+                encoding: "UTF-8",
+                element_format : 'html',
+                height: '1500px',
+                entity_encoding : "raw",
             });
         </script>
     </body>
