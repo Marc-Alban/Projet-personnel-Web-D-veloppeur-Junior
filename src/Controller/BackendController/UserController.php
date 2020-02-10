@@ -30,11 +30,13 @@ class UserController
             exit();
         }
         $dataFormUser = null;
+        $dataBddUser = null;
         $userData = $this->userManager->dataFormBack($data);
+        $dataBddUser = $this->userManager->getAllUserBdd();
         if (isset($data['get']['action']) && $data['get']['action'] === 'save') {
             $dataFormUser = $this->userManager->FormUser($data);
         }
-        $this->view->renderer('Backend', 'loginUser', ['userData' => $userData, 'dataFormUser' => $dataFormUser]);
+        $this->view->renderer('Backend', 'loginUser', ['userData' => $userData, 'dataFormUser' => $dataFormUser, 'dataBddUser' => $dataBddUser]);
     }
 /************************************End Page Infos Users************************************************* */
 /************************************Users Log Out ************************************************* */

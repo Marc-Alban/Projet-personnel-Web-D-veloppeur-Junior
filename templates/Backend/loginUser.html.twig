@@ -37,7 +37,7 @@
                                     font-weight-light">Nom</label>
                                 <input type="text" name="name"
                                     id="defaultFormCardName"
-                                    class="form-control" value="{{data.dataFormUser.name}}">
+                                    class="form-control" value="{% if data.dataFormUser %}{{data.dataFormUser.name}}{% else %}{{data.dataBddUser.name}}{% endif %}">
                             </div>
                             <div class="col-6">
                                 {#---------------------------Input-Last_Name-----------------------------#}
@@ -46,7 +46,7 @@
                                     font-weight-light">Prénoms</label>
                                 <input type="text" name="lastName"
                                     id="defaultFormCardLastName"
-                                    class="form-control" value="{{data.dataFormUser.lastName}}">
+                                    class="form-control" value="{% if data.dataFormUser %}{{data.dataFormUser.lastName}}{% else %}{{data.dataBddUser.lastName}}{% endif %}">
                             </div>
                         </div>
                         <br>
@@ -58,7 +58,7 @@
                                     font-weight-light">E-mail</label>
                                 <input type="email" name="mail"
                                     id="defaultFormCardEmail"
-                                    class="form-control" value="{{data.dataFormUser.mail}}">
+                                    class="form-control" value="{% if data.dataFormUser %}{{data.dataFormUser.mail}}{% else %}{{data.dataBddUser.mail}}{% endif %}">
                             </div>
                             <div class="col-6">
                                 {#---------------------------Input-Confirm-Email-----------------------------#}
@@ -67,7 +67,7 @@
                                     font-weight-light">Confirmation de l'e-mail</label>
                                 <input type="email" name="mailConf"
                                     id="defaultFormCardEmailConf"
-                                    class="form-control" value="{{data.dataFormUser.mailConf}}">
+                                    class="form-control" value="{{data.dataBddUser.mailConf}}">
                             </div>
                         </div>
                         {#---------------------------Submit-----------------------------#}

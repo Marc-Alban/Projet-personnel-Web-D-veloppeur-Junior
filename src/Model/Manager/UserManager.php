@@ -22,9 +22,20 @@ class UserManager
     {
         $this->userRepository = new UserRepository();
     }
-    /************************************Get All Form User************************************************* */
+    /************************************Get All Form User Bdd************************************************* */
     /**
      * Retourne la table user sauf le password
+     *
+     * @return string
+     */
+    public function getAllUserBdd(): Object
+    {
+        return $this->userRepository->readAllUser();
+    }
+/************************************End Get Users Bdd************************************************* */
+    /************************************Get All Form User************************************************* */
+    /**
+     * formulaire user sauf le password
      *
      * @return string
      */
@@ -178,20 +189,6 @@ class UserManager
         $this->userRepository->updateMail($data);
     }
 /************************************End Set Mail Bdd************************************************* */
-/************************************Set Password Bdd************************************************* */
-    /**
-     * Modifie le nom dans la bdd
-     *
-     * @param array $data
-     * @return string
-     */
-    public function setPasswordBdd(array $data): void
-    {
-        $passwordForm = $data['post']['newMdp'] ?? null;
-        $mdp = password_hash($passwordForm, PASSWORD_DEFAULT);
-        $this->userRepository->updatePassword($mdp);
-    }
-/************************************End Set Password Bdd************************************************* */
 /************************************Check BDD Mail************************************************* */
 
     /**
@@ -340,7 +337,6 @@ class UserManager
                 $this->setNameBdd($data);
                 $this->setLastNameBdd($data);
                 $this->setMailBdd($data);
-                $this->setPasswordBdd($data);
                 $succes["update"] = "Utilisateur mis à jour";
                 return $succes;
             }
