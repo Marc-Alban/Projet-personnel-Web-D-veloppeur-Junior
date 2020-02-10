@@ -146,6 +146,8 @@ class ArticleManager
         $action = $data['get']['action'] ?? null;
         $id = $data['get']['id'] ?? null;
         $submit = $data['post']['submit'] ?? null;
+        $checkLast = $data['post']['lastArticle'] ?? null;
+        $lastArticle = $this->articleRepository->last();
         $errors = $data['session']['errors'] ?? null;
         unset($data['session']['errors']);
 
@@ -153,22 +155,23 @@ class ArticleManager
             $this->dataFormArticle($data);
             if ($this->verifDataFormArticle()) {
                 $errors['formData'] = $errors . $this->error;
+            } else if ($lastArticle->getLastArticle() === '1' && $checkLast === null) {
+                $errors['lastArticle'] = "Ne peut pas mettre à jour, si il n'y a plus de dernier article !";
             }
+
             if (empty($errors)) {
+                if ($this->lastArticle === 1) {
+                    $this->articleRepository->updateLast($data);
+                }
+
                 //Nouvel article
                 if ($action === 'newArticle') {
-                    if ($this->lastArticle === 1) {
-                        $this->articleRepository->updateLast($data);
-                    }
                     $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, null);
                     $succes['succesArticle'] = "Article bien enregistré";
                     return $succes;
                 }
                 //Modification article
                 if ($action === "articleModif") {
-                    if ($this->lastArticle === 1) {
-                        $this->articleRepository->updateLast($data);
-                    }
                     $this->articleRepository->articleWrite($this->title, $this->legende, $this->description, $this->date, $this->posted, $this->lastArticle, $this->tmpName, $this->extention, $id);
                     $succes['succesArticle'] = "Article bien mise à jour";
                     return $succes;

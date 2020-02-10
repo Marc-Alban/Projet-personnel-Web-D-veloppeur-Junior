@@ -36,9 +36,10 @@ class DashboardController
     public function DashboardAction(array $data)
     {
         $action = $data['get']['action'] ?? null;
+        $pseudo = $data['post']['pseudo'] ?? null;
         $modalControl = $this->DashboardManager->modalControl($data);
         if (!isset($modalControl['succes']) && $modalControl !== null) {
-            return $this->view->renderer('Frontend', '404', ['errors' => $modalControl]);
+            return $this->view->renderer('Frontend', '404', ['errors' => $modalControl, 'pseudo' => $pseudo]);
         } else if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && empty($data['session']['active'][0])) {
             header('Location: /?p=home');
             exit();

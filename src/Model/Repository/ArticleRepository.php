@@ -50,32 +50,20 @@ class ArticleRepository
     {
 
         $this->pdoStatement = $this->pdo->query('SELECT * FROM article WHERE lastArticle = 1 AND posted = 1 ORDER BY date DESC LIMIT 1');
-
         //execution de la requête
         $executeIsOk = $this->pdoStatement->execute();
-
         if ($executeIsOk) {
             //$article = $this->pdoStatement->fetchObject('App\Model\Entity\Article');
             $this->article = $this->pdoStatement->fetchObject(Article::class);
-            if ($this->article === false) {
-                $articleFake = (object) [
-                    'id' => '1',
-                    'title' => 'Pas d\'article en bdd',
-                    'legende' => 'Pas d\'article en bdd',
-                    'description' => 'Pas d\'article en bdd',
-                    'image' => 'default.png',
-                    'date' => '',
-                    'posted' => '1',
-                    'lastArticle' => '1',
-                ];
-                return $articleFake;
+            if ($this->article) {
+                return $this->article;
+            } else if (!$this->article) {
+                return null;
             }
-            return $this->article;
-        }
-
-        if (!$executeIsOk) {
+        } else if (!$executeIsOk) {
             return null;
         }
+        die();
     }
 /************************************End last Article************************************************* */
 /************************************ Update last Article with 0 for 1************************************************* */
