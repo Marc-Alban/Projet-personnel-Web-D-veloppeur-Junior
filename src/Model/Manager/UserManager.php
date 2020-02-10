@@ -234,7 +234,7 @@ class UserManager
 
                 <p>Vous avez cliqué sur le lien pour renouveler son mot de passe:</p>
                 <p>Cliquer sur le lien dessous pour modifier votre mot de passe.</p>
-                <p><a href='index.php?p=newPassword&token=" . $token . "'>index.php?p=newPassword&token=' . $token . '</a></p>
+                <p><a href='http://projet5.marcalban/?p=newPassword&token=" . $token . "'>?p=newPassword&token=' . $token . '</a></p>
             </body>
         </html>
         ";
@@ -335,8 +335,6 @@ class UserManager
                 $errors['emptyMailConf'] = "Veuillez mettre un mail de confirmation";
             } else if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mailConf)) {
                 $errors['mailConfWrong'] = "L'adresse e-mail de confirmation est invalide";
-            } else if ($this->verifPass($data)) {
-                $errors['errorMdp'] = $errors . $this->error;
             }
             if (empty($errors)) {
                 $this->setNameBdd($data);
@@ -360,32 +358,41 @@ class UserManager
      */
     public function changeMdp(array $data): ?array
     {
-        if ($this->userRepository->getActiveValue() === 1) {
+        $submit = $data['post']['submit'] ?? null;
+        $arrayValue = $this->userRepository->getActiveValue();
+        $activeValue = $arrayValue[0];
+        $errors = $data['session']['error'] ?? null;
+        unset($data["session"]["error"]);
 
-            $submit = $data['post']['submit'] ?? null;
-
-            if ($submit) {
-
-                $errors = $data['session']['error'] ?? null;
-                unset($data["session"]["error"]);
-
+        if ($activeValue === '0' || $activeValue === 0) {
+            if (isset($submit)) {
                 if ($this->verifPass($data)) {
                     $errors['errorMdp'] = $errors . $this->error;
                 }
-
                 if (empty($errors)) {
                     $this->userRepository->changePass($data);
                     $this->userRepository->changeActive('true');
                     $succes['message'] = "Mot de passe changé";
                     return $succes;
                 }
-
+                return $errors;
+            }
+            return null;
+        } else if ($activeValue === '1' || $activeValue === 1) {
+            if (isset($submit)) {
+                if ($this->verifPass($data)) {
+                    $errors['errorMdp'] = $errors . $this->error;
+                }
+                if (empty($errors)) {
+                    $this->userRepository->changePass($data);
+                    $succes['message'] = "Mot de passe changé";
+                    return $succes;
+                }
                 return $errors;
             }
             return null;
         }
-        header("Location: index.php?p=lostPassword");
-        exit();
+        return null;
     }
 /************************************End Change Password************************************************* */
 

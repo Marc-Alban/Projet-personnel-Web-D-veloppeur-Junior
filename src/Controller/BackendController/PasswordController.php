@@ -5,7 +5,7 @@ namespace App\Controller\BackendController;
 use App\Model\Manager\UserManager;
 use App\View\View;
 
-class UserController
+class PasswordController
 {
 
     private $view;
@@ -23,31 +23,15 @@ class UserController
      *
      * @return void
      */
-    public function UserAction(array $data): void
+    public function PasswordAction(array $data): void
     {
         if (!isset($data['session']['user']) && !isset($data['session']['active'][0]) && $data['session']['active'][0] !== 1) {
             header('Location: /?p=home');
             exit();
         }
-        $dataFormUser = null;
-        $userData = $this->userManager->dataFormBack($data);
-        if (isset($data['get']['action']) && $data['get']['action'] === 'save') {
-            $dataFormUser = $this->userManager->FormUser($data);
-        }
-        $this->view->renderer('Backend', 'loginUser', ['userData' => $userData, 'dataFormUser' => $dataFormUser]);
+        $userData = $this->userManager->changeMdp($data);
+        $this->view->renderer('Backend', 'password', ['userData' => $userData]);
     }
 /************************************End Page Infos Users************************************************* */
-/************************************Users Log Out ************************************************* */
-/**
- * Permet la déconnexion de l'utilisateur
- * Supprime la session en court
- *
- * @return void
- */
-    public function logoutUser(): void
-    {
-        session_destroy();
-    }
-/************************************End Users Log Out ************************************************* */
 
 }

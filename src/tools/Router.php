@@ -22,7 +22,7 @@ class Router
         $this->page = $_GET['p'] ?? "home";
         $this->pageMaj = ucfirst($this->page);
         $this->pageFront = ['Home', 'Article', 'ListesArticles', 'Contact', 'Page', 'NewPassword', 'LostPassword'];
-        $this->pageBack = ['Dashboard', 'Form', 'Graph', 'Partenaire', 'Table', 'User'];
+        $this->pageBack = ['Dashboard', 'Form', 'Graph', 'Partenaire', 'Table', 'User', 'Password'];
         $this->home = new HomeController;
     }
 /************************************Controller************************************************* */
