@@ -58,9 +58,10 @@ class PartenaireManager
     {
         $extentions = ['jpg', 'png', 'gif', 'jpeg'];
         $tailleMax = 2097152;
-
         if (empty($this->legende) && empty($this->link) && empty($this->tmpName)) {
             $this->error = 'Veuillez renseigner un contenu !';
+        } else if (strlen($this->legende) > 6) {
+            $this->error = "Légende trop grande, doit être inférieur ou égal à 6 caractères";
         } else if (empty($this->legende)) {
             $this->error = "Veuillez mettre une legende";
         } else if (empty($this->link)) {
