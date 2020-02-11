@@ -129,7 +129,7 @@ class PageManager extends PDOException
                 $errors['errorImage'] = $errors . $this->error;
             }
             if (empty($errors)) {
-                $this->pageRepository->addBddPage($this->titlePage, $this->title, $this->description, $this->tmpName, $this->extention, $id);
+                $this->pageRepository->addBddPage($this->title, $this->description, $this->tmpName, $this->extention, $id);
                 $this->succesPage();
                 header('Location: index.php?p=table&liste=listePages&action=update');
                 exit();

@@ -2,22 +2,10 @@
 declare (strict_types = 1);
 namespace App\Tools;
 
-use App\Tools\Database;
-use App\Tools\GestionGlobal;
-
 class Token
 {
     private $token;
-    private $pdo;
-    private $pdoStatement;
-    private $getTokenBdd;
-    private $GestionGlobal;
 
-    public function __construct()
-    {
-        $this->pdo = Database::getPdo();
-        $this->GestionGlobal = new GestionGlobal();
-    }
 /************************************Create Token Session************************************************ */
 /**
  * Créer les tokens

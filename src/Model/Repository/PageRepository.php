@@ -92,17 +92,16 @@ class PageRepository
     /**
      * Insert en bdd les données des pages modifié avec id une fois vérifiées
      */
-    public function addBddPage(string $titlePage, string $title, string $description, string $tmpName, string $extention, string $id): void
+    public function addBddPage(string $title, string $description, string $tmpName, string $extention, string $id): void
     {
         $idInt = (int) $id;
         $p = [
-            ':titlePage' => $titlePage,
             ':title' => $title,
             ':description' => $description,
             ':image' => $idInt . "." . $extention,
         ];
         $sql = "
-        UPDATE `page` SET `titlePage`=:titlePage,`title`=:title,`description`=:description,`image`=:image WHERE id = $idInt
+        UPDATE `page` SET `title`=:title,`description`=:description,`image`=:image WHERE id = $idInt
         ";
         $query = $this->pdo->prepare($sql);
         $query->execute($p);

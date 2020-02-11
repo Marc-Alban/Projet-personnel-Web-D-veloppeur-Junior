@@ -39,7 +39,13 @@ xhr.onreadystatechange = function() {
     following.innerHTML = user.edge_follow.count;
     // Affichage des posts avec une boucle car c'est un tableau
     post = user.edge_owner_to_timeline_media.edges;
-    for (let i = 0; i < 10; i++) {
+    let maxPost = post.length;
+
+    if (maxPost > 10) {
+      maxPost = 10;
+    }
+
+    for (let i = 0; i < maxPost; i++) {
       let url = post[i].node.display_url;
       let likes = post[i].node.edge_liked_by.count;
       let comments = post[i].node.edge_media_to_comment.count;
