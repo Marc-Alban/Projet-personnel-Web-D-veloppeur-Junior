@@ -147,6 +147,7 @@ class ArticleManager
         $id = $data['get']['id'] ?? null;
         $submit = $data['post']['submit'] ?? null;
         $idArticle = $data['get']['id'] ?? null;
+        $checklast = $data['post']['lastArticle'] ?? null;
         $lastArticle = $this->articleRepository->last();
         $article = ($lastArticle === null) ? '0' : $lastArticle;
         $errors = $data['session']['errors'] ?? null;
@@ -156,8 +157,10 @@ class ArticleManager
             $this->dataFormArticle($data);
             if ($this->verifDataFormArticle()) {
                 $errors['formData'] = $errors . $this->error;
-            } else if ($article->getId() === $idArticle) {
-                $errors['lastArticle'] = "Ne peut pas mettre à jour, si il n'y a plus de dernier article !";
+            } else if ($checklast === null) {
+                if ($article->getId() === $idArticle) {
+                    $errors['lastArticle'] = "Ne peut pas mettre à jour, si il n'y a plus de dernier article !";
+                }
             }
 
             if (empty($errors)) {
