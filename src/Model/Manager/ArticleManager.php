@@ -3,8 +3,9 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Repository\ArticleRepository;
-
-// use App\Tools\Token;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
+use DateTime;
 
 class ArticleManager
 {
@@ -20,6 +21,9 @@ class ArticleManager
     private $size;
     private $error;
     private $extention;
+    private $dateNow;
+    private $token;
+    private $maSuperGlobale;
 
     /**
      * Fonction constructeur, instanciation de l'articlerepository
@@ -28,6 +32,9 @@ class ArticleManager
     public function __construct()
     {
         $this->articleRepository = new ArticleRepository();
+        $this->dateNow = new DateTime();
+        $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
     }
 
     /******************************Get Post******************************* */
@@ -162,6 +169,9 @@ class ArticleManager
                     $errors['lastArticle'] = "Ne peut pas mettre à jour, si il n'y a plus de dernier article !";
                 }
             }
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['token'] = "Formulaire incorrect";
+            }
 
             if (empty($errors)) {
                 if ($this->lastArticle === 1) {
@@ -238,10 +248,11 @@ class ArticleManager
      */
     public function dataFormArticle(array $data): void
     {
+        $dateDefault = $this->dateNow->format('Y-m-d');
         $this->title = $data['post']['title'] ?? null;
         $this->legende = $data['post']['legende'] ?? null;
         $this->description = $data['post']['description'] ?? null;
-        $this->date = $data['post']['date'] ?? null;
+        $this->date = (empty($data['post']['date'])) ? $dateDefault : $data['post']['date'];
         $this->posted = (isset($data['post']['posted']) && $data['post']['posted'] === 'on') ? 1 : 0;
         $this->lastArticle = (isset($data['post']['lastArticle']) && $data['post']['lastArticle'] === 'on') ? 1 : 0;
         $this->tmpName = $data['files']['imageArticle']['tmp_name'] ?? null;

@@ -2,8 +2,19 @@
 declare (strict_types = 1);
 namespace App\Model\Manager;
 
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
+
 class ContactManager
 {
+    private $token;
+    private $maSuperGlobale;
+
+    public function __construct()
+    {
+        $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
+    }
 
     /************************************Contenu Mail Contact************************************************* */
 /**
@@ -107,6 +118,10 @@ class ContactManager
                 $errors['tab']['message'] = "Veuillez mettre un message";
             } else if (empty($liste)) {
                 $errors['tab']['liste'] = "Veuillez choisir une option";
+            }
+
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['tab']['token'] = "Formulaire incorrect";
             }
 
             if (!empty($mail)) {

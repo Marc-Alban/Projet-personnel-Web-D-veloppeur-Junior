@@ -56,6 +56,12 @@
                         font-weight-light">Nom du lien (ex: quantalys.fr, waldata.com):</label>
                     <input type="text" name="link" id="Link"
                         class="form-control" value="{{data.datapartenaire.link}}">
+                                    {#----------------------------MODAL-HIDDEN----------------------------#}
+            <div class="md-form">
+                <input type="hidden"
+                    name="token" id="token"
+                    value="{{session.token}}" />
+            </div>
                     {#---------------------------SUBMIT-----------------------------#}
                     <div class="text-center py-4 mt-3">
                         <input class="btn btn-black" name="submit" type="submit" value="{% if data.id == null %}Envoyer{% elseif data.id %}Mettre à jour{% endif %}"><i

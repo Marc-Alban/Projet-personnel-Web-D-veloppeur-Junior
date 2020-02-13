@@ -102,6 +102,12 @@
                             </div>
                         </div>
                         <br>
+                             {#----------------------------MODAL-HIDDEN----------------------------#}
+            <div class="md-form">
+                <input type="hidden"
+                    name="token" id="token"
+                    value="{{session.token}}" />
+            </div>
                         {#----------------------------Submit-Article---------------------------#}
                         <div class="text-center py-4 mt-3">
                             <input class="btn btn-dark" name="submit"

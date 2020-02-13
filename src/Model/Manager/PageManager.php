@@ -3,6 +3,8 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Repository\PageRepository;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 use PDOException;
 
 class PageManager extends PDOException
@@ -17,6 +19,8 @@ class PageManager extends PDOException
     private $error;
     private $files;
     private $extention;
+    private $token;
+    private $maSuperGlobale;
 
     /**
      * Fonction constructeur, instanciation de l'pageRepository
@@ -25,6 +29,8 @@ class PageManager extends PDOException
     public function __construct()
     {
         $this->pageRepository = new PageRepository();
+        $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
     }
 /************************************ Read Page ************************************************* */
     /**
@@ -127,6 +133,9 @@ class PageManager extends PDOException
             $this->dataFormPage($data);
             if ($this->verifPageUpdate()) {
                 $errors['errorImage'] = $errors . $this->error;
+            }
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['token'] = "Formulaire incorrect";
             }
             if (empty($errors)) {
                 $this->pageRepository->addBddPage($this->title, $this->description, $this->tmpName, $this->extention, $id);

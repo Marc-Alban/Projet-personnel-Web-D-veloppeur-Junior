@@ -3,6 +3,8 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Repository\UserRepository;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 
 class UserManager
 {
@@ -13,6 +15,8 @@ class UserManager
     private $mail;
     private $mailConf;
     private $error;
+    private $token;
+    private $maSuperGlobale;
 
     /**
      * Fonction constructeur, instanciation du userRepository
@@ -21,6 +25,8 @@ class UserManager
     public function __construct()
     {
         $this->userRepository = new UserRepository();
+        $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
     }
     /************************************Get All Form User Bdd************************************************* */
     /**
@@ -266,6 +272,9 @@ class UserManager
                 $error['mailEmpty'] = "L'adresse e-mail est inconnue de nos service";
             }
 
+            if ($this->token->compareTokens($data) !== null) {
+                $error['token'] = "Formulaire incorrect";
+            }
             if (empty($error)) {
                 if ($this->checkBddMail($mail) === true) {
                     $this->message($token);
@@ -333,6 +342,11 @@ class UserManager
             } else if (!preg_match(" /^.+@.+\.[a-zA-Z]{2,}$/ ", $mailConf)) {
                 $errors['mailConfWrong'] = "L'adresse e-mail de confirmation est invalide";
             }
+
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['token'] = "Formulaire incorrect";
+            }
+
             if (empty($errors)) {
                 $this->setNameBdd($data);
                 $this->setLastNameBdd($data);
@@ -365,6 +379,9 @@ class UserManager
                 if ($this->verifPass($data)) {
                     $errors['errorMdp'] = $errors . $this->error;
                 }
+                if ($this->token->compareTokens($data) !== null) {
+                    $errors['token'] = "Formulaire incorrect";
+                }
                 if (empty($errors)) {
                     $this->userRepository->changePass($data);
                     $this->userRepository->changeActive('true');
@@ -378,6 +395,9 @@ class UserManager
             if (isset($submit)) {
                 if ($this->verifPass($data)) {
                     $errors['errorMdp'] = $errors . $this->error;
+                }
+                if ($this->token->compareTokens($data) !== null) {
+                    $errors['token'] = "Formulaire incorrect";
                 }
                 if (empty($errors)) {
                     $this->userRepository->changePass($data);

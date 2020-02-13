@@ -144,8 +144,12 @@
                     md-textarea" rows="3"></textarea>
                 <label for="materialContactFormMessage">Message (requis)</label>
             </div>
-            {#-------------------------END-MESSAGE---------------------------#}
-            <div id="contact"></div>
+            {#----------------------------MODAL-HIDDEN----------------------------#}
+            <div class="md-form">
+                <input type="hidden"
+                    name="token" id="token"
+                    value="{{session.token}}" />
+            </div>
             {#-------------------------SUBMIT---------------------------#}
             <button class="btn btn-red btn-rounded btn-block z-depth-0 my-4
                 waves-effect" name="submit" type="submit">Envoyer

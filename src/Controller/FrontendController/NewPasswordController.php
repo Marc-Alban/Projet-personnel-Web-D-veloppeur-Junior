@@ -4,6 +4,8 @@ namespace App\Controller\FrontendController;
 
 use App\Controller\FrontendController\HomeController;
 use App\Model\Manager\UserManager;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 use App\View\View;
 
 class NewPasswordController
@@ -11,12 +13,16 @@ class NewPasswordController
     private $view;
     private $userManager;
     private $home;
+    private $token;
+    private $maSuperGlobale;
 
     public function __construct()
     {
         $this->view = new View();
         $this->userManager = new UserManager();
         $this->home = new HomeController();
+        $this->token = new Token();
+        $this->maSuperGlobale = new GestionGlobal();
     }
     /************************************Page New Password************************************************* */
 
@@ -27,6 +33,7 @@ class NewPasswordController
      */
     public function NewPasswordAction(array $data): void
     {
+        $this->maSuperGlobale->setParamSession('token', $this->token->createSessionToken());
         if (!isset($data['get']['token']) || empty($data['get']['token'])) {
             $this->home->errorAction();
         }

@@ -44,6 +44,12 @@ Mot de passe oublié
                     votre e-mail (requis)</label>
             </div>
 {#-----------------------END-CARD-EMAIL------------------------#}
+            {#----------------------------MODAL-HIDDEN----------------------------#}
+            <div class="md-form">
+                <input type="hidden"
+                    name="token" id="token"
+                    value="{{session.token}}" />
+            </div>
 {#-----------------------SUBMIT------------------------#}
             <div class="text-center py-4 mt-3">
                 <input name="submit" class="btn btn-red" type="submit" value="Envoyer"></input>

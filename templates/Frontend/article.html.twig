@@ -58,7 +58,7 @@
                         <p class="font-small grey-text mb-0">
                             <i class="far fa-clock-o dark-grey-text"></i>
                             {% for post in data %}
-                            {{ post.date }}
+                            {{ post.date|date('d/m/Y') }}
                             {% endfor %}
                         </p>
                     </div>

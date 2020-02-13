@@ -3,6 +3,8 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Repository\HomeRepository;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 
 class HomeManager
 {
@@ -15,6 +17,8 @@ class HomeManager
     private $extention;
     private $legende;
     private $error;
+    private $token;
+    private $maSuperGlobale;
 
     /**
      * Fonction constructeur, instanciation de l'homerepository
@@ -23,6 +27,8 @@ class HomeManager
     public function __construct()
     {
         $this->homeRepository = new HomeRepository();
+        $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
     }
 /************************************Liste Graph BDD************************************************* */
     /**
@@ -100,6 +106,9 @@ class HomeManager
             $this->dataPostGraph($data);
             if ($this->checkFielsGraph()) {
                 $errors['errorImage'] = $errors . $this->error;
+            }
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['token'] = "Formulaire incorrect";
             }
             if (empty($errors)) {
                 /*************Update**************** */

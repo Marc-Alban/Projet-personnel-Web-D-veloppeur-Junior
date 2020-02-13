@@ -3,6 +3,8 @@ declare (strict_types = 1);
 namespace App\Model\Manager;
 
 use App\Model\Repository\PartenaireRepository;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 
 class PartenaireManager
 {
@@ -13,6 +15,8 @@ class PartenaireManager
     private $tmpName;
     private $size;
     private $error;
+    private $token;
+    private $maSuperGlobale;
     private $extention;
 
     /**
@@ -22,6 +26,8 @@ class PartenaireManager
     public function __construct()
     {
         $this->partenaireRepository = new PartenaireRepository();
+        $this->maSuperGlobale = new GestionGlobal();
+        $this->token = new Token();
     }
 
     /************************************liste Partenaire ReadALL************************************************* */
@@ -109,6 +115,9 @@ class PartenaireManager
             if ($this->nbPartenaire() >= "4" || $this->nbPartenaire() >= 4) {
                 $errors['nbPartenaire'] = "Impossible d'inserer plus de 4 partenaires ! ";
                 return $errors;
+            }
+            if ($this->token->compareTokens($data) !== null) {
+                $errors['token'] = "Formulaire incorrect";
             }
             if (empty($errors)) {
                 /*************Send**************** */

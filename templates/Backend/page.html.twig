@@ -67,6 +67,12 @@
                         <textarea class="form-control"  rows="7"
                             name="bodyPage">{% for pages in data.page %}{{pages.description}}{% endfor %}</textarea>
                         <br>
+                                                     {#----------------------------MODAL-HIDDEN----------------------------#}
+            <div class="md-form">
+                <input type="hidden"
+                    name="token" id="token"
+                    value="{{session.token}}" />
+            </div>
                         {#----------------------------Submit----------------------------#}
                         <div class="text-center py-4 mt-3">
                             <input class="btn btn-dark" type="submit" name="update" value="Mettre à jour"><i

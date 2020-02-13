@@ -2,20 +2,24 @@
 declare (strict_types = 1);
 namespace App\Controller\BackendController;
 
-// use App\Controller\FrontendController\HomeController;
-
 use App\Model\Manager\PartenaireManager;
+use App\Tools\GestionGlobal;
+use App\Tools\Token;
 use App\View\View;
 
 class PartenaireController
 {
     private $view;
     private $partenaireManager;
+    private $token;
+    private $maSuperGlobale;
 
     public function __construct()
     {
         $this->view = new View();
         $this->partenaireManager = new PartenaireManager();
+        $this->token = new Token();
+        $this->maSuperGlobale = new GestionGlobal();
     }
 
     /**
@@ -29,6 +33,7 @@ class PartenaireController
             header('Location: /?p=home');
             exit();
         }
+        $this->maSuperGlobale->setParamSession('token', $this->token->createSessionToken());
         $datapartenaire = null;
         $id = $data['get']['id'] ?? null;
         if ($id !== null) {

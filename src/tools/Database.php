@@ -13,11 +13,6 @@ class Database
     const USER = 'root';
     const PASSWORD = '';
     private static $instance = null;
-    // const DSN = 'mysql:host=localhost;dbname=bmfinance;charset=utf8mb4';
-    // const USER = 'root';
-    // const PASSWORD = '';
-    // private static $instance = null;
-
 /************************************PDO Connexion************************************************* */
     /**
      * Retourne la base de donnée si elle n'existe pas

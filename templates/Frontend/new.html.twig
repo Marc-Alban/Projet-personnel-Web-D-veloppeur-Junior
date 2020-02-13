@@ -58,6 +58,12 @@ Nouveau mot de passe
                         (requis)</label>
                 </div>
 {#-----------------------END-CARD-PASSWORD-CONFIRMATION-----------------------#}
+            {#----------------------------MODAL-HIDDEN----------------------------#}
+            <div class="md-form">
+                <input type="hidden"
+                    name="token" id="token"
+                    value="{{session.token}}" />
+            </div>
 {#-----------------------SUBMI------------------------#}
                 <div class="text-center py-4 mt-3">
                     <input class="btn btn-red" name="submit" type="submit"

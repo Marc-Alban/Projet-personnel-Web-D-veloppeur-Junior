@@ -6,7 +6,6 @@ use App\Controller\BackendController\UserController;
 use App\Model\Manager\ArticleManager;
 use App\Model\Manager\DashboardManager;
 use App\Model\Manager\PartenaireManager;
-use App\Tools\Token;
 use App\View\View;
 
 class DashboardController
@@ -23,16 +22,10 @@ class DashboardController
         $this->article = new ArticleManager();
         $this->partenaire = new PartenaireManager();
         $this->DashboardManager = new DashboardManager();
-        $this->token = new Token();
         $this->userController = new UserController();
     }
 /************************************Page Dashboard************************************************* */
-    /**
-     * méthode qui permet de vérifier si l'utilisateur sera renvoyé sur la page home avec
-     * une erreur lors de la connection ou alors sur la page dashboard et qu'il soit bien connecté.
-     *
-     * @return void
-     */
+
     public function DashboardAction(array $data)
     {
         $action = $data['get']['action'] ?? null;
