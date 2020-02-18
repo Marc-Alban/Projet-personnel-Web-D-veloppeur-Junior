@@ -24,7 +24,7 @@ class DashboardController
         $this->DashboardManager = new DashboardManager();
         $this->userController = new UserController();
     }
-/************************************Page Dashboard************************************************* */
+/************************************Page Dashboard**************************************************/
 
     public function DashboardAction(array $data)
     {

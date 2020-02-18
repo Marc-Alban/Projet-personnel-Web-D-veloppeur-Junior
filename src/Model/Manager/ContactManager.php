@@ -59,7 +59,7 @@ class ContactManager
             <td>' . $data['post']['liste'] . '</td>
         </tr>
         <tr>
-            <td>Message</td>
+            <td>Sujet</td>
             <td>' . $data['post']['sujet'] . '</td>
         </tr>
         <tr>
